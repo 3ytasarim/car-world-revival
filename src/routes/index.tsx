@@ -1,20 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  BadgeCheck,
-  CarFront,
-  Check,
-  ChevronRight,
-  CircleDot,
-  ClipboardCheck,
-  FileCheck,
-  Phone,
-  Settings,
-  ShieldCheck,
-  Sparkles,
-  Truck,
-  Wrench,
-  X,
-} from "lucide-react";
+import { Check, ChevronRight, Phone, X } from "lucide-react";
+
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -22,6 +8,8 @@ import { MobileBar } from "@/components/site/MobileBar";
 import { StatsSection } from "@/components/site/StatsSection";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { ProcessSection } from "@/components/site/ProcessSection";
+import { ServicesSection } from "@/components/site/ServicesSection";
+
 import { PHONE_DISPLAY, PHONE_HREF } from "@/components/site/site-data";
 import tuv from "@/assets/tuv.png.asset.json";
 import innung from "@/assets/innung.png.asset.json";
@@ -106,19 +94,6 @@ const coreServices = [
   },
 ];
 
-
-const services = [
-  { icon: ShieldCheck, title: "Unfallservice", text: "Soforthilfe nach dem Unfall – vom Abschleppen bis zur Reparatur.", href: "/leistungen/unfallservice" },
-  { icon: Truck, title: "Abschleppdienst", text: "Schnelle Bergung und Transport zu unserer Werkstatt.", href: "/leistungen/abschleppdienst" },
-  { icon: Wrench, title: "Fahrzeugreparatur", text: "Professionelle Reparatur durch erfahrene Techniker.", href: "/leistungen/fahrzeugreparatur" },
-  { icon: CarFront, title: "Ersatzwagen", text: "Mobil bleiben, während Ihr Fahrzeug repariert wird.", href: "/leistungen/ersatzwagen" },
-  { icon: FileCheck, title: "Versicherungsabwicklung", text: "Wir übernehmen die komplette Kommunikation mit Ihrer Versicherung.", href: "/leistungen/versicherungsabwicklung" },
-  { icon: CircleDot, title: "Reifenwechsel", text: "Saisonaler Reifenwechsel und Einlagerung.", href: "/leistungen/reifenwechsel" },
-  { icon: Sparkles, title: "Windschutzscheiben", text: "Schnelle Windschutzscheiben-Reparatur und -Erneuerung.", href: "/leistungen/windschutzscheiben" },
-  { icon: BadgeCheck, title: "TÜV", text: "Termingerechte Prüfung ohne lange Wartezeiten.", href: "/leistungen/tuev" },
-  { icon: ClipboardCheck, title: "Inspektionen", text: "Regelmäßige Inspektion nach Herstellervorgabe.", href: "/leistungen/inspektionen" },
-  { icon: Settings, title: "Wartung", text: "Vorsorge, die teure Reparaturen vermeidet.", href: "/leistungen/wartung" },
-];
 
 const comparison: Array<[string, boolean, boolean]> = [
   ["Digitale Statusupdates", true, false],
@@ -264,30 +239,8 @@ function Home() {
         <ProcessSection />
 
         {/* Services grid */}
-        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight">Unsere Leistungen</h2>
-            <p className="mt-3 text-muted-foreground">Ein Ansprechpartner für alles rund um Ihr Fahrzeug.</p>
-          </div>
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
-              <a
-                key={s.title}
-                href={s.href}
-                className="group flex flex-col gap-3 rounded-xl border p-5 transition-colors hover:border-brand-navy"
-              >
-                <span className="flex size-10 items-center justify-center rounded-lg bg-brand-navy/10 text-brand-navy">
-                  <s.icon className="size-5" aria-hidden="true" />
-                </span>
-                <p className="font-semibold">{s.title}</p>
-                <p className="text-sm text-muted-foreground">{s.text}</p>
-                <span className="mt-auto text-sm font-medium text-brand-navy group-hover:underline">
-                  Mehr erfahren →
-                </span>
-              </a>
-            ))}
-          </div>
-        </section>
+        <ServicesSection />
+
 
         {/* Comparison */}
         <section className="mx-auto max-w-4xl px-4 pb-16 sm:px-6">
