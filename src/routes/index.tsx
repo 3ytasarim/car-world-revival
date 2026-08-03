@@ -106,14 +106,6 @@ const coreServices = [
   },
 ];
 
-const steps = [
-  ["Anrufen", "Sie melden sich telefonisch oder per WhatsApp bei uns."],
-  ["Fahrzeugabholung", "Wir holen Ihr Fahrzeug ab oder organisieren den Abschleppdienst."],
-  ["Schadensaufnahme", "Unsere Meister begutachten den Schaden transparent und dokumentiert."],
-  ["Versicherungsabwicklung", "Wir übernehmen die komplette Kommunikation mit Ihrer Versicherung."],
-  ["Reparatur", "Fachgerechte Instandsetzung mit laufenden Status-Updates."],
-  ["Fahrzeugübergabe", "Sie erhalten Ihr Fahrzeug sauber und einsatzbereit zurück."],
-];
 
 const services = [
   { icon: ShieldCheck, title: "Unfallservice", text: "Soforthilfe nach dem Unfall – vom Abschleppen bis zur Reparatur.", href: "/leistungen/unfallservice" },
