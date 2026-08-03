@@ -10,18 +10,25 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AktuelleAngeboteRouteImport } from './routes/aktuelle-angebote'
 import { Route as AngebotRouteImport } from './routes/angebot'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as KarriereRouteImport } from './routes/karriere'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as KundenmeinungenRouteImport } from './routes/kundenmeinungen'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
 import { Route as PartnerRouteImport } from './routes/partner'
 import { Route as TerminRouteImport } from './routes/termin'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AktuelleAngeboteRoute = AktuelleAngeboteRouteImport.update({
@@ -32,6 +39,11 @@ const AktuelleAngeboteRoute = AktuelleAngeboteRouteImport.update({
 const AngebotRoute = AngebotRouteImport.update({
   id: '/angebot',
   path: '/angebot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KarriereRoute = KarriereRouteImport.update({
@@ -64,40 +76,52 @@ const TerminRoute = TerminRouteImport.update({
   path: '/termin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/aktuelle-angebote': typeof AktuelleAngeboteRoute
   '/angebot': typeof AngebotRoute
+  '/auth': typeof AuthRoute
   '/karriere': typeof KarriereRoute
   '/kontakt': typeof KontaktRoute
   '/kundenmeinungen': typeof KundenmeinungenRoute
   '/leistungen': typeof LeistungenRoute
   '/partner': typeof PartnerRoute
   '/termin': typeof TerminRoute
+  '/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/aktuelle-angebote': typeof AktuelleAngeboteRoute
   '/angebot': typeof AngebotRoute
+  '/auth': typeof AuthRoute
   '/karriere': typeof KarriereRoute
   '/kontakt': typeof KontaktRoute
   '/kundenmeinungen': typeof KundenmeinungenRoute
   '/leistungen': typeof LeistungenRoute
   '/partner': typeof PartnerRoute
   '/termin': typeof TerminRoute
+  '/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/aktuelle-angebote': typeof AktuelleAngeboteRoute
   '/angebot': typeof AngebotRoute
+  '/auth': typeof AuthRoute
   '/karriere': typeof KarriereRoute
   '/kontakt': typeof KontaktRoute
   '/kundenmeinungen': typeof KundenmeinungenRoute
   '/leistungen': typeof LeistungenRoute
   '/partner': typeof PartnerRoute
   '/termin': typeof TerminRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -105,40 +129,49 @@ export interface FileRouteTypes {
     | '/'
     | '/aktuelle-angebote'
     | '/angebot'
+    | '/auth'
     | '/karriere'
     | '/kontakt'
     | '/kundenmeinungen'
     | '/leistungen'
     | '/partner'
     | '/termin'
+    | '/admin'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/aktuelle-angebote'
     | '/angebot'
+    | '/auth'
     | '/karriere'
     | '/kontakt'
     | '/kundenmeinungen'
     | '/leistungen'
     | '/partner'
     | '/termin'
+    | '/admin'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/aktuelle-angebote'
     | '/angebot'
+    | '/auth'
     | '/karriere'
     | '/kontakt'
     | '/kundenmeinungen'
     | '/leistungen'
     | '/partner'
     | '/termin'
+    | '/_authenticated/admin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AktuelleAngeboteRoute: typeof AktuelleAngeboteRoute
   AngebotRoute: typeof AngebotRoute
+  AuthRoute: typeof AuthRoute
   KarriereRoute: typeof KarriereRoute
   KontaktRoute: typeof KontaktRoute
   KundenmeinungenRoute: typeof KundenmeinungenRoute
@@ -156,6 +189,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/aktuelle-angebote': {
       id: '/aktuelle-angebote'
       path: '/aktuelle-angebote'
@@ -168,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/angebot'
       fullPath: '/angebot'
       preLoaderRoute: typeof AngebotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/karriere': {
@@ -212,13 +259,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TerminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AktuelleAngeboteRoute: AktuelleAngeboteRoute,
   AngebotRoute: AngebotRoute,
+  AuthRoute: AuthRoute,
   KarriereRoute: KarriereRoute,
   KontaktRoute: KontaktRoute,
   KundenmeinungenRoute: KundenmeinungenRoute,
