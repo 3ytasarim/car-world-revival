@@ -20,6 +20,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
 import { StatsSection } from "@/components/site/StatsSection";
+import { SectionHeading } from "@/components/site/SectionHeading";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/components/site/site-data";
 import tuv from "@/assets/tuv.png.asset.json";
 import innung from "@/assets/innung.png.asset.json";
@@ -242,12 +243,11 @@ function Home() {
         {/* Core services — sticky stack */}
         <section className="relative bg-white pt-8 pb-4">
           <div className="mx-auto max-w-3xl px-4 text-center">
-            <h2 className="mx-auto w-fit text-3xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              Unsere Kernleistungen
-            </h2>
-            <p className="mt-3 text-xl font-semibold text-gray-700 sm:text-2xl">
-              Schnelle Hilfe, wenn es darauf ankommt.
-            </p>
+            <SectionHeading
+              eyebrow="Meisterwerkstatt in Ihrer Nähe"
+              title="Unsere Kernleistungen"
+              subtitle="Schnelle Hilfe, wenn es darauf ankommt."
+            />
           </div>
           <div className="mt-6">
             {coreServices.map((s, i) => (
