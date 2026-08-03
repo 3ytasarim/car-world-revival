@@ -268,40 +268,7 @@ function Home() {
         </section>
 
         {/* Process */}
-        <section className="bg-muted/40 py-16">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="mx-auto max-w-2xl text-center">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-4 py-1.5 text-sm font-semibold text-brand-orange">
-                Rundum-Sorglos-Paket
-              </span>
-              <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-                Nach dem Unfall: So läuft es ab
-              </h2>
-              <p className="mt-3 text-lg text-muted-foreground">
-                Unser Rundum-Sorglos-Paket nimmt Ihnen jeden Schritt ab.
-              </p>
-            </div>
-            <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-6">
-              {steps.map(([title, text], i) => (
-                <div key={title} className="flex flex-col items-center gap-2 text-center">
-                  <span className="flex size-10 items-center justify-center rounded-full bg-brand-navy text-sm font-bold text-brand-navy-foreground">
-                    {i + 1}
-                  </span>
-                  <p className="text-sm font-semibold">{title}</p>
-                  <p className="text-xs text-muted-foreground">{text}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-10 text-center">
-              <a
-                href="/leistungen/unfallservice"
-                className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-brand-orange px-2.5 text-sm font-medium text-brand-orange-foreground transition-colors hover:bg-brand-orange/90"
-              >
-                Mehr zum Unfallservice
-              </a>
-            </div>
-          </div>
-        </section>
+        <ProcessSection />
 
         {/* Services grid */}
         <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
