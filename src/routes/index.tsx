@@ -238,43 +238,8 @@ function Home() {
           </section>
         </div>
 
-        {/* Trust row */}
-        <div className="pb-10">
-          <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 px-4 sm:px-6">
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck className="size-4" aria-hidden="true" /> Meisterbetrieb
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Clock className="size-4" aria-hidden="true" /> Schnelle Terminvergabe
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Award className="size-4" aria-hidden="true" /> Versicherungspartner
-              </span>
-            </div>
-            <a
-              href={WA_UNFALL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-            >
-              <MessageCircle className="size-4" aria-hidden="true" />
-              Unfall passiert? Per WhatsApp melden
-            </a>
-          </div>
-        </div>
-
-        {/* Stats */}
-        <section className="border-b">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-4 py-10 sm:px-6 md:grid-cols-4">
-            {stats.map(([value, label]) => (
-              <div key={label} className="text-center">
-                <p className="text-3xl font-bold tracking-tight text-brand-navy">{value}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{label}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Trust + Stats */}
+        <StatsSection />
 
         {/* Core services — sticky stack */}
         <section className="relative bg-white pt-8 pb-4">
