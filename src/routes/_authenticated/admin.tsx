@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Briefcase, Handshake, Images, LogOut, Plus, Search, Tag, Trash2 } from "lucide-react";
+import { Briefcase, Handshake, Images, LogOut, Plus, Quote, Search, Tag, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,7 @@ import type { Database } from "@/integrations/supabase/types";
 type Offer = Database["public"]["Tables"]["offers"]["Row"];
 type Job = Database["public"]["Tables"]["job_openings"]["Row"];
 type Seo = Database["public"]["Tables"]["seo_settings"]["Row"];
+type Testimonial = Database["public"]["Tables"]["testimonials"]["Row"];
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -100,6 +101,9 @@ function AdminPage() {
             <TabsTrigger value="seo" className="gap-2">
               <Search className="size-4" aria-hidden="true" /> SEO
             </TabsTrigger>
+            <TabsTrigger value="testimonials" className="gap-2">
+              <Quote className="size-4" aria-hidden="true" /> Kundenmeinungen
+            </TabsTrigger>
             <TabsTrigger value="quotes" className="gap-2">
               <Images className="size-4" aria-hidden="true" /> Anfragen
             </TabsTrigger>
@@ -116,6 +120,9 @@ function AdminPage() {
           </TabsContent>
           <TabsContent value="seo" className="mt-6">
             <SeoTab />
+          </TabsContent>
+          <TabsContent value="testimonials" className="mt-6">
+            <TestimonialsTab />
           </TabsContent>
           <TabsContent value="quotes" className="mt-6">
             <QuotesTab />
@@ -253,6 +260,142 @@ function OffersTab() {
               <div className="flex items-center justify-between pt-1">
                 <label className="flex items-center gap-2 text-sm">
                   <Switch name="is_active" defaultChecked={offer.is_active} />
+                  Aktiv
+                </label>
+                <Button type="submit" size="sm">
+                  Speichern
+                </Button>
+              </div>
+            </form>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- Kundenmeinungen ---------------- */
+
+function TestimonialsTab() {
+  const qc = useQueryClient();
+  const { data } = useQuery({
+    queryKey: ["admin-testimonials"],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("testimonials").select("*").order("sort_order");
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const invalidate = () => {
+    qc.invalidateQueries({ queryKey: ["admin-testimonials"] });
+    qc.invalidateQueries({ queryKey: ["testimonials"] });
+  };
+
+  const save = useMutation({
+    mutationFn: async (t: Partial<Testimonial> & { id: string }) => {
+      const { id, ...rest } = t;
+      const { error } = await supabase.from("testimonials").update(rest).eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast.success("Kundenmeinung gespeichert");
+      invalidate();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const create = useMutation({
+    mutationFn: async () => {
+      const { error } = await supabase
+        .from("testimonials")
+        .insert({ name: "Neuer Kunde", text: "", sort_order: (data?.length ?? 0) + 1, is_active: false });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast.success("Kundenmeinung angelegt");
+      invalidate();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const remove = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("testimonials").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast.success("Kundenmeinung gelöscht");
+      invalidate();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-muted-foreground">
+          {data?.filter((t) => t.is_active).length ?? 0} aktive Kundenmeinungen auf der Website
+        </p>
+        <Button onClick={() => create.mutate()} className="gap-2">
+          <Plus className="size-4" aria-hidden="true" /> Kundenmeinung hinzufügen
+        </Button>
+      </div>
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        {data?.map((t) => (
+          <Card key={t.id}>
+            <form
+              className="space-y-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const fd = new FormData(e.currentTarget);
+                save.mutate({
+                  id: t.id,
+                  name: String(fd.get("name")),
+                  role: String(fd.get("role")),
+                  text: String(fd.get("text")),
+                  image_url: String(fd.get("image_url")) || null,
+                  rating: Number(fd.get("rating")),
+                  sort_order: Number(fd.get("sort_order")),
+                  is_active: fd.get("is_active") === "on",
+                });
+              }}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <Input name="name" defaultValue={t.name} className="font-semibold" />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Kundenmeinung löschen"
+                  onClick={() => remove.mutate(t.id)}
+                >
+                  <Trash2 className="size-4 text-destructive" aria-hidden="true" />
+                </Button>
+              </div>
+              <Textarea name="text" defaultValue={t.text} rows={3} placeholder="Bewertungstext" />
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <Label className="text-xs">Leistung / Rolle</Label>
+                  <Input name="role" defaultValue={t.role} />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">Sterne (1–5)</Label>
+                  <Input name="rating" type="number" min={1} max={5} defaultValue={t.rating} />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">Foto-URL (optional)</Label>
+                  <Input name="image_url" defaultValue={t.image_url ?? ""} />
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">Reihenfolge</Label>
+                  <Input name="sort_order" type="number" defaultValue={t.sort_order} />
+                </div>
+              </div>
+              <div className="flex items-center justify-between pt-1">
+                <label className="flex items-center gap-2 text-sm">
+                  <Switch name="is_active" defaultChecked={t.is_active} />
                   Aktiv
                 </label>
                 <Button type="submit" size="sm">
