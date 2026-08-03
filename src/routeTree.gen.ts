@@ -11,9 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AktuelleAngeboteRouteImport } from './routes/aktuelle-angebote'
+import { Route as AngebotRouteImport } from './routes/angebot'
 import { Route as KarriereRouteImport } from './routes/karriere'
+import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as KundenmeinungenRouteImport } from './routes/kundenmeinungen'
+import { Route as LeistungenRouteImport } from './routes/leistungen'
 import { Route as PartnerRouteImport } from './routes/partner'
+import { Route as TerminRouteImport } from './routes/termin'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -25,9 +29,19 @@ const AktuelleAngeboteRoute = AktuelleAngeboteRouteImport.update({
   path: '/aktuelle-angebote',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AngebotRoute = AngebotRouteImport.update({
+  id: '/angebot',
+  path: '/angebot',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const KarriereRoute = KarriereRouteImport.update({
   id: '/karriere',
   path: '/karriere',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KundenmeinungenRoute = KundenmeinungenRouteImport.update({
@@ -35,55 +49,102 @@ const KundenmeinungenRoute = KundenmeinungenRouteImport.update({
   path: '/kundenmeinungen',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LeistungenRoute = LeistungenRouteImport.update({
+  id: '/leistungen',
+  path: '/leistungen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PartnerRoute = PartnerRouteImport.update({
   id: '/partner',
   path: '/partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TerminRoute = TerminRouteImport.update({
+  id: '/termin',
+  path: '/termin',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/aktuelle-angebote': typeof AktuelleAngeboteRoute
+  '/angebot': typeof AngebotRoute
   '/karriere': typeof KarriereRoute
+  '/kontakt': typeof KontaktRoute
   '/kundenmeinungen': typeof KundenmeinungenRoute
+  '/leistungen': typeof LeistungenRoute
   '/partner': typeof PartnerRoute
+  '/termin': typeof TerminRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/aktuelle-angebote': typeof AktuelleAngeboteRoute
+  '/angebot': typeof AngebotRoute
   '/karriere': typeof KarriereRoute
+  '/kontakt': typeof KontaktRoute
   '/kundenmeinungen': typeof KundenmeinungenRoute
+  '/leistungen': typeof LeistungenRoute
   '/partner': typeof PartnerRoute
+  '/termin': typeof TerminRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/aktuelle-angebote': typeof AktuelleAngeboteRoute
+  '/angebot': typeof AngebotRoute
   '/karriere': typeof KarriereRoute
+  '/kontakt': typeof KontaktRoute
   '/kundenmeinungen': typeof KundenmeinungenRoute
+  '/leistungen': typeof LeistungenRoute
   '/partner': typeof PartnerRoute
+  '/termin': typeof TerminRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/aktuelle-angebote' | '/karriere' | '/kundenmeinungen' | '/partner'
+    | '/'
+    | '/aktuelle-angebote'
+    | '/angebot'
+    | '/karriere'
+    | '/kontakt'
+    | '/kundenmeinungen'
+    | '/leistungen'
+    | '/partner'
+    | '/termin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/aktuelle-angebote' | '/karriere' | '/kundenmeinungen' | '/partner'
+  to:
+    | '/'
+    | '/aktuelle-angebote'
+    | '/angebot'
+    | '/karriere'
+    | '/kontakt'
+    | '/kundenmeinungen'
+    | '/leistungen'
+    | '/partner'
+    | '/termin'
   id:
     | '__root__'
     | '/'
     | '/aktuelle-angebote'
+    | '/angebot'
     | '/karriere'
+    | '/kontakt'
     | '/kundenmeinungen'
+    | '/leistungen'
     | '/partner'
+    | '/termin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AktuelleAngeboteRoute: typeof AktuelleAngeboteRoute
+  AngebotRoute: typeof AngebotRoute
   KarriereRoute: typeof KarriereRoute
+  KontaktRoute: typeof KontaktRoute
   KundenmeinungenRoute: typeof KundenmeinungenRoute
+  LeistungenRoute: typeof LeistungenRoute
   PartnerRoute: typeof PartnerRoute
+  TerminRoute: typeof TerminRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -102,11 +163,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AktuelleAngeboteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/angebot': {
+      id: '/angebot'
+      path: '/angebot'
+      fullPath: '/angebot'
+      preLoaderRoute: typeof AngebotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/karriere': {
       id: '/karriere'
       path: '/karriere'
       fullPath: '/karriere'
       preLoaderRoute: typeof KarriereRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kundenmeinungen': {
@@ -116,11 +191,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KundenmeinungenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/leistungen': {
+      id: '/leistungen'
+      path: '/leistungen'
+      fullPath: '/leistungen'
+      preLoaderRoute: typeof LeistungenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/partner': {
       id: '/partner'
       path: '/partner'
       fullPath: '/partner'
       preLoaderRoute: typeof PartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/termin': {
+      id: '/termin'
+      path: '/termin'
+      fullPath: '/termin'
+      preLoaderRoute: typeof TerminRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -129,9 +218,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AktuelleAngeboteRoute: AktuelleAngeboteRoute,
+  AngebotRoute: AngebotRoute,
   KarriereRoute: KarriereRoute,
+  KontaktRoute: KontaktRoute,
   KundenmeinungenRoute: KundenmeinungenRoute,
+  LeistungenRoute: LeistungenRoute,
   PartnerRoute: PartnerRoute,
+  TerminRoute: TerminRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
