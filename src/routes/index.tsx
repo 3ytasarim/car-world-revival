@@ -9,6 +9,11 @@ import { StatsSection } from "@/components/site/StatsSection";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { ProcessSection } from "@/components/site/ProcessSection";
 import { ServicesSection } from "@/components/site/ServicesSection";
+import { RundumSorglos } from "@/components/site/RundumSorglos";
+import { FotoAngebot } from "@/components/site/FotoAngebot";
+import { VideoSection } from "@/components/site/VideoSection";
+import { TestimonialsSection } from "@/components/site/TestimonialsSection";
+import { PartnerSection } from "@/components/site/PartnerSection";
 
 import { PHONE_DISPLAY, PHONE_HREF } from "@/components/site/site-data";
 import tuv from "@/assets/tuv.png.asset.json";
@@ -205,14 +210,23 @@ function Home() {
           </section>
         </div>
 
+        {/* Rundum-sorglos-Paket — ganz oben, direkt unter dem Hero */}
+        <RundumSorglos />
+
+        {/* Foto senden → Angebot in 24 Stunden */}
+        <FotoAngebot />
+
         {/* Trust + Stats */}
         <StatsSection />
+
+        {/* Videos */}
+        <VideoSection />
 
         {/* Core services — sticky stack */}
         <section className="relative bg-white pt-8 pb-4">
           <div className="mx-auto max-w-3xl px-4 text-center">
             <SectionHeading
-              eyebrow="Meisterwerkstatt in Ihrer Nähe"
+              eyebrow="Autowerkstatt in meiner Nähe"
               title="Unsere Kernleistungen"
               subtitle="Schnelle Hilfe, wenn es darauf ankommt."
             />
@@ -240,6 +254,14 @@ function Home() {
 
         {/* Services grid */}
         <ServicesSection />
+
+        {/* Kundenmeinungen */}
+        <TestimonialsSection />
+
+        {/* Partner */}
+        <PartnerSection />
+
+
 
 
         {/* Comparison */}

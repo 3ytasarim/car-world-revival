@@ -10,33 +10,80 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AktuelleAngeboteRouteImport } from './routes/aktuelle-angebote'
+import { Route as KarriereRouteImport } from './routes/karriere'
+import { Route as KundenmeinungenRouteImport } from './routes/kundenmeinungen'
+import { Route as PartnerRouteImport } from './routes/partner'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AktuelleAngeboteRoute = AktuelleAngeboteRouteImport.update({
+  id: '/aktuelle-angebote',
+  path: '/aktuelle-angebote',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KarriereRoute = KarriereRouteImport.update({
+  id: '/karriere',
+  path: '/karriere',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KundenmeinungenRoute = KundenmeinungenRouteImport.update({
+  id: '/kundenmeinungen',
+  path: '/kundenmeinungen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerRoute = PartnerRouteImport.update({
+  id: '/partner',
+  path: '/partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aktuelle-angebote': typeof AktuelleAngeboteRoute
+  '/karriere': typeof KarriereRoute
+  '/kundenmeinungen': typeof KundenmeinungenRoute
+  '/partner': typeof PartnerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aktuelle-angebote': typeof AktuelleAngeboteRoute
+  '/karriere': typeof KarriereRoute
+  '/kundenmeinungen': typeof KundenmeinungenRoute
+  '/partner': typeof PartnerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aktuelle-angebote': typeof AktuelleAngeboteRoute
+  '/karriere': typeof KarriereRoute
+  '/kundenmeinungen': typeof KundenmeinungenRoute
+  '/partner': typeof PartnerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/aktuelle-angebote' | '/karriere' | '/kundenmeinungen' | '/partner'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/aktuelle-angebote' | '/karriere' | '/kundenmeinungen' | '/partner'
+  id:
+    | '__root__'
+    | '/'
+    | '/aktuelle-angebote'
+    | '/karriere'
+    | '/kundenmeinungen'
+    | '/partner'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AktuelleAngeboteRoute: typeof AktuelleAngeboteRoute
+  KarriereRoute: typeof KarriereRoute
+  KundenmeinungenRoute: typeof KundenmeinungenRoute
+  PartnerRoute: typeof PartnerRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +95,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/aktuelle-angebote': {
+      id: '/aktuelle-angebote'
+      path: '/aktuelle-angebote'
+      fullPath: '/aktuelle-angebote'
+      preLoaderRoute: typeof AktuelleAngeboteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/karriere': {
+      id: '/karriere'
+      path: '/karriere'
+      fullPath: '/karriere'
+      preLoaderRoute: typeof KarriereRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kundenmeinungen': {
+      id: '/kundenmeinungen'
+      path: '/kundenmeinungen'
+      fullPath: '/kundenmeinungen'
+      preLoaderRoute: typeof KundenmeinungenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner': {
+      id: '/partner'
+      path: '/partner'
+      fullPath: '/partner'
+      preLoaderRoute: typeof PartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AktuelleAngeboteRoute: AktuelleAngeboteRoute,
+  KarriereRoute: KarriereRoute,
+  KundenmeinungenRoute: KundenmeinungenRoute,
+  PartnerRoute: PartnerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

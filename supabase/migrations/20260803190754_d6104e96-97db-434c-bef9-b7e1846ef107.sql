@@ -1,0 +1,3 @@
+CREATE POLICY "Anyone can upload damage photos" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'schaden-fotos');
+CREATE POLICY "Admins can view damage photos" ON storage.objects FOR SELECT TO authenticated USING (bucket_id = 'schaden-fotos' AND public.has_role(auth.uid(), 'admin'));
+CREATE POLICY "Admins can delete damage photos" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'schaden-fotos' AND public.has_role(auth.uid(), 'admin'));

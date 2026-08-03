@@ -1,16 +1,44 @@
 export const PHONE_DISPLAY = "02641 39 69 555";
 export const PHONE_HREF = "tel:+4926413969555";
 export const EMAIL = "info@kfz-car-world.de";
-export const WA_UNFALL =
-  "https://wa.me/4926413969555?text=Hallo%2C%20ich%20hatte%20einen%20Unfall%20und%20ben%C3%B6tige%20Hilfe.";
-export const WA_FRAGE =
-  "https://wa.me/4926413969555?text=Hallo%2C%20ich%20habe%20eine%20Frage%20zu%20meinem%20Fahrzeug.";
+export const EMAIL_KARRIERE = "karriere@kfz-car-world.de";
+export const WA_NUMBER = "4926413969555";
+
+const wa = (text: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+
+export const WA_UNFALL = wa("Hallo, ich hatte einen Unfall und benötige sofort Hilfe.");
+export const WA_FRAGE = wa("Hallo, ich habe eine Frage zu meinem Fahrzeug.");
+export const WA_FOTO = wa(
+  "Hallo Car-World, ich schicke Ihnen Fotos von meinem Schaden. Bitte erstellen Sie mir ein Angebot.",
+);
+export const WA_SCHEIBE = wa(
+  "Hallo Car-World, ich habe einen Steinschlag / Frontscheibenschaden. Ich sende Ihnen gleich Fotos.",
+);
+export const WA_LACK = wa("Hallo Car-World, ich habe einen Lackschaden. Anbei Fotos für ein Angebot.");
+export const WA_FAHRZEUGSCHEIN = wa(
+  "Hallo Car-World, ich sende Ihnen hier meinen Fahrzeugschein für ein passendes Angebot.",
+);
+export const WA_PARTNER = wa(
+  "Hallo Car-World, ich komme aus dem Partner-Bereich Ihrer Webseite und interessiere mich für eine Partnerschaft.",
+);
+export const WA_KARRIERE = wa("Hallo Car-World, ich interessiere mich für eine Stelle bei Ihnen.");
+export const WA_TERMIN = wa("Hallo Car-World, ich möchte gerne einen Werkstatt-Termin vereinbaren.");
+
+/** Erreichbarkeit: bewusst ohne Öffnungszeiten – WhatsApp ist rund um die Uhr. */
+export const AVAILABILITY = "Per WhatsApp 7/24 erreichbar";
+
+export const ADDRESS = {
+  street: "Ehlinger Straße 45",
+  zip: "53474",
+  city: "Bad Neuenahr-Ahrweiler (Heimersheim)",
+};
 
 export const NAV = [
   { label: "Start", href: "/", icon: "house" },
-  { label: "Aktuelle Angebote", href: "/aktuelle-angebote", icon: "tag" },
   { label: "Leistungen", href: "/leistungen", icon: "wrench" },
+  { label: "Aktuelle Angebote", href: "/aktuelle-angebote", icon: "tag" },
+  { label: "Partner", href: "/partner", icon: "handshake" },
   { label: "Kundenmeinungen", href: "/kundenmeinungen", icon: "star" },
   { label: "Karriere", href: "/karriere", icon: "briefcase" },
-  { label: "Kontakt & Anfahrt", href: "/kontakt", icon: "mail" },
+  { label: "Kontakt", href: "/kontakt", icon: "mail" },
 ] as const;
