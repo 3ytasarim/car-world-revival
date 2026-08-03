@@ -1,3 +1,4 @@
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { useState } from "react";
 import { Building2, CheckCircle2, Handshake, Loader2, ShieldCheck, Truck } from "lucide-react";
 import { toast } from "sonner";

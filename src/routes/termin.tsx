@@ -1,3 +1,4 @@
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { createFileRoute } from "@tanstack/react-router";
 import { Phone } from "lucide-react";
 

@@ -1,3 +1,4 @@
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { Calendar, Phone } from "lucide-react";
 
 import { PHONE_HREF, WA_FRAGE } from "./site-data";

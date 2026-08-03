@@ -1,3 +1,4 @@
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Briefcase, CheckCircle2, Mail, Phone } from "lucide-react";
