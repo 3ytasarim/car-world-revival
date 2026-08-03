@@ -65,11 +65,48 @@ function ServiceCard({ service, index, inView }: { service: (typeof services)[nu
       ref={cardRef}
       href={service.href}
       onMouseMove={handleMove}
-      className={`group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-brand-navy/10 bg-white p-5 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-brand-orange/40 hover:shadow-[0_24px_50px_-24px_var(--brand-orange)] ${
+      className={`group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-brand-navy/10 bg-white p-5 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-transparent hover:shadow-[0_24px_50px_-24px_var(--brand-orange)] ${
         inView ? "translate-y-0 scale-100 opacity-100" : "translate-y-8 scale-95 opacity-0"
       }`}
       style={{ transitionDelay: inView ? `${index * 70}ms` : "0ms" }}
     >
+      {/* rotating gradient frame */}
+      <span
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background:
+            "conic-gradient(from var(--cw-angle, 0deg), transparent 0deg, var(--brand-orange) 60deg, color-mix(in oklab, var(--brand-navy) 60%, transparent) 130deg, transparent 200deg, transparent 360deg)",
+          padding: "1.5px",
+          WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          WebkitMaskComposite: "xor",
+          mask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          maskComposite: "exclude",
+          animation: "cw-svc-spin 4s linear infinite",
+        }}
+        aria-hidden="true"
+      />
+      {/* traveling frame highlight */}
+      <span
+        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background:
+            "conic-gradient(from var(--cw-angle, 0deg), transparent 0deg, color-mix(in oklab, var(--brand-orange) 70%, transparent) 20deg, transparent 45deg)",
+          padding: "3px",
+          filter: "blur(6px)",
+          WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          WebkitMaskComposite: "xor",
+          mask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          maskComposite: "exclude",
+          animation: "cw-svc-spin 4s linear infinite",
+        }}
+        aria-hidden="true"
+      />
+      {/* idle breathing frame */}
+      <span
+        className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-brand-navy/10 transition-opacity duration-500 group-hover:opacity-0"
+        style={{ animation: "cw-svc-breathe 3.5s ease-in-out infinite", animationDelay: `${index * 0.25}s` }}
+        aria-hidden="true"
+      />
       {/* cursor spotlight */}
       <span
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -84,6 +121,7 @@ function ServiceCard({ service, index, inView }: { service: (typeof services)[nu
         className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 -skew-x-12 bg-linear-to-r from-transparent via-brand-orange/15 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-[300%]"
         aria-hidden="true"
       />
+
 
       <span className="relative flex size-12 items-center justify-center rounded-xl bg-brand-navy/8 text-brand-navy transition-all duration-500 group-hover:rotate-6 group-hover:bg-brand-navy group-hover:text-brand-orange">
         <span
