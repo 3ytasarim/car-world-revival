@@ -1,6 +1,7 @@
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Briefcase, CheckCircle2, Mail, MessageCircle, Phone } from "lucide-react";
+import { Briefcase, CheckCircle2, Mail, Phone } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -96,7 +97,7 @@ function KarrierePage() {
                   rel="noopener noreferrer"
                   className="mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#25D366] text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
                 >
-                  <MessageCircle className="size-4" aria-hidden="true" />
+                  <WhatsAppIcon className="size-4" />
                   Jetzt bewerben
                 </a>
               </article>
@@ -145,7 +146,7 @@ function KarrierePage() {
                   rel="noopener noreferrer"
                   className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-brand-orange text-sm font-semibold text-brand-orange-foreground"
                 >
-                  <MessageCircle className="size-4" aria-hidden="true" />
+                  <WhatsAppIcon className="size-4" />
                   Per WhatsApp bewerben
                 </a>
               </div>

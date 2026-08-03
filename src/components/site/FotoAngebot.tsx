@@ -1,5 +1,6 @@
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { useState } from "react";
-import { Camera, CheckCircle2, Clock4, Loader2, MessageCircle, Upload } from "lucide-react";
+import { Camera, CheckCircle2, Clock4, Loader2, Upload } from "lucide-react";
 import { toast } from "sonner";
 
 import { supabase } from "@/integrations/supabase/client";
@@ -84,7 +85,7 @@ export function FotoAngebot() {
                 rel="noopener noreferrer"
                 className="inline-flex h-12 items-center gap-2 rounded-full bg-[#25D366] px-6 text-sm font-semibold text-white transition-transform hover:scale-[1.03]"
               >
-                <MessageCircle className="size-5" aria-hidden="true" />
+                <WhatsAppIcon className="size-5" />
                 Fotos per WhatsApp senden
               </a>
               <a

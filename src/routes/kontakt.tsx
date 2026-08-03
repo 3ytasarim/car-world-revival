@@ -1,5 +1,6 @@
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { createFileRoute } from "@tanstack/react-router";
-import { MapPin, MessageCircle, Phone } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -54,7 +55,7 @@ function KontaktPage() {
                   rel="noopener noreferrer"
                   className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#25D366] text-sm font-semibold text-white"
                 >
-                  <MessageCircle className="size-5" aria-hidden="true" />
+                  <WhatsAppIcon className="size-5" />
                   WhatsApp schreiben (7/24)
                 </a>
                 <a

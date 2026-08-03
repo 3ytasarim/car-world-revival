@@ -1,4 +1,5 @@
-import { Calendar, MessageCircle, Phone } from "lucide-react";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+import { Calendar, Phone } from "lucide-react";
 
 import { PHONE_HREF, WA_FRAGE } from "./site-data";
 
@@ -18,7 +19,7 @@ export function MobileBar() {
         rel="noopener noreferrer"
         className="flex flex-col items-center gap-0.5 bg-brand-orange py-2.5 text-xs font-medium text-brand-orange-foreground"
       >
-        <MessageCircle className="size-4" aria-hidden="true" />
+        <WhatsAppIcon className="size-4" />
         WhatsApp
       </a>
       <a
