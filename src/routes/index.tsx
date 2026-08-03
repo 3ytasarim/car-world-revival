@@ -1,15 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  Award,
   BadgeCheck,
   CarFront,
   Check,
   ChevronRight,
-  Clock,
   CircleDot,
   ClipboardCheck,
   FileCheck,
-  MessageCircle,
   Phone,
   Settings,
   ShieldCheck,
@@ -23,7 +20,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
 import { StatsSection } from "@/components/site/StatsSection";
-import { PHONE_DISPLAY, PHONE_HREF, WA_UNFALL } from "@/components/site/site-data";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/components/site/site-data";
 import tuv from "@/assets/tuv.png.asset.json";
 import innung from "@/assets/innung.png.asset.json";
 import autoglas from "@/assets/autoglas.png.asset.json";
