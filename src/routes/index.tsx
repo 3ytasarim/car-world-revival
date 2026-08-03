@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
-import {
-  createFileRoute,
-} from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { Check, ChevronRight, Phone, X } from "lucide-react";
+
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
