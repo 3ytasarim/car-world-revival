@@ -1,19 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import {
-  BadgeCheck,
-  CarFront,
-  Check,
-  ChevronRight,
-  CircleDot,
-  ClipboardCheck,
-  FileCheck,
-  Phone,
-  Settings,
-  ShieldCheck,
-  Sparkles,
-  Truck,
-  Wrench,
-  X,
+  createFileRoute,
 } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
@@ -108,19 +94,6 @@ const coreServices = [
   },
 ];
 
-
-const services = [
-  { icon: ShieldCheck, title: "Unfallservice", text: "Soforthilfe nach dem Unfall – vom Abschleppen bis zur Reparatur.", href: "/leistungen/unfallservice" },
-  { icon: Truck, title: "Abschleppdienst", text: "Schnelle Bergung und Transport zu unserer Werkstatt.", href: "/leistungen/abschleppdienst" },
-  { icon: Wrench, title: "Fahrzeugreparatur", text: "Professionelle Reparatur durch erfahrene Techniker.", href: "/leistungen/fahrzeugreparatur" },
-  { icon: CarFront, title: "Ersatzwagen", text: "Mobil bleiben, während Ihr Fahrzeug repariert wird.", href: "/leistungen/ersatzwagen" },
-  { icon: FileCheck, title: "Versicherungsabwicklung", text: "Wir übernehmen die komplette Kommunikation mit Ihrer Versicherung.", href: "/leistungen/versicherungsabwicklung" },
-  { icon: CircleDot, title: "Reifenwechsel", text: "Saisonaler Reifenwechsel und Einlagerung.", href: "/leistungen/reifenwechsel" },
-  { icon: Sparkles, title: "Windschutzscheiben", text: "Schnelle Windschutzscheiben-Reparatur und -Erneuerung.", href: "/leistungen/windschutzscheiben" },
-  { icon: BadgeCheck, title: "TÜV", text: "Termingerechte Prüfung ohne lange Wartezeiten.", href: "/leistungen/tuev" },
-  { icon: ClipboardCheck, title: "Inspektionen", text: "Regelmäßige Inspektion nach Herstellervorgabe.", href: "/leistungen/inspektionen" },
-  { icon: Settings, title: "Wartung", text: "Vorsorge, die teure Reparaturen vermeidet.", href: "/leistungen/wartung" },
-];
 
 const comparison: Array<[string, boolean, boolean]> = [
   ["Digitale Statusupdates", true, false],
