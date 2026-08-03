@@ -21,6 +21,7 @@ import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
 import { StatsSection } from "@/components/site/StatsSection";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { ProcessSection } from "@/components/site/ProcessSection";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/components/site/site-data";
 import tuv from "@/assets/tuv.png.asset.json";
 import innung from "@/assets/innung.png.asset.json";
