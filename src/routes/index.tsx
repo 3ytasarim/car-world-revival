@@ -264,30 +264,8 @@ function Home() {
         <ProcessSection />
 
         {/* Services grid */}
-        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight">Unsere Leistungen</h2>
-            <p className="mt-3 text-muted-foreground">Ein Ansprechpartner für alles rund um Ihr Fahrzeug.</p>
-          </div>
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
-              <a
-                key={s.title}
-                href={s.href}
-                className="group flex flex-col gap-3 rounded-xl border p-5 transition-colors hover:border-brand-navy"
-              >
-                <span className="flex size-10 items-center justify-center rounded-lg bg-brand-navy/10 text-brand-navy">
-                  <s.icon className="size-5" aria-hidden="true" />
-                </span>
-                <p className="font-semibold">{s.title}</p>
-                <p className="text-sm text-muted-foreground">{s.text}</p>
-                <span className="mt-auto text-sm font-medium text-brand-navy group-hover:underline">
-                  Mehr erfahren →
-                </span>
-              </a>
-            ))}
-          </div>
-        </section>
+        <ServicesSection />
+
 
         {/* Comparison */}
         <section className="mx-auto max-w-4xl px-4 pb-16 sm:px-6">
