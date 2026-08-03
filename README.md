@@ -1,14 +1,16 @@
-# Welcome to your Lovable project
+# Car-World Revival
+
+Ekteki HTML dosyası, bir Autowerkstatt (Alman araba tamir atölyesi) için mevcut bir web sitesinin ana sayfasının statik tasarım görüntüsüdür (Car-World). Lütfen bu dosyadaki tasarımı — renkler, tipografi, düzen, bölüm sırası ve gerçek içerik (metinler, görseller) — birebir koruyarak bu projeyi bu tasarımdan devam ettir. Marka rengi lacivert/mavi (#5088C8 civarı) ve turuncu vurgu. Site Almanca.
 
 This project was built with [Lovable](https://lovable.dev).
 
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/60bd9a49-9d21-464b-88e0-54ddd072e1d2).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +22,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
