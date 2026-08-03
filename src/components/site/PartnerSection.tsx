@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Building2, CheckCircle2, Handshake, Loader2, MessageCircle, ShieldCheck, Truck } from "lucide-react";
+import { Building2, CheckCircle2, Handshake, Loader2, ShieldCheck, Truck } from "lucide-react";
 import { toast } from "sonner";
 
 import { supabase } from "@/integrations/supabase/client";
@@ -161,7 +161,7 @@ export function PartnerSection() {
                     rel="noopener noreferrer"
                     className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
                   >
-                    <MessageCircle className="size-5" aria-hidden="true" />
+                    <WhatsAppIcon className="size-5" />
                     Per WhatsApp
                   </a>
                 </div>

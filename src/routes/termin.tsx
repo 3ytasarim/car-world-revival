@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MessageCircle, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -43,7 +43,7 @@ function TerminPage() {
                 rel="noopener noreferrer"
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#25D366] px-7 text-sm font-semibold text-white transition-transform hover:scale-[1.03]"
               >
-                <MessageCircle className="size-5" aria-hidden="true" />
+                <WhatsAppIcon className="size-5" />
                 Termin per WhatsApp
               </a>
               <a
