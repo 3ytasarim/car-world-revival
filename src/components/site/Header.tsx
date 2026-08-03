@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   Briefcase,
+  Handshake,
   House,
   Mail,
   Menu,
@@ -14,7 +15,15 @@ import {
 import logo from "@/assets/logo.png.asset.json";
 import { NAV, PHONE_DISPLAY, PHONE_HREF } from "./site-data";
 
-const icons = { house: House, tag: Tag, wrench: Wrench, star: Star, briefcase: Briefcase, mail: Mail };
+const icons = {
+  house: House,
+  tag: Tag,
+  wrench: Wrench,
+  star: Star,
+  briefcase: Briefcase,
+  mail: Mail,
+  handshake: Handshake,
+} as const;
 
 export function Header() {
   const [open, setOpen] = useState(false);
