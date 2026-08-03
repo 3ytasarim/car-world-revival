@@ -100,13 +100,6 @@ const coreServices = [
 ];
 
 
-const comparison: Array<[string, boolean, boolean]> = [
-  ["Digitale Statusupdates", true, false],
-  ["Transparente Kommunikation", true, false],
-  ["Direkte Versicherungsabwicklung", true, false],
-  ["Ersatzwagen verfügbar", true, false],
-  ["Garantie auf Reparaturen", true, true],
-];
 
 function Home() {
   return (
@@ -263,37 +256,6 @@ function Home() {
 
 
 
-
-        {/* Comparison */}
-        <section className="mx-auto max-w-4xl px-4 pb-16 sm:px-6">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight">
-              Warum <span className="text-brand-orange">Car-World</span>?
-            </h2>
-            <p className="mt-3 text-muted-foreground">Der Unterschied zu einer klassischen Werkstatt.</p>
-          </div>
-          <div className="mt-10 overflow-hidden rounded-xl border">
-            <div className="grid grid-cols-3 items-center border-b bg-muted/40 text-sm font-semibold">
-              <div className="p-4" />
-              <div className="p-4 text-center text-brand-orange">Car-World</div>
-              <div className="p-4 text-center text-muted-foreground">Typische Werkstatt</div>
-            </div>
-            {comparison.map(([label, a, b], i) => (
-              <div
-                key={label}
-                className={`grid grid-cols-3 items-center text-sm ${i % 2 === 1 ? "bg-muted/20" : ""}`}
-              >
-                <div className="p-4">{label}</div>
-                <div className="flex justify-center p-4">
-                  {a ? <Check className="size-5 text-success" /> : <X className="size-5 text-muted-foreground" />}
-                </div>
-                <div className="flex justify-center p-4">
-                  {b ? <Check className="size-5 text-success" /> : <X className="size-5 text-muted-foreground" />}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
         {/* CTA */}
         <section className="bg-brand-navy text-brand-navy-foreground">
