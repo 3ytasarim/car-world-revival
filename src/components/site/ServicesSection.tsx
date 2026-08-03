@@ -149,6 +149,9 @@ export function ServicesSection() {
   return (
     <section className="relative overflow-hidden py-16">
       <style>{`
+        @property --cw-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+        @keyframes cw-svc-spin { to { --cw-angle: 360deg } }
+        @keyframes cw-svc-breathe { 0%,100%{opacity:1} 50%{opacity:.45} }
         @keyframes cw-svc-ring { 0%{transform:scale(.9);opacity:.6} 100%{transform:scale(1.45);opacity:0} }
         @keyframes cw-svc-drift { 0%,100%{transform:translate3d(0,0,0)} 50%{transform:translate3d(-16px,14px,0)} }
       `}</style>
