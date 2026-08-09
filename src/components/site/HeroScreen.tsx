@@ -67,7 +67,7 @@ export function HeroScreen() {
                 i === index ? "translate-y-0 opacity-100" : "pointer-events-none absolute translate-y-3 opacity-0"
               }`}
             >
-              <span className="flex aspect-square w-[8%] min-w-7 items-center justify-center rounded-lg bg-brand-blue/90 text-white shadow-lg">
+              <span className="flex aspect-square w-[8%] min-w-7 items-center justify-center rounded-lg bg-brand-orange/90 text-white shadow-lg">
                 <Icon className="size-[55%]" aria-hidden="true" />
               </span>
               <span className="leading-tight text-white">
