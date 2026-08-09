@@ -1,181 +1,95 @@
-import { useEffect, useRef, useState } from "react";
-import { CarFront, ClipboardCheck, FileCheck2, PhoneCall, Truck, Wrench, ArrowRight } from "lucide-react";
+import { CarFront, ClipboardCheck, FileCheck2, Phone, PhoneCall, Truck, Wrench } from "lucide-react";
+
+import { useInView } from "@/hooks/use-in-view";
+import { PHONE_HREF } from "./site-data";
+import unfall from "@/assets/unfall.jpg";
 
 const steps = [
-  { icon: PhoneCall, title: "Anrufen", text: "Sie melden sich telefonisch oder per WhatsApp bei uns." },
-  { icon: Truck, title: "Fahrzeugabholung", text: "Wir holen Ihr Fahrzeug ab oder organisieren den Abschleppdienst." },
-  { icon: ClipboardCheck, title: "Schadensaufnahme", text: "Unsere Meister begutachten den Schaden transparent und dokumentiert." },
-  { icon: FileCheck2, title: "Versicherungsabwicklung", text: "Wir übernehmen die komplette Kommunikation mit Ihrer Versicherung." },
-  { icon: Wrench, title: "Reparatur", text: "Fachgerechte Instandsetzung mit laufenden Status-Updates." },
-  { icon: CarFront, title: "Fahrzeugübergabe", text: "Sie erhalten Ihr Fahrzeug sauber und einsatzbereit zurück." },
+  { icon: PhoneCall, title: "Anrufen" },
+  { icon: Truck, title: "Fahrzeugaufnahme" },
+  { icon: ClipboardCheck, title: "Schadensaufnahme" },
+  { icon: FileCheck2, title: "Versicherungsabwicklung" },
+  { icon: Wrench, title: "Reparatur" },
+  { icon: CarFront, title: "Fahrzeugübergabe" },
 ];
 
-function useInView<T extends HTMLElement>() {
-  const ref = useRef<T | null>(null);
-  const [inView, setInView] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setInView(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.2 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-  return { ref, inView };
-}
-
 export function ProcessSection() {
-  const { ref, inView } = useInView<HTMLDivElement>();
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    if (!inView) return;
-    const id = setInterval(() => setActive((a) => (a + 1) % steps.length), 2200);
-    return () => clearInterval(id);
-  }, [inView]);
+  const { ref, inView } = useInView<HTMLDivElement>(0.15);
 
   return (
-    <section className="relative overflow-hidden bg-muted/40 py-16">
+    <section aria-labelledby="unfall-title" className="relative overflow-hidden bg-muted/40 py-20">
       <style>{`
-        @keyframes cw-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-        @keyframes cw-beam { 0%{transform:translateX(-100%)} 100%{transform:translateX(400%)} }
-        @keyframes cw-dot { 0%{left:-6%;opacity:0} 10%{opacity:1} 90%{opacity:1} 100%{left:104%;opacity:0} }
-        @keyframes cw-ring { 0%{transform:scale(0.85);opacity:.55} 100%{transform:scale(1.5);opacity:0} }
-        @keyframes cw-drift { 0%{transform:translate3d(0,0,0)} 50%{transform:translate3d(12px,-14px,0)} 100%{transform:translate3d(0,0,0)} }
+        @keyframes cw-step-pulse { 0%,100%{transform:scale(1);opacity:.35} 50%{transform:scale(1.25);opacity:0} }
       `}</style>
 
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, var(--brand-navy) 1px, transparent 1px), linear-gradient(to bottom, var(--brand-navy) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-          maskImage: "radial-gradient(ellipse at center, black, transparent 78%)",
-          animation: "cw-drift 18s ease-in-out infinite",
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute top-1/3 left-1/2 size-[46rem] -translate-x-1/2 rounded-full opacity-30 blur-3xl"
-        style={{ background: "radial-gradient(circle, var(--brand-orange), transparent 65%)", animation: "cw-drift 22s ease-in-out infinite" }}
-        aria-hidden="true"
-      />
-
       <div ref={ref} className="relative mx-auto max-w-6xl px-4 sm:px-6">
-        <div
-          className={`mx-auto max-w-2xl text-center transition-all duration-700 ${inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
-        >
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-4 py-1.5 text-sm font-semibold text-brand-orange">
-            <span className="relative flex size-2">
-              <span className="absolute inline-flex size-2 animate-ping rounded-full bg-brand-orange opacity-75" />
-              <span className="relative inline-flex size-2 rounded-full bg-brand-orange" />
-            </span>
-            Rundum-Sorglos-Paket
-          </span>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">Nach dem Unfall: So läuft es ab</h2>
-          <p className="mt-3 text-lg text-muted-foreground">
-            Unser Rundum-Sorglos-Paket nimmt Ihnen jeden Schritt ab.
-          </p>
-        </div>
-
-        <div className="relative mt-12">
-          <span
-            className={`pointer-events-none absolute top-8 right-0 left-0 hidden h-px origin-left overflow-hidden bg-linear-to-r from-transparent via-brand-orange/40 to-transparent transition-transform duration-[1400ms] ease-out lg:block ${
-              inView ? "scale-x-100" : "scale-x-0"
-            }`}
-            aria-hidden="true"
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div
+            className={`transition-all duration-700 ease-out ${inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
           >
-            {inView ? (
-              <span
-                className="absolute top-0 h-px w-24 bg-linear-to-r from-transparent via-brand-orange to-transparent"
-                style={{ animation: "cw-beam 3.6s linear infinite" }}
-              />
-            ) : null}
-          </span>
-          {inView ? (
-            <span
-              className="pointer-events-none absolute top-8 hidden size-2 -translate-y-1/2 rounded-full bg-brand-orange shadow-[0_0_12px_var(--brand-orange)] lg:block"
-              style={{ animation: "cw-dot 5s linear infinite" }}
-              aria-hidden="true"
-            />
-          ) : null}
+            <span className="inline-flex items-center gap-2 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-4 py-1.5 text-sm font-semibold text-brand-orange">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex size-2 animate-ping rounded-full bg-brand-orange opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-brand-orange" />
+              </span>
+              Rundum-sorglos-Paket
+            </span>
+            <h2 id="unfall-title" className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+              Nach dem Unfall – was passiert jetzt?
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Ein Anruf genügt. Wir übernehmen alles Weitere – Abholung, Gutachten, Versicherung und Reparatur.
+            </p>
+            <a
+              href={PHONE_HREF}
+              className="group mt-7 inline-flex items-center gap-2 rounded-full bg-brand-orange px-7 py-4 text-base font-semibold text-brand-orange-foreground shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_18px_40px_-14px_var(--brand-orange)]"
+            >
+              <Phone className="size-5 transition-transform duration-300 group-hover:-rotate-12" aria-hidden="true" />
+              Jetzt anrufen
+            </a>
+          </div>
 
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-6 lg:gap-4">
-            {steps.map((s, i) => {
-              const isActive = inView && active === i;
-              return (
-                <div
-                  key={s.title}
-                  className={`group relative flex flex-col items-center text-center transition-all duration-700 ease-out ${
-                    inView ? "translate-y-0 scale-100 opacity-100" : "translate-y-10 scale-95 opacity-0"
-                  }`}
-                  style={{ transitionDelay: `${i * 130}ms` }}
-                >
-                  <span
-                    className={`relative flex size-16 items-center justify-center rounded-2xl border bg-white shadow-sm transition-all duration-500 group-hover:-translate-y-2 group-hover:rotate-3 group-hover:border-brand-orange/40 group-hover:bg-brand-navy group-hover:text-brand-orange group-hover:shadow-[0_18px_38px_-16px_var(--brand-orange)] ${
-                      isActive
-                        ? "-translate-y-1.5 border-brand-orange/50 bg-brand-navy text-brand-orange shadow-lg"
-                        : "border-brand-navy/10 text-brand-navy"
-                    }`}
-                    style={isActive ? undefined : { animation: `cw-float 4s ease-in-out ${i * 0.35}s infinite` }}
-                  >
-                    {isActive ? (
-                      <span
-                        className="pointer-events-none absolute inset-0 rounded-2xl border-2 border-brand-orange/60"
-                        style={{ animation: "cw-ring 1.6s ease-out infinite" }}
-                        aria-hidden="true"
-                      />
-                    ) : null}
-                    <s.icon
-                      className={`size-7 transition-transform duration-500 group-hover:scale-115 ${isActive ? "scale-110" : ""}`}
-                      strokeWidth={1.6}
-                      aria-hidden="true"
-                    />
-                    <span
-                      className={`absolute -top-2 -right-2 flex size-6 items-center justify-center rounded-full bg-brand-orange text-[11px] font-bold text-brand-orange-foreground shadow ring-4 ring-muted/40 transition-all duration-500 group-hover:scale-115 ${
-                        isActive ? "scale-115" : ""
-                      }`}
-                    >
-                      {i + 1}
-                    </span>
-                  </span>
-                  <p className="mt-4 text-sm font-semibold transition-colors duration-300 group-hover:text-brand-orange">{s.title}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">{s.text}</p>
-                  <span
-                    className={`mt-2 h-px w-10 bg-brand-orange transition-all duration-500 ${isActive ? "opacity-100" : "w-0 opacity-0"} group-hover:w-10 group-hover:opacity-100`}
-                    aria-hidden="true"
-                  />
-                  {i < steps.length - 1 ? (
-                    <ArrowRight
-                      className={`absolute top-6 -right-4 hidden size-4 transition-all duration-500 lg:block ${
-                        isActive ? "translate-x-1 text-brand-orange" : "text-brand-orange/40"
-                      }`}
-                      aria-hidden="true"
-                    />
-                  ) : null}
-                </div>
-              );
-            })}
+          <div
+            className={`relative overflow-hidden rounded-3xl shadow-2xl transition-all duration-1000 ease-out ${
+              inView ? "translate-y-0 scale-100 opacity-100" : "translate-y-8 scale-95 opacity-0"
+            }`}
+          >
+            <img
+              src={unfall}
+              alt="Unfallfahrzeug am Straßenrand"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              className="aspect-4/3 w-full object-cover transition-transform duration-[1400ms] ease-out hover:scale-105"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-brand-navy/60 via-transparent to-transparent" />
           </div>
         </div>
 
-        <div className={`mt-12 text-center transition-all duration-700 delay-500 ${inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
-          <a
-            href="/leistungen/unfallservice"
-            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-brand-orange px-6 py-3 text-sm font-semibold text-brand-orange-foreground shadow-lg transition-all duration-300 hover:scale-[1.05] hover:shadow-[0_14px_32px_-10px_var(--brand-orange)]"
-          >
-            <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 group-hover:translate-x-full" aria-hidden="true" />
-            Mehr zum Unfallservice
-            <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden="true" />
-          </a>
-        </div>
+        <ol className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          {steps.map((s, i) => (
+            <li
+              key={s.title}
+              className={`group flex flex-col items-center gap-3 rounded-2xl border border-black/5 bg-white p-4 text-center shadow-sm transition-all duration-700 ease-out hover:-translate-y-1.5 hover:border-brand-orange/40 hover:shadow-lg ${
+                inView ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              }`}
+              style={{ transitionDelay: `${200 + i * 110}ms` }}
+            >
+              <span className="relative flex size-14 items-center justify-center rounded-2xl bg-brand-navy/6 text-brand-navy transition-colors duration-500 group-hover:bg-brand-navy group-hover:text-brand-orange">
+                <span
+                  className="pointer-events-none absolute inset-0 rounded-2xl bg-brand-orange"
+                  style={{ animation: `cw-step-pulse 3.2s ease-out ${i * 0.4}s infinite` }}
+                  aria-hidden="true"
+                />
+                <s.icon className="relative size-6" strokeWidth={1.7} aria-hidden="true" />
+                <span className="absolute -top-2 -right-2 flex size-6 items-center justify-center rounded-full bg-brand-orange text-[11px] font-bold text-brand-orange-foreground shadow">
+                  {i + 1}
+                </span>
+              </span>
+              <span className="text-sm font-semibold">{s.title}</span>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
