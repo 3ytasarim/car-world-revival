@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { motion, useInView, useScroll, useSpring, useTransform } from "framer-motion";
 
-import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
+import { AnimatedText } from "@/components/ui/animated-text";
 import werkstattFoto from "@/assets/svc-reparatur.jpg";
 
 const services = [
@@ -49,20 +49,8 @@ export function RundumSorglosSection() {
     <section
       ref={sectionRef}
       aria-labelledby="rundum-title"
-      className="relative w-full overflow-hidden bg-transparent py-16 sm:py-24"
+      className="relative w-full overflow-hidden bg-white py-16 sm:py-24"
     >
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <AnimatedGradientBackground
-          Breathing
-          startingGap={120}
-          breathingRange={12}
-          animationSpeed={0.03}
-          topOffset={20}
-          gradientColors={["#F4F7FB", "#DCEAF8", "#A9CCEC", "#7FB3E0", "#5088C8", "#2F5F9B", "#1B3A63"]}
-          gradientStops={[20, 40, 55, 68, 80, 90, 100]}
-          containerClassName="opacity-70"
-        />
-      </div>
       <motion.div
         style={{ y: y1 }}
         className="pointer-events-none absolute -top-24 -left-24 size-[420px] rounded-full bg-[#5088C8]/10 blur-3xl"
@@ -77,14 +65,19 @@ export function RundumSorglosSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mx-auto max-w-2xl text-center"
+          className="mx-auto max-w-3xl text-center"
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-[#5088C8]/30 bg-[#5088C8]/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-[#1B3A63] uppercase">
             <ShieldCheck className="size-4" aria-hidden="true" />
             Alles aus einer Hand
           </span>
-          <h2 id="rundum-title" className="mt-4 text-3xl font-bold tracking-tight text-[#131F35] sm:text-5xl">
-            Rundum-sorglos-Paket
+          <h2 id="rundum-title" className="mt-4 text-3xl tracking-tight text-[#1B3A63] sm:text-5xl">
+            <AnimatedText
+              text="Nach dem Unfall – was passiert jetzt?"
+              minWeight={300}
+              maxWeight={800}
+              delayMultiplier={0.06}
+            />
           </h2>
           <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-[#1B3A63] to-[#5088C8]" />
         </motion.div>
