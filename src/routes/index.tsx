@@ -23,7 +23,7 @@ import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { PartnerSection } from "@/components/site/PartnerSection";
 
 import { PHONE_HREF } from "@/components/site/site-data";
-import { TextAnimation } from "@/components/ui/text-animation";
+import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
 
 
