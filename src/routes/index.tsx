@@ -15,6 +15,8 @@ import { PhoneScreen } from "@/components/site/PhoneScreen";
 import IPhoneMockup from "@/components/ui/iphone-mockup";
 import { ClientOnly } from "@tanstack/react-router";
 import { MeshyBackground } from "@/components/ui/meshy-background";
+import { FloatingIcons } from "@/components/site/FloatingIcons";
+
 
 import heroBg from "@/assets/hero-bg.jpg";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
