@@ -225,33 +225,27 @@ function Home() {
 
         </div>
 
-        {/* Partner marquee – eigener Bereich unter dem Hero */}
-        <section className="relative z-10 border-y border-black/5 bg-brand-surface py-12">
-          <div className="mx-auto w-full max-w-screen-xl overflow-hidden px-4 md:px-8">
-            <p className="mb-6 text-center text-xs font-semibold tracking-widest text-gray-400 uppercase">
-              Partner &amp; Zertifizierungen
-            </p>
-            <div className="relative flex overflow-hidden py-5">
-              <div
-                className="animate-marquee flex w-max hover:[animation-play-state:paused]"
-                style={{ "--duration": "28s" } as React.CSSProperties}
-              >
-                {[...partners, ...partners].map((p, i) => (
-                  <div key={i} className="mx-8 flex h-12 w-fit shrink-0 items-center justify-center sm:mx-12">
-                    <img
-                      src={p.src}
-                      alt={p.alt}
-                      width={p.w}
-                      height={p.h}
-                      loading="lazy"
-                      className="h-10 w-auto object-contain grayscale-[35%] sm:h-12"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
+        {/* Partner & Zertifizierungen – Logo-Timeline */}
+        <section className="relative z-10 border-y border-black/5 bg-brand-surface py-14">
+          <div className="mx-auto w-full max-w-screen-xl px-4 md:px-8">
+            <h2 className="mb-8 text-center text-3xl font-bold tracking-tight text-[#1B3A63] sm:text-4xl">
+              <AnimatedText text="Partner & Zertifizierungen" minWeight={300} maxWeight={800} delayMultiplier={0.06} />
+            </h2>
+            <LogoTimeline
+              items={partnerTimelineItems}
+              title={
+                <img
+                  src={logo.url}
+                  alt="Car-World"
+                  width={520}
+                  height={160}
+                  className="h-20 w-auto object-contain opacity-45 mix-blend-multiply sm:h-28 md:h-32"
+                />
+              }
+            />
           </div>
         </section>
+
 
 
         {/* Foto senden → Angebot in 24 Stunden */}
