@@ -6,9 +6,6 @@ import { PHONE_HREF } from "@/components/site/site-data";
 
 /** Smartphone-Inhalt: Unfall gehabt? → direkt anrufen */
 export function PhoneScreen() {
-  return () => clearInterval(id);
-  }, []);
-
   return (
     <div className="relative flex size-full flex-col overflow-hidden bg-brand-navy">
       <div className="relative flex-1 overflow-hidden">
