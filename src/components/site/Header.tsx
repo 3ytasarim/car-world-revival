@@ -36,7 +36,7 @@ function AnimatedLogo() {
           alt="Car-World"
           width={243}
           height={120}
-          className="h-11 w-auto transition-transform duration-700 ease-out group-hover:scale-[1.06] group-hover:-rotate-1"
+          className="h-16 w-auto transition-transform duration-700 ease-out group-hover:scale-[1.06] group-hover:-rotate-1 sm:h-20"
           style={ready ? { animation: "cw-logo-in 900ms cubic-bezier(.22,1,.36,1) both" } : { opacity: 0 }}
         />
         {/* Premium-Sheen über dem Logo */}
@@ -47,19 +47,28 @@ function AnimatedLogo() {
         />
       </span>
 
-      {/* Auto, das dezent am Logo vorbeifährt */}
-      <span className="pointer-events-none absolute -bottom-1 left-0 h-3 w-full overflow-hidden" aria-hidden="true">
+      {/* Abschleppwagen, der dezent am Logo vorbeifährt */}
+      <span className="pointer-events-none absolute -bottom-1 left-0 h-5 w-full overflow-hidden" aria-hidden="true">
         <svg
-          viewBox="0 0 48 20"
-          className="absolute top-0 h-3 w-8 text-brand-orange/70"
+          viewBox="0 0 72 26"
+          className="absolute top-0 h-5 w-14 text-brand-orange/75"
           style={ready ? { animation: "cw-car-pass 9s cubic-bezier(.5,0,.2,1) 1.6s infinite" } : { opacity: 0 }}
           fill="currentColor"
         >
-          <path d="M4 13h40a2 2 0 0 0 2-2v-1a3 3 0 0 0-2.4-2.9L36 5.6 31.5 2.4A5 5 0 0 0 28.6 1.5H17a5 5 0 0 0-3.3 1.3L9.6 6.6 4.2 8A3 3 0 0 0 2 10.9V11a2 2 0 0 0 2 2Z" />
-          <circle cx="13" cy="14.5" r="3.2" />
-          <circle cx="35" cy="14.5" r="3.2" />
+          {/* Kranarm */}
+          <path d="M26 15V9h3v4.2l16-8.2 1.4 2.7L31 15.6V15h-5Z" />
+          <path d="M45.6 3.6h7.2v2.6h-7.2z" />
+          {/* Haken */}
+          <path d="M50 6.2h2v3.4a2.4 2.4 0 1 1-2.6 2.4h2V6.2Z" />
+          {/* Ladefläche + Kabine */}
+          <path d="M2 18h30v-6H2a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2Z" />
+          <path d="M32 18h30a2 2 0 0 0 2-2v-2a3 3 0 0 0-2.3-2.9l-5.2-1.3-3.6-3.1A5 5 0 0 0 49.6 5.4H32V18Z" opacity=".92" />
+          {/* Räder */}
+          <circle cx="14" cy="19.4" r="4" />
+          <circle cx="52" cy="19.4" r="4" />
         </svg>
       </span>
+
     </a>
   );
 }
