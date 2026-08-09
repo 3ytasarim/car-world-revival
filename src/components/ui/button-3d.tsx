@@ -31,7 +31,7 @@ export function Button3D({
         className={cn(
           "absolute inset-0 rounded-full",
           isPrimary
-            ? "bg-[linear-gradient(to_left,hsl(24_90%_26%)_0%,hsl(24_90%_38%)_8%,hsl(24_90%_38%)_92%,hsl(24_90%_26%)_100%)]"
+            ? "bg-[linear-gradient(to_left,hsl(212_52%_28%)_0%,hsl(212_52%_40%)_8%,hsl(212_52%_40%)_92%,hsl(212_52%_28%)_100%)]"
             : "bg-[linear-gradient(to_left,hsl(220_14%_70%)_0%,hsl(220_14%_84%)_8%,hsl(220_14%_84%)_92%,hsl(220_14%_70%)_100%)]",
         )}
       />

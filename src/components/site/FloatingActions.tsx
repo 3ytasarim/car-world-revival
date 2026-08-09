@@ -19,7 +19,7 @@ export function FloatingActions() {
 
       <a
         href="/termin"
-        className="inline-flex h-12 items-center gap-3 rounded-l-xl bg-[#E11D2E] px-5 text-sm font-semibold text-white shadow-[0_18px_35px_-14px_rgba(225,29,46,0.9)] transition-transform duration-300 hover:-translate-x-1"
+        className="inline-flex h-12 items-center gap-3 rounded-l-xl bg-[#1B3A63] px-5 text-sm font-semibold text-white shadow-[0_18px_35px_-14px_rgba(27,58,99,0.9)] transition-transform duration-300 hover:-translate-x-1"
       >
         <CalendarDays className="size-5" aria-hidden="true" />
         Termin anfragen
