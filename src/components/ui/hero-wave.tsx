@@ -104,7 +104,8 @@ export function HeroWave({ className, height = 260 }: Props) {
         depthWrite: false,
       });
 
-      let mesh: THREE.InstancedMesh | null = null;
+      const U = material.uniforms as Record<string, { value: any }>;
+      let mesh: any = null;
       let count = 0;
 
       const build = () => {
@@ -139,9 +140,9 @@ export function HeroWave({ className, height = 260 }: Props) {
         camera.bottom = -h / 2;
         camera.updateProjectionMatrix();
         renderer.setSize(w, h, false);
-        material.uniforms.uBaseY.value = -h / 2;
-        material.uniforms.uHalfW.value = w / 2;
-        material.uniforms.uGain.value = Math.max(90, h * 0.62);
+        U['uBaseY']!.value = -h / 2;
+        U['uHalfW']!.value = w / 2;
+        U['uGain']!.value = Math.max(90, h * 0.62);
         build();
       };
       resize();
@@ -162,9 +163,9 @@ export function HeroWave({ className, height = 260 }: Props) {
         const dt = gsap.ticker.deltaRatio() * (1 / 60);
         phase += dt * 0.9;
         mouseX += (targetMouse - mouseX) * Math.min(1, dt * 6);
-        material.uniforms.uPhase.value = phase;
-        material.uniforms.uMouseX.value = mouseX;
-        material.uniforms.uLen.value = 1.4 + Math.sin(phase * 0.15) * 0.8;
+        U['uPhase']!.value = phase;
+        U['uMouseX']!.value = mouseX;
+        U['uLen']!.value = 1.4 + Math.sin(phase * 0.15) * 0.8;
         renderer.render(scene, camera);
       };
       gsap.ticker.add(tick);
