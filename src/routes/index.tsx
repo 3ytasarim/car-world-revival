@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { ProcessSection } from "@/components/site/ProcessSection";
 import { ServicesSection } from "@/components/site/ServicesSection";
 import { FloatingActions } from "@/components/site/FloatingActions";
+import { HeroScreen } from "@/components/site/HeroScreen";
 import heroBg from "@/assets/hero-bg.jpg";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
 import { VideoSection } from "@/components/site/VideoSection";
@@ -172,20 +173,10 @@ function Home() {
                     <path d="M278.11,362.6h94.05c0,3.63-2.95,6.58-6.58,6.58h-80.89c-3.63,0-6.58-2.95-6.58-6.58h0Z" fill="#8f9091" />
                   </svg>
                   <div
-                    className="absolute overflow-hidden rounded-[2%]"
+                    className="absolute overflow-hidden rounded-[2%] [container-type:inline-size]"
                     style={{ left: "11.46%", top: "5.33%", width: "77.11%", height: "80.96%" }}
                   >
-                    <video
-                      className="size-full object-cover"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      poster={werkstatt.url}
-                      aria-label="Car-World Werkstatt Video"
-                    >
-                      <source src="/videos/werkstatt.mp4" type="video/mp4" />
-                    </video>
+                    <HeroScreen />
                   </div>
                 </div>
               </div>
