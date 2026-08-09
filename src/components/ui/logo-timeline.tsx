@@ -53,10 +53,15 @@ export function LogoTimeline({
         {rows.map((rowItems, index) => (
           <div key={index} className="relative flex items-center">
             {showRowSeparator && <div className="absolute inset-x-0 top-0 h-px bg-black/5" />}
-            {rowItems.map((logo) => (
+            {rowItems.map((logo, i) => (
               <div
-                key={`${logo.label}-${logo.animationDelay}`}
-                className="absolute flex items-center gap-2 rounded-full border border-black/5 bg-white/90 px-4 py-2 whitespace-nowrap shadow-[0_10px_30px_-20px_rgba(19,31,53,0.8)] backdrop-blur"
+                key={`${logo.label}-${logo.animationDelay}-${i}`}
+                className={cn(
+                  "absolute flex items-center whitespace-nowrap",
+                  logo.label
+                    ? "gap-2 rounded-full border border-black/5 bg-white/90 px-4 py-2 shadow-[0_10px_30px_-20px_rgba(19,31,53,0.8)] backdrop-blur"
+                    : "px-2",
+                )}
                 style={{
                   // @ts-expect-error custom props
                   "--move-x-from": "-120%",
@@ -66,7 +71,9 @@ export function LogoTimeline({
                 }}
               >
                 {logo.icon}
-                <span className="text-sm font-semibold text-[#1B3A63]">{logo.label}</span>
+                {logo.label ? (
+                  <span className="text-sm font-semibold text-[#1B3A63]">{logo.label}</span>
+                ) : null}
               </div>
             ))}
           </div>
@@ -76,7 +83,7 @@ export function LogoTimeline({
       {/* Zentrales Logo */}
       {title && (
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="rounded-3xl bg-white/55 px-8 py-6 backdrop-blur-[2px]">{title}</div>
+          <div className="px-8 py-6">{title}</div>
         </div>
       )}
 
