@@ -13,7 +13,7 @@ import { FloatingActions } from "@/components/site/FloatingActions";
 import { HeroScreen } from "@/components/site/HeroScreen";
 import { PhoneScreen } from "@/components/site/PhoneScreen";
 import IPhoneMockup from "@/components/ui/iphone-mockup";
-import { HeroWave } from "@/components/ui/hero-wave";
+import { GrainHeroBg } from "@/components/ui/grain-hero-bg";
 
 import heroBg from "@/assets/hero-bg.jpg";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
