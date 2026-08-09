@@ -32,6 +32,8 @@ import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
 
 
+import abschleppen from "@/assets/abschleppen.png.asset.json";
+import werkstatt from "@/assets/werkstatt.png.asset.json";
 import steinschlag from "@/assets/steinschlag.png.asset.json";
 import tuv from "@/assets/tuv.png.asset.json";
 import innung from "@/assets/innung.png.asset.json";
