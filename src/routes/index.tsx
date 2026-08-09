@@ -145,9 +145,9 @@ function Home() {
               <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-6">
                 {/* Text-Spalte */}
                 <div className="max-w-2xl space-y-5 text-center lg:text-left">
-                  <span className="group mx-auto flex w-fit items-center rounded-3xl border-[2px] border-black/5 bg-gradient-to-tr from-zinc-300/20 via-gray-400/20 to-transparent px-5 py-2 text-sm text-gray-600 lg:mx-0">
+                  <span className="group mx-auto flex w-fit items-center rounded-3xl border-[2px] border-brand-orange/25 bg-gradient-to-tr from-brand-orange/15 via-sky-400/15 to-transparent px-5 py-2 text-sm text-[#1B3A63] shadow-[0_10px_25px_-18px_rgba(80,136,200,0.9)] lg:mx-0">
                     <AnimatedText text="Alles aus einer Hand" minWeight={300} maxWeight={700} delayMultiplier={0.12} />
-                    <ChevronRight className="ml-2 inline size-4 duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                    <ChevronRight className="ml-2 inline size-4 text-brand-orange duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </span>
                   <h1 className="text-4xl tracking-tighter md:text-6xl">
                     <AnimatedText
