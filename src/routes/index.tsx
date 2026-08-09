@@ -13,7 +13,8 @@ import { FloatingActions } from "@/components/site/FloatingActions";
 import { HeroScreen } from "@/components/site/HeroScreen";
 import { PhoneScreen } from "@/components/site/PhoneScreen";
 import IPhoneMockup from "@/components/ui/iphone-mockup";
-import { GrainHeroBg } from "@/components/ui/grain-hero-bg";
+import { ClientOnly } from "@tanstack/react-router";
+import { MeshyBackground } from "@/components/ui/meshy-background";
 
 import heroBg from "@/assets/hero-bg.jpg";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
