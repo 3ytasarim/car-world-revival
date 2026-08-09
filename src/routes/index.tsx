@@ -17,6 +17,7 @@ import { ClientOnly } from "@tanstack/react-router";
 import { MeshyBackground } from "@/components/ui/meshy-background";
 import { FloatingIcons } from "@/components/site/FloatingIcons";
 import { LogoTimeline, type LogoItem } from "@/components/ui/logo-timeline";
+import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 import logo from "@/assets/logo.png.asset.json";
 
 
@@ -250,8 +251,24 @@ function Home() {
         </div>
 
         {/* Partner & Zertifizierungen – Logo-Timeline */}
-        <section className="relative z-10 border-y border-black/5 bg-brand-surface py-14">
-          <div className="mx-auto w-full max-w-screen-xl px-4 md:px-8">
+        <section className="relative z-10 overflow-hidden border-y border-black/5 bg-brand-surface py-14">
+          {/* Animierter Farbverlauf im unteren Bereich */}
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3"
+            style={{ maskImage: "linear-gradient(to top, black 40%, transparent 100%)", WebkitMaskImage: "linear-gradient(to top, black 40%, transparent 100%)" }}
+          >
+            <AnimatedGradientBackground
+              Breathing
+              startingGap={120}
+              breathingRange={12}
+              animationSpeed={0.03}
+              topOffset={20}
+              gradientColors={["#F4F7FB", "#DCEAF8", "#A9CCEC", "#7FB3E0", "#5088C8", "#2F5F9B", "#1B3A63"]}
+              gradientStops={[20, 40, 55, 68, 80, 90, 100]}
+              containerClassName="opacity-70"
+            />
+          </div>
+          <div className="relative z-10 mx-auto w-full max-w-screen-xl px-4 md:px-8">
             <h2 className="mb-8 text-center text-3xl font-bold tracking-tight text-[#1B3A63] sm:text-4xl">
               <AnimatedText text="Partner & Zertifizierungen" minWeight={300} maxWeight={800} delayMultiplier={0.06} />
             </h2>
