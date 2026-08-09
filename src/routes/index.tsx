@@ -141,7 +141,7 @@ function Home() {
                 {/* Text-Spalte */}
                 <div className="max-w-2xl space-y-5 text-center lg:text-left">
                   <span className="group mx-auto flex w-fit items-center rounded-3xl border-[2px] border-black/5 bg-gradient-to-tr from-zinc-300/20 via-gray-400/20 to-transparent px-5 py-2 text-sm text-gray-600 lg:mx-0">
-                    Alles aus einer Hand
+                    <AnimatedText text="Alles aus einer Hand" minWeight={300} maxWeight={700} delayMultiplier={0.12} />
                     <ChevronRight className="ml-2 inline size-4 duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </span>
                   <h1 className="text-4xl tracking-tighter md:text-6xl">
