@@ -189,34 +189,6 @@ function Home() {
                     </video>
                   </div>
                 </div>
-
-                {/* Smartphone – größer und im Vordergrund */}
-                <div className="absolute -bottom-8 left-1/2 w-[190px] -translate-x-[135%] sm:-bottom-4 sm:left-auto sm:right-2 sm:translate-x-0 sm:w-[236px] lg:w-[268px]">
-                  <div className="relative rounded-[2.2rem] border-[10px] border-neutral-900 bg-neutral-900 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.65)] ring-1 ring-black/20">
-                    <div className="absolute top-2 left-1/2 z-10 h-4 w-20 -translate-x-1/2 rounded-full bg-neutral-900" />
-                    <div className="relative overflow-hidden rounded-[1.6rem] bg-black">
-                      <img
-                        src={unfallImg}
-                        alt="Unfallfahrzeug"
-                        width={1024}
-                        height={1024}
-                        className="aspect-9/16 w-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/35 to-black/25" />
-                      <div className="absolute inset-x-0 bottom-0 space-y-3 p-4 text-center text-white">
-                        <p className="text-lg font-bold tracking-tight">Unfall gehabt?</p>
-                        <p className="text-[11px] text-white/75">Wir kümmern uns um alles.</p>
-                        <a
-                          href={PHONE_HREF}
-                          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-orange py-3 text-sm font-semibold text-brand-orange-foreground shadow-lg transition-transform hover:scale-[1.03]"
-                        >
-                          <Phone className="size-4" aria-hidden="true" />
-                          Jetzt anrufen
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
 
               {/* Partner marquee – mit deutlich mehr Abstand zum Hero */}
