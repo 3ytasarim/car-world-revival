@@ -97,7 +97,7 @@ const timelineLogos = partners;
 const partnerTimelineItems: LogoItem[] = [1, 2, 3].flatMap((row) => {
   const duration = 42 + row * 8;
   // jede Zeile zeigt alle Logos, rotiert, mit gleichmäßigem Abstand
-  const rotated = timelineLogos.map((_, i) => timelineLogos[(i + row) % timelineLogos.length]);
+  const rotated = timelineLogos.map((_, i) => timelineLogos[(i + row) % timelineLogos.length]!);
   return rotated.map((l, i) => ({
     label: "",
     icon: (
