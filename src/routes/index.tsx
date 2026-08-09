@@ -11,6 +11,7 @@ import { ProcessSection } from "@/components/site/ProcessSection";
 import { ServicesSection } from "@/components/site/ServicesSection";
 import { FloatingActions } from "@/components/site/FloatingActions";
 import { HeroScreen } from "@/components/site/HeroScreen";
+import IPhoneMockup from "@/components/ui/iphone-mockup";
 import heroBg from "@/assets/hero-bg.jpg";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
 import { VideoSection } from "@/components/site/VideoSection";
@@ -154,8 +155,24 @@ function Home() {
                 </div>
               </div>
 
-              {/* Laptop + Smartphone Mockup */}
-              <div className="relative mx-auto mt-14 w-full max-w-4xl pb-16 sm:pb-6">
+              {/* Smartphone Mockup – mobil */}
+              <div className="mt-12 flex w-full justify-center sm:hidden">
+                <div className="h-[534px] w-[292px] [container-type:inline-size]">
+                  <IPhoneMockup
+                    model="15-pro"
+                    color="natural-titanium"
+                    safeArea={false}
+                    scale={0.7}
+                    screenStyle={{ containerType: "inline-size" } as React.CSSProperties}
+                  >
+                    <HeroScreen />
+                  </IPhoneMockup>
+                </div>
+              </div>
+
+              {/* Laptop Mockup – ab Tablet */}
+              <div className="relative mx-auto mt-14 hidden w-full max-w-4xl pb-16 sm:block sm:pb-6">
+
                 <div className="relative mx-auto w-[88%] text-gray-950 sm:w-full">
                   <svg className="h-auto w-full" fill="none" height="400" viewBox="0 0 650 400" width="650" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M79.56,13.18h491.32c7.23,0,13.1,5.87,13.1,13.1v336.61H66.46V26.28c0-7.23,5.87-13.1,13.1-13.1Z" fill="#a4a5a7" />
