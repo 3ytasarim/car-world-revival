@@ -296,8 +296,12 @@ function Home() {
         {/* Rundum-sorglos-Paket */}
         <RundumSorglosSection />
 
+        {/* Unsere Leistungen — vertikale Tabs */}
+        <LeistungenTabs />
+
         {/* Foto senden → Angebot in 24 Stunden */}
         <FotoAngebot />
+
 
         {/* Trust + Stats */}
         <StatsSection />
