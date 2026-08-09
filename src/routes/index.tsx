@@ -23,7 +23,7 @@ import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { PartnerSection } from "@/components/site/PartnerSection";
 
 import { PHONE_HREF } from "@/components/site/site-data";
-import { TextAnimation } from "@/components/ui/text-animation";
+import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
 
 
@@ -144,14 +144,17 @@ function Home() {
                     Alles aus einer Hand
                     <ChevronRight className="ml-2 inline size-4 duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </span>
-                  <h1 className="bg-[linear-gradient(180deg,_#000_0%,_rgba(0,_0,_0,_0.75)_100%)] bg-clip-text text-4xl tracking-tighter text-transparent md:text-6xl">
-                    Deine{" "}
-                    <TextAnimation
-                      words={["Nr. 1 Autowerkstatt"]}
-                      className="bg-gradient-to-r from-brand-orange to-sky-400 bg-clip-text text-left text-transparent"
+                  <h1 className="text-4xl tracking-tighter md:text-6xl">
+                    <AnimatedText
+                      text="Deine "
+                      className="bg-[linear-gradient(180deg,_#000_0%,_rgba(0,_0,_0,_0.75)_100%)] bg-clip-text text-transparent"
                     />
-
+                    <AnimatedText
+                      text="Nr. 1 Autowerkstatt"
+                      className="bg-gradient-to-r from-brand-orange to-sky-400 bg-clip-text text-transparent"
+                    />
                   </h1>
+
 
                   <p className="mx-auto max-w-xl text-gray-600 lg:mx-0">
                     Von der Unfallhilfe bis zur Wartung: Wir übernehmen Reparatur, Versicherungsabwicklung
