@@ -142,10 +142,12 @@ function Home() {
                   </span>
                   <h1 className="bg-[linear-gradient(180deg,_#000_0%,_rgba(0,_0,_0,_0.75)_100%)] bg-clip-text text-4xl tracking-tighter text-transparent md:text-6xl">
                     Deine{" "}
-                    <span className="bg-gradient-to-r from-brand-orange to-sky-400 bg-clip-text text-transparent">
-                      Nr. 1 Autowerkstatt
-                    </span>
+                    <TextAnimation
+                      words={["Nr. 1 Autowerkstatt", "Unfallhilfe rund um die Uhr", "Werkstatt in deiner Nähe"]}
+                      className="bg-gradient-to-r from-brand-orange to-sky-400 bg-clip-text text-left text-transparent"
+                    />
                   </h1>
+
                   <p className="mx-auto max-w-xl text-gray-600 lg:mx-0">
                     Von der Unfallhilfe bis zur Wartung: Wir übernehmen Reparatur, Versicherungsabwicklung
                     und Ersatzwagen — Sie müssen sich um nichts kümmern.
