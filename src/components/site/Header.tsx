@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { Briefcase, Handshake, House, Mail, Menu, Tag, Wrench, X } from "lucide-react";
 
 import logo from "@/assets/logo.png.asset.json";
@@ -75,6 +76,7 @@ function AnimatedLogo() {
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md">
@@ -83,27 +85,35 @@ export function Header() {
 
         <nav className="hidden md:block">
           <div className="flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1.5 shadow-lg backdrop-blur-lg lg:gap-4 lg:px-5">
-            {NAV.map((item, i) => {
+            {NAV.map((item) => {
               const Icon = icons[item.icon];
-              const active = i === 0;
+              const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
               return (
                 <a
                   key={item.href}
                   href={item.href}
-                  className={`relative flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors hover:text-gray-950 lg:px-4 ${
-                    active ? "text-brand-orange" : "text-gray-700"
+                  aria-current={active ? "page" : undefined}
+                  className={`relative flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors lg:px-4 ${
+                    active
+                      ? "bg-brand-orange/10 text-brand-orange"
+                      : "text-gray-700 hover:bg-black/5 hover:text-gray-950"
                   }`}
                 >
+                  {active && (
+                    <>
+                      {/* Leuchtender Indikator über dem aktiven Punkt */}
+                      <span className="pointer-events-none absolute -top-[13px] left-1/2 h-1 w-8 -translate-x-1/2 rounded-full bg-brand-orange" />
+                      <span className="pointer-events-none absolute -top-[13px] left-1/2 h-4 w-12 -translate-x-1/2 rounded-full bg-brand-orange/35 blur-md" />
+                    </>
+                  )}
                   <Icon className="hidden lg:inline" size={15} strokeWidth={2.5} aria-hidden="true" />
                   <span>{item.label}</span>
-                  {active && (
-                    <span className="absolute -bottom-0.5 left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-brand-orange" />
-                  )}
                 </a>
               );
             })}
           </div>
         </nav>
+
 
         <button
           type="button"
