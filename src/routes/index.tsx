@@ -8,7 +8,7 @@ import { MobileBar } from "@/components/site/MobileBar";
 import { StatsSection } from "@/components/site/StatsSection";
 import { SectionHeading } from "@/components/site/SectionHeading";
 
-import { ServicesSection } from "@/components/site/ServicesSection";
+import { LeistungenTabs } from "@/components/site/LeistungenTabs";
 import { FloatingActions } from "@/components/site/FloatingActions";
 import { HeroScreen } from "@/components/site/HeroScreen";
 import { PhoneScreen } from "@/components/site/PhoneScreen";
