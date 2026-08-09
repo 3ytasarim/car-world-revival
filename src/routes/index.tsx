@@ -7,7 +7,7 @@ import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
 import { StatsSection } from "@/components/site/StatsSection";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { ProcessSection } from "@/components/site/ProcessSection";
+
 import { ServicesSection } from "@/components/site/ServicesSection";
 import { FloatingActions } from "@/components/site/FloatingActions";
 import { HeroScreen } from "@/components/site/HeroScreen";
