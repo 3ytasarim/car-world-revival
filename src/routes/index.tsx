@@ -94,27 +94,23 @@ const partners = [
 
 const timelineLogos = partners;
 
-const partnerTimelineItems: LogoItem[] = [1, 2, 3].flatMap((row) => {
-  const duration = 42 + row * 8;
-  // jede Zeile zeigt alle Logos, rotiert, mit gleichmäßigem Abstand
-  const rotated = timelineLogos.map((_, i) => timelineLogos[(i + row) % timelineLogos.length]!);
-  return rotated.map((l, i) => ({
-    label: "",
-    icon: (
-      <img
-        src={l.src}
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-        className="h-12 w-auto object-contain sm:h-16 md:h-20"
-      />
-    ),
-    animationDelay: 0,
-    animationDuration: duration,
-    row,
-    key: `${row}-${i}`,
-  })) as LogoItem[];
-});
+// 4 Zeilen, pro Zeile läuft genau ein Logo — zeitversetzt
+const partnerTimelineItems: LogoItem[] = timelineLogos.map((l, i) => ({
+  label: "",
+  icon: (
+    <img
+      src={l.src}
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      className="h-14 w-auto object-contain sm:h-20 md:h-24"
+    />
+  ),
+  animationDelay: -i * 6,
+  animationDuration: 26 + i * 4,
+  row: i + 1,
+}));
+
 
 
 const stats = [
