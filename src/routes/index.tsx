@@ -8,7 +8,7 @@ import { MobileBar } from "@/components/site/MobileBar";
 import { StatsSection } from "@/components/site/StatsSection";
 import { SectionHeading } from "@/components/site/SectionHeading";
 
-import { ServicesSection } from "@/components/site/ServicesSection";
+import { LeistungenTabs } from "@/components/site/LeistungenTabs";
 import { FloatingActions } from "@/components/site/FloatingActions";
 import { HeroScreen } from "@/components/site/HeroScreen";
 import { PhoneScreen } from "@/components/site/PhoneScreen";
@@ -296,8 +296,12 @@ function Home() {
         {/* Rundum-sorglos-Paket */}
         <RundumSorglosSection />
 
+        {/* Unsere Leistungen — vertikale Tabs */}
+        <LeistungenTabs />
+
         {/* Foto senden → Angebot in 24 Stunden */}
         <FotoAngebot />
+
 
         {/* Trust + Stats */}
         <StatsSection />
@@ -336,8 +340,7 @@ function Home() {
 
 
 
-        {/* Services grid */}
-        <ServicesSection />
+
 
         {/* Kundenmeinungen */}
         <TestimonialsSection />
