@@ -6,6 +6,7 @@ import { Briefcase, CheckCircle2, Mail, Phone } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
+import { FloatingActions } from "@/components/site/FloatingActions";
 import { supabase } from "@/integrations/supabase/client";
 import { EMAIL_KARRIERE, PHONE_LABEL, PHONE_HREF, WA_KARRIERE } from "@/components/site/site-data";
 
@@ -155,6 +156,7 @@ function KarrierePage() {
         </section>
       </main>
       <Footer />
+      <FloatingActions />
       <MobileBar />
     </div>
   );

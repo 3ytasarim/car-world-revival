@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
+import { FloatingActions } from "@/components/site/FloatingActions";
 import { PartnerSection } from "@/components/site/PartnerSection";
 
 export const Route = createFileRoute("/partner")({
@@ -39,6 +40,7 @@ function PartnerPage() {
         <PartnerSection />
       </main>
       <Footer />
+      <FloatingActions />
       <MobileBar />
     </div>
   );

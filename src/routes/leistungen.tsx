@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
+import { FloatingActions } from "@/components/site/FloatingActions";
 import { ServicesSection } from "@/components/site/ServicesSection";
 import { RundumSorglos } from "@/components/site/RundumSorglos";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
@@ -47,6 +48,7 @@ function LeistungenPage() {
         <FotoAngebot />
       </main>
       <Footer />
+      <FloatingActions />
       <MobileBar />
     </div>
   );

@@ -5,6 +5,7 @@ import { Tag } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
+import { FloatingActions } from "@/components/site/FloatingActions";
 import { supabase } from "@/integrations/supabase/client";
 import { WA_FRAGE } from "@/components/site/site-data";
 
@@ -109,6 +110,7 @@ function OffersPage() {
         </section>
       </main>
       <Footer />
+      <FloatingActions />
       <MobileBar />
     </div>
   );

@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
+import { FloatingActions } from "@/components/site/FloatingActions";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 
 export const Route = createFileRoute("/kundenmeinungen")({
@@ -39,6 +40,7 @@ function ReviewsPage() {
         <TestimonialsSection />
       </main>
       <Footer />
+      <FloatingActions />
       <MobileBar />
     </div>
   );

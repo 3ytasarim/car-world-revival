@@ -5,6 +5,7 @@ import { Phone } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
+import { FloatingActions } from "@/components/site/FloatingActions";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
 import { PHONE_LABEL, PHONE_HREF, WA_TERMIN } from "@/components/site/site-data";
 
@@ -60,6 +61,7 @@ function TerminPage() {
         <FotoAngebot />
       </main>
       <Footer />
+      <FloatingActions />
       <MobileBar />
     </div>
   );
