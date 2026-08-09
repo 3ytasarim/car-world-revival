@@ -329,8 +329,8 @@ function Home() {
           </div>
         </section>
 
-        {/* Process */}
-        <ProcessSection />
+
+
 
         {/* Services grid */}
         <ServicesSection />
