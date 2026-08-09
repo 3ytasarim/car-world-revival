@@ -122,82 +122,70 @@ function Home() {
           />
           <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-white/85 via-white/92 to-white" />
           <section className="relative z-1 mx-auto flex max-w-full items-center">
-            <div className="z-10 mx-auto max-w-screen-xl gap-12 px-4 py-24 md:px-8">
-              <div className="mx-auto max-w-3xl space-y-5 text-center">
-                <span className="group mx-auto flex w-fit items-center rounded-3xl border-[2px] border-black/5 bg-gradient-to-tr from-zinc-300/20 via-gray-400/20 to-transparent px-5 py-2 text-sm text-gray-600">
-                  Alles aus einer Hand
-                  <ChevronRight className="ml-2 inline size-4 duration-300 group-hover:translate-x-1" aria-hidden="true" />
-                </span>
-                <h1 className="mx-auto bg-[linear-gradient(180deg,_#000_0%,_rgba(0,_0,_0,_0.75)_100%)] bg-clip-text text-4xl tracking-tighter text-transparent md:text-6xl">
-                  Deine{" "}
-                  <span className="bg-gradient-to-r from-brand-orange to-sky-400 bg-clip-text text-transparent">
-                    Nr. 1 Autowerkstatt
+            <div className="z-10 mx-auto w-full max-w-screen-xl px-4 py-20 md:px-8 md:py-24">
+              <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-6">
+                {/* Text-Spalte */}
+                <div className="max-w-2xl space-y-5 text-center lg:text-left">
+                  <span className="group mx-auto flex w-fit items-center rounded-3xl border-[2px] border-black/5 bg-gradient-to-tr from-zinc-300/20 via-gray-400/20 to-transparent px-5 py-2 text-sm text-gray-600 lg:mx-0">
+                    Alles aus einer Hand
+                    <ChevronRight className="ml-2 inline size-4 duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </span>
-                </h1>
-                <p className="mx-auto max-w-2xl text-gray-600">
-                  Von der Unfallhilfe bis zur Wartung: Wir übernehmen Reparatur, Versicherungsabwicklung
-                  und Ersatzwagen — Sie müssen sich um nichts kümmern.
-                </p>
-                <div className="flex flex-wrap items-center justify-center gap-3">
-                  <a
-                    href={PHONE_HREF}
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-orange px-8 py-4 text-sm font-semibold text-brand-orange-foreground shadow-lg transition-transform hover:scale-[1.03]"
-                  >
-                    <Phone className="size-4" aria-hidden="true" />
-                    Jetzt anrufen
-                  </a>
-                  <a
-                    href="/termin"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-black/10 bg-white px-8 py-4 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50"
-                  >
-                    Termin buchen
-                  </a>
+                  <h1 className="bg-[linear-gradient(180deg,_#000_0%,_rgba(0,_0,_0,_0.75)_100%)] bg-clip-text text-4xl tracking-tighter text-transparent md:text-6xl">
+                    Deine{" "}
+                    <span className="bg-gradient-to-r from-brand-orange to-sky-400 bg-clip-text text-transparent">
+                      Nr. 1 Autowerkstatt
+                    </span>
+                  </h1>
+                  <p className="mx-auto max-w-xl text-gray-600 lg:mx-0">
+                    Von der Unfallhilfe bis zur Wartung: Wir übernehmen Reparatur, Versicherungsabwicklung
+                    und Ersatzwagen — Sie müssen sich um nichts kümmern.
+                  </p>
+                  <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+                    <a
+                      href={PHONE_HREF}
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-orange px-8 py-4 text-sm font-semibold text-brand-orange-foreground shadow-lg transition-transform hover:scale-[1.03]"
+                    >
+                      <Phone className="size-4" aria-hidden="true" />
+                      Jetzt anrufen
+                    </a>
+                    <a
+                      href="/termin"
+                      className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-black/10 bg-white px-8 py-4 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50"
+                    >
+                      Termin buchen
+                    </a>
+                  </div>
                 </div>
-              </div>
 
-              {/* Smartphone Mockup – mobil */}
-              <div className="mt-12 flex w-full justify-center sm:hidden">
-                <div className="h-[534px] w-[292px] [container-type:inline-size]">
-                  <IPhoneMockup
-                    model="15-pro"
-                    color="natural-titanium"
-                    safeArea={false}
-                    scale={0.7}
-                    screenStyle={{ containerType: "inline-size" } as React.CSSProperties}
-                  >
-                    <HeroScreen />
-                  </IPhoneMockup>
-                </div>
-              </div>
-
-              {/* Laptop Mockup – ab Tablet */}
-              <div className="relative mx-auto mt-14 hidden w-full max-w-4xl pb-16 sm:block sm:pb-6">
-
-                <div className="relative mx-auto w-[88%] text-gray-950 sm:w-full">
-                  <svg className="h-auto w-full" fill="none" height="400" viewBox="0 0 650 400" width="650" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M79.56,13.18h491.32c7.23,0,13.1,5.87,13.1,13.1v336.61H66.46V26.28c0-7.23,5.87-13.1,13.1-13.1Z" fill="#a4a5a7" />
-                    <path d="M79.96,14.24h490.45c6.83,0,12.37,5.54,12.37,12.37v336.28H67.59V26.6c0-6.83,5.54-12.37,12.37-12.37Z" fill="#222" />
-                    <path d="M570.25,15.74H80.34c-6.12,0-11.08,4.96-11.08,11.08v336.07h512.08V26.82c0-6.12-4.96-11.08-11.08-11.08ZM575.74,345.17H74.52V27.31c0-3.31,2.68-5.99,5.99-5.99h489.24c3.31,0,5.99,2.68,5.99,5.99v317.86Z" fill="#000" />
-                    <rect fill="currentColor" height="323.85" rx="5" ry="5" width="501.22" x="74.52" y="21.32" />
-                    <rect fill="#1d1d1d" height="12.48" width="512.11" x="69.09" y="350.51" />
-                    <path d="M298.14,21.02h54.07v6.5c0,1.56-1.27,2.82-2.82,2.82h-48.42c-1.56,0-2.82-1.27-2.82-2.82v-6.5h0Z" fill="#000" />
-                    <path d="M19.04,362.77h611.92v10.39c0,5.95-4.83,10.79-10.79,10.79H29.83c-5.95,0-10.79-4.83-10.79-10.79v-10.39h0Z" fill="#acadaf" />
-                    <path d="M325.11,25.14c-1.99.03-1.99-3.09,0-3.06,1.99-.03,1.99,3.09,0,3.06Z" fill="#080d4c" />
-                    <polygon fill="#b9b9bb" points="600.06 385.39 567.29 385.39 565.84 383.95 601.82 383.95 600.06 385.39" />
-                    <polygon fill="#292929" points="598.73 386.82 568.64 386.82 567.32 385.39 600.35 385.39 598.73 386.82" />
-                    <polygon fill="#b9b9bb" points="82.64 385.39 49.87 385.39 48.43 383.95 84.41 383.95 82.64 385.39" />
-                    <polygon fill="#292929" points="81.31 386.82 51.23 386.82 49.9 385.39 82.93 385.39 81.31 386.82" />
-                    <path d="M278.11,362.6h94.05c0,3.63-2.95,6.58-6.58,6.58h-80.89c-3.63,0-6.58-2.95-6.58-6.58h0Z" fill="#8f9091" />
-                  </svg>
-                  <div
-                    className="absolute overflow-hidden rounded-[2%] [container-type:inline-size]"
-                    style={{ left: "11.46%", top: "5.33%", width: "77.11%", height: "80.96%" }}
-                  >
-                    <HeroScreen />
+                {/* Mockup-Spalte: Laptop hinten, Smartphone davor */}
+                <div className="relative mx-auto w-full max-w-2xl">
+                  {/* Laptop – ab Tablet */}
+                  <div className="relative hidden w-[92%] text-gray-950 sm:block">
+                    <svg className="h-auto w-full" fill="none" height="400" viewBox="0 0 650 400" width="650" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M79.56,13.18h491.32c7.23,0,13.1,5.87,13.1,13.1v336.61H66.46V26.28c0-7.23,5.87-13.1,13.1-13.1Z" fill="#a4a5a7" />
+                      <path d="M79.96,14.24h490.45c6.83,0,12.37,5.54,12.37,12.37v336.28H67.59V26.6c0-6.83,5.54-12.37,12.37-12.37Z" fill="#222" />
+                      <path d="M570.25,15.74H80.34c-6.12,0-11.08,4.96-11.08,11.08v336.07h512.08V26.82c0-6.12-4.96-11.08-11.08-11.08ZM575.74,345.17H74.52V27.31c0-3.31,2.68-5.99,5.99-5.99h489.24c3.31,0,5.99,2.68,5.99,5.99v317.86Z" fill="#000" />
+                      <rect fill="currentColor" height="323.85" rx="5" ry="5" width="501.22" x="74.52" y="21.32" />
+                      <rect fill="#1d1d1d" height="12.48" width="512.11" x="69.09" y="350.51" />
+                      <path d="M298.14,21.02h54.07v6.5c0,1.56-1.27,2.82-2.82,2.82h-48.42c-1.56,0-2.82-1.27-2.82-2.82v-6.5h0Z" fill="#000" />
+                      <path d="M19.04,362.77h611.92v10.39c0,5.95-4.83,10.79-10.79,10.79H29.83c-5.95,0-10.79-4.83-10.79-10.79v-10.39h0Z" fill="#acadaf" />
+                      <path d="M325.11,25.14c-1.99.03-1.99-3.09,0-3.06,1.99-.03,1.99,3.09,0,3.06Z" fill="#080d4c" />
+                      <polygon fill="#b9b9bb" points="600.06 385.39 567.29 385.39 565.84 383.95 601.82 383.95 600.06 385.39" />
+                      <polygon fill="#292929" points="598.73 386.82 568.64 386.82 567.32 385.39 600.35 385.39 598.73 386.82" />
+                      <polygon fill="#b9b9bb" points="82.64 385.39 49.87 385.39 48.43 383.95 84.41 383.95 82.64 385.39" />
+                      <polygon fill="#292929" points="81.31 386.82 51.23 386.82 49.9 385.39 82.93 385.39 81.31 386.82" />
+                      <path d="M278.11,362.6h94.05c0,3.63-2.95,6.58-6.58,6.58h-80.89c-3.63,0-6.58-2.95-6.58-6.58h0Z" fill="#8f9091" />
+                    </svg>
+                    <div
+                      className="absolute overflow-hidden rounded-[2%] [container-type:inline-size]"
+                      style={{ left: "11.46%", top: "5.33%", width: "77.11%", height: "80.96%" }}
+                    >
+                      <HeroScreen />
+                    </div>
                   </div>
 
-                  {/* Smartphone – neben/vor dem Laptop (Desktop) */}
-                  <div className="animate-fade-in absolute -bottom-4 right-[4%] hidden h-[380px] w-[190px] drop-shadow-2xl [container-type:inline-size] sm:block lg:right-[2%] lg:h-[420px] lg:w-[210px]">
+                  {/* Smartphone – davor, größer, leicht geneigt */}
+                  <div className="animate-fade-in mx-auto h-[560px] w-[300px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:-bottom-16 sm:right-0 sm:z-20 sm:mx-0 sm:h-[520px] sm:w-[268px] sm:rotate-[-6deg] lg:-bottom-20 lg:h-[580px] lg:w-[300px]">
                     <IPhoneMockup
                       model="15-pro"
                       color="natural-titanium"
@@ -205,15 +193,14 @@ function Home() {
                       scale={0.7}
                       screenStyle={{ containerType: "inline-size" } as React.CSSProperties}
                     >
-                      <HeroScreen />
+                      <PhoneScreen />
                     </IPhoneMockup>
                   </div>
                 </div>
               </div>
 
-
               {/* Partner marquee – mit deutlich mehr Abstand zum Hero */}
-              <div className="z-10 mt-28 w-full overflow-hidden sm:mt-36">
+              <div className="z-10 mt-32 w-full overflow-hidden sm:mt-44">
                 <p className="mb-6 text-center text-xs font-semibold tracking-widest text-gray-400 uppercase">
                   Partner &amp; Zertifizierungen
                 </p>
@@ -239,6 +226,7 @@ function Home() {
               </div>
             </div>
           </section>
+
         </div>
 
         {/* Foto senden → Angebot in 24 Stunden */}
