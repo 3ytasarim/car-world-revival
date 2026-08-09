@@ -52,7 +52,7 @@ export function LogoTimeline({
       <div className="absolute inset-0 grid" style={{ gridTemplateRows: `repeat(${rows.length}, 1fr)` }}>
         {rows.map((rowItems, index) => (
           <div key={index} className="relative flex items-center">
-            {showRowSeparator && <div className="absolute inset-x-0 top-0 h-px bg-black/5" />}
+            {showRowSeparator && <div className="absolute inset-x-0 top-0 h-px bg-black/[0.03]" />}
             {rowItems.map((logo, i) => (
               <div
                 key={`${logo.label}-${logo.animationDelay}-${i}`}
@@ -88,8 +88,6 @@ export function LogoTimeline({
       )}
 
       {/* Kanten weichzeichnen */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-linear-to-r from-white/40 to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-linear-to-l from-white/40 to-transparent" />
     </div>
   );
 }
