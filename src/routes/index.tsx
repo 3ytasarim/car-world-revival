@@ -191,13 +191,14 @@ function Home() {
                     </div>
                   </div>
 
-                  {/* Smartphone – kompakt, laptopun sağında ve hero sınırları içinde */}
-                  <div className="animate-fade-in relative z-30 mx-auto h-[325px] w-[155px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[2%] sm:-bottom-4 sm:mx-0 sm:h-[330px] sm:w-[158px] sm:rotate-[-4deg] lg:-bottom-6 lg:h-[370px] lg:w-[178px]">
+                  {/* Smartphone – im Vordergrund, größer */}
+                  <div className="animate-fade-in relative z-30 mx-auto h-[420px] w-[202px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[1%] sm:bottom-0 sm:mx-0 sm:h-[430px] sm:w-[207px] sm:rotate-[-5deg] lg:h-[490px] lg:w-[236px]">
                     <IPhoneMockup
                       model="15-pro"
                       color="natural-titanium"
                       safeArea={false}
-                      scale={0.36}
+                      scale={0.48}
+
                       screenStyle={{ containerType: "inline-size" } as React.CSSProperties}
                     >
                       <PhoneScreen />
