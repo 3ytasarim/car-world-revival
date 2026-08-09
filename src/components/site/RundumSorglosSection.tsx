@@ -62,6 +62,18 @@ export function RundumSorglosSection() {
         className="pointer-events-none absolute -right-24 -bottom-24 size-[420px] rounded-full bg-[#1B3A63]/10 blur-3xl"
       />
 
+      {/* Shader lines in the left & right gutters (desktop only) */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-[calc((100%-72rem)/2)] min-w-[80px] overflow-hidden opacity-70 mix-blend-multiply xl:block">
+        <ShaderAnimation />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white" />
+      </div>
+      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[calc((100%-72rem)/2)] min-w-[80px] overflow-hidden opacity-70 mix-blend-multiply xl:block">
+        <ShaderAnimation />
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-white" />
+      </div>
+
+
+
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
