@@ -13,7 +13,7 @@ import { FloatingActions } from "@/components/site/FloatingActions";
 import { HeroScreen } from "@/components/site/HeroScreen";
 import { PhoneScreen } from "@/components/site/PhoneScreen";
 import IPhoneMockup from "@/components/ui/iphone-mockup";
-import { HeroWave } from "@/components/ui/hero-wave";
+import { GrainHeroBg } from "@/components/ui/grain-hero-bg";
 
 import heroBg from "@/assets/hero-bg.jpg";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
@@ -124,7 +124,7 @@ function Home() {
             className="pointer-events-none absolute inset-0 size-full object-cover opacity-[0.14]"
           />
           <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-white/85 via-white/92 to-white" />
-          <HeroWave height={320} />
+          <GrainHeroBg height={340} />
           <section className="relative z-1 mx-auto flex max-w-full items-center">
 
             <div className="relative z-10 mx-auto w-full max-w-screen-xl px-4 pt-20 pb-[420px] md:px-8 md:pt-24 md:pb-[460px]">
