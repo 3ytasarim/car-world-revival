@@ -164,9 +164,10 @@ function Home() {
                 </div>
 
                 {/* Mockup-Spalte: Laptop und Smartphone nebeneinander */}
-                <div className="relative mx-auto w-full max-w-2xl sm:min-h-[330px] lg:min-h-[370px]">
-                  {/* Laptop – ab Tablet */}
-                  <div className="relative hidden w-[76%] text-gray-950 sm:block">
+                <div className="relative mx-auto w-full max-w-2xl sm:min-h-[420px] lg:min-h-[480px]">
+                  {/* Laptop – ab Tablet, im Hintergrund */}
+                  <div className="relative z-10 w-[68%] text-gray-950 opacity-95 sm:block hidden sm:mt-6">
+
                     <svg className="h-auto w-full" fill="none" height="400" viewBox="0 0 650 400" width="650" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                       <path d="M79.56,13.18h491.32c7.23,0,13.1,5.87,13.1,13.1v336.61H66.46V26.28c0-7.23,5.87-13.1,13.1-13.1Z" fill="#a4a5a7" />
                       <path d="M79.96,14.24h490.45c6.83,0,12.37,5.54,12.37,12.37v336.28H67.59V26.6c0-6.83,5.54-12.37,12.37-12.37Z" fill="#222" />
@@ -190,13 +191,14 @@ function Home() {
                     </div>
                   </div>
 
-                  {/* Smartphone – kompakt, laptopun sağında ve hero sınırları içinde */}
-                  <div className="animate-fade-in relative z-30 mx-auto h-[325px] w-[155px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[2%] sm:-bottom-4 sm:mx-0 sm:h-[330px] sm:w-[158px] sm:rotate-[-4deg] lg:-bottom-6 lg:h-[370px] lg:w-[178px]">
+                  {/* Smartphone – im Vordergrund, größer */}
+                  <div className="animate-fade-in relative z-30 mx-auto h-[420px] w-[202px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[1%] sm:bottom-0 sm:mx-0 sm:h-[430px] sm:w-[207px] sm:rotate-[-5deg] lg:h-[490px] lg:w-[236px]">
                     <IPhoneMockup
                       model="15-pro"
                       color="natural-titanium"
                       safeArea={false}
-                      scale={0.36}
+                      scale={0.48}
+
                       screenStyle={{ containerType: "inline-size" } as React.CSSProperties}
                     >
                       <PhoneScreen />
