@@ -88,8 +88,8 @@ export function LogoTimeline({
       )}
 
       {/* Kanten weichzeichnen */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-linear-to-r from-brand-surface to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-linear-to-l from-brand-surface to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-linear-to-r from-white/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-linear-to-l from-white/40 to-transparent" />
     </div>
   );
 }
