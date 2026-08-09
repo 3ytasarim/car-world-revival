@@ -69,11 +69,11 @@ export function RundumSorglosSection() {
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-[#5088C8]/30 bg-[#5088C8]/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-[#1B3A63] uppercase">
             <ShieldCheck className="size-4" aria-hidden="true" />
-            Alles aus einer Hand
+            Nach dem Unfall – was passiert jetzt?
           </span>
           <h2 id="rundum-title" className="mt-4 text-3xl tracking-tight text-[#1B3A63] sm:text-5xl">
             <AnimatedText
-              text="Nach dem Unfall – was passiert jetzt?"
+              text="Rundum-sorglos-Paket"
               minWeight={300}
               maxWeight={800}
               delayMultiplier={0.06}
