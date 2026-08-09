@@ -17,7 +17,7 @@ import { VideoSection } from "@/components/site/VideoSection";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { PartnerSection } from "@/components/site/PartnerSection";
 
-import { PHONE_DISPLAY, PHONE_HREF } from "@/components/site/site-data";
+import { PHONE_HREF } from "@/components/site/site-data";
 import tuv from "@/assets/tuv.png.asset.json";
 import innung from "@/assets/innung.png.asset.json";
 import autoglas from "@/assets/autoglas.png.asset.json";
@@ -326,6 +326,7 @@ function Home() {
       </main>
 
       <Footer />
+      <FloatingActions />
       <MobileBar />
     </div>
   );
