@@ -48,45 +48,38 @@ export function LogoTimeline({
       onMouseEnter={() => animateOnHover && setIsHovered(true)}
       onMouseLeave={() => animateOnHover && setIsHovered(false)}
     >
-      {/* Zeilen als gleichmäßige Marquee-Spuren */}
+      {/* Zeilen: pro Zeile läuft jeweils ein Logo, zeitversetzt */}
       <div className="absolute inset-0 grid" style={{ gridTemplateRows: `repeat(${rows.length}, 1fr)` }}>
-        {rows.map((rowItems, index) => {
-          const duration = rowItems[0]?.animationDuration ?? 50;
-          const reverse = index % 2 === 1;
-          return (
-            <div key={index} className="relative flex items-center overflow-hidden">
-              {showRowSeparator && <div className="absolute inset-x-0 top-0 h-px bg-black/[0.03]" />}
+        {rows.map((rowItems, index) => (
+          <div key={index} className="relative flex items-center overflow-hidden">
+            {showRowSeparator && <div className="absolute inset-x-0 top-0 h-px bg-black/[0.03]" />}
+            {rowItems.map((logo, i) => (
               <div
-                className="flex w-max shrink-0 items-center gap-16 sm:gap-24"
+                key={`${index}-${i}`}
+                className={cn(
+                  "absolute left-0 flex items-center whitespace-nowrap",
+                  logo.label
+                    ? "gap-2 rounded-full border border-black/5 bg-white/90 px-4 py-2 shadow-[0_10px_30px_-20px_rgba(19,31,53,0.8)] backdrop-blur"
+                    : "",
+                )}
                 style={{
-                  animation: `marquee ${duration}s linear infinite`,
-                  animationDirection: reverse ? "reverse" : "normal",
+                  // @ts-expect-error custom props
+                  "--move-x-from": "-140%",
+                  "--move-x-to": "calc(100vw + 40%)",
+                  animation: `move-x ${logo.animationDuration}s linear ${logo.animationDelay}s infinite`,
                   animationPlayState,
                 }}
               >
-                {[0, 1].map((copy) =>
-                  rowItems.map((logo, i) => (
-                    <div
-                      key={`${index}-${copy}-${logo.label}-${i}`}
-                      className={cn(
-                        "flex shrink-0 items-center whitespace-nowrap",
-                        logo.label
-                          ? "gap-2 rounded-full border border-black/5 bg-white/90 px-4 py-2 shadow-[0_10px_30px_-20px_rgba(19,31,53,0.8)] backdrop-blur"
-                          : "",
-                      )}
-                    >
-                      {logo.icon}
-                      {logo.label ? (
-                        <span className="text-sm font-semibold text-[#1B3A63]">{logo.label}</span>
-                      ) : null}
-                    </div>
-                  )),
-                )}
+                {logo.icon}
+                {logo.label ? (
+                  <span className="text-sm font-semibold text-[#1B3A63]">{logo.label}</span>
+                ) : null}
               </div>
-            </div>
-          );
-        })}
+            ))}
+          </div>
+        ))}
       </div>
+
 
       {/* Zentrales Logo */}
       {title && (
