@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { ProcessSection } from "@/components/site/ProcessSection";
 import { ServicesSection } from "@/components/site/ServicesSection";
 import { FloatingActions } from "@/components/site/FloatingActions";
+import { HeroScreen } from "@/components/site/HeroScreen";
 import heroBg from "@/assets/hero-bg.jpg";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
 import { VideoSection } from "@/components/site/VideoSection";
