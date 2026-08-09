@@ -36,9 +36,6 @@ import tuv from "@/assets/tuv.png.asset.json";
 import innung from "@/assets/innung.png.asset.json";
 import autoglas from "@/assets/autoglas.png.asset.json";
 import hwk from "@/assets/hwk.png.asset.json";
-import steinschlag from "@/assets/steinschlag.png.asset.json";
-import abschleppen from "@/assets/abschleppen.png.asset.json";
-import werkstatt from "@/assets/werkstatt.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -90,17 +87,11 @@ const partners = [
   { src: hwk.url, alt: "Handwerkskammer Koblenz", w: 237, h: 102 },
 ];
 
-const timelineLogos = [
-  ...partners,
-  { src: steinschlag.url, alt: "Steinschlag-Service", w: 200, h: 100 },
-  { src: abschleppen.url, alt: "Abschleppdienst", w: 200, h: 100 },
-  { src: werkstatt.url, alt: "Meisterwerkstatt", w: 200, h: 100 },
-];
+const timelineLogos = partners;
 
 const partnerTimelineItems: LogoItem[] = timelineLogos.flatMap((l, i) => {
-  const row = (i % 5) + 1;
   const duration = 48 + (i % 4) * 10;
-  return [0, 1].map((k) => ({
+  return [0, 1, 2].map((k) => ({
     label: "",
     icon: (
       <img
@@ -111,9 +102,9 @@ const partnerTimelineItems: LogoItem[] = timelineLogos.flatMap((l, i) => {
         className="h-14 w-auto object-contain sm:h-20 md:h-24"
       />
     ),
-    animationDelay: -(duration / 2) * k - i * 2.5,
+    animationDelay: -(duration / 3) * k - i * 3,
     animationDuration: duration,
-    row,
+    row: ((i + k) % 4) + 1,
   }));
 });
 
