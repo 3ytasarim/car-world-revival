@@ -99,16 +99,16 @@ const timelineLogos = [
 
 const partnerTimelineItems: LogoItem[] = timelineLogos.flatMap((l, i) => {
   const row = (i % 5) + 1;
-  const duration = 26 + (i % 4) * 6;
+  const duration = 48 + (i % 4) * 10;
   return [0, 1].map((k) => ({
-    label: l.alt,
+    label: "",
     icon: (
       <img
         src={l.src}
         alt=""
         aria-hidden="true"
         loading="lazy"
-        className="h-7 w-auto object-contain sm:h-9"
+        className="h-14 w-auto object-contain sm:h-20 md:h-24"
       />
     ),
     animationDelay: -(duration / 2) * k - i * 2.5,
@@ -269,7 +269,7 @@ function Home() {
                   alt="Car-World"
                   width={520}
                   height={160}
-                  className="h-20 w-auto object-contain opacity-45 mix-blend-multiply sm:h-28 md:h-32"
+                  className="h-28 w-auto object-contain opacity-20 mix-blend-multiply sm:h-40 md:h-52"
                 />
               }
             />
