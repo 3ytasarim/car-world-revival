@@ -48,8 +48,20 @@ export function RundumSorglosSection() {
     <section
       ref={sectionRef}
       aria-labelledby="rundum-title"
-      className="relative w-full overflow-hidden bg-white py-16 sm:py-24"
+      className="relative w-full overflow-hidden bg-transparent py-16 sm:py-24"
     >
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <AnimatedGradientBackground
+          Breathing
+          startingGap={120}
+          breathingRange={12}
+          animationSpeed={0.03}
+          topOffset={20}
+          gradientColors={["#F4F7FB", "#DCEAF8", "#A9CCEC", "#7FB3E0", "#5088C8", "#2F5F9B", "#1B3A63"]}
+          gradientStops={[20, 40, 55, 68, 80, 90, 100]}
+          containerClassName="opacity-70"
+        />
+      </div>
       <motion.div
         style={{ y: y1 }}
         className="pointer-events-none absolute -top-24 -left-24 size-[420px] rounded-full bg-[#5088C8]/10 blur-3xl"
