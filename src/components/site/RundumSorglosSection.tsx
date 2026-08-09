@@ -14,6 +14,8 @@ import {
 import { motion, useInView, useScroll, useSpring, useTransform } from "framer-motion";
 
 import { AnimatedText } from "@/components/ui/animated-text";
+import { Button3D } from "@/components/ui/button-3d";
+import { PHONE_HREF } from "@/components/site/site-data";
 import werkstattFoto from "@/assets/svc-reparatur.jpg";
 
 const services = [
@@ -110,6 +112,13 @@ export function RundumSorglosSection() {
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute -right-4 -bottom-4 size-24 rounded-2xl bg-[#5088C8]/25 backdrop-blur"
               />
+            </div>
+
+            <div className="mt-8 flex justify-center">
+              <Button3D href={PHONE_HREF}>
+                <PhoneCall className="size-4" aria-hidden="true" />
+                Jetzt anrufen
+              </Button3D>
             </div>
           </motion.div>
 
