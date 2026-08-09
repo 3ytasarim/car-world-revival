@@ -159,7 +159,7 @@ function Home() {
                 </div>
 
                 {/* Mockup-Spalte: Laptop hinten, Smartphone davor */}
-                <div className="relative mx-auto w-full max-w-2xl">
+                <div className="relative mx-auto w-full max-w-2xl sm:pb-10">
                   {/* Laptop – ab Tablet */}
                   <div className="relative hidden w-[92%] text-gray-950 sm:block">
                     <svg className="h-auto w-full" fill="none" height="400" viewBox="0 0 650 400" width="650" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
