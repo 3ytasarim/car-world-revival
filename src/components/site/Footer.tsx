@@ -1,6 +1,6 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 
-import { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "./site-data";
+import { EMAIL, PHONE_LABEL, PHONE_HREF } from "./site-data";
 
 const leistungen = [
   ["Unfallservice", "/leistungen/unfallservice"],
@@ -59,7 +59,7 @@ export function Footer() {
             <li className="flex items-center gap-2">
               <Phone className="size-3.5 shrink-0" aria-hidden="true" />
               <a className="hover:opacity-100" href={PHONE_HREF}>
-                {PHONE_DISPLAY}
+                {PHONE_LABEL}
               </a>
             </li>
             <li className="flex items-center gap-2">

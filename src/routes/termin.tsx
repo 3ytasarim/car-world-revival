@@ -6,7 +6,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
-import { PHONE_DISPLAY, PHONE_HREF, WA_TERMIN } from "@/components/site/site-data";
+import { PHONE_LABEL, PHONE_HREF, WA_TERMIN } from "@/components/site/site-data";
 
 export const Route = createFileRoute("/termin")({
   head: () => ({
@@ -52,7 +52,7 @@ function TerminPage() {
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-brand-orange px-7 text-sm font-semibold text-brand-orange-foreground transition-transform hover:scale-[1.03]"
               >
                 <Phone className="size-4" aria-hidden="true" />
-                {PHONE_DISPLAY}
+                {PHONE_LABEL}
               </a>
             </div>
           </div>
