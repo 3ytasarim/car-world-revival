@@ -127,7 +127,7 @@ function Home() {
           <HeroWave height={320} />
           <section className="relative z-1 mx-auto flex max-w-full items-center">
 
-            <div className="z-10 mx-auto w-full max-w-screen-xl px-4 pt-20 pb-[340px] md:px-8 md:pt-24 md:pb-[380px]">
+            <div className="relative z-10 mx-auto w-full max-w-screen-xl px-4 pt-20 pb-[420px] md:px-8 md:pt-24 md:pb-[460px]">
 
               <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-6">
                 {/* Text-Spalte */}
