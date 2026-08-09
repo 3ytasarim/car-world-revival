@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
+import { FloatingActions } from "@/components/site/FloatingActions";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
 
 export const Route = createFileRoute("/angebot")({
@@ -39,6 +40,7 @@ function AngebotPage() {
         <FotoAngebot />
       </main>
       <Footer />
+      <FloatingActions />
       <MobileBar />
     </div>
   );

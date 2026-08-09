@@ -33,12 +33,14 @@ export const ADDRESS = {
   city: "Bad Neuenahr-Ahrweiler (Heimersheim)",
 };
 
+/** Kurzes Label statt ausgeschriebener Rufnummer. */
+export const PHONE_LABEL = "Jetzt anrufen";
+
 export const NAV = [
   { label: "Start", href: "/", icon: "house" },
   { label: "Leistungen", href: "/leistungen", icon: "wrench" },
   { label: "Aktuelle Angebote", href: "/aktuelle-angebote", icon: "tag" },
   { label: "Partner", href: "/partner", icon: "handshake" },
-  { label: "Kundenmeinungen", href: "/kundenmeinungen", icon: "star" },
   { label: "Karriere", href: "/karriere", icon: "briefcase" },
   { label: "Kontakt", href: "/kontakt", icon: "mail" },
 ] as const;

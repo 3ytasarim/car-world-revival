@@ -1,7 +1,7 @@
 import { CarFront, Clock, FileCheck2, PhoneCall, ShieldCheck, Truck } from "lucide-react";
 
 import { useInView } from "@/hooks/use-in-view";
-import { PHONE_DISPLAY, PHONE_HREF, WA_UNFALL } from "./site-data";
+import { PHONE_LABEL, PHONE_HREF, WA_UNFALL } from "./site-data";
 
 const items = [
   { icon: PhoneCall, title: "Ein Anruf genügt", text: "Wir starten sofort." },
@@ -72,7 +72,7 @@ export function RundumSorglos() {
             className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 text-sm font-semibold transition-colors hover:bg-white/10 sm:w-auto"
           >
             <PhoneCall className="size-4" aria-hidden="true" />
-            {PHONE_DISPLAY}
+            {PHONE_LABEL}
           </a>
         </div>
         <p className="mt-4 text-center text-xs opacity-70">Per WhatsApp 7/24 erreichbar — auch am Wochenende.</p>

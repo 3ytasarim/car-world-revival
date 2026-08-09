@@ -6,8 +6,9 @@ import { Briefcase, CheckCircle2, Mail, Phone } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
+import { FloatingActions } from "@/components/site/FloatingActions";
 import { supabase } from "@/integrations/supabase/client";
-import { EMAIL_KARRIERE, PHONE_DISPLAY, PHONE_HREF, WA_KARRIERE } from "@/components/site/site-data";
+import { EMAIL_KARRIERE, PHONE_LABEL, PHONE_HREF, WA_KARRIERE } from "@/components/site/site-data";
 
 export const Route = createFileRoute("/karriere")({
   head: () => ({
@@ -131,7 +132,7 @@ function KarrierePage() {
                   className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-black/10 bg-white text-sm font-semibold"
                 >
                   <Phone className="size-4" aria-hidden="true" />
-                  {PHONE_DISPLAY}
+                  {PHONE_LABEL}
                 </a>
                 <a
                   href={`mailto:${EMAIL_KARRIERE}`}
@@ -155,6 +156,7 @@ function KarrierePage() {
         </section>
       </main>
       <Footer />
+      <FloatingActions />
       <MobileBar />
     </div>
   );

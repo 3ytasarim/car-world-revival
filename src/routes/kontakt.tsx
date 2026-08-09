@@ -5,8 +5,9 @@ import { MapPin, Phone } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
+import { FloatingActions } from "@/components/site/FloatingActions";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
-import { ADDRESS, EMAIL, PHONE_DISPLAY, PHONE_HREF, WA_FRAGE } from "@/components/site/site-data";
+import { ADDRESS, EMAIL, PHONE_LABEL, PHONE_HREF, WA_FRAGE } from "@/components/site/site-data";
 
 export const Route = createFileRoute("/kontakt")({
   head: () => ({
@@ -63,7 +64,7 @@ function KontaktPage() {
                   className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-brand-orange text-sm font-semibold text-brand-orange-foreground"
                 >
                   <Phone className="size-4" aria-hidden="true" />
-                  {PHONE_DISPLAY}
+                  {PHONE_LABEL}
                 </a>
                 <a
                   href={`mailto:${EMAIL}`}
@@ -88,6 +89,7 @@ function KontaktPage() {
         <FotoAngebot />
       </main>
       <Footer />
+      <FloatingActions />
       <MobileBar />
     </div>
   );
