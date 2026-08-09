@@ -195,8 +195,22 @@ function Home() {
                   >
                     <HeroScreen />
                   </div>
+
+                  {/* Smartphone – neben/vor dem Laptop (Desktop) */}
+                  <div className="animate-fade-in absolute -bottom-4 right-[4%] hidden h-[380px] w-[190px] drop-shadow-2xl [container-type:inline-size] sm:block lg:right-[2%] lg:h-[420px] lg:w-[210px]">
+                    <IPhoneMockup
+                      model="15-pro"
+                      color="natural-titanium"
+                      safeArea={false}
+                      scale={0.7}
+                      screenStyle={{ containerType: "inline-size" } as React.CSSProperties}
+                    >
+                      <HeroScreen />
+                    </IPhoneMockup>
+                  </div>
                 </div>
               </div>
+
 
               {/* Partner marquee – mit deutlich mehr Abstand zum Hero */}
               <div className="z-10 mt-28 w-full overflow-hidden sm:mt-36">
