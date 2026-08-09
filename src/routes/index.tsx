@@ -251,11 +251,10 @@ function Home() {
         </div>
 
         {/* Partner & Zertifizierungen – Logo-Timeline */}
-        <section className="relative z-10 overflow-hidden border-y border-black/5 bg-brand-surface py-14">
+        <section className="relative z-10 overflow-hidden border-y border-black/5 bg-transparent py-14">
           {/* Animierter Farbverlauf im unteren Bereich */}
           <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3"
-            style={{ maskImage: "linear-gradient(to top, black 40%, transparent 100%)", WebkitMaskImage: "linear-gradient(to top, black 40%, transparent 100%)" }}
+            className="pointer-events-none absolute inset-0"
           >
             <AnimatedGradientBackground
               Breathing
