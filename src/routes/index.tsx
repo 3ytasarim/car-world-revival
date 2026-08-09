@@ -24,6 +24,7 @@ import logo from "@/assets/logo.png.asset.json";
 
 import heroBg from "@/assets/hero-bg.jpg";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
+import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
 import { VideoSection } from "@/components/site/VideoSection";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { PartnerSection } from "@/components/site/PartnerSection";
@@ -287,6 +288,9 @@ function Home() {
         </section>
 
 
+
+        {/* Rundum-sorglos-Paket */}
+        <RundumSorglosSection />
 
         {/* Foto senden → Angebot in 24 Stunden */}
         <FotoAngebot />
