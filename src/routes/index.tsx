@@ -24,6 +24,8 @@ import { PartnerSection } from "@/components/site/PartnerSection";
 
 import { PHONE_HREF } from "@/components/site/site-data";
 import { TextAnimation } from "@/components/ui/text-animation";
+import { Button3D } from "@/components/ui/button-3d";
+
 
 import tuv from "@/assets/tuv.png.asset.json";
 import innung from "@/assets/innung.png.asset.json";
@@ -156,20 +158,15 @@ function Home() {
                     und Ersatzwagen — Sie müssen sich um nichts kümmern.
                   </p>
                   <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-                    <a
-                      href={PHONE_HREF}
-                      className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-orange px-8 py-4 text-sm font-semibold text-brand-orange-foreground shadow-lg transition-transform hover:scale-[1.03]"
-                    >
+                    <Button3D href={PHONE_HREF}>
                       <Phone className="size-4" aria-hidden="true" />
                       Jetzt anrufen
-                    </a>
-                    <a
-                      href="/termin"
-                      className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-black/10 bg-white px-8 py-4 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50"
-                    >
+                    </Button3D>
+                    <Button3D href="/termin" variant="secondary">
                       Termin buchen
-                    </a>
+                    </Button3D>
                   </div>
+
                 </div>
 
                 {/* Mockup-Spalte: Laptop und Smartphone nebeneinander */}
