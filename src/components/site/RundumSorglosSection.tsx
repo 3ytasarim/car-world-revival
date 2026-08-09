@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { motion, useInView, useScroll, useSpring, useTransform } from "framer-motion";
 
-import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
+import { AnimatedText } from "@/components/ui/animated-text";
 import werkstattFoto from "@/assets/svc-reparatur.jpg";
 
 const services = [
