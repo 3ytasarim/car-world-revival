@@ -87,6 +87,33 @@ const partners = [
   { src: hwk.url, alt: "Handwerkskammer Koblenz", w: 237, h: 102 },
 ];
 
+const timelineLogos = [
+  ...partners,
+  { src: steinschlag.url, alt: "Steinschlag-Service", w: 200, h: 100 },
+  { src: abschleppen.url, alt: "Abschleppdienst", w: 200, h: 100 },
+  { src: werkstatt.url, alt: "Meisterwerkstatt", w: 200, h: 100 },
+];
+
+const partnerTimelineItems: LogoItem[] = timelineLogos.flatMap((l, i) => {
+  const row = (i % 5) + 1;
+  const duration = 26 + (i % 4) * 6;
+  return [0, 1].map((k) => ({
+    label: l.alt,
+    icon: (
+      <img
+        src={l.src}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        className="h-7 w-auto object-contain sm:h-9"
+      />
+    ),
+    animationDelay: -(duration / 2) * k - i * 2.5,
+    animationDuration: duration,
+    row,
+  }));
+});
+
 const stats = [
   ["15+", "Jahre Erfahrung"],
   ["4.800+", "Reparaturen abgeschlossen"],
