@@ -340,8 +340,7 @@ function Home() {
 
 
 
-        {/* Services grid */}
-        <ServicesSection />
+
 
         {/* Kundenmeinungen */}
         <TestimonialsSection />
