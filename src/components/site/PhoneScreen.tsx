@@ -17,7 +17,7 @@ export function PhoneScreen() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/50 to-transparent" />
 
-        <span className="absolute left-[6%] top-[7%] inline-flex items-center gap-[4%] rounded-full bg-brand-blue px-[5%] py-[2.5%] text-[clamp(9px,3.4cqw,17px)] font-bold text-white shadow-lg">
+        <span className="absolute left-[6%] top-[7%] inline-flex items-center gap-[4%] rounded-full bg-brand-orange px-[5%] py-[2.5%] text-[clamp(9px,3.4cqw,17px)] font-bold text-white shadow-lg">
           <span className="relative flex size-[1em] items-center justify-center">
             <span className="absolute inset-0 animate-ping rounded-full bg-white/60" />
             <AlertTriangle className="relative size-[1em]" aria-hidden="true" />
