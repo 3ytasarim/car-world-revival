@@ -75,6 +75,7 @@ function AnimatedLogo() {
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md">
