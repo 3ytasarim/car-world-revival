@@ -191,7 +191,7 @@ function Home() {
                   </div>
 
                   {/* Smartphone – kompakt, laptopun sağında ve hero sınırları içinde */}
-                  <div className="animate-fade-in mx-auto h-[325px] w-[155px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-0 sm:bottom-6 sm:z-20 sm:mx-0 sm:h-[280px] sm:w-[135px] sm:rotate-[-3deg] lg:bottom-8 lg:h-[310px] lg:w-[148px]">
+                  <div className="animate-fade-in relative z-30 mx-auto h-[325px] w-[155px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[2%] sm:-bottom-4 sm:mx-0 sm:h-[330px] sm:w-[158px] sm:rotate-[-4deg] lg:-bottom-6 lg:h-[370px] lg:w-[178px]">
                     <IPhoneMockup
                       model="15-pro"
                       color="natural-titanium"
