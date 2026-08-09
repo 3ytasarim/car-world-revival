@@ -67,7 +67,7 @@ export function ServicesSection() {
                 <h3 className="text-xl font-semibold">{s.title}</h3>
                 <p className="mt-1 text-sm text-white/80">{s.text}</p>
                 <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-brand-orange">
-                  Mehr erfahren
+                  Termin anfragen
                   <ArrowUpRight
                     className="size-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
                     aria-hidden="true"
