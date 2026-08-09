@@ -11,7 +11,6 @@ import { ProcessSection } from "@/components/site/ProcessSection";
 import { ServicesSection } from "@/components/site/ServicesSection";
 import { FloatingActions } from "@/components/site/FloatingActions";
 import heroBg from "@/assets/hero-bg.jpg";
-import unfallImg from "@/assets/unfall.jpg";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
 import { VideoSection } from "@/components/site/VideoSection";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
