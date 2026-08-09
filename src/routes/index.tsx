@@ -159,7 +159,7 @@ function Home() {
                 </div>
 
                 {/* Mockup-Spalte: Laptop hinten, Smartphone davor */}
-                <div className="relative mx-auto w-full max-w-2xl">
+                <div className="relative mx-auto w-full max-w-2xl sm:pb-10">
                   {/* Laptop – ab Tablet */}
                   <div className="relative hidden w-[92%] text-gray-950 sm:block">
                     <svg className="h-auto w-full" fill="none" height="400" viewBox="0 0 650 400" width="650" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -186,7 +186,7 @@ function Home() {
                   </div>
 
                   {/* Smartphone – davor, größer, leicht geneigt */}
-                  <div className="animate-fade-in mx-auto h-[560px] w-[300px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:-bottom-16 sm:right-0 sm:z-20 sm:mx-0 sm:h-[520px] sm:w-[268px] sm:rotate-[-6deg] lg:-bottom-20 lg:h-[580px] lg:w-[300px]">
+                  <div className="animate-fade-in mx-auto h-[480px] w-[258px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:bottom-[-6%] sm:right-[1%] sm:z-20 sm:mx-0 sm:h-[340px] sm:w-[176px] sm:rotate-[-5deg] lg:h-[390px] lg:w-[202px]">
                     <IPhoneMockup
                       model="15-pro"
                       color="natural-titanium"
