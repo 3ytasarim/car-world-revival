@@ -132,6 +132,9 @@ function Home() {
             <MeshyBackground className="opacity-40" />
           </ClientOnly>
           <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-white/80 via-white/70 to-white" />
+          <FloatingIcons />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-b from-white to-transparent" />
+
           <section className="relative z-1 mx-auto flex max-w-full items-center">
 
             <div className="relative z-10 mx-auto w-full max-w-screen-xl px-4 pt-20 pb-20 md:px-8 md:pt-24 md:pb-28">
