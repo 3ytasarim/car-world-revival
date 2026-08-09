@@ -111,6 +111,13 @@ export function RundumSorglosSection() {
                 className="absolute -right-4 -bottom-4 size-24 rounded-2xl bg-[#5088C8]/25 backdrop-blur"
               />
             </div>
+
+            <div className="mt-8 flex justify-center">
+              <Button3D href={PHONE_HREF}>
+                <PhoneCall className="size-4" aria-hidden="true" />
+                Jetzt anrufen
+              </Button3D>
+            </div>
           </motion.div>
 
           <div className="flex flex-col gap-6">
