@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { Briefcase, Handshake, House, Mail, Menu, Tag, Wrench, X } from "lucide-react";
 
 import logo from "@/assets/logo.png.asset.json";
