@@ -94,9 +94,11 @@ const partners = [
 
 const timelineLogos = partners;
 
-const partnerTimelineItems: LogoItem[] = timelineLogos.flatMap((l, i) => {
-  const duration = 48 + (i % 4) * 10;
-  return [0, 1, 2].map((k) => ({
+const partnerTimelineItems: LogoItem[] = [1, 2, 3].flatMap((row) => {
+  const duration = 42 + row * 8;
+  // jede Zeile zeigt alle Logos, rotiert, mit gleichmäßigem Abstand
+  const rotated = timelineLogos.map((_, i) => timelineLogos[(i + row) % timelineLogos.length]!);
+  return rotated.map((l, i) => ({
     label: "",
     icon: (
       <img
@@ -104,14 +106,16 @@ const partnerTimelineItems: LogoItem[] = timelineLogos.flatMap((l, i) => {
         alt=""
         aria-hidden="true"
         loading="lazy"
-        className="h-14 w-auto object-contain sm:h-20 md:h-24"
+        className="h-12 w-auto object-contain sm:h-16 md:h-20"
       />
     ),
-    animationDelay: -(duration / 3) * k - i * 3,
+    animationDelay: 0,
     animationDuration: duration,
-    row: ((i + k) % 4) + 1,
-  }));
+    row,
+    key: `${row}-${i}`,
+  })) as LogoItem[];
 });
+
 
 const stats = [
   ["15+", "Jahre Erfahrung"],
