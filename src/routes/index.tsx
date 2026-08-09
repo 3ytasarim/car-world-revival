@@ -127,7 +127,7 @@ function Home() {
           <HeroWave height={320} />
           <section className="relative z-1 mx-auto flex max-w-full items-center">
 
-            <div className="z-10 mx-auto w-full max-w-screen-xl px-4 pt-20 pb-[340px] md:px-8 md:pt-24 md:pb-[380px]">
+            <div className="relative z-10 mx-auto w-full max-w-screen-xl px-4 pt-20 pb-[420px] md:px-8 md:pt-24 md:pb-[460px]">
 
               <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-6">
                 {/* Text-Spalte */}
@@ -191,7 +191,7 @@ function Home() {
                   </div>
 
                   {/* Smartphone – kompakt, laptopun sağında ve hero sınırları içinde */}
-                  <div className="animate-fade-in mx-auto h-[325px] w-[155px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-0 sm:bottom-6 sm:z-20 sm:mx-0 sm:h-[280px] sm:w-[135px] sm:rotate-[-3deg] lg:bottom-8 lg:h-[310px] lg:w-[148px]">
+                  <div className="animate-fade-in relative z-30 mx-auto h-[325px] w-[155px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[2%] sm:-bottom-4 sm:mx-0 sm:h-[330px] sm:w-[158px] sm:rotate-[-4deg] lg:-bottom-6 lg:h-[370px] lg:w-[178px]">
                     <IPhoneMockup
                       model="15-pro"
                       color="natural-titanium"
