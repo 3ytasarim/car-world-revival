@@ -203,36 +203,39 @@ function Home() {
                   </div>
                 </div>
               </div>
-
-              {/* Partner marquee – mit deutlich mehr Abstand zum Hero */}
-              <div className="z-10 mt-32 w-full overflow-hidden sm:mt-44">
-                <p className="mb-6 text-center text-xs font-semibold tracking-widest text-gray-400 uppercase">
-                  Partner &amp; Zertifizierungen
-                </p>
-                <div className="relative flex max-w-[90vw] overflow-hidden py-5">
-                  <div
-                    className="animate-marquee flex w-max hover:[animation-play-state:paused]"
-                    style={{ "--duration": "28s" } as React.CSSProperties}
-                  >
-                    {[...partners, ...partners].map((p, i) => (
-                      <div key={i} className="mx-8 flex h-12 w-fit shrink-0 items-center justify-center sm:mx-12">
-                        <img
-                          src={p.src}
-                          alt={p.alt}
-                          width={p.w}
-                          height={p.h}
-                          loading="lazy"
-                          className="h-10 w-auto object-contain grayscale-[35%] sm:h-12"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
             </div>
           </section>
 
         </div>
+
+        {/* Partner marquee – eigener Bereich unter dem Hero */}
+        <section className="relative z-10 border-y border-black/5 bg-brand-surface py-12">
+          <div className="mx-auto w-full max-w-screen-xl overflow-hidden px-4 md:px-8">
+            <p className="mb-6 text-center text-xs font-semibold tracking-widest text-gray-400 uppercase">
+              Partner &amp; Zertifizierungen
+            </p>
+            <div className="relative flex overflow-hidden py-5">
+              <div
+                className="animate-marquee flex w-max hover:[animation-play-state:paused]"
+                style={{ "--duration": "28s" } as React.CSSProperties}
+              >
+                {[...partners, ...partners].map((p, i) => (
+                  <div key={i} className="mx-8 flex h-12 w-fit shrink-0 items-center justify-center sm:mx-12">
+                    <img
+                      src={p.src}
+                      alt={p.alt}
+                      width={p.w}
+                      height={p.h}
+                      loading="lazy"
+                      className="h-10 w-auto object-contain grayscale-[35%] sm:h-12"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
 
         {/* Foto senden → Angebot in 24 Stunden */}
         <FotoAngebot />
