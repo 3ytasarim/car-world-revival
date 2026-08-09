@@ -24,6 +24,8 @@ import { PartnerSection } from "@/components/site/PartnerSection";
 
 import { PHONE_HREF } from "@/components/site/site-data";
 import { TextAnimation } from "@/components/ui/text-animation";
+import { Button3D } from "@/components/ui/button-3d";
+
 
 import tuv from "@/assets/tuv.png.asset.json";
 import innung from "@/assets/innung.png.asset.json";
