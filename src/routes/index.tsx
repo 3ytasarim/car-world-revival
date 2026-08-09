@@ -197,7 +197,7 @@ function Home() {
                   </div>
 
                   {/* Smartphone – neben/vor dem Laptop (Desktop) */}
-                  <div className="animate-fade-in absolute -bottom-10 right-[-2%] hidden h-[420px] w-[210px] drop-shadow-2xl [container-type:inline-size] sm:block lg:right-[-6%] lg:h-[470px] lg:w-[235px]">
+                  <div className="animate-fade-in absolute -bottom-4 right-[4%] hidden h-[380px] w-[190px] drop-shadow-2xl [container-type:inline-size] sm:block lg:right-[2%] lg:h-[420px] lg:w-[210px]">
                     <IPhoneMockup
                       model="15-pro"
                       color="natural-titanium"
