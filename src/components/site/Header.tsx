@@ -42,14 +42,14 @@ export function Header() {
                   href={item.href}
                   aria-current={active ? "page" : undefined}
                   className={`relative flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors lg:px-4 ${
-                    active ? "bg-brand-orange/20 text-brand-orange" : "text-white/85 hover:bg-white/10 hover:text-white"
+                    active ? "bg-white/15 text-[#A9CCEC]" : "text-white/85 hover:bg-white/10 hover:text-white"
                   }`}
                 >
                   {active && (
                     <>
                       {/* Leuchtender Indikator über dem aktiven Punkt */}
-                      <span className="pointer-events-none absolute -top-[13px] left-1/2 h-1 w-8 -translate-x-1/2 rounded-full bg-brand-orange" />
-                      <span className="pointer-events-none absolute -top-[13px] left-1/2 h-4 w-12 -translate-x-1/2 rounded-full bg-brand-orange/35 blur-md" />
+                      <span className="pointer-events-none absolute -top-[13px] left-1/2 h-1 w-8 -translate-x-1/2 rounded-full bg-[#A9CCEC]" />
+                      <span className="pointer-events-none absolute -top-[13px] left-1/2 h-4 w-12 -translate-x-1/2 rounded-full bg-[#A9CCEC]/35 blur-md" />
                     </>
                   )}
                   <Icon className="hidden lg:inline" size={15} strokeWidth={2.5} aria-hidden="true" />

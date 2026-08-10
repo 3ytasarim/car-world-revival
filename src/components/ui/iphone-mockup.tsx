@@ -172,8 +172,11 @@ export const IPhoneMockup: React.FC<IPhoneMockupProps> = ({
     display: "inline-block",
     width: outerWidth,
     height: outerHeight,
-    transform: `scale(${scale})`,
-    transformOrigin: "top left",
+    // `zoom` (not `transform: scale`) so the frame and its text actually
+    // re-render/reflow at the smaller size instead of being rasterized at
+    // full size and then squished down as a bitmap — the latter is what
+    // was making the headline/CTA text inside the mockup look blurry.
+    ...(scale !== 1 ? ({ zoom: scale } as CSSProperties) : {}),
     ...style,
   };
 

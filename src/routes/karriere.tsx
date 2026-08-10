@@ -78,12 +78,38 @@ function KarrierePage() {
           subtitle="Kfz-Meisterbetrieb | Mitglied der Kfz-Innung Ahrweiler"
         />
 
-        <section className="mx-auto max-w-5xl px-4 py-14 sm:px-6">
+        <section className="relative mx-auto max-w-5xl px-4 py-14 sm:px-6">
+          <style>{`
+            @property --karriere-border-angle {
+              syntax: '<angle>';
+              inherits: false;
+              initial-value: 0deg;
+            }
+            .karriere-card::before {
+              content: '';
+              position: absolute;
+              inset: -1.5px;
+              border-radius: inherit;
+              padding: 1.5px;
+              background: conic-gradient(from var(--karriere-border-angle), transparent 0%, transparent 72%, var(--brand-orange) 86%, transparent 100%);
+              -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+              -webkit-mask-composite: xor;
+              mask-composite: exclude;
+              animation: karriere-border-spin 4s linear infinite;
+              pointer-events: none;
+            }
+            @keyframes karriere-border-spin {
+              to { --karriere-border-angle: 360deg; }
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .karriere-card::before { animation: none; }
+            }
+          `}</style>
           <div className="grid gap-4 sm:grid-cols-2">
             {data?.map((job) => (
               <article
                 key={job.id}
-                className="flex flex-col items-center rounded-2xl border border-black/10 bg-white p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-brand-orange/50 hover:shadow-xl"
+                className="karriere-card relative flex h-full flex-col items-center rounded-2xl border border-black/10 bg-white p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
                 <div className="size-28 shrink-0 overflow-hidden rounded-full border-4 border-brand-surface shadow-md">
                   <img src={werkstattFoto} alt="" loading="lazy" className="size-full object-cover" />
@@ -107,23 +133,25 @@ function KarrierePage() {
                   </dl>
                 )}
 
-                <Button3D
-                  href={`https://wa.me/4926413969555?text=${encodeURIComponent(
-                    `Hallo Car-World, ich bewerbe mich auf die Stelle: ${job.title}`,
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variant="whatsapp"
-                  className="mt-5 w-full"
-                >
-                  <WhatsAppIcon className="size-4" />
-                  Jetzt in 60 Sekunden bewerben
-                </Button3D>
+                <div className="mt-auto w-full pt-5">
+                  <Button3D
+                    href={`https://wa.me/4926413969555?text=${encodeURIComponent(
+                      `Hallo Car-World, ich bewerbe mich auf die Stelle: ${job.title}`,
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="whatsapp"
+                    className="w-full"
+                  >
+                    <WhatsAppIcon className="size-4" />
+                    Jetzt in 60 Sekunden bewerben
+                  </Button3D>
+                </div>
               </article>
             ))}
           </div>
 
-          <div className="mt-12 grid gap-6 rounded-3xl border border-black/10 bg-white p-8 lg:grid-cols-2">
+          <div className="relative mt-12 grid gap-6 rounded-3xl border border-black/10 bg-white p-8 lg:grid-cols-2">
             <div>
               <h2 className="text-2xl font-bold">Warum Car-World?</h2>
               <ul className="mt-4 space-y-2">

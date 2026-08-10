@@ -14,6 +14,9 @@ export default defineConfig({
   },
   vite: {
     server: {
+      // Dev-only: lets the app be reached through a Cloudflare quick tunnel
+      // (random *.trycloudflare.com host) for previewing on other devices.
+      allowedHosts: true,
       proxy: {
         // Lovable-hosted asset CDN paths (src/assets/*.asset.json -> /__l5e/assets-v1/...)
         // only resolve on Lovable's own servers. Proxy them to the live preview deployment

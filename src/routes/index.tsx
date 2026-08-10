@@ -151,14 +151,14 @@ function Home() {
             <div className="relative z-10 mx-auto w-full max-w-screen-xl px-4 pt-20 pb-20 md:px-8 md:pt-24 md:pb-28">
 
 
-              <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-6">
+              <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
                 {/* Text-Spalte */}
                 <div className="max-w-2xl space-y-5 text-center lg:text-left">
                   <span className="group mx-auto flex w-fit items-center rounded-3xl border-[2px] border-brand-orange/25 bg-gradient-to-tr from-brand-orange/15 via-sky-400/15 to-transparent px-5 py-2 text-sm text-[#1B3A63] shadow-[0_10px_25px_-18px_rgba(80,136,200,0.9)] lg:mx-0">
                     <AnimatedText text="Alles aus einer Hand" minWeight={300} maxWeight={700} delayMultiplier={0.12} />
                     <ChevronRight className="ml-2 inline size-4 text-brand-orange duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </span>
-                  <h1 className="text-4xl tracking-tighter md:text-6xl">
+                  <h1 className="text-5xl tracking-tighter md:text-7xl">
                     <AnimatedText
                       text="Deine "
                       className="bg-[linear-gradient(180deg,_#000_0%,_rgba(0,_0,_0,_0.75)_100%)] bg-clip-text text-transparent"
@@ -170,7 +170,7 @@ function Home() {
                   </h1>
 
 
-                  <p className="mx-auto max-w-xl text-gray-600 lg:mx-0">
+                  <p className="mx-auto max-w-xl text-lg text-gray-600 lg:mx-0">
                     Von der Unfallhilfe bis zur Wartung: Wir übernehmen Reparatur, Versicherungsabwicklung
                     und Ersatzwagen — Sie müssen sich um nichts kümmern.
                   </p>
@@ -187,9 +187,9 @@ function Home() {
                 </div>
 
                 {/* Mockup-Spalte: Laptop und Smartphone nebeneinander */}
-                <div className="relative mx-auto w-full max-w-2xl sm:min-h-[420px] lg:min-h-[480px]">
+                <div className="relative mx-auto w-full max-w-2xl sm:min-h-[500px] sm:translate-x-6 lg:min-h-[580px] lg:translate-x-16">
                   {/* Laptop – ab Tablet, im Hintergrund */}
-                  <div className="relative z-10 w-[68%] text-gray-950 opacity-95 sm:block hidden sm:mt-6">
+                  <div className="relative z-10 w-[80%] text-gray-950 opacity-95 sm:-ml-2 sm:block hidden sm:mt-6 lg:-ml-6">
 
                     <svg className="h-auto w-full" fill="none" height="400" viewBox="0 0 650 400" width="650" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                       <path d="M79.56,13.18h491.32c7.23,0,13.1,5.87,13.1,13.1v336.61H66.46V26.28c0-7.23,5.87-13.1,13.1-13.1Z" fill="#a4a5a7" />
@@ -215,7 +215,7 @@ function Home() {
                   </div>
 
                   {/* Smartphone – im Vordergrund, größer */}
-                  <div className="animate-fade-in relative z-30 mx-auto h-[420px] w-[202px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[1%] sm:bottom-0 sm:mx-0 sm:h-[430px] sm:w-[207px] sm:rotate-[-5deg] lg:h-[490px] lg:w-[236px]">
+                  <div className="animate-fade-in relative z-30 mx-auto h-[500px] w-[242px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[-6%] sm:bottom-0 sm:mx-0 sm:h-[510px] sm:w-[247px] sm:rotate-[-5deg] lg:h-[580px] lg:w-[282px]">
                     <IPhoneMockup
                       model="15-pro"
                       color="natural-titanium"

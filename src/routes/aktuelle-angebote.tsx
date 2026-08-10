@@ -63,7 +63,7 @@ function OffersPage() {
           subtitle="Kurz anfragen, schnell erledigt — direkt per WhatsApp."
         />
 
-        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        <section className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6">
           {isLoading ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {[0, 1, 2, 3, 4, 5].map((i) => (

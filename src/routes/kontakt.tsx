@@ -58,9 +58,9 @@ function KontaktPage() {
           subtitle="Per WhatsApp 7/24 erreichbar — wir antworten schnell."
         />
 
-        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        <section className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6">
           <div className="grid gap-6 lg:grid-cols-2">
-            <div className="rounded-3xl border border-black/10 bg-white p-8">
+            <div className="relative rounded-3xl border border-black/10 bg-white p-8">
               <h2 className="text-xl font-semibold">Car-World Kfz-Meisterbetrieb</h2>
               <p className="mt-3 flex items-start gap-2 text-sm text-muted-foreground">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-brand-orange" aria-hidden="true" />
