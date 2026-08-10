@@ -66,8 +66,8 @@ export function FeatureCarousel({
   };
 
   return (
-    <div className="mx-auto w-full max-w-[100rem] md:p-8">
-      <div className="border-border/40 relative flex min-h-[600px] flex-col overflow-hidden rounded-[2.5rem] border lg:aspect-video lg:flex-row lg:rounded-[4rem]">
+    <div className="w-full">
+      <div className="relative flex min-h-[600px] flex-col overflow-hidden rounded-[2.5rem] lg:aspect-video lg:flex-row lg:rounded-[4rem]">
         <div
           className="relative z-30 flex min-h-[350px] w-full flex-col items-start justify-center overflow-hidden px-8 md:min-h-[450px] md:px-16 lg:h-full lg:w-[40%] lg:pl-16"
           style={{ backgroundColor: accentColor }}
