@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Handshake } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
 import { FloatingActions } from "@/components/site/FloatingActions";
+import { PageHero } from "@/components/site/PageHero";
 import { PartnerSection } from "@/components/site/PartnerSection";
+import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 
 export const Route = createFileRoute("/partner")({
   head: () => ({
@@ -28,15 +31,29 @@ export const Route = createFileRoute("/partner")({
 
 function PartnerPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-brand-surface">
+    <div className="relative flex min-h-screen flex-col">
+      <AnimatedGradientBackground
+        Breathing
+        startingGap={120}
+        breathingRange={12}
+        animationSpeed={0.03}
+        topOffset={20}
+        gradientColors={["#F4F7FB", "#DCEAF8", "#A9CCEC", "#7FB3E0", "#5088C8", "#2F5F9B", "#1B3A63"]}
+        gradientStops={[20, 40, 55, 68, 80, 90, 100]}
+        containerClassName="opacity-70"
+      />
       <Header />
       <main className="flex-1 pb-16 md:pb-0">
-        <section className="bg-brand-navy py-14 text-brand-navy-foreground">
-          <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
-            <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">Partnerschaft mit Car-World</h1>
-            <p className="mt-3 opacity-80">Ein starker Werkstattpartner für Versicherungen, Flotten und Firmen.</p>
-          </div>
-        </section>
+        <PageHero
+          badge={
+            <span className="inline-flex items-center gap-2 rounded-full bg-brand-orange/15 px-4 py-1.5 text-xs font-semibold text-brand-orange">
+              <Handshake className="size-4" aria-hidden="true" />
+              Partnerschaft
+            </span>
+          }
+          title="Partnerschaft mit Car-World"
+          subtitle="Ein starker Werkstattpartner für Versicherungen, Flotten und Firmen."
+        />
         <PartnerSection />
       </main>
       <Footer />

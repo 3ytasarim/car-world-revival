@@ -6,8 +6,10 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
 import { FloatingActions } from "@/components/site/FloatingActions";
-import { supabase } from "@/integrations/supabase/client";
+import { PageHero } from "@/components/site/PageHero";
+import { getPublicOffers } from "@/lib/public-content.functions";
 import { WA_FRAGE } from "@/components/site/site-data";
+import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 
 export const Route = createFileRoute("/aktuelle-angebote")({
   head: () => ({
@@ -32,31 +34,33 @@ export const Route = createFileRoute("/aktuelle-angebote")({
 function OffersPage() {
   const { data, isLoading } = useQuery({
     queryKey: ["offers"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("offers")
-        .select("*")
-        .eq("is_active", true)
-        .order("sort_order");
-      if (error) throw error;
-      return data;
-    },
+    queryFn: () => getPublicOffers(),
   });
 
   return (
-    <div className="flex min-h-screen flex-col bg-brand-surface">
+    <div className="relative flex min-h-screen flex-col">
+      <AnimatedGradientBackground
+        Breathing
+        startingGap={120}
+        breathingRange={12}
+        animationSpeed={0.03}
+        topOffset={20}
+        gradientColors={["#F4F7FB", "#DCEAF8", "#A9CCEC", "#7FB3E0", "#5088C8", "#2F5F9B", "#1B3A63"]}
+        gradientStops={[20, 40, 55, 68, 80, 90, 100]}
+        containerClassName="opacity-70"
+      />
       <Header />
       <main className="flex-1 pb-16 md:pb-0">
-        <section className="bg-brand-navy py-14 text-brand-navy-foreground">
-          <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
+        <PageHero
+          badge={
             <span className="inline-flex items-center gap-2 rounded-full bg-brand-orange/15 px-4 py-1.5 text-xs font-semibold text-brand-orange">
               <Tag className="size-4" aria-hidden="true" />
               Aktionen
             </span>
-            <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">Aktuelle Angebote</h1>
-            <p className="mt-3 opacity-80">Kurz anfragen, schnell erledigt — direkt per WhatsApp.</p>
-          </div>
-        </section>
+          }
+          title="Aktuelle Angebote"
+          subtitle="Kurz anfragen, schnell erledigt — direkt per WhatsApp."
+        />
 
         <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
           {isLoading ? (

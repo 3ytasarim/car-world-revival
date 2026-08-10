@@ -1,14 +1,17 @@
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Briefcase, CheckCircle2, Mail, Phone } from "lucide-react";
+import { Briefcase, CheckCircle2, IdCard, Mail, Phone } from "lucide-react";
+import werkstattFoto from "@/assets/svc-reparatur.jpg";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
 import { FloatingActions } from "@/components/site/FloatingActions";
-import { supabase } from "@/integrations/supabase/client";
+import { PageHero } from "@/components/site/PageHero";
+import { getJobOpenings } from "@/lib/public-content.functions";
 import { EMAIL_KARRIERE, PHONE_LABEL, PHONE_HREF, WA_KARRIERE } from "@/components/site/site-data";
+import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 
 export const Route = createFileRoute("/karriere")({
   head: () => ({
@@ -46,60 +49,73 @@ const benefits = [
 function KarrierePage() {
   const { data } = useQuery({
     queryKey: ["jobs"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("job_openings")
-        .select("*")
-        .eq("is_active", true)
-        .order("sort_order");
-      if (error) throw error;
-      return data;
-    },
+    queryFn: () => getJobOpenings(),
   });
 
   return (
-    <div className="flex min-h-screen flex-col bg-brand-surface">
+    <div className="relative flex min-h-screen flex-col">
+      <AnimatedGradientBackground
+        Breathing
+        startingGap={120}
+        breathingRange={12}
+        animationSpeed={0.03}
+        topOffset={20}
+        gradientColors={["#F4F7FB", "#DCEAF8", "#A9CCEC", "#7FB3E0", "#5088C8", "#2F5F9B", "#1B3A63"]}
+        gradientStops={[20, 40, 55, 68, 80, 90, 100]}
+        containerClassName="opacity-70"
+      />
       <Header />
       <main className="flex-1 pb-16 md:pb-0">
-        <section className="bg-brand-navy py-14 text-brand-navy-foreground">
-          <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
+        <PageHero
+          badge={
             <span className="inline-flex items-center gap-2 rounded-full bg-brand-orange/15 px-4 py-1.5 text-xs font-semibold text-brand-orange">
               <Briefcase className="size-4" aria-hidden="true" />
               In 60 Sekunden bewerben
             </span>
-            <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">Karriere bei Car-World</h1>
-            <p className="mt-3 opacity-80">Kfz-Meisterbetrieb | Mitglied der Kfz-Innung Ahrweiler</p>
-          </div>
-        </section>
+          }
+          title="Karriere bei Car-World"
+          subtitle="Kfz-Meisterbetrieb | Mitglied der Kfz-Innung Ahrweiler"
+        />
 
         <section className="mx-auto max-w-5xl px-4 py-14 sm:px-6">
           <div className="grid gap-4 sm:grid-cols-2">
             {data?.map((job) => (
               <article
                 key={job.id}
-                className="flex flex-col rounded-2xl border border-black/10 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-orange/50 hover:shadow-xl"
+                className="flex flex-col items-center rounded-2xl border border-black/10 bg-white p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-brand-orange/50 hover:shadow-xl"
               >
-                <span className="w-fit rounded-full bg-brand-surface px-3 py-1 text-[11px] font-semibold text-muted-foreground">
+                <div className="size-28 shrink-0 overflow-hidden rounded-full border-4 border-brand-surface shadow-md">
+                  <img src={werkstattFoto} alt="" loading="lazy" className="size-full object-cover" />
+                </div>
+                <span className="mt-4 w-fit rounded-full bg-brand-surface px-3 py-1 text-[11px] font-semibold text-muted-foreground">
                   {job.employment_type}
                 </span>
                 <h2 className="mt-3 text-lg font-semibold">{job.title}</h2>
-                <p className="mt-1 text-sm font-medium text-brand-orange">{job.subtitle}</p>
-                <p className="mt-3 flex-1 text-sm text-muted-foreground">{job.description}</p>
+                {job.subtitle && <p className="mt-1 text-sm font-medium text-brand-orange">{job.subtitle}</p>}
+                <p className="mt-3 text-sm text-muted-foreground">{job.description}</p>
+
                 {job.requirements && (
-                  <p className="mt-3 text-xs text-muted-foreground">
-                    <strong>Voraussetzung:</strong> {job.requirements}
-                  </p>
+                  <dl className="mt-4 w-full rounded-xl bg-brand-surface p-4 text-left text-sm">
+                    <div className="flex items-start gap-2">
+                      <IdCard className="mt-0.5 size-4 shrink-0 text-brand-orange" aria-hidden="true" />
+                      <div>
+                        <dt className="font-semibold">Voraussetzung</dt>
+                        <dd className="text-muted-foreground">{job.requirements}</dd>
+                      </div>
+                    </div>
+                  </dl>
                 )}
+
                 <a
                   href={`https://wa.me/4926413969555?text=${encodeURIComponent(
                     `Hallo Car-World, ich bewerbe mich auf die Stelle: ${job.title}`,
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#25D366] text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
+                  className="mt-5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#25D366] text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
                 >
                   <WhatsAppIcon className="size-4" />
-                  Jetzt bewerben
+                  Jetzt in 60 Sekunden bewerben
                 </a>
               </article>
             ))}

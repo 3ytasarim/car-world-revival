@@ -26,8 +26,8 @@ export function VideoSection() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section aria-labelledby="video-title">
-      <div ref={ref} className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <section aria-labelledby="video-title" className="scroll-mt-28">
+      <div ref={ref} className="mx-auto max-w-6xl px-4 pt-28 pb-16 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 id="video-title" className="text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
             <AnimatedText text="Sehen statt lesen" minWeight={300} maxWeight={800} delayMultiplier={0.05} />

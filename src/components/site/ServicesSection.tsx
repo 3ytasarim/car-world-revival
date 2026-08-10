@@ -1,6 +1,7 @@
 import { ArrowUpRight, Sparkles } from "lucide-react";
 
 import { useInView } from "@/hooks/use-in-view";
+import { AnimatedText } from "@/components/ui/animated-text";
 import unfall from "@/assets/unfall.jpg";
 import abschlepp from "@/assets/svc-abschlepp.jpg";
 import reparatur from "@/assets/svc-reparatur.jpg";
@@ -27,7 +28,7 @@ export function ServicesSection() {
   const { ref, inView } = useInView<HTMLDivElement>(0.1);
 
   return (
-    <section aria-labelledby="leistungen-title" className="relative overflow-hidden bg-white py-20">
+    <section aria-labelledby="leistungen-title" className="relative overflow-hidden py-20">
       <div ref={ref} className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div
           className={`mx-auto max-w-2xl text-center transition-all duration-700 ${inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
@@ -36,8 +37,8 @@ export function ServicesSection() {
             <Sparkles className="size-4" aria-hidden="true" />
             Alles aus einer Hand
           </span>
-          <h2 id="leistungen-title" className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-            Unsere Leistungen
+          <h2 id="leistungen-title" className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
+            <AnimatedText text="Unsere Leistungen" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
           </h2>
           <p className="mt-3 text-lg text-muted-foreground">Ein Ansprechpartner für alles rund um Ihr Fahrzeug.</p>
         </div>

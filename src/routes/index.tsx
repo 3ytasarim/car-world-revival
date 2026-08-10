@@ -15,9 +15,7 @@ import IPhoneMockup from "@/components/ui/iphone-mockup";
 import { ClientOnly } from "@tanstack/react-router";
 import { MeshyBackground } from "@/components/ui/meshy-background";
 import { FloatingIcons } from "@/components/site/FloatingIcons";
-import { LogoTimeline, type LogoItem } from "@/components/ui/logo-timeline";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
-import logo from "@/assets/logo.png.asset.json";
 
 
 
@@ -36,10 +34,6 @@ import { Button3D } from "@/components/ui/button-3d";
 import kernAbschleppen from "@/assets/kern-abschleppen.png";
 import kernWerkstatt from "@/assets/kern-werkstatt.png";
 import kernSteinschlag from "@/assets/kern-steinschlag.png";
-import tuv from "@/assets/tuv.png.asset.json";
-import innung from "@/assets/innung.png.asset.json";
-import autoglas from "@/assets/autoglas.png.asset.json";
-import hwk from "@/assets/hwk.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -83,32 +77,6 @@ export const Route = createFileRoute("/")({
   }),
   component: Home,
 });
-
-const partners = [
-  { src: tuv.url, alt: "TÜV Rheinland", w: 237, h: 62 },
-  { src: innung.url, alt: "KFZ-Innung Ahrweiler", w: 132, h: 132 },
-  { src: autoglas.url, alt: "Autoglas Spezialist", w: 209, h: 117 },
-  { src: hwk.url, alt: "Handwerkskammer Koblenz", w: 237, h: 102 },
-];
-
-const timelineLogos = partners;
-
-// 4 Zeilen, pro Zeile läuft genau ein Logo — zeitversetzt
-const partnerTimelineItems: LogoItem[] = timelineLogos.map((l, i) => ({
-  label: "",
-  icon: (
-    <img
-      src={l.src}
-      alt=""
-      aria-hidden="true"
-      loading="lazy"
-      className="h-14 w-auto object-contain sm:h-20 md:h-24"
-    />
-  ),
-  animationDelay: -i * 6,
-  animationDuration: 26 + i * 4,
-  row: i + 1,
-}));
 
 
 
@@ -265,29 +233,6 @@ function Home() {
           </section>
 
         </div>
-
-        {/* Partner & Zertifizierungen – Logo-Timeline */}
-        <section className="relative z-10 overflow-hidden border-y border-black/5 bg-transparent py-14">
-          <div className="relative z-10 mx-auto w-full max-w-screen-xl px-4 md:px-8">
-            <h2 className="mb-8 text-center text-3xl font-bold tracking-tight text-[#1B3A63] sm:text-4xl">
-              <AnimatedText text="Partner & Zertifizierungen" minWeight={300} maxWeight={800} delayMultiplier={0.06} />
-            </h2>
-            <LogoTimeline
-              items={partnerTimelineItems}
-              title={
-                <img
-                  src={logo.url}
-                  alt="Car-World"
-                  width={520}
-                  height={160}
-                  className="h-28 w-auto object-contain opacity-20 mix-blend-multiply sm:h-40 md:h-52"
-                />
-              }
-            />
-          </div>
-        </section>
-
-
 
         {/* Rundum-sorglos-Paket */}
         <RundumSorglosSection />

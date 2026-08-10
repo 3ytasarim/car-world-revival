@@ -5,11 +5,16 @@ import { toast } from "sonner";
 
 import { supabase } from "@/integrations/supabase/client";
 import { useInView } from "@/hooks/use-in-view";
+import { OrbitingLogos } from "@/components/ui/orbiting-logos";
+import { GradientBoldCard } from "@/components/ui/gradient-bold-card";
+import { AnimatedText } from "@/components/ui/animated-text";
+import { TextShimmerWave } from "@/components/ui/text-shimmer-wave";
 import { WA_PARTNER } from "./site-data";
 import tuv from "@/assets/tuv.png.asset.json";
 import innung from "@/assets/innung.png.asset.json";
 import autoglas from "@/assets/autoglas.png.asset.json";
 import hwk from "@/assets/hwk.png.asset.json";
+import logo from "@/assets/logo.png.asset.json";
 
 const types = [
   { icon: ShieldCheck, label: "Versicherungen", text: "Direkte Schadenabwicklung, feste Ansprechpartner." },
@@ -62,8 +67,8 @@ export function PartnerSection() {
             <Handshake className="size-4" aria-hidden="true" />
             Partnerschaft
           </span>
-          <h2 id="partner-title" className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-            Werden Sie <span className="text-brand-orange">Car-World Partner</span>
+          <h2 id="partner-title" className="mt-4 text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
+            <AnimatedText text="Werden Sie Car-World Partner" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
           </h2>
           <p className="mt-3 text-muted-foreground">
             Versicherungen, Unternehmen mit eigener Flotte und Betriebe mit Wartungsverträgen — arbeiten Sie mit einem
@@ -76,16 +81,18 @@ export function PartnerSection() {
             <div
               key={t.label}
               style={{ transitionDelay: `${i * 90}ms` }}
-              className={`group rounded-2xl border border-black/10 bg-white p-6 transition-all duration-700 hover:-translate-y-1 hover:border-brand-orange/50 hover:shadow-lg ${
+              className={`group transition-all duration-700 hover:-translate-y-1 ${
                 inView ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
               }`}
             >
-              <t.icon
-                className="size-8 text-brand-orange transition-transform duration-300 group-hover:scale-110"
-                aria-hidden="true"
-              />
-              <h3 className="mt-4 text-lg font-semibold">{t.label}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{t.text}</p>
+              <GradientBoldCard>
+                <t.icon
+                  className="size-8 text-brand-orange transition-transform duration-300 group-hover:scale-110"
+                  aria-hidden="true"
+                />
+                <h3 className="mt-4 text-lg font-semibold">{t.label}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{t.text}</p>
+              </GradientBoldCard>
             </div>
           ))}
         </div>
@@ -170,18 +177,37 @@ export function PartnerSection() {
             )}
           </div>
 
-          <div className="flex flex-col justify-center rounded-3xl border border-black/10 bg-white p-8">
-            <p className="text-sm font-semibold text-muted-foreground">Unsere Partner & Zertifizierungen</p>
-            <div className="mt-6 grid grid-cols-2 gap-6">
-              {logos.map((l) => (
-                <img
-                  key={l.alt}
-                  src={l.src}
-                  alt={l.alt}
-                  loading="lazy"
-                  className="h-14 w-auto object-contain grayscale transition-all duration-300 hover:grayscale-0"
-                />
-              ))}
+          <div className="flex flex-col items-center justify-center rounded-3xl border border-black/10 bg-white p-8">
+            <TextShimmerWave
+              as="p"
+              duration={1.4}
+              className="text-2xl font-bold [--base-color:#1B3A63] [--base-gradient-color:#8FB8E8] dark:[--base-color:#1B3A63] dark:[--base-gradient-color:#8FB8E8]"
+            >
+              Unsere Partner & Zertifizierungen
+            </TextShimmerWave>
+            <div className="mt-2">
+              <OrbitingLogos
+                radius={200}
+                duration={24}
+                center={
+                  <div className="flex size-28 items-center justify-center rounded-full border border-black/10 bg-white shadow-md">
+                    <img src={logo.url} alt="Car-World" className="size-20 object-contain" />
+                  </div>
+                }
+                items={logos.map((l) => ({
+                  key: l.alt,
+                  content: (
+                    <div className="flex size-20 items-center justify-center rounded-full border border-black/10 bg-white p-2.5 shadow-sm">
+                      <img
+                        src={l.src}
+                        alt={l.alt}
+                        loading="lazy"
+                        className="size-full object-contain grayscale transition-all duration-300 hover:grayscale-0"
+                      />
+                    </div>
+                  ),
+                }))}
+              />
             </div>
           </div>
         </div>
