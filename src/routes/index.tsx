@@ -153,12 +153,12 @@ function Home() {
 
               <div className="grid w-full items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
                 {/* Text-Spalte */}
-                <div className="max-w-3xl space-y-7 text-center lg:text-left">
+                <div className="max-w-4xl space-y-7 text-center lg:text-left">
                   <span className="group mx-auto flex w-fit items-center rounded-3xl border-[2px] border-brand-orange/25 bg-gradient-to-tr from-brand-orange/15 via-sky-400/15 to-transparent px-6 py-2.5 text-base text-[#1B3A63] shadow-[0_10px_25px_-18px_rgba(80,136,200,0.9)] lg:mx-0">
                     <AnimatedText text="Alles aus einer Hand" minWeight={300} maxWeight={700} delayMultiplier={0.12} />
                     <ChevronRight className="ml-2 inline size-4 text-brand-orange duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </span>
-                  <h1 className="text-[2.75rem] leading-[1.05] tracking-tighter md:text-6xl lg:text-[3.6rem] xl:text-[4.5rem]">
+                  <h1 className="text-[2.75rem] leading-[1.05] tracking-tighter md:text-6xl lg:text-[3.4rem] xl:text-[4rem]">
                     <span className="block">
                       <AnimatedText
                         text="Deine"
