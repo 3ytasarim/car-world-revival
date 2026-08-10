@@ -168,7 +168,7 @@ function Home() {
                       />
                     </span>
                     <span className="block whitespace-nowrap font-extrabold">
-                      <HeroShutterText text="Nr. 1 Autowerkstatt" delay={0.25} />
+                      <TextGradient as="span" duration={5}>Nr. 1 Autowerkstatt</TextGradient>
                     </span>
 
                   </h1>
