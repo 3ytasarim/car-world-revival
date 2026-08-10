@@ -174,11 +174,6 @@ function Home() {
                   </h1>
 
 
-
-                  <p className="mx-auto max-w-2xl text-lg text-gray-600 md:text-xl lg:mx-0">
-                    Von der Unfallhilfe bis zur Wartung: Wir übernehmen Reparatur, Versicherungsabwicklung
-                    und Ersatzwagen — Sie müssen sich um nichts kümmern.
-                  </p>
                   <div className="flex flex-wrap items-center justify-center gap-4 lg:justify-start">
                     <Button3D href={PHONE_HREF}>
                       <Phone className="size-4" aria-hidden="true" />
