@@ -14,7 +14,6 @@ import {
 import { motion, useInView, useScroll, useSpring, useTransform } from "framer-motion";
 
 import { AnimatedText } from "@/components/ui/animated-text";
-import { AnimatedBackgroundLines } from "@/components/animated-background-lines";
 import { Button3D } from "@/components/ui/button-3d";
 import { PHONE_HREF } from "@/components/site/site-data";
 import werkstattFoto from "@/assets/svc-reparatur.jpg";
