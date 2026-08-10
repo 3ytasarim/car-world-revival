@@ -29,7 +29,7 @@ import { PartnerSection } from "@/components/site/PartnerSection";
 import { PHONE_HREF } from "@/components/site/site-data";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
-import HeroShutterText from "@/components/ui/hero-shutter-text";
+import { TextGradient } from "@/components/ui/text-gradient";
 
 
 
@@ -168,7 +168,7 @@ function Home() {
                       />
                     </span>
                     <span className="block whitespace-nowrap font-extrabold">
-                      <HeroShutterText text="Nr. 1 Autowerkstatt" delay={0.25} />
+                      <TextGradient as="span" duration={5}>Nr. 1 Autowerkstatt</TextGradient>
                     </span>
 
                   </h1>
