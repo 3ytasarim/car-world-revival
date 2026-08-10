@@ -187,7 +187,7 @@ function Home() {
                 </div>
 
                 {/* Mockup-Spalte: Laptop und Smartphone nebeneinander */}
-                <div className="relative mx-auto w-full max-w-5xl sm:min-h-[520px] lg:min-h-[660px]">
+                <div className="relative mx-auto mt-8 w-full max-w-5xl sm:min-h-[520px] lg:mt-20 lg:min-h-[660px]">
                   {/* Laptop – ab Tablet, im Hintergrund */}
                   <div className="relative z-10 w-full text-gray-950 opacity-95 sm:block hidden sm:mt-10 lg:w-[104%]">
 
