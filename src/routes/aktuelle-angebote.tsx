@@ -46,7 +46,7 @@ function OffersPage() {
         breathingRange={12}
         animationSpeed={0.03}
         topOffset={20}
-        gradientColors={["#F4F7FB", "#DCEAF8", "#A9CCEC", "#7FB3E0", "#5088C8", "#2F5F9B", "#1B3A63"]}
+        gradientColors={["#FFFFFF", "#F7FBFE", "#EAF4FC", "#DCEDFA", "#C9E2F7", "#B4D5F1", "#9FC8EA"]}
         gradientStops={[20, 40, 55, 68, 80, 90, 100]}
         containerClassName="opacity-70"
       />
