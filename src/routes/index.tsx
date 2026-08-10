@@ -151,14 +151,14 @@ function Home() {
             <div className="relative z-10 mx-auto flex w-full max-w-[1600px] items-center px-4 pt-24 pb-24 md:px-10 md:pt-28 md:pb-32 lg:min-h-[720px] lg:px-14 lg:pt-28 lg:pb-32">
 
 
-              <div className="grid w-full items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
+              <div className="grid w-full items-center gap-12 lg:grid-cols-[1.25fr_1fr] lg:gap-10">
                 {/* Text-Spalte */}
                 <div className="max-w-4xl space-y-7 text-center lg:text-left">
                   <span className="group mx-auto flex w-fit items-center rounded-3xl border-[2px] border-brand-orange/25 bg-gradient-to-tr from-brand-orange/15 via-sky-400/15 to-transparent px-6 py-2.5 text-base text-[#1B3A63] shadow-[0_10px_25px_-18px_rgba(80,136,200,0.9)] lg:mx-0">
                     <AnimatedText text="Alles aus einer Hand" minWeight={300} maxWeight={700} delayMultiplier={0.12} />
                     <ChevronRight className="ml-2 inline size-4 text-brand-orange duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </span>
-                  <h1 className="text-[2.75rem] leading-[1.05] tracking-tighter md:text-6xl lg:text-[3.4rem] xl:text-[4rem]">
+                  <h1 className="text-[2.75rem] leading-[1.05] tracking-tighter md:text-6xl lg:text-[3.4rem] xl:text-[3.75rem]">
                     <span className="block">
                       <AnimatedText
                         text="Deine"
