@@ -29,6 +29,8 @@ import { PartnerSection } from "@/components/site/PartnerSection";
 import { PHONE_HREF } from "@/components/site/site-data";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
+import { TextGradient } from "@/components/ui/text-gradient";
+
 
 
 import kernAbschleppen from "@/assets/kern-abschleppen.png";
@@ -121,7 +123,7 @@ function Home() {
         breathingRange={12}
         animationSpeed={0.03}
         topOffset={20}
-        gradientColors={["#F4F7FB", "#DCEAF8", "#A9CCEC", "#7FB3E0", "#5088C8", "#2F5F9B", "#1B3A63"]}
+        gradientColors={["#FFFFFF", "#F7FBFE", "#EAF4FC", "#DCEDFA", "#C9E2F7", "#B4D5F1", "#9FC8EA"]}
         gradientStops={[20, 40, 55, 68, 80, 90, 100]}
         containerClassName="opacity-70"
       />
@@ -148,33 +150,31 @@ function Home() {
 
           <section className="relative z-1 mx-auto flex max-w-full items-center">
 
-            <div className="relative z-10 mx-auto w-full max-w-screen-xl px-4 pt-20 pb-20 md:px-8 md:pt-24 md:pb-28">
+            <div className="relative z-10 mx-auto flex w-full max-w-[1600px] items-center px-4 pt-24 pb-10 md:px-10 md:pt-28 md:pb-12 lg:min-h-[620px] lg:px-14 lg:pt-28 lg:pb-12">
 
 
-              <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+              <div className="grid w-full items-center gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-stretch lg:gap-8">
                 {/* Text-Spalte */}
-                <div className="max-w-2xl space-y-5 text-center lg:text-left">
-                  <span className="group mx-auto flex w-fit items-center rounded-3xl border-[2px] border-brand-orange/25 bg-gradient-to-tr from-brand-orange/15 via-sky-400/15 to-transparent px-5 py-2 text-sm text-[#1B3A63] shadow-[0_10px_25px_-18px_rgba(80,136,200,0.9)] lg:mx-0">
+                <div className="max-w-4xl space-y-7 pt-6 text-center lg:flex lg:flex-col lg:pt-20 lg:text-center">
+                  <span className="group mx-auto flex w-fit items-center rounded-3xl border-[2px] border-brand-orange/25 bg-gradient-to-tr from-brand-orange/15 via-sky-400/15 to-transparent px-6 py-2.5 text-base text-[#1B3A63] shadow-[0_10px_25px_-18px_rgba(80,136,200,0.9)]">
                     <AnimatedText text="Alles aus einer Hand" minWeight={300} maxWeight={700} delayMultiplier={0.12} />
                     <ChevronRight className="ml-2 inline size-4 text-brand-orange duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </span>
-                  <h1 className="text-5xl tracking-tighter md:text-7xl">
-                    <AnimatedText
-                      text="Deine "
-                      className="bg-[linear-gradient(180deg,_#000_0%,_rgba(0,_0,_0,_0.75)_100%)] bg-clip-text text-transparent"
-                    />
-                    <AnimatedText
-                      text="Nr. 1 Autowerkstatt"
-                      className="bg-gradient-to-r from-brand-orange to-sky-400 bg-clip-text text-transparent"
-                    />
+                  <h1 className="origin-center -rotate-[5deg] text-center text-[3.9rem] leading-[0.95] tracking-tighter md:text-[5.25rem] lg:text-[5.25rem] xl:text-[6.25rem]">
+                    <span className="block">
+                      <AnimatedText
+                        text="Deine"
+                        className="bg-[linear-gradient(180deg,_#0B1626_0%,_rgba(11,_22,_38,_0.8)_100%)] bg-clip-text text-transparent"
+                      />
+                    </span>
+                    <span className="block whitespace-nowrap font-extrabold">
+                      <TextGradient as="span" duration={5}>Nr. 1 Autowerkstatt</TextGradient>
+                    </span>
+
                   </h1>
 
 
-                  <p className="mx-auto max-w-xl text-lg text-gray-600 lg:mx-0">
-                    Von der Unfallhilfe bis zur Wartung: Wir übernehmen Reparatur, Versicherungsabwicklung
-                    und Ersatzwagen — Sie müssen sich um nichts kümmern.
-                  </p>
-                  <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+                  <div className="flex flex-wrap items-center justify-center gap-4 lg:mt-auto lg:mb-[10rem] lg:justify-center">
                     <Button3D href={PHONE_HREF}>
                       <Phone className="size-4" aria-hidden="true" />
                       Jetzt anrufen
@@ -187,9 +187,10 @@ function Home() {
                 </div>
 
                 {/* Mockup-Spalte: Laptop und Smartphone nebeneinander */}
-                <div className="relative mx-auto w-full max-w-2xl sm:min-h-[500px] sm:translate-x-6 lg:min-h-[580px] lg:translate-x-16">
+                <div className="relative mx-auto mt-8 w-full max-w-5xl sm:min-h-[520px] lg:mt-20 lg:min-h-[660px]">
                   {/* Laptop – ab Tablet, im Hintergrund */}
-                  <div className="relative z-10 w-[80%] text-gray-950 opacity-95 sm:-ml-2 sm:block hidden sm:mt-6 lg:-ml-6">
+                  <div className="relative z-10 w-full text-gray-950 opacity-95 sm:block hidden sm:mt-10 lg:w-[104%]">
+
 
                     <svg className="h-auto w-full" fill="none" height="400" viewBox="0 0 650 400" width="650" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                       <path d="M79.56,13.18h491.32c7.23,0,13.1,5.87,13.1,13.1v336.61H66.46V26.28c0-7.23,5.87-13.1,13.1-13.1Z" fill="#a4a5a7" />
@@ -215,7 +216,7 @@ function Home() {
                   </div>
 
                   {/* Smartphone – im Vordergrund, größer */}
-                  <div className="animate-fade-in relative z-30 mx-auto h-[500px] w-[242px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[-6%] sm:bottom-0 sm:mx-0 sm:h-[510px] sm:w-[247px] sm:rotate-[-5deg] lg:h-[580px] lg:w-[282px]">
+                  <div className="animate-fade-in relative z-30 mx-auto h-[580px] w-[280px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[-4%] sm:bottom-0 sm:mx-0 sm:h-[660px] sm:w-[320px] sm:rotate-[-5deg] lg:h-[800px] lg:w-[386px]">
                     <IPhoneMockup
                       model="15-pro"
                       color="natural-titanium"

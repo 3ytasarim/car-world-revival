@@ -169,15 +169,15 @@ export function PartnerSection() {
             )}
           </div>
 
-          <div className="flex flex-col items-center justify-center rounded-3xl border border-black/10 bg-white p-8">
+          <div className="flex flex-col items-center justify-center overflow-hidden rounded-3xl border border-black/10 bg-white p-5 sm:p-8">
             <TextShimmerWave
               as="p"
               duration={1.4}
-              className="text-2xl font-bold [--base-color:#1B3A63] [--base-gradient-color:#8FB8E8] dark:[--base-color:#1B3A63] dark:[--base-gradient-color:#8FB8E8]"
+              className="text-center text-xl sm:text-2xl font-bold [--base-color:#1B3A63] [--base-gradient-color:#8FB8E8] dark:[--base-color:#1B3A63] dark:[--base-gradient-color:#8FB8E8]"
             >
               Unsere Partner & Zertifizierungen
             </TextShimmerWave>
-            <div className="mt-2">
+            <div className="mt-2 w-full origin-top scale-[0.52] sm:scale-[0.72] lg:scale-90 xl:scale-100 h-[270px] sm:h-[370px] lg:h-[460px] xl:h-[500px] flex justify-center">
               <OrbitingLogos
                 radius={200}
                 duration={24}

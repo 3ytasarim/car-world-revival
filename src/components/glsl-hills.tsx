@@ -2,12 +2,15 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 const GLSLHills = ({ width = '100%', height = '100%', cameraZ = 125, planeSize = 256, speed = 0.5 }) => {
-  const canvasRef = useRef(null);
-  const containerRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Plane class
     class Plane {
+      uniforms: { time: { type: string; value: number } };
+      mesh!: THREE.Mesh;
+      time: number;
       constructor() {
         this.uniforms = {
           time: { type: 'f', value: 0 },
@@ -145,13 +148,13 @@ const GLSLHills = ({ width = '100%', height = '100%', cameraZ = 125, planeSize =
         );
       }
 
-      render(time) {
+      render(time: number) {
         this.uniforms.time.value += time * this.time;
       }
     }
 
     // Three.js setup
-    const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current, antialias: false });
+    const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current!, antialias: false });
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
     const clock = new THREE.Clock();
@@ -160,8 +163,8 @@ const GLSLHills = ({ width = '100%', height = '100%', cameraZ = 125, planeSize =
     // Sized to the wrapping container (not window) so this fits whatever hero
     // section it's dropped into, rather than always filling the full viewport.
     const resize = () => {
-      const canvas = canvasRef.current;
-      const container = containerRef.current;
+      const canvas = canvasRef.current!;
+      const container = containerRef.current!;
       const w = container.clientWidth || window.innerWidth;
       const h = container.clientHeight || window.innerHeight;
       canvas.width = w;

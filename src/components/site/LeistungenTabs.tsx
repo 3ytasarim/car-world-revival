@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { FeatureCarousel, type FeatureCarouselItem } from "@/components/feature-carousel";
+import { GradientBoldCard } from "@/components/ui/gradient-bold-card";
 
 import unfall from "@/assets/unfall.jpg";
 import abschlepp from "@/assets/svc-abschlepp.jpg";
@@ -48,7 +49,12 @@ export function LeistungenTabs() {
       </div>
 
       <div className="relative z-10 px-4 sm:px-6">
-        <FeatureCarousel features={features} accentColor="#5088C8" />
+        <GradientBoldCard
+          className="mx-auto max-w-[100rem] rounded-[2.75rem] p-[5px] lg:rounded-[4.25rem]"
+          contentClassName="overflow-hidden rounded-[2.5rem] bg-white lg:rounded-[4rem]"
+        >
+          <FeatureCarousel features={features} accentColor="#3A6DA8" />
+        </GradientBoldCard>
       </div>
     </section>
   );
