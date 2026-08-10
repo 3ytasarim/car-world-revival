@@ -20,16 +20,16 @@ type Item = {
 };
 
 function buildItems(seed: number): Item[] {
-  return Array.from({ length: 7 }, (_, i) => {
+  return Array.from({ length: 11 }, (_, i) => {
     const n = i + seed;
     return {
       src: ICONS[(n * 2 + seed) % ICONS.length]!.url,
       offset: 12 + ((n * 23) % 60),
-      size: 26 + ((n * 11) % 22),
+      size: 38 + ((n * 11) % 30),
       duration: 18 + ((n * 7) % 14),
       delay: -((n * 3.7) % 24),
       drift: (n % 2 === 0 ? 1 : -1) * (8 + ((n * 5) % 18)),
-      opacity: 0.22 + ((n % 3) * 0.07),
+      opacity: 0.5 + ((n % 3) * 0.15),
     };
   });
 }
@@ -40,7 +40,7 @@ const RIGHT = buildItems(3);
 function Rail({ items, side }: { items: Item[]; side: "left" | "right" }) {
   return (
     <div
-      className="absolute top-0 bottom-0 w-[clamp(40px,7vw,130px)] overflow-hidden"
+      className="absolute top-0 bottom-0 w-[clamp(56px,8vw,150px)] overflow-hidden"
       style={{
         [side]: 0,
         maskImage: "linear-gradient(to top, transparent 0%, #000 12%, #000 55%, transparent 92%)",
@@ -107,7 +107,7 @@ export function SideRailIcons() {
           100% { transform: translate3d(var(--drift, 0px), -110vh, 0) rotate(8deg); opacity: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
-          .rail-icon { animation: none !important; opacity: .15; }
+          .rail-icon { animation: none !important; opacity: .3; }
         }
       `}</style>
       <Rail items={LEFT} side="left" />
