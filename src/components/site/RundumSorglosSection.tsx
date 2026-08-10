@@ -14,7 +14,6 @@ import {
 import { motion, useInView, useScroll, useSpring, useTransform } from "framer-motion";
 
 import { AnimatedText } from "@/components/ui/animated-text";
-import { AnimatedBackgroundLines } from "@/components/animated-background-lines";
 import { Button3D } from "@/components/ui/button-3d";
 import { PHONE_HREF } from "@/components/site/site-data";
 import werkstattFoto from "@/assets/svc-reparatur.jpg";
@@ -54,16 +53,6 @@ export function RundumSorglosSection() {
       aria-labelledby="rundum-title"
       className="relative w-full overflow-hidden"
     >
-      {/* Vertical sweeping lines, each its own bounded instance confined to a
-          gutter — guarantees the animation stays visible within that strip
-          instead of spending most of its cycle hidden under the middle
-          content (which is what happened with one full-width instance). */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-[380px] overflow-hidden xl:block">
-        <AnimatedBackgroundLines color="#5088C8" className="absolute inset-0" />
-      </div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[380px] overflow-hidden xl:block">
-        <AnimatedBackgroundLines color="#5088C8" className="absolute inset-0" />
-      </div>
 
       <div className="relative py-16 sm:py-24">
         <motion.div
