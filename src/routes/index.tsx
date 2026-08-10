@@ -160,7 +160,7 @@ function Home() {
                     <AnimatedText text="Alles aus einer Hand" minWeight={300} maxWeight={700} delayMultiplier={0.12} />
                     <ChevronRight className="ml-2 inline size-4 text-brand-orange duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </span>
-                  <h1 className="origin-center -rotate-[22.5deg] text-center text-[3.25rem] leading-[0.95] tracking-tighter md:text-[4.25rem] lg:text-[4.25rem] xl:text-[5rem]">
+                  <h1 className="origin-center -rotate-[5deg] text-center text-[3.25rem] leading-[0.95] tracking-tighter md:text-[4.25rem] lg:text-[4.25rem] xl:text-[5rem]">
                     <span className="block">
                       <AnimatedText
                         text="Deine"
