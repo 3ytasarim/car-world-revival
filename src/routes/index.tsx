@@ -150,7 +150,7 @@ function Home() {
 
           <section className="relative z-1 mx-auto flex max-w-full items-center">
 
-            <div className="relative z-10 mx-auto flex w-full max-w-[1600px] items-center px-4 pt-24 pb-24 md:px-10 md:pt-28 md:pb-32 lg:min-h-[720px] lg:px-14 lg:pt-28 lg:pb-32">
+            <div className="relative z-10 mx-auto flex w-full max-w-[1600px] items-center px-4 pt-24 pb-10 md:px-10 md:pt-28 md:pb-12 lg:min-h-[620px] lg:px-14 lg:pt-28 lg:pb-12">
 
 
               <div className="grid w-full items-center gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-stretch lg:gap-8">
@@ -187,7 +187,7 @@ function Home() {
                 </div>
 
                 {/* Mockup-Spalte: Laptop und Smartphone nebeneinander */}
-                <div className="relative mx-auto w-full max-w-5xl sm:min-h-[600px] lg:min-h-[780px]">
+                <div className="relative mx-auto w-full max-w-5xl sm:min-h-[520px] lg:min-h-[660px]">
                   {/* Laptop – ab Tablet, im Hintergrund */}
                   <div className="relative z-10 w-full text-gray-950 opacity-95 sm:block hidden sm:mt-10 lg:w-[104%]">
 
