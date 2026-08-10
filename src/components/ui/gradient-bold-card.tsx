@@ -4,11 +4,9 @@ import type { ReactNode } from "react";
 // a fixed-size empty demo card with no content slot. This takes real
 // children instead, in the site's two-blue brand gradient.
 //
-// The colored blob has to show through a gap around the content panel (not
-// sit fully behind it) or it's invisible — the outer wrapper's padding is
-// that gap. It travels on a true circular `offset-path` (not a translate
-// between 4 corners) so it reads as one smooth orbit, not a square with
-// sharp direction changes at the corners.
+// The outer wrapper provides a permanent dark-blue frame. A much larger
+// conic-gradient layer rotates behind the content, so the highlight travels
+// continuously without the border ever disappearing.
 export function GradientBoldCard({
   children,
   className = "",
@@ -20,26 +18,27 @@ export function GradientBoldCard({
 }) {
   return (
     <div
-      className={`relative h-full overflow-hidden rounded-2xl p-[3px] shadow-[10px_10px_30px_rgba(19,31,53,0.1),-10px_-10px_30px_#ffffff] ${className}`}
+      className={`relative h-full overflow-hidden rounded-2xl bg-brand-navy p-[4px] shadow-[0_20px_55px_-24px_rgba(19,31,53,0.65)] ${className}`}
     >
       <style>{`
-        @keyframes gbc-orbit {
-          from { offset-distance: 0%; }
-          to   { offset-distance: 100%; }
+        @keyframes gbc-frame-rotate {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
         }
-        .gbc-blob {
-          offset-path: circle(50% at 50% 50%);
-          offset-rotate: 0deg;
-          animation: gbc-orbit 5s linear infinite;
+        .gbc-frame-glow {
+          animation: gbc-frame-rotate 14s linear infinite;
         }
         @media (prefers-reduced-motion: reduce) {
-          .gbc-blob { animation: none; }
+          .gbc-frame-glow { animation: none; }
         }
       `}</style>
 
       <div
-        className="gbc-blob absolute top-0 left-0 z-0 size-32 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-90 blur-[16px]"
-        style={{ background: "linear-gradient(135deg, #1B3A63, #8FB8E8)" }}
+        className="gbc-frame-glow absolute -inset-[75%] z-0 opacity-100"
+        style={{
+          background:
+            "conic-gradient(from 0deg, #131F35 0deg, #1B3A63 70deg, #8FB8E8 125deg, #5088C8 175deg, #1B3A63 235deg, #A9CCF2 285deg, #131F35 360deg)",
+        }}
         aria-hidden="true"
       />
 
