@@ -148,7 +148,7 @@ function Home() {
 
           <section className="relative z-1 mx-auto flex max-w-full items-center">
 
-            <div className="relative z-10 mx-auto flex w-full max-w-[1600px] items-center px-4 pt-24 pb-24 md:px-10 md:pt-28 md:pb-32 lg:min-h-[82vh] lg:px-14 lg:pt-28 lg:pb-32">
+            <div className="relative z-10 mx-auto flex w-full max-w-[1600px] items-center px-4 pt-24 pb-24 md:px-10 md:pt-28 md:pb-32 lg:min-h-[720px] lg:px-14 lg:pt-28 lg:pb-32">
 
 
               <div className="grid w-full items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
@@ -158,7 +158,7 @@ function Home() {
                     <AnimatedText text="Alles aus einer Hand" minWeight={300} maxWeight={700} delayMultiplier={0.12} />
                     <ChevronRight className="ml-2 inline size-4 text-brand-orange duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </span>
-                  <h1 className="text-5xl leading-[1.05] tracking-tighter md:text-6xl lg:text-[4.25rem] xl:text-[5rem]">
+                  <h1 className="text-[2.75rem] leading-[1.05] tracking-tighter md:text-6xl lg:text-[3.6rem] xl:text-[4.5rem]">
                     <span className="block">
                       <AnimatedText
                         text="Deine"
