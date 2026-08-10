@@ -14,7 +14,7 @@ import {
 import { motion, useInView, useScroll, useSpring, useTransform } from "framer-motion";
 
 import { AnimatedText } from "@/components/ui/animated-text";
-import { ShaderAnimation } from "@/components/ui/shader-lines";
+import { AnimatedBackgroundLines } from "@/components/animated-background-lines";
 import { Button3D } from "@/components/ui/button-3d";
 import { PHONE_HREF } from "@/components/site/site-data";
 import werkstattFoto from "@/assets/svc-reparatur.jpg";
@@ -52,31 +52,31 @@ export function RundumSorglosSection() {
     <section
       ref={sectionRef}
       aria-labelledby="rundum-title"
-      className="relative w-full overflow-hidden bg-white py-16 sm:py-24"
+      className="relative w-full overflow-hidden"
     >
-      <motion.div
-        style={{ y: y1 }}
-        className="pointer-events-none absolute -top-24 -left-24 size-[420px] rounded-full bg-[#5088C8]/10 blur-3xl"
-      />
-      <motion.div
-        style={{ y: y2 }}
-        className="pointer-events-none absolute -right-24 -bottom-24 size-[420px] rounded-full bg-[#1B3A63]/10 blur-3xl"
-      />
-
-      {/* Shader lines in the left & right gutters (desktop only) */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-[calc((100%-72rem)/2)] min-w-[80px] overflow-hidden opacity-70 mix-blend-multiply xl:block">
-        <ShaderAnimation />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white" />
+      {/* Vertical sweeping lines, each its own bounded instance confined to a
+          gutter — guarantees the animation stays visible within that strip
+          instead of spending most of its cycle hidden under the middle
+          content (which is what happened with one full-width instance). */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-[380px] overflow-hidden xl:block">
+        <AnimatedBackgroundLines color="#5088C8" className="absolute inset-0" />
       </div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[calc((100%-72rem)/2)] min-w-[80px] overflow-hidden opacity-70 mix-blend-multiply xl:block">
-        <ShaderAnimation />
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-white" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[380px] overflow-hidden xl:block">
+        <AnimatedBackgroundLines color="#5088C8" className="absolute inset-0" />
       </div>
 
-
-
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="relative py-16 sm:py-24">
         <motion.div
+          style={{ y: y1 }}
+          className="pointer-events-none absolute -top-24 -left-24 size-[420px] rounded-full bg-[#5088C8]/10 blur-3xl"
+        />
+        <motion.div
+          style={{ y: y2 }}
+          className="pointer-events-none absolute -right-24 -bottom-24 size-[420px] rounded-full bg-[#1B3A63]/10 blur-3xl"
+        />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+          <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -97,7 +97,7 @@ export function RundumSorglosSection() {
           <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-[#1B3A63] to-[#5088C8]" />
         </motion.div>
 
-        <div className="mt-12 grid grid-cols-1 items-center gap-8 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_1.4fr_1fr]">
           <div className="flex flex-col gap-6">
             {services
               .filter((s) => s.position === "left")
@@ -112,7 +112,7 @@ export function RundumSorglosSection() {
             transition={{ duration: 0.8 }}
             className="order-first lg:order-none"
           >
-            <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-3xl border border-[#5088C8]/20 shadow-[0_30px_60px_-30px_rgba(19,31,53,0.55)]">
+            <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-3xl border border-[#5088C8]/20 shadow-[0_30px_60px_-30px_rgba(19,31,53,0.55)] lg:max-w-md">
               <img
                 src={werkstattFoto}
                 alt="Kfz-Meisterwerkstatt Car-World bei der Arbeit"
@@ -144,10 +144,11 @@ export function RundumSorglosSection() {
           </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-          {stats.map((s, i) => (
-            <StatCounter key={s.label} {...s} delay={i * 0.1} />
-          ))}
+          <div className="mt-16 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+            {stats.map((s, i) => (
+              <StatCounter key={s.label} {...s} delay={i * 0.1} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -178,9 +179,13 @@ function ServiceItem({
         align === "right" ? "lg:flex-row-reverse lg:text-right" : ""
       }`}
     >
-      <span className="relative flex size-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#1B3A63] to-[#5088C8] text-white transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
+      <motion.span
+        animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
+        transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 3, delay, ease: "easeInOut" }}
+        className="relative flex size-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#1B3A63] to-[#5088C8] text-white transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
+      >
         <Icon className="size-6" aria-hidden="true" />
-      </span>
+      </motion.span>
       <p className="text-sm font-semibold text-[#131F35] sm:text-base">{title}</p>
     </motion.div>
   );

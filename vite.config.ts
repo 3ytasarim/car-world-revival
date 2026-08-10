@@ -12,4 +12,17 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    server: {
+      proxy: {
+        // Lovable-hosted asset CDN paths (src/assets/*.asset.json -> /__l5e/assets-v1/...)
+        // only resolve on Lovable's own servers. Proxy them to the live preview deployment
+        // so images render in this local mirror too.
+        "/__l5e": {
+          target: "https://id-preview--60bd9a49-9d21-464b-88e0-54ddd072e1d2.lovable.app",
+          changeOrigin: true,
+        },
+      },
+    },
+  },
 });

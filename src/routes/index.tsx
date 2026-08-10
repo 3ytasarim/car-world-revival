@@ -1,12 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ChevronRight, Phone } from "lucide-react";
+import { motion } from "framer-motion";
 
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
-import { StatsSection } from "@/components/site/StatsSection";
-import { SectionHeading } from "@/components/site/SectionHeading";
 
 import { LeistungenTabs } from "@/components/site/LeistungenTabs";
 import { FloatingActions } from "@/components/site/FloatingActions";
@@ -34,9 +33,9 @@ import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
 
 
-import abschleppen from "@/assets/abschleppen.png.asset.json";
-import werkstatt from "@/assets/werkstatt.png.asset.json";
-import steinschlag from "@/assets/steinschlag.png.asset.json";
+import kernAbschleppen from "@/assets/kern-abschleppen.png";
+import kernWerkstatt from "@/assets/kern-werkstatt.png";
+import kernSteinschlag from "@/assets/kern-steinschlag.png";
 import tuv from "@/assets/tuv.png.asset.json";
 import innung from "@/assets/innung.png.asset.json";
 import autoglas from "@/assets/autoglas.png.asset.json";
@@ -123,17 +122,17 @@ const stats = [
 const coreServices = [
   {
     title: "Steinschlag",
-    img: steinschlag.url,
+    img: kernSteinschlag,
     text: "Wir wechseln Ihre Windschutzscheibe oder reparieren sie innerhalb Minuten! Rufen Sie uns an, wir helfen sofort!",
   },
   {
     title: "Unfall? Abschleppen!",
-    img: abschleppen.url,
+    img: kernAbschleppen,
     text: "Wir schleppen Ihr Fahrzeug nach einem Unfall gerne ab! Rufen Sie uns an, wir helfen sofort!",
   },
   {
     title: "Werkstatt",
-    img: werkstatt.url,
+    img: kernWerkstatt,
     text: "Als Kfz-Meisterwerkstatt führen wir alle Tätigkeiten und Reparaturen einer modernen Werkstatt durch.",
   },
 ];
@@ -142,7 +141,23 @@ const coreServices = [
 
 function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-brand-surface">
+    <div className="relative flex min-h-screen flex-col">
+      {/* Shared page background — same soft blue gradient as the Partner &
+          Zertifizierungen strip, now spanning the full height of the
+          homepage behind every section (absolute inset-0 against this
+          `relative` root, so it covers the whole scrollable page, not just
+          one viewport). */}
+      <AnimatedGradientBackground
+        Breathing
+        startingGap={120}
+        breathingRange={12}
+        animationSpeed={0.03}
+        topOffset={20}
+        gradientColors={["#F4F7FB", "#DCEAF8", "#A9CCEC", "#7FB3E0", "#5088C8", "#2F5F9B", "#1B3A63"]}
+        gradientStops={[20, 40, 55, 68, 80, 90, 100]}
+        containerClassName="opacity-70"
+      />
+
       <Header />
 
       <main className="flex-1 pb-16 md:pb-0">
@@ -253,21 +268,6 @@ function Home() {
 
         {/* Partner & Zertifizierungen – Logo-Timeline */}
         <section className="relative z-10 overflow-hidden border-y border-black/5 bg-transparent py-14">
-          {/* Animierter Farbverlauf im unteren Bereich */}
-          <div
-            className="pointer-events-none absolute inset-0"
-          >
-            <AnimatedGradientBackground
-              Breathing
-              startingGap={120}
-              breathingRange={12}
-              animationSpeed={0.03}
-              topOffset={20}
-              gradientColors={["#F4F7FB", "#DCEAF8", "#A9CCEC", "#7FB3E0", "#5088C8", "#2F5F9B", "#1B3A63"]}
-              gradientStops={[20, 40, 55, 68, 80, 90, 100]}
-              containerClassName="opacity-70"
-            />
-          </div>
           <div className="relative z-10 mx-auto w-full max-w-screen-xl px-4 md:px-8">
             <h2 className="mb-8 text-center text-3xl font-bold tracking-tight text-[#1B3A63] sm:text-4xl">
               <AnimatedText text="Partner & Zertifizierungen" minWeight={300} maxWeight={800} delayMultiplier={0.06} />
@@ -295,43 +295,45 @@ function Home() {
         {/* Unsere Leistungen — vertikale Tabs */}
         <LeistungenTabs />
 
+        {/* Unsere Kernleistungen — image/title/text cards, adapted from
+            21st.dev prebuiltui/feature-sections. Each card wiggles
+            periodically (staggered) instead of the old sticky-scroll stack. */}
+        <section className="relative py-16">
+          <div className="mx-auto max-w-3xl px-4 text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-4 py-1.5 text-sm font-semibold text-brand-orange">
+              Autowerkstatt in meiner Nähe
+            </span>
+            <h2 className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
+              <AnimatedText text="Unsere Kernleistungen" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
+            </h2>
+            <p className="mt-3 text-lg text-muted-foreground">Schnelle Hilfe, wenn es darauf ankommt.</p>
+          </div>
+          <div className="mx-auto mt-10 flex max-w-6xl flex-wrap items-start justify-center gap-10 px-4">
+            {coreServices.map((s, i) => (
+              <motion.div
+                key={s.title}
+                animate={{ rotate: [0, -3, 3, -3, 3, 0] }}
+                transition={{ duration: 0.7, repeat: Infinity, repeatDelay: 4, delay: i * 0.6, ease: "easeInOut" }}
+                whileHover={{ y: -4 }}
+                className="w-full max-w-80"
+              >
+                <div className="aspect-[969/669] overflow-hidden rounded-xl shadow-[0_20px_40px_-30px_rgba(19,31,53,0.35)]">
+                  <img src={s.img} alt={s.title} loading="lazy" className="size-full object-cover" />
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-brand-navy">{s.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{s.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
         {/* Foto senden → Angebot in 24 Stunden */}
         <FotoAngebot />
 
 
-        {/* Trust + Stats */}
-        <StatsSection />
-
 
         {/* Videos */}
         <VideoSection />
-
-        {/* Core services — sticky stack */}
-        <section className="relative bg-white pt-8 pb-4">
-          <div className="mx-auto max-w-3xl px-4 text-center">
-            <SectionHeading
-              eyebrow="Autowerkstatt in meiner Nähe"
-              title="Unsere Kernleistungen"
-              subtitle="Schnelle Hilfe, wenn es darauf ankommt."
-            />
-          </div>
-          <div className="mt-6">
-            {coreServices.map((s, i) => (
-              <div key={s.title} className="sticky top-0 flex h-[75vh] items-center justify-center sm:h-[80vh]">
-                <div className="relative w-[92%] max-w-4xl" style={{ top: `calc(-2vh + ${i * 16}px)` }}>
-                  <div className="absolute -inset-[3px] -z-10 rounded-[27px] bg-[conic-gradient(from_0deg,transparent_0deg,var(--brand-orange)_60deg,rgba(80,136,200,0.5)_120deg,transparent_180deg,rgba(80,136,200,0.35)_240deg,transparent_360deg)]" />
-                  <div className="relative flex flex-col items-center gap-6 rounded-3xl border border-gray-200 bg-white p-10 text-center shadow-xl sm:p-16">
-                    <h3 className="text-3xl font-bold text-brand-orange sm:text-5xl">{s.title}</h3>
-                    <div className="relative size-40 shrink-0 overflow-hidden rounded-full border-4 border-gray-100 shadow-lg sm:size-56">
-                      <img src={s.img} alt={s.title} loading="lazy" className="absolute inset-0 size-full object-cover" />
-                    </div>
-                    <p className="max-w-xl text-lg text-gray-600 sm:text-xl">{s.text}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
 
 

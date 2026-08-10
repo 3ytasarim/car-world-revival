@@ -3,6 +3,8 @@ import { Car, Droplets, Play, ShieldAlert, Wrench } from "lucide-react";
 
 import { useInView } from "@/hooks/use-in-view";
 import { WA_FOTO } from "./site-data";
+import { Button3D } from "@/components/ui/button-3d";
+import { AnimatedText } from "@/components/ui/animated-text";
 
 type Clip = {
   title: string;
@@ -24,11 +26,11 @@ export function VideoSection() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section aria-labelledby="video-title" className="bg-brand-surface">
+    <section aria-labelledby="video-title">
       <div ref={ref} className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 id="video-title" className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Sehen statt lesen
+          <h2 id="video-title" className="text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
+            <AnimatedText text="Sehen statt lesen" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
           </h2>
           <p className="mt-3 text-muted-foreground">Kurze Videos zeigen, wie wir Ihnen helfen.</p>
         </div>
@@ -77,14 +79,9 @@ export function VideoSection() {
         </div>
 
         <div className="mt-8 text-center">
-          <a
-            href={WA_FOTO}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-12 items-center justify-center rounded-full bg-brand-orange px-7 text-sm font-semibold text-brand-orange-foreground transition-transform hover:scale-[1.03]"
-          >
+          <Button3D href={WA_FOTO} target="_blank" rel="noopener noreferrer">
             Fotos senden & Angebot erhalten
-          </a>
+          </Button3D>
         </div>
       </div>
     </section>

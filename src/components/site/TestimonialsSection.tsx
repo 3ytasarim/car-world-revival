@@ -132,7 +132,7 @@ export function TestimonialsSection() {
   );
 
   return (
-    <section aria-labelledby="reviews-title" className="relative overflow-hidden bg-brand-surface">
+    <section aria-labelledby="reviews-title" className="relative overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -60,7 +60,7 @@ export function FotoAngebot() {
   }
 
   return (
-    <section aria-labelledby="foto-title" className="bg-white">
+    <section aria-labelledby="foto-title">
       <div ref={ref} className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div

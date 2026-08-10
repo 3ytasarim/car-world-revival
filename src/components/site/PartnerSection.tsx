@@ -55,7 +55,7 @@ export function PartnerSection() {
   }
 
   return (
-    <section aria-labelledby="partner-title" className="bg-brand-surface">
+    <section aria-labelledby="partner-title">
       <div ref={ref} className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-4 py-1.5 text-xs font-semibold text-brand-navy-foreground">
