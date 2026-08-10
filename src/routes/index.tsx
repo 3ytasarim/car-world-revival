@@ -148,26 +148,31 @@ function Home() {
 
           <section className="relative z-1 mx-auto flex max-w-full items-center">
 
-            <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 pt-24 pb-24 md:px-10 md:pt-28 md:pb-32 lg:min-h-[86vh] lg:px-14 lg:pt-32 lg:pb-36">
+            <div className="relative z-10 mx-auto flex w-full max-w-[1600px] items-center px-4 pt-24 pb-24 md:px-10 md:pt-28 md:pb-32 lg:min-h-[82vh] lg:px-14 lg:pt-28 lg:pb-32">
 
 
-              <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
+              <div className="grid w-full items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
                 {/* Text-Spalte */}
                 <div className="max-w-3xl space-y-7 text-center lg:text-left">
                   <span className="group mx-auto flex w-fit items-center rounded-3xl border-[2px] border-brand-orange/25 bg-gradient-to-tr from-brand-orange/15 via-sky-400/15 to-transparent px-6 py-2.5 text-base text-[#1B3A63] shadow-[0_10px_25px_-18px_rgba(80,136,200,0.9)] lg:mx-0">
                     <AnimatedText text="Alles aus einer Hand" minWeight={300} maxWeight={700} delayMultiplier={0.12} />
                     <ChevronRight className="ml-2 inline size-4 text-brand-orange duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </span>
-                  <h1 className="text-5xl leading-[1.02] tracking-tighter md:text-7xl lg:text-[5.5rem] xl:text-[6.25rem]">
-                    <AnimatedText
-                      text="Deine "
-                      className="bg-[linear-gradient(180deg,_#0B1626_0%,_rgba(11,_22,_38,_0.8)_100%)] bg-clip-text text-transparent"
-                    />
-                    <AnimatedText
-                      text="Nr. 1 Autowerkstatt"
-                      className="bg-gradient-to-r from-[#123456] via-[#1B3A63] to-[#2F5F9B] bg-clip-text font-extrabold text-transparent"
-                    />
+                  <h1 className="text-5xl leading-[1.05] tracking-tighter md:text-6xl lg:text-[4.25rem] xl:text-[5rem]">
+                    <span className="block">
+                      <AnimatedText
+                        text="Deine"
+                        className="bg-[linear-gradient(180deg,_#0B1626_0%,_rgba(11,_22,_38,_0.8)_100%)] bg-clip-text text-transparent"
+                      />
+                    </span>
+                    <span className="block whitespace-nowrap">
+                      <AnimatedText
+                        text="Nr. 1 Autowerkstatt"
+                        className="bg-gradient-to-r from-[#0F2E52] via-[#1B3A63] to-[#2F5F9B] bg-clip-text font-extrabold text-transparent"
+                      />
+                    </span>
                   </h1>
+
 
 
                   <p className="mx-auto max-w-2xl text-lg text-gray-600 md:text-xl lg:mx-0">
