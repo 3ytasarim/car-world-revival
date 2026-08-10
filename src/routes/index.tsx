@@ -29,6 +29,8 @@ import { PartnerSection } from "@/components/site/PartnerSection";
 import { PHONE_HREF } from "@/components/site/site-data";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
+import HeroShutterText from "@/components/ui/hero-shutter-text";
+
 
 
 import kernAbschleppen from "@/assets/kern-abschleppen.png";
