@@ -174,7 +174,7 @@ function Home() {
                   </h1>
 
 
-                  <div className="flex flex-wrap items-center justify-center gap-4 lg:mt-auto lg:mb-[17rem] lg:justify-center">
+                  <div className="flex flex-wrap items-center justify-center gap-4 lg:mt-auto lg:mb-[10rem] lg:justify-center">
                     <Button3D href={PHONE_HREF}>
                       <Phone className="size-4" aria-hidden="true" />
                       Jetzt anrufen
