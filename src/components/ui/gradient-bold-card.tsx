@@ -9,7 +9,15 @@ import type { ReactNode } from "react";
 // that gap. It travels on a true circular `offset-path` (not a translate
 // between 4 corners) so it reads as one smooth orbit, not a square with
 // sharp direction changes at the corners.
-export function GradientBoldCard({ children, className = "" }: { children: ReactNode; className?: string }) {
+export function GradientBoldCard({
+  children,
+  className = "",
+  contentClassName = "rounded-[13px] bg-white/95 p-6",
+}: {
+  children: ReactNode;
+  className?: string;
+  contentClassName?: string;
+}) {
   return (
     <div
       className={`relative h-full overflow-hidden rounded-2xl p-[3px] shadow-[10px_10px_30px_rgba(19,31,53,0.1),-10px_-10px_30px_#ffffff] ${className}`}
@@ -35,7 +43,7 @@ export function GradientBoldCard({ children, className = "" }: { children: React
         aria-hidden="true"
       />
 
-      <div className="relative z-10 flex h-full flex-col rounded-[13px] bg-white/95 p-6">{children}</div>
+      <div className={`relative z-10 flex h-full flex-col ${contentClassName}`}>{children}</div>
     </div>
   );
 }

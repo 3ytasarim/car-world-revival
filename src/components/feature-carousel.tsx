@@ -26,7 +26,7 @@ const wrap = (min: number, max: number, v: number) => {
 
 export function FeatureCarousel({
   features,
-  accentColor = "#5088C8",
+  accentColor = "#3A6DA8",
 }: {
   features: FeatureCarouselItem[];
   accentColor?: string;
@@ -92,7 +92,7 @@ export function FeatureCarousel({
                   style={{ height: ITEM_HEIGHT, width: "fit-content" }}
                   animate={{
                     y: wrappedDistance * ITEM_HEIGHT,
-                    opacity: 1 - Math.abs(wrappedDistance) * 0.25,
+                    opacity: Math.max(0.55, 1 - Math.abs(wrappedDistance) * 0.15),
                   }}
                   transition={{ type: "spring", stiffness: 90, damping: 22, mass: 1 }}
                   className="absolute flex items-center justify-start"
@@ -104,19 +104,19 @@ export function FeatureCarousel({
                     className={cn(
                       "group relative flex items-center gap-4 rounded-full border px-6 py-3.5 text-left transition-all duration-700 md:px-10 md:py-5 lg:px-8 lg:py-4",
                       isActive
-                        ? "z-10 border-white bg-white"
-                        : "border-white/20 bg-transparent text-white/60 hover:border-white/40 hover:text-white",
+                        ? "z-10 border-white bg-white shadow-lg"
+                        : "border-white/50 bg-white/10 text-white hover:border-white hover:bg-white/20",
                     )}
                     style={isActive ? { color: accentColor } : undefined}
                   >
                     <div
-                      className={cn("flex items-center justify-center transition-colors duration-500", !isActive && "text-white/40")}
+                      className={cn("flex items-center justify-center transition-colors duration-500", !isActive && "text-white")}
                       style={isActive ? { color: accentColor } : undefined}
                     >
                       <feature.icon size={18} strokeWidth={2} />
                     </div>
 
-                    <span className="font-normal text-sm tracking-tight whitespace-nowrap uppercase md:text-[15px]">
+                    <span className="text-sm font-bold tracking-tight whitespace-nowrap uppercase drop-shadow-sm md:text-[15px]">
                       {feature.label}
                     </span>
                   </button>
