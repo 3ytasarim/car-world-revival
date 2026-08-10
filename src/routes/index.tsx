@@ -216,7 +216,7 @@ function Home() {
                   </div>
 
                   {/* Smartphone – im Vordergrund, größer */}
-                  <div className="animate-fade-in relative z-30 mx-auto h-[420px] w-[202px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[1%] sm:bottom-0 sm:mx-0 sm:h-[430px] sm:w-[207px] sm:rotate-[-5deg] lg:h-[490px] lg:w-[236px]">
+                  <div className="animate-fade-in relative z-30 mx-auto h-[500px] w-[240px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[1%] sm:bottom-0 sm:mx-0 sm:h-[540px] sm:w-[260px] sm:rotate-[-5deg] lg:h-[640px] lg:w-[308px]">
                     <IPhoneMockup
                       model="15-pro"
                       color="natural-titanium"
