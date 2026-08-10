@@ -168,7 +168,7 @@ function Home() {
                     <span className="block whitespace-nowrap">
                       <AnimatedText
                         text="Nr. 1 Autowerkstatt"
-                        className="bg-gradient-to-r from-[#0F2E52] via-[#1B3A63] to-[#2F5F9B] bg-clip-text font-extrabold text-transparent"
+                        className="whitespace-nowrap bg-gradient-to-r from-[#0F2E52] via-[#1B3A63] to-[#2F5F9B] bg-clip-text font-extrabold text-transparent"
                       />
                     </span>
                   </h1>
