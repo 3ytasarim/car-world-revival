@@ -9,6 +9,7 @@ import { OrbitingLogos } from "@/components/ui/orbiting-logos";
 import { GradientBoldCard } from "@/components/ui/gradient-bold-card";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { TextShimmerWave } from "@/components/ui/text-shimmer-wave";
+import { Button3D } from "@/components/ui/button-3d";
 import { WA_PARTNER } from "./site-data";
 import tuv from "@/assets/tuv.png.asset.json";
 import innung from "@/assets/innung.png.asset.json";
@@ -60,7 +61,7 @@ export function PartnerSection() {
   }
 
   return (
-    <section aria-labelledby="partner-title">
+    <section aria-labelledby="partner-title" className="relative">
       <div ref={ref} className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-4 py-1.5 text-xs font-semibold text-brand-navy-foreground">
@@ -154,24 +155,15 @@ export function PartnerSection() {
                   placeholder="Ihre Nachricht"
                   className="w-full rounded-lg border border-black/10 px-3 py-2 text-sm outline-none focus:border-brand-orange"
                 />
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <button
-                    type="submit"
-                    disabled={sending}
-                    className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full bg-brand-orange text-sm font-semibold text-brand-orange-foreground transition-transform hover:scale-[1.02] disabled:opacity-60"
-                  >
+                <div className="flex flex-col gap-3 sm:flex-row [&>*]:flex-1">
+                  <Button3D as="button" type="submit" disabled={sending}>
                     {sending && <Loader2 className="size-4 animate-spin" aria-hidden="true" />}
                     Partner werden
-                  </button>
-                  <a
-                    href={WA_PARTNER}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full bg-[#25D366] text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
-                  >
+                  </Button3D>
+                  <Button3D href={WA_PARTNER} target="_blank" rel="noopener noreferrer" variant="whatsapp">
                     <WhatsAppIcon className="size-5" />
                     Per WhatsApp
-                  </a>
+                  </Button3D>
                 </div>
               </form>
             )}
@@ -197,13 +189,8 @@ export function PartnerSection() {
                 items={logos.map((l) => ({
                   key: l.alt,
                   content: (
-                    <div className="flex size-20 items-center justify-center rounded-full border border-black/10 bg-white p-2.5 shadow-sm">
-                      <img
-                        src={l.src}
-                        alt={l.alt}
-                        loading="lazy"
-                        className="size-full object-contain grayscale transition-all duration-300 hover:grayscale-0"
-                      />
+                    <div className="flex size-24 items-center justify-center rounded-full border border-black/10 bg-white p-3 shadow-md">
+                      <img src={l.src} alt={l.alt} loading="lazy" className="size-full object-contain" />
                     </div>
                   ),
                 }))}

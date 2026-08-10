@@ -10,6 +10,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
 import { ADDRESS, EMAIL, PHONE_LABEL, PHONE_HREF, WA_FRAGE } from "@/components/site/site-data";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
+import { Button3D } from "@/components/ui/button-3d";
 
 export const Route = createFileRoute("/kontakt")({
   head: () => ({
@@ -66,28 +67,17 @@ function KontaktPage() {
                 {ADDRESS.street}, {ADDRESS.zip} {ADDRESS.city}
               </p>
               <div className="mt-6 flex flex-col gap-3">
-                <a
-                  href={WA_FRAGE}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#25D366] text-sm font-semibold text-white"
-                >
+                <Button3D href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="whatsapp" className="w-full">
                   <WhatsAppIcon className="size-5" />
                   WhatsApp schreiben (7/24)
-                </a>
-                <a
-                  href={PHONE_HREF}
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-brand-orange text-sm font-semibold text-brand-orange-foreground"
-                >
+                </Button3D>
+                <Button3D href={PHONE_HREF} className="w-full">
                   <Phone className="size-4" aria-hidden="true" />
                   {PHONE_LABEL}
-                </a>
-                <a
-                  href={`mailto:${EMAIL}`}
-                  className="inline-flex h-12 items-center justify-center rounded-full border border-black/10 text-sm font-semibold"
-                >
+                </Button3D>
+                <Button3D href={`mailto:${EMAIL}`} variant="secondary" className="w-full">
                   {EMAIL}
-                </a>
+                </Button3D>
               </div>
             </div>
 

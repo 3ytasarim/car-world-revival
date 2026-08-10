@@ -292,31 +292,6 @@ function Home() {
         <PartnerSection />
 
 
-
-
-        {/* CTA */}
-        <section className="bg-brand-navy text-brand-navy-foreground">
-          <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6">
-            <h2 className="text-3xl font-bold tracking-tight">Bereit für einen Termin?</h2>
-            <p className="mt-3 opacity-80">
-              Vereinbaren Sie jetzt einen Termin oder fordern Sie ein unverbindliches Angebot an.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <a
-                href="/termin"
-                className="inline-flex h-12 items-center justify-center rounded-lg bg-brand-orange px-6 text-base font-medium text-brand-orange-foreground transition-colors hover:bg-brand-orange/90"
-              >
-                Termin buchen
-              </a>
-              <a
-                href="/angebot"
-                className="inline-flex h-12 items-center justify-center rounded-lg border border-white/30 bg-white/5 px-6 text-base font-medium text-brand-navy-foreground transition-colors hover:bg-white/10"
-              >
-                Angebot anfordern
-              </a>
-            </div>
-          </div>
-        </section>
       </main>
 
       <Footer />

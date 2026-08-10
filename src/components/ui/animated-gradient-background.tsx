@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import React, { useEffect, useRef } from "react";
 
 interface AnimatedGradientBackgroundProps {
@@ -30,6 +29,15 @@ const AnimatedGradientBackground: React.FC<AnimatedGradientBackgroundProps> = ({
 
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Computed up front (not just inside the RAF loop below) so the gradient is
+  // already present in the very first paint/SSR markup — otherwise the div
+  // renders with no background until the effect's first animation frame
+  // runs, which reads as a white flash before it "turns" blue.
+  const initialGradientStopsString = gradientStops
+    .map((stop, index) => `${gradientColors[index]} ${stop}%`)
+    .join(", ");
+  const initialGradient = `radial-gradient(${startingGap}% ${startingGap + topOffset}% at 50% 20%, ${initialGradientStopsString})`;
+
   useEffect(() => {
     let animationFrame: number;
     let width = startingGap;
@@ -59,14 +67,13 @@ const AnimatedGradientBackground: React.FC<AnimatedGradientBackgroundProps> = ({
   }, [startingGap, Breathing, gradientColors, gradientStops, animationSpeed, breathingRange, topOffset]);
 
   return (
-    <motion.div
-      key="animated-gradient-background"
-      initial={{ opacity: 0, scale: 1.05 }}
-      animate={{ opacity: 1, scale: 1, transition: { duration: 2, ease: [0.25, 0.1, 0.25, 1] } }}
-      className={`absolute inset-0 overflow-hidden ${containerClassName}`}
-    >
-      <div ref={containerRef} style={containerStyle} className="absolute inset-0" />
-    </motion.div>
+    <div className={`absolute inset-0 overflow-hidden ${containerClassName}`}>
+      <div
+        ref={containerRef}
+        style={{ background: initialGradient, ...containerStyle }}
+        className="absolute inset-0"
+      />
+    </div>
   );
 };
 

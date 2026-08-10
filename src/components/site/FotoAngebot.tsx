@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useInView } from "@/hooks/use-in-view";
 import supportImg from "@/assets/support-team.jpg";
 import { WA_FAHRZEUGSCHEIN, WA_FOTO } from "./site-data";
+import { Button3D } from "@/components/ui/button-3d";
 
 const services = ["Unfallschaden", "Lackschaden", "Frontscheibe / Steinschlag", "Reparatur", "Sonstiges"];
 
@@ -60,7 +61,7 @@ export function FotoAngebot() {
   }
 
   return (
-    <section aria-labelledby="foto-title">
+    <section aria-labelledby="foto-title" className="relative">
       <div ref={ref} className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div
@@ -79,24 +80,14 @@ export function FotoAngebot() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href={WA_FOTO}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-12 items-center gap-2 rounded-full bg-[#25D366] px-6 text-sm font-semibold text-white transition-transform hover:scale-[1.03]"
-              >
+              <Button3D href={WA_FOTO} target="_blank" rel="noopener noreferrer" variant="whatsapp">
                 <WhatsAppIcon className="size-5" />
                 Fotos per WhatsApp senden
-              </a>
-              <a
-                href={WA_FAHRZEUGSCHEIN}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-12 items-center gap-2 rounded-full border border-black/10 px-6 text-sm font-semibold transition-colors hover:bg-black/5"
-              >
+              </Button3D>
+              <Button3D href={WA_FAHRZEUGSCHEIN} target="_blank" rel="noopener noreferrer" variant="secondary">
                 <Upload className="size-4" aria-hidden="true" />
                 Fahrzeugschein senden
-              </a>
+              </Button3D>
             </div>
 
             <div className="mt-8 flex items-center gap-4 rounded-2xl border border-black/10 bg-brand-surface p-4">
@@ -182,14 +173,10 @@ export function FotoAngebot() {
                     onChange={(e) => setFiles(Array.from(e.target.files ?? []).slice(0, 6))}
                   />
                 </label>
-                <button
-                  type="submit"
-                  disabled={sending}
-                  className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-brand-orange text-sm font-semibold text-brand-orange-foreground transition-transform hover:scale-[1.02] disabled:opacity-60"
-                >
+                <Button3D as="button" type="submit" disabled={sending} className="w-full">
                   {sending && <Loader2 className="size-4 animate-spin" aria-hidden="true" />}
                   Angebot anfordern
-                </button>
+                </Button3D>
               </form>
             )}
           </div>

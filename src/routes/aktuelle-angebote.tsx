@@ -10,6 +10,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { getPublicOffers } from "@/lib/public-content.functions";
 import { WA_FRAGE } from "@/components/site/site-data";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
+import { Button3D } from "@/components/ui/button-3d";
 
 export const Route = createFileRoute("/aktuelle-angebote")({
   head: () => ({
@@ -86,30 +87,26 @@ function OffersPage() {
                   {offer.price_label && (
                     <p className="mt-4 text-2xl font-bold text-brand-orange">{offer.price_label}</p>
                   )}
-                  <a
+                  <Button3D
                     href={`https://wa.me/4926413969555?text=${encodeURIComponent(
                       `Hallo Car-World, ich interessiere mich für das Angebot: ${offer.title}`,
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-5 inline-flex h-11 items-center justify-center rounded-full bg-brand-navy text-sm font-semibold text-brand-navy-foreground transition-transform hover:scale-[1.02]"
+                    variant="navy"
+                    className="mt-5 w-full"
                   >
                     {offer.cta_label}
-                  </a>
+                  </Button3D>
                 </article>
               ))}
             </div>
           )}
 
           <div className="mt-12 text-center">
-            <a
-              href={WA_FRAGE}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-brand-orange px-7 text-sm font-semibold text-brand-orange-foreground"
-            >
+            <Button3D href={WA_FRAGE} target="_blank" rel="noopener noreferrer">
               Angebot nicht dabei? Schreiben Sie uns
-            </a>
+            </Button3D>
           </div>
         </section>
       </main>

@@ -4,6 +4,7 @@ import { Quote, Star } from "lucide-react";
 
 import { supabase } from "@/integrations/supabase/client";
 import { WA_FRAGE } from "./site-data";
+import { Button3D } from "@/components/ui/button-3d";
 
 type Testimonial = {
   id: string;
@@ -162,14 +163,9 @@ export function TestimonialsSection() {
         </div>
 
         <div className="mt-10 text-center">
-          <a
-            href={WA_FRAGE}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-12 items-center justify-center rounded-full bg-brand-navy px-7 text-sm font-semibold text-brand-navy-foreground transition-transform hover:scale-[1.03]"
-          >
+          <Button3D href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="navy">
             Jetzt Frage per WhatsApp stellen
-          </a>
+          </Button3D>
         </div>
       </div>
     </section>

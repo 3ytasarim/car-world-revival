@@ -12,6 +12,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { getJobOpenings } from "@/lib/public-content.functions";
 import { EMAIL_KARRIERE, PHONE_LABEL, PHONE_HREF, WA_KARRIERE } from "@/components/site/site-data";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
+import { Button3D } from "@/components/ui/button-3d";
 
 export const Route = createFileRoute("/karriere")({
   head: () => ({
@@ -106,17 +107,18 @@ function KarrierePage() {
                   </dl>
                 )}
 
-                <a
+                <Button3D
                   href={`https://wa.me/4926413969555?text=${encodeURIComponent(
                     `Hallo Car-World, ich bewerbe mich auf die Stelle: ${job.title}`,
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-[#25D366] text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
+                  variant="whatsapp"
+                  className="mt-5 w-full"
                 >
                   <WhatsAppIcon className="size-4" />
                   Jetzt in 60 Sekunden bewerben
-                </a>
+                </Button3D>
               </article>
             ))}
           </div>
@@ -143,29 +145,18 @@ function KarrierePage() {
                 53474 Bad Neuenahr-Ahrweiler (Heimersheim)
               </p>
               <div className="mt-5 flex flex-col gap-3">
-                <a
-                  href={PHONE_HREF}
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-black/10 bg-white text-sm font-semibold"
-                >
+                <Button3D href={PHONE_HREF} variant="secondary" className="w-full">
                   <Phone className="size-4" aria-hidden="true" />
                   {PHONE_LABEL}
-                </a>
-                <a
-                  href={`mailto:${EMAIL_KARRIERE}`}
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-black/10 bg-white text-sm font-semibold"
-                >
+                </Button3D>
+                <Button3D href={`mailto:${EMAIL_KARRIERE}`} variant="secondary" className="w-full">
                   <Mail className="size-4" aria-hidden="true" />
                   {EMAIL_KARRIERE}
-                </a>
-                <a
-                  href={WA_KARRIERE}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-brand-orange text-sm font-semibold text-brand-orange-foreground"
-                >
+                </Button3D>
+                <Button3D href={WA_KARRIERE} target="_blank" rel="noopener noreferrer" className="w-full">
                   <WhatsAppIcon className="size-4" />
                   Per WhatsApp bewerben
-                </a>
+                </Button3D>
               </div>
             </div>
           </div>
