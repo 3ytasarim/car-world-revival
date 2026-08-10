@@ -165,12 +165,10 @@ function Home() {
                         className="bg-[linear-gradient(180deg,_#0B1626_0%,_rgba(11,_22,_38,_0.8)_100%)] bg-clip-text text-transparent"
                       />
                     </span>
-                    <span className="block whitespace-nowrap">
-                      <AnimatedText
-                        text="Nr. 1 Autowerkstatt"
-                        className="whitespace-nowrap bg-gradient-to-r from-[#0F2E52] via-[#1B3A63] to-[#2F5F9B] bg-clip-text font-extrabold text-transparent"
-                      />
+                    <span className="block whitespace-nowrap font-extrabold">
+                      <HeroShutterText text="Nr. 1 Autowerkstatt" delay={0.25} />
                     </span>
+
                   </h1>
 
 
