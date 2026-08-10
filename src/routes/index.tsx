@@ -29,6 +29,8 @@ import { PartnerSection } from "@/components/site/PartnerSection";
 import { PHONE_HREF } from "@/components/site/site-data";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
+import HeroShutterText from "@/components/ui/hero-shutter-text";
+
 
 
 import kernAbschleppen from "@/assets/kern-abschleppen.png";
@@ -165,12 +167,10 @@ function Home() {
                         className="bg-[linear-gradient(180deg,_#0B1626_0%,_rgba(11,_22,_38,_0.8)_100%)] bg-clip-text text-transparent"
                       />
                     </span>
-                    <span className="block whitespace-nowrap">
-                      <AnimatedText
-                        text="Nr. 1 Autowerkstatt"
-                        className="whitespace-nowrap bg-gradient-to-r from-[#0F2E52] via-[#1B3A63] to-[#2F5F9B] bg-clip-text font-extrabold text-transparent"
-                      />
+                    <span className="block whitespace-nowrap font-extrabold">
+                      <HeroShutterText text="Nr. 1 Autowerkstatt" delay={0.25} />
                     </span>
+
                   </h1>
 
 
@@ -187,9 +187,9 @@ function Home() {
                 </div>
 
                 {/* Mockup-Spalte: Laptop und Smartphone nebeneinander */}
-                <div className="relative mx-auto w-full max-w-3xl sm:min-h-[500px] lg:min-h-[620px]">
+                <div className="relative mx-auto w-full max-w-4xl sm:min-h-[560px] lg:min-h-[720px]">
                   {/* Laptop – ab Tablet, im Hintergrund */}
-                  <div className="relative z-10 w-[76%] text-gray-950 opacity-95 sm:block hidden sm:mt-6">
+                  <div className="relative z-10 w-[88%] text-gray-950 opacity-95 sm:block hidden sm:mt-6">
 
 
                     <svg className="h-auto w-full" fill="none" height="400" viewBox="0 0 650 400" width="650" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -216,7 +216,7 @@ function Home() {
                   </div>
 
                   {/* Smartphone – im Vordergrund, größer */}
-                  <div className="animate-fade-in relative z-30 mx-auto h-[500px] w-[240px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[1%] sm:bottom-0 sm:mx-0 sm:h-[540px] sm:w-[260px] sm:rotate-[-5deg] lg:h-[640px] lg:w-[308px]">
+                  <div className="animate-fade-in relative z-30 mx-auto h-[560px] w-[270px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[-2%] sm:bottom-0 sm:mx-0 sm:h-[620px] sm:w-[300px] sm:rotate-[-5deg] lg:h-[740px] lg:w-[356px]">
                     <IPhoneMockup
                       model="15-pro"
                       color="natural-titanium"
