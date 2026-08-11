@@ -5,12 +5,12 @@ import unfall from "@/assets/unfall.jpg";
 import { PHONE_HREF } from "@/components/site/site-data";
 
 /** Smartphone-Inhalt: Unfall gehabt? → direkt anrufen */
-export function PhoneScreen() {
+export function PhoneScreen({ image = unfall }: { image?: string }) {
   return (
     <div className="relative flex size-full flex-col overflow-hidden bg-brand-navy">
       <div className="relative flex-1 overflow-hidden">
         <img
-          src={unfall}
+          src={image}
           alt="Unfallfahrzeug mit Frontschaden"
           className="animate-phone-kenburns absolute inset-0 size-full object-cover"
           loading="lazy"

@@ -9,17 +9,18 @@ import { MobileBar } from "@/components/site/MobileBar";
 
 import { LeistungenTabs } from "@/components/site/LeistungenTabs";
 import { FloatingActions } from "@/components/site/FloatingActions";
-import { HeroScreen } from "@/components/site/HeroScreen";
 import { PhoneScreen } from "@/components/site/PhoneScreen";
-import IPhoneMockup from "@/components/ui/iphone-mockup";
 import { ClientOnly } from "@tanstack/react-router";
 import { MeshyBackground } from "@/components/ui/meshy-background";
-import { FloatingIcons } from "@/components/site/FloatingIcons";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 
 
 
 import heroBg from "@/assets/hero-bg.jpg";
+import heroPhone1 from "@/assets/unfall-1.jpg";
+import heroPhone2 from "@/assets/unfall-2.jpg";
+import heroPhone3 from "@/assets/unfall-3.jpg";
+import { Iphone15ProFrame, PhoneFanCarousel } from "@/components/ui/phone-mockups-1";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
 import { VideoSection } from "@/components/site/VideoSection";
@@ -29,7 +30,6 @@ import { PartnerSection } from "@/components/site/PartnerSection";
 import { PHONE_HREF } from "@/components/site/site-data";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
-import { TextGradient } from "@/components/ui/text-gradient";
 
 
 
@@ -145,7 +145,6 @@ function Home() {
             <MeshyBackground className="opacity-40" />
           </ClientOnly>
           <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-white/80 via-white/70 to-white" />
-          <FloatingIcons />
           <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-b from-white to-transparent" />
 
           <section className="relative z-1 mx-auto flex max-w-full items-center">
@@ -155,26 +154,27 @@ function Home() {
 
               <div className="grid w-full items-center gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-stretch lg:gap-8">
                 {/* Text-Spalte */}
-                <div className="max-w-4xl space-y-7 pt-6 text-center lg:flex lg:flex-col lg:pt-20 lg:text-center">
-                  <span className="group mx-auto flex w-fit items-center rounded-3xl border-[2px] border-brand-orange/25 bg-gradient-to-tr from-brand-orange/15 via-sky-400/15 to-transparent px-6 py-2.5 text-base text-[#1B3A63] shadow-[0_10px_25px_-18px_rgba(80,136,200,0.9)]">
-                    <AnimatedText text="Alles aus einer Hand" minWeight={300} maxWeight={700} delayMultiplier={0.12} />
+                <div className="max-w-4xl space-y-7 pt-6 text-left lg:flex lg:flex-col lg:pt-20">
+                  <span className="group flex w-fit items-center rounded-3xl border-[2px] border-brand-orange/25 bg-gradient-to-tr from-brand-orange/15 via-sky-400/15 to-transparent px-6 py-2.5 text-base text-[#1B3A63] shadow-[0_10px_25px_-18px_rgba(80,136,200,0.9)]">
+                    Alles aus einer Hand
                     <ChevronRight className="ml-2 inline size-4 text-brand-orange duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </span>
-                  <h1 className="origin-center -rotate-[5deg] text-center text-[3.9rem] leading-[0.95] tracking-tighter md:text-[5.25rem] lg:text-[5.25rem] xl:text-[6.25rem]">
-                    <span className="block">
-                      <AnimatedText
-                        text="Deine"
-                        className="bg-[linear-gradient(180deg,_#0B1626_0%,_rgba(11,_22,_38,_0.8)_100%)] bg-clip-text text-transparent"
-                      />
+                  <h1 className="text-left text-[2.5rem] leading-[0.95] tracking-tighter sm:text-[3.5rem] md:text-[4.75rem] lg:text-[4.75rem] xl:text-[5.5rem]">
+                    <span
+                      className="block bg-[linear-gradient(180deg,_#0B1626_0%,_rgba(11,_22,_38,_0.8)_100%)] bg-clip-text text-transparent"
+                    >
+                      Deine
                     </span>
-                    <span className="block whitespace-nowrap font-extrabold">
-                      <TextGradient as="span" duration={5}>Nr. 1 Autowerkstatt</TextGradient>
+                    <span
+                      className="block bg-[linear-gradient(135deg,_#0B1626,_#1B3A63,_#2F6FB5,_#5088C8,_#8FB8E8)] bg-clip-text font-extrabold text-transparent sm:whitespace-nowrap"
+                    >
+                      Nr. 1 Autowerkstatt
                     </span>
 
                   </h1>
 
 
-                  <div className="flex flex-wrap items-center justify-center gap-4 lg:mt-auto lg:mb-[10rem] lg:justify-center">
+                  <div className="flex flex-wrap items-center gap-4 lg:mt-auto lg:mb-[10rem]">
                     <Button3D href={PHONE_HREF}>
                       <Phone className="size-4" aria-hidden="true" />
                       Jetzt anrufen
@@ -186,48 +186,16 @@ function Home() {
 
                 </div>
 
-                {/* Mockup-Spalte: Laptop und Smartphone nebeneinander */}
-                <div className="relative mx-auto mt-8 w-full max-w-5xl sm:min-h-[520px] lg:mt-20 lg:min-h-[660px]">
-                  {/* Laptop – ab Tablet, im Hintergrund */}
-                  <div className="relative z-10 w-full text-gray-950 opacity-95 sm:block hidden sm:mt-10 lg:w-[104%]">
-
-
-                    <svg className="h-auto w-full" fill="none" height="400" viewBox="0 0 650 400" width="650" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M79.56,13.18h491.32c7.23,0,13.1,5.87,13.1,13.1v336.61H66.46V26.28c0-7.23,5.87-13.1,13.1-13.1Z" fill="#a4a5a7" />
-                      <path d="M79.96,14.24h490.45c6.83,0,12.37,5.54,12.37,12.37v336.28H67.59V26.6c0-6.83,5.54-12.37,12.37-12.37Z" fill="#222" />
-                      <path d="M570.25,15.74H80.34c-6.12,0-11.08,4.96-11.08,11.08v336.07h512.08V26.82c0-6.12-4.96-11.08-11.08-11.08ZM575.74,345.17H74.52V27.31c0-3.31,2.68-5.99,5.99-5.99h489.24c3.31,0,5.99,2.68,5.99,5.99v317.86Z" fill="#000" />
-                      <rect fill="currentColor" height="323.85" rx="5" ry="5" width="501.22" x="74.52" y="21.32" />
-                      <rect fill="#1d1d1d" height="12.48" width="512.11" x="69.09" y="350.51" />
-                      <path d="M298.14,21.02h54.07v6.5c0,1.56-1.27,2.82-2.82,2.82h-48.42c-1.56,0-2.82-1.27-2.82-2.82v-6.5h0Z" fill="#000" />
-                      <path d="M19.04,362.77h611.92v10.39c0,5.95-4.83,10.79-10.79,10.79H29.83c-5.95,0-10.79-4.83-10.79-10.79v-10.39h0Z" fill="#acadaf" />
-                      <path d="M325.11,25.14c-1.99.03-1.99-3.09,0-3.06,1.99-.03,1.99,3.09,0,3.06Z" fill="#080d4c" />
-                      <polygon fill="#b9b9bb" points="600.06 385.39 567.29 385.39 565.84 383.95 601.82 383.95 600.06 385.39" />
-                      <polygon fill="#292929" points="598.73 386.82 568.64 386.82 567.32 385.39 600.35 385.39 598.73 386.82" />
-                      <polygon fill="#b9b9bb" points="82.64 385.39 49.87 385.39 48.43 383.95 84.41 383.95 82.64 385.39" />
-                      <polygon fill="#292929" points="81.31 386.82 51.23 386.82 49.9 385.39 82.93 385.39 81.31 386.82" />
-                      <path d="M278.11,362.6h94.05c0,3.63-2.95,6.58-6.58,6.58h-80.89c-3.63,0-6.58-2.95-6.58-6.58h0Z" fill="#8f9091" />
-                    </svg>
-                    <div
-                      className="absolute overflow-hidden rounded-[2%] [container-type:inline-size]"
-                      style={{ left: "11.46%", top: "5.33%", width: "77.11%", height: "80.96%" }}
-                    >
-                      <HeroScreen />
-                    </div>
-                  </div>
-
-                  {/* Smartphone – im Vordergrund, größer */}
-                  <div className="animate-fade-in relative z-30 mx-auto h-[580px] w-[280px] drop-shadow-2xl [container-type:inline-size] sm:absolute sm:right-[-4%] sm:bottom-0 sm:mx-0 sm:h-[660px] sm:w-[320px] sm:rotate-[-5deg] lg:h-[800px] lg:w-[386px]">
-                    <IPhoneMockup
-                      model="15-pro"
-                      color="natural-titanium"
-                      safeArea={false}
-                      scale={0.48}
-
-                      screenStyle={{ containerType: "inline-size" } as React.CSSProperties}
-                    >
-                      <PhoneScreen />
-                    </IPhoneMockup>
-                  </div>
+                {/* Mockup-Spalte: 3 Smartphones im Fan-Carousel, automatisch wechselnd */}
+                <div className="mx-auto mt-8 flex h-full w-full max-w-2xl items-center justify-center lg:mt-0">
+                  <PhoneFanCarousel
+                    className="drop-shadow-2xl"
+                    items={[heroPhone1, heroPhone2, heroPhone3].map((img, i) => (
+                      <Iphone15ProFrame key={i}>
+                        <PhoneScreen image={img} />
+                      </Iphone15ProFrame>
+                    ))}
+                  />
                 </div>
               </div>
             </div>
@@ -240,6 +208,22 @@ function Home() {
 
         {/* Unsere Leistungen — vertikale Tabs */}
         <LeistungenTabs />
+
+        {/* Foto senden → Angebot in 24 Stunden */}
+        <FotoAngebot />
+
+
+
+        {/* Videos */}
+        <VideoSection />
+
+
+
+
+
+
+        {/* Kundenmeinungen */}
+        <TestimonialsSection />
 
         {/* Unsere Kernleistungen — image/title/text cards, adapted from
             21st.dev prebuiltui/feature-sections. Each card wiggles
@@ -272,22 +256,6 @@ function Home() {
             ))}
           </div>
         </section>
-
-        {/* Foto senden → Angebot in 24 Stunden */}
-        <FotoAngebot />
-
-
-
-        {/* Videos */}
-        <VideoSection />
-
-
-
-
-
-
-        {/* Kundenmeinungen */}
-        <TestimonialsSection />
 
         {/* Partner */}
         <PartnerSection />

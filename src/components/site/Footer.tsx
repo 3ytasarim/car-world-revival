@@ -1,9 +1,10 @@
 import { Instagram, Mail } from "lucide-react";
 
 import { EMAIL, WA_FRAGE } from "./site-data";
-import logo from "@/assets/logo.png.asset.json";
+import logoWhite from "@/assets/logo-white.png";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { StarsCanvas } from "@/components/ui/stars-canvas";
+import { SpinningLogo } from "@/components/site/SpinningLogo";
 
 const legal = [
   ["Impressum", "/impressum"],
@@ -40,9 +41,9 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="relative mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <img src={logo.url} alt="Car-World" className="h-16 w-auto object-contain" />
+          <SpinningLogo src={logoWhite} alt="Car-World" className="h-16 w-auto sm:h-20" />
           <p className="mt-4 text-2xl leading-tight font-bold tracking-tight text-white">
             Ihre Nr. 1 Autowerkstatt in Bad Neuenahr-Ahrweiler.
           </p>
@@ -100,7 +101,7 @@ export function Footer() {
       </div>
 
       <div className="relative border-t border-white/10 px-4 py-4 sm:px-6">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 text-xs opacity-60 sm:flex-row">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 text-xs opacity-60 sm:flex-row">
           <p>© {new Date().getFullYear()} Car-World Kfz-Werkstatt · Alle Rechte vorbehalten</p>
           <p>Kfz-Meisterbetrieb · Mitglied der Kfz-Innung Ahrweiler</p>
         </div>
