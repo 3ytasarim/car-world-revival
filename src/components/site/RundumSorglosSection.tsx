@@ -1,30 +1,30 @@
 import { useRef } from "react";
-import {
-  CarFront,
-  Clock4,
-  FileCheck2,
-  PhoneCall,
-  ShieldCheck,
-  Sparkles,
-  Star,
-  Truck,
-  UsersRound,
-  Wrench,
-} from "lucide-react";
-import { motion, useInView, useScroll, useSpring, useTransform } from "framer-motion";
+import { CarFront, Clock4, FileCheck2, PhoneCall, ShieldCheck, Star, Truck, UsersRound, Wrench } from "lucide-react";
+import { motion, useInView, useSpring, useTransform } from "framer-motion";
 
 import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
+import { RevealSlider } from "@/components/ui/reveal2";
 import { PHONE_HREF } from "@/components/site/site-data";
-import werkstattFoto from "@/assets/svc-reparatur.jpg";
+import rundumBefore from "@/assets/rundum-before.jpg";
+import rundumAfter from "@/assets/rundum-after.jpg";
 
-const services = [
-  { icon: PhoneCall, title: "Ein Anruf genügt", position: "left" as const },
-  { icon: Truck, title: "Abholung & Abschleppen", position: "left" as const },
-  { icon: FileCheck2, title: "Versicherungsabwicklung", position: "left" as const },
-  { icon: CarFront, title: "Ersatzwagen", position: "right" as const },
-  { icon: ShieldCheck, title: "Reparatur mit Garantie", position: "right" as const },
-  { icon: Sparkles, title: "Gereinigte Rückgabe", position: "right" as const },
+const highlights = [
+  {
+    icon: Truck,
+    title: "Abholen & Abschleppen",
+    description: "Wir holen Ihr Fahrzeug ab und bringen es sicher zu uns in die Werkstatt.",
+  },
+  {
+    icon: CarFront,
+    title: "Ersatzwagen",
+    description: "Bleiben Sie mobil — mit einem kostenlosen Ersatzwagen.",
+  },
+  {
+    icon: FileCheck2,
+    title: "Versicherungsabwicklung",
+    description: "Wir übernehmen die komplette Kommunikation mit Ihrer Versicherung.",
+  },
 ];
 
 const stats = [
@@ -34,104 +34,82 @@ const stats = [
   { icon: UsersRound, value: 12, suffix: "", label: "Versicherungspartner" },
 ];
 
-const itemVariants = {
-  hidden: { y: 24, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" as const } },
-};
-
 export function RundumSorglosSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
 
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, 50]);
-
   return (
-    <section
-      ref={sectionRef}
-      aria-labelledby="rundum-title"
-      className="relative w-full overflow-hidden"
-    >
-
+    <section ref={sectionRef} aria-labelledby="rundum-title" className="relative w-full overflow-hidden">
       <div className="relative py-16 sm:py-24">
-        <motion.div
-          style={{ y: y1 }}
-          className="pointer-events-none absolute -top-24 -left-24 size-[420px] rounded-full bg-[#5088C8]/10 blur-3xl"
-        />
-        <motion.div
-          style={{ y: y2 }}
-          className="pointer-events-none absolute -right-24 -bottom-24 size-[420px] rounded-full bg-[#1B3A63]/10 blur-3xl"
-        />
-
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-          <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#5088C8]/30 bg-[#5088C8]/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-[#1B3A63] uppercase">
-            <ShieldCheck className="size-4" aria-hidden="true" />
-            Nach dem Unfall – was passiert jetzt?
-          </span>
-          <h2 id="rundum-title" className="mt-4 text-3xl tracking-tight text-[#1B3A63] sm:text-5xl">
-            <AnimatedText
-              text="Rundum-sorglos-Paket"
-              minWeight={300}
-              maxWeight={800}
-              delayMultiplier={0.06}
-            />
-          </h2>
-          <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-[#1B3A63] to-[#5088C8]" />
-        </motion.div>
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+            {/* Inhalt */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#5088C8]/30 bg-[#5088C8]/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-[#1B3A63] uppercase">
+                <ShieldCheck className="size-4" aria-hidden="true" />
+                Rundum abgesichert
+              </span>
 
-        <div className="mt-12 grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_1.4fr_1fr]">
-          <div className="flex flex-col gap-6">
-            {services
-              .filter((s) => s.position === "left")
-              .map((s, i) => (
-                <ServiceItem key={s.title} {...s} delay={i * 0.15} align="right" isInView={isInView} />
-              ))}
-          </div>
+              <h2 id="rundum-title" className="mt-4 text-4xl tracking-tight sm:text-5xl">
+                <AnimatedText text="Rundum-" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#131F35]" />
+                <AnimatedText text="sorglos" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#5088C8]" />
+                <AnimatedText text="-Paket" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#131F35]" />
+              </h2>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.8 }}
-            className="order-first lg:order-none"
-          >
-            <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-3xl border border-[#5088C8]/20 shadow-[0_30px_60px_-30px_rgba(19,31,53,0.55)] lg:max-w-md">
-              <img
-                src={werkstattFoto}
-                alt="Kfz-Meisterwerkstatt Car-World bei der Arbeit"
-                loading="lazy"
-                className="size-full object-cover"
+              <p className="mt-4 max-w-lg text-base text-muted-foreground sm:text-lg">
+                Wir kümmern uns um alles — von der Abholung bis zur kompletten Abwicklung mit Ihrer Versicherung. Sie
+                lehnen sich zurück, wir machen den Rest.
+              </p>
+
+              <div className="mt-6 grid gap-3">
+                {highlights.map((h, i) => (
+                  <motion.div
+                    key={h.title}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    className="group flex items-center gap-4 rounded-2xl border border-[#5088C8]/15 bg-white p-4 shadow-[0_20px_40px_-34px_rgba(19,31,53,0.4)] transition-colors hover:border-[#5088C8]/40"
+                  >
+                    <motion.span
+                      animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
+                      transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 3, delay: i * 0.15, ease: "easeInOut" }}
+                      className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-[#5088C8]/12 text-[#1B3A63]"
+                    >
+                      <h.icon className="size-5" aria-hidden="true" />
+                    </motion.span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-semibold text-[#131F35] sm:text-base">{h.title}</p>
+                      <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">{h.description}</p>
+                    </div>
+                    <ShieldCheck className="size-5 shrink-0 text-[#5088C8]" aria-hidden="true" />
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-8">
+                <Button3D href={PHONE_HREF}>
+                  <PhoneCall className="size-4" aria-hidden="true" />
+                  Jetzt anrufen
+                </Button3D>
+              </div>
+            </motion.div>
+
+            {/* Vorher/Nachher */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.7 }}
+            >
+              <RevealSlider
+                beforeImage={{ src: rundumBefore, alt: "Unfallfahrzeug vor der Reparatur" }}
+                afterImage={{ src: rundumAfter, alt: "Fahrzeug nach der Reparatur bei Car-World" }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#131F35]/60 via-transparent to-transparent" />
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -right-4 -bottom-4 size-24 rounded-2xl bg-[#5088C8]/25 backdrop-blur"
-              />
-            </div>
-
-            <div className="mt-8 flex justify-center">
-              <Button3D href={PHONE_HREF}>
-                <PhoneCall className="size-4" aria-hidden="true" />
-                Jetzt anrufen
-              </Button3D>
-            </div>
-          </motion.div>
-
-          <div className="flex flex-col gap-6">
-            {services
-              .filter((s) => s.position === "right")
-              .map((s, i) => (
-                <ServiceItem key={s.title} {...s} delay={i * 0.15} align="left" isInView={isInView} />
-              ))}
+            </motion.div>
           </div>
-        </div>
 
           <div className="mt-16 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
             {stats.map((s, i) => (
@@ -141,42 +119,6 @@ export function RundumSorglosSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function ServiceItem({
-  icon: Icon,
-  title,
-  delay,
-  align,
-  isInView,
-}: {
-  icon: typeof PhoneCall;
-  title: string;
-  delay: number;
-  align: "left" | "right";
-  isInView: boolean;
-}) {
-  return (
-    <motion.div
-      variants={itemVariants}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      transition={{ delay }}
-      whileHover={{ y: -4 }}
-      className={`group flex items-center gap-4 rounded-2xl border border-[#5088C8]/15 bg-white/70 p-4 shadow-[0_20px_40px_-32px_rgba(19,31,53,0.7)] backdrop-blur transition-colors hover:border-[#5088C8]/50 ${
-        align === "right" ? "lg:flex-row-reverse lg:text-right" : ""
-      }`}
-    >
-      <motion.span
-        animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
-        transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 3, delay, ease: "easeInOut" }}
-        className="relative flex size-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#1B3A63] to-[#5088C8] text-white transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
-      >
-        <Icon className="size-6" aria-hidden="true" />
-      </motion.span>
-      <p className="text-sm font-semibold text-[#131F35] sm:text-base">{title}</p>
-    </motion.div>
   );
 }
 

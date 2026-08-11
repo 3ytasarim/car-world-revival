@@ -18,7 +18,7 @@ const icons = {
 function AnimatedLogo() {
   return (
     <a aria-label="Car-World" href="/" className="relative flex items-center">
-      <SpinningLogo src={logoWhite} alt="Car-World" className="h-16 w-auto sm:h-20" />
+      <SpinningLogo src={logoWhite} alt="Car-World" className="h-28 w-auto sm:h-36" />
     </a>
   );
 }
@@ -29,7 +29,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 bg-[#1B3A63] shadow-lg">
-      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6">
+      <div className="mx-auto flex h-32 max-w-[1600px] items-center justify-between gap-6 px-4 sm:h-40 md:px-10 lg:px-14">
         <AnimatedLogo />
 
         <nav className="hidden md:block">
