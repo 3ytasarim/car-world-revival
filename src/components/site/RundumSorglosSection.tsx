@@ -113,12 +113,19 @@ export function RundumSorglosSection() {
                     </span>
                   </div>
                 }
-                items={processSteps.map((step) => ({
+                items={processSteps.map((step, i) => ({
                   key: step.title,
                   content: (
                     <div className="flex flex-col items-center gap-1.5">
-                      <div className="flex size-14 items-center justify-center rounded-full border border-[#5088C8]/20 bg-white shadow-md sm:size-16">
+                      <div className="relative flex size-14 items-center justify-center rounded-full border border-[#5088C8]/20 bg-white shadow-md sm:size-16">
                         <step.icon className="size-5 text-[#1B3A63] sm:size-6" aria-hidden="true" />
+                        <span
+                          className="animate-step-badge absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-full border-2 border-white bg-brand-orange text-[10px] font-bold text-brand-orange-foreground shadow-sm sm:size-6 sm:text-xs"
+                          style={{ animationDelay: `${i * 0.3}s` }}
+                          aria-hidden="true"
+                        >
+                          {i + 1}
+                        </span>
                       </div>
                       <span className="text-[11px] font-semibold whitespace-nowrap text-[#131F35] sm:text-xs">
                         {step.title}
