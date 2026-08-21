@@ -160,17 +160,28 @@ export function RundumSorglosSection() {
           {/* Versicherungspartner — Logo-Marquee statt Zahlen-Kacheln */}
           <div className="mt-16">
             <div className="mx-auto grid max-w-xs grid-cols-2 gap-3 sm:max-w-md sm:gap-5">
-              {/* Links: unten nach oben. Rechts: oben nach unten. */}
-              <InfiniteSlider direction="vertical" gap={16} duration={28} durationOnHover={70} className="h-[340px] sm:h-[420px]">
-                {insurancePartners.map((p) => (
-                  <PartnerLogoCard key={p.alt} partner={p} />
-                ))}
-              </InfiniteSlider>
-              <InfiniteSlider direction="vertical" reverse gap={16} duration={28} durationOnHover={70} className="h-[340px] sm:h-[420px]">
-                {insurancePartners.map((p) => (
-                  <PartnerLogoCard key={p.alt} partner={p} />
-                ))}
-              </InfiniteSlider>
+              {/* Links: unten nach oben. Rechts: oben nach unten. Die
+                  Fade-Maske oben/unten sorgt dafür, dass rein/raus-scrollende
+                  Karten weich ausblenden statt hart abgeschnitten zu wirken
+                  ("iç içe" — als würden sie ineinander laufen). */}
+              <div
+                className="[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]"
+              >
+                <InfiniteSlider direction="vertical" gap={16} duration={28} durationOnHover={70} className="h-[340px] sm:h-[420px]">
+                  {insurancePartners.map((p) => (
+                    <PartnerLogoCard key={p.alt} partner={p} />
+                  ))}
+                </InfiniteSlider>
+              </div>
+              <div
+                className="[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]"
+              >
+                <InfiniteSlider direction="vertical" reverse gap={16} duration={28} durationOnHover={70} className="h-[340px] sm:h-[420px]">
+                  {insurancePartners.map((p) => (
+                    <PartnerLogoCard key={p.alt} partner={p} />
+                  ))}
+                </InfiniteSlider>
+              </div>
             </div>
           </div>
         </div>
