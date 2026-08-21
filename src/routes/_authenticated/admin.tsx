@@ -10,8 +10,6 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { supabase } from "@/integrations/supabase/client";
-import type { Database } from "@/integrations/supabase/types";
 import { logoutFn } from "@/lib/auth.functions";
 import {
   getAdminOffers,
@@ -26,15 +24,21 @@ import {
   getAdminQuoteRequests,
   updateAdminQuoteRequestStatus,
   getAdminPartnerRequests,
+  getAdminTestimonials,
+  createAdminTestimonial,
+  updateAdminTestimonial,
+  deleteAdminTestimonial,
+  getAdminSeoSettings,
+  upsertAdminSeoSettings,
 } from "@/lib/admin-content.functions";
 import { getOnlineNow, getAnalyticsSummary } from "@/lib/analytics.functions";
-import type { AdminOfferRow, AdminJobOpeningRow } from "@/lib/admin-content.server";
+import type { AdminOfferRow, AdminJobOpeningRow, AdminTestimonialRow, AdminSeoRow } from "@/lib/admin-content.server";
 import logoWhite from "@/assets/logo-white.png";
 import badge10Jahre from "@/assets/badge-10jahre.png";
 
 type Offer = AdminOfferRow;
-type Seo = Database["public"]["Tables"]["seo_settings"]["Row"];
-type Testimonial = Database["public"]["Tables"]["testimonials"]["Row"];
+type Seo = AdminSeoRow;
+type Testimonial = AdminTestimonialRow;
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -335,11 +339,7 @@ function TestimonialsTab() {
   const qc = useQueryClient();
   const { data } = useQuery({
     queryKey: ["admin-testimonials"],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("testimonials").select("*").order("sort_order");
-      if (error) throw error;
-      return data;
-    },
+    queryFn: () => getAdminTestimonials(),
   });
 
   const invalidate = () => {
@@ -350,8 +350,7 @@ function TestimonialsTab() {
   const save = useMutation({
     mutationFn: async (t: Partial<Testimonial> & { id: string }) => {
       const { id, ...rest } = t;
-      const { error } = await supabase.from("testimonials").update(rest).eq("id", id);
-      if (error) throw error;
+      await updateAdminTestimonial({ data: { id, ...rest } });
     },
     onSuccess: () => {
       toast.success("Kundenmeinung gespeichert");
@@ -362,10 +361,7 @@ function TestimonialsTab() {
 
   const create = useMutation({
     mutationFn: async () => {
-      const { error } = await supabase
-        .from("testimonials")
-        .insert({ name: "Neuer Kunde", text: "", sort_order: (data?.length ?? 0) + 1, is_active: false });
-      if (error) throw error;
+      await createAdminTestimonial({ data: { sortOrder: (data?.length ?? 0) + 1 } });
     },
     onSuccess: () => {
       toast.success("Kundenmeinung angelegt");
@@ -376,8 +372,7 @@ function TestimonialsTab() {
 
   const remove = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase.from("testimonials").delete().eq("id", id);
-      if (error) throw error;
+      await deleteAdminTestimonial({ data: { id } });
     },
     onSuccess: () => {
       toast.success("Kundenmeinung gelöscht");
@@ -594,17 +589,12 @@ function SeoTab() {
   const qc = useQueryClient();
   const { data } = useQuery({
     queryKey: ["admin-seo"],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("seo_settings").select("*").order("page_path");
-      if (error) throw error;
-      return data;
-    },
+    queryFn: () => getAdminSeoSettings(),
   });
 
   const upsert = useMutation({
-    mutationFn: async (row: Database["public"]["Tables"]["seo_settings"]["Insert"]) => {
-      const { error } = await supabase.from("seo_settings").upsert(row, { onConflict: "page_path" });
-      if (error) throw error;
+    mutationFn: async (row: AdminSeoRow) => {
+      await upsertAdminSeoSettings({ data: row });
     },
     onSuccess: () => {
       toast.success("SEO gespeichert");

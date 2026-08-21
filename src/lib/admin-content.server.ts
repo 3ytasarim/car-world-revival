@@ -162,6 +162,85 @@ export async function updatePartnerRequestStatus(id: string, status: string): Pr
   await getPool().query(`UPDATE public.cw_partner_requests SET status = $2 WHERE id = $1`, [id, status]);
 }
 
+export interface AdminTestimonialRow {
+  id: string;
+  name: string;
+  role: string;
+  text: string;
+  image_url: string | null;
+  rating: number;
+  sort_order: number;
+  is_active: boolean;
+}
+
+export async function fetchAllTestimonials(): Promise<AdminTestimonialRow[]> {
+  const { rows } = await getPool().query<AdminTestimonialRow>(
+    `SELECT id, name, role, text, image_url, rating, sort_order, is_active
+     FROM public.cw_testimonials ORDER BY sort_order ASC`,
+  );
+  return rows;
+}
+
+export async function createTestimonial(sortOrder: number): Promise<{ id: string }> {
+  const { rows } = await getPool().query<{ id: string }>(
+    `INSERT INTO public.cw_testimonials (name, role, text, rating, sort_order, is_active)
+     VALUES ('Neuer Kunde', '', '', 5, $1, false)
+     RETURNING id`,
+    [sortOrder],
+  );
+  return rows[0]!;
+}
+
+export async function updateTestimonial(
+  id: string,
+  fields: { [K in keyof Omit<AdminTestimonialRow, "id">]?: AdminTestimonialRow[K] | undefined },
+): Promise<void> {
+  const entries = Object.entries(fields).filter(([, v]) => v !== undefined);
+  if (entries.length === 0) return;
+  const setClause = entries.map(([key], i) => `${key} = $${i + 2}`).join(", ");
+  const values = entries.map(([, v]) => v);
+  await getPool().query(
+    `UPDATE public.cw_testimonials SET ${setClause}, updated_at = now() WHERE id = $1`,
+    [id, ...values],
+  );
+}
+
+export async function deleteTestimonial(id: string): Promise<void> {
+  await getPool().query(`DELETE FROM public.cw_testimonials WHERE id = $1`, [id]);
+}
+
+export interface AdminSeoRow {
+  page_path: string;
+  title: string;
+  description: string;
+  keywords: string;
+  og_title: string;
+  og_description: string;
+}
+
+export async function fetchSeoSettings(): Promise<AdminSeoRow[]> {
+  const { rows } = await getPool().query<AdminSeoRow>(
+    `SELECT page_path, title, description, keywords, og_title, og_description
+     FROM public.cw_seo_settings ORDER BY page_path`,
+  );
+  return rows;
+}
+
+export async function upsertSeoSettings(row: AdminSeoRow): Promise<void> {
+  await getPool().query(
+    `INSERT INTO public.cw_seo_settings (page_path, title, description, keywords, og_title, og_description, updated_at)
+     VALUES ($1, $2, $3, $4, $5, $6, now())
+     ON CONFLICT (page_path) DO UPDATE SET
+       title = excluded.title,
+       description = excluded.description,
+       keywords = excluded.keywords,
+       og_title = excluded.og_title,
+       og_description = excluded.og_description,
+       updated_at = now()`,
+    [row.page_path, row.title, row.description, row.keywords, row.og_title, row.og_description],
+  );
+}
+
 const UPLOAD_ROOT = path.join(process.cwd(), "public", "uploads");
 const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
 

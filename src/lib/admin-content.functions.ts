@@ -148,3 +148,75 @@ export const updateAdminPartnerRequestStatus = createServerFn({ method: "POST" }
     await updatePartnerRequestStatus(data.id, data.status);
     return { success: true as const };
   });
+
+/* ---------------- Kundenmeinungen ---------------- */
+
+export const getAdminTestimonials = createServerFn({ method: "GET" }).handler(async () => {
+  await requireAdmin();
+  const { fetchAllTestimonials } = await import("./admin-content.server");
+  return fetchAllTestimonials();
+});
+
+export const createAdminTestimonial = createServerFn({ method: "POST" })
+  .validator(z.object({ sortOrder: z.number() }))
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    const { createTestimonial } = await import("./admin-content.server");
+    return createTestimonial(data.sortOrder);
+  });
+
+export const updateAdminTestimonial = createServerFn({ method: "POST" })
+  .validator(
+    z.object({
+      id: z.string(),
+      name: z.string().max(150).optional(),
+      role: z.string().max(150).optional(),
+      text: z.string().max(2000).optional(),
+      image_url: z.string().max(500).nullable().optional(),
+      rating: z.number().min(1).max(5).optional(),
+      sort_order: z.number().optional(),
+      is_active: z.boolean().optional(),
+    }),
+  )
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    const { id, ...fields } = data;
+    const { updateTestimonial } = await import("./admin-content.server");
+    await updateTestimonial(id, fields);
+    return { success: true as const };
+  });
+
+export const deleteAdminTestimonial = createServerFn({ method: "POST" })
+  .validator(z.object({ id: z.string() }))
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    const { deleteTestimonial } = await import("./admin-content.server");
+    await deleteTestimonial(data.id);
+    return { success: true as const };
+  });
+
+/* ---------------- SEO ---------------- */
+
+export const getAdminSeoSettings = createServerFn({ method: "GET" }).handler(async () => {
+  await requireAdmin();
+  const { fetchSeoSettings } = await import("./admin-content.server");
+  return fetchSeoSettings();
+});
+
+export const upsertAdminSeoSettings = createServerFn({ method: "POST" })
+  .validator(
+    z.object({
+      page_path: z.string().max(200),
+      title: z.string().max(60),
+      description: z.string().max(160),
+      keywords: z.string().max(300),
+      og_title: z.string().max(60),
+      og_description: z.string().max(160),
+    }),
+  )
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    const { upsertSeoSettings } = await import("./admin-content.server");
+    await upsertSeoSettings(data);
+    return { success: true as const };
+  });
