@@ -68,7 +68,7 @@ export function RundumSorglosSection() {
 
           {/* Darunter: links der Orbit, rechts Vorher/Nachher — auf gleicher
               Höhe, der Orbit darf breit atmen (Kreise überlappen nicht). */}
-          <div className="mt-12 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className="mt-12 grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <motion.div
               initial={{ opacity: 0, scale: 0.92 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
