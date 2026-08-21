@@ -159,14 +159,14 @@ export function RundumSorglosSection() {
 
           {/* Versicherungspartner — Logo-Marquee statt Zahlen-Kacheln */}
           <div className="mt-16">
-            <div className="mx-auto grid max-w-md grid-cols-2 gap-5">
+            <div className="mx-auto grid max-w-xs grid-cols-2 gap-3 sm:max-w-md sm:gap-5">
               {/* Links: unten nach oben. Rechts: oben nach unten. */}
-              <InfiniteSlider direction="vertical" gap={24} duration={28} durationOnHover={70} className="h-[420px]">
+              <InfiniteSlider direction="vertical" gap={16} duration={28} durationOnHover={70} className="h-[340px] sm:h-[420px]">
                 {insurancePartners.map((p) => (
                   <PartnerLogoCard key={p.alt} partner={p} />
                 ))}
               </InfiniteSlider>
-              <InfiniteSlider direction="vertical" reverse gap={24} duration={28} durationOnHover={70} className="h-[420px]">
+              <InfiniteSlider direction="vertical" reverse gap={16} duration={28} durationOnHover={70} className="h-[340px] sm:h-[420px]">
                 {insurancePartners.map((p) => (
                   <PartnerLogoCard key={p.alt} partner={p} />
                 ))}
@@ -181,7 +181,7 @@ export function RundumSorglosSection() {
 
 function PartnerLogoCard({ partner }: { partner: { src: string; alt: string } }) {
   return (
-    <div className="flex size-48 shrink-0 items-center justify-center rounded-2xl border border-black/10 bg-white p-5 shadow-md">
+    <div className="flex size-40 shrink-0 items-center justify-center rounded-2xl border border-black/10 bg-white p-4 shadow-md sm:size-48 sm:p-5">
       <img src={partner.src} alt={partner.alt} loading="lazy" className="max-h-full max-w-full object-contain" />
     </div>
   );
