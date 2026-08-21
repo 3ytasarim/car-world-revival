@@ -4,9 +4,9 @@
 // project's own @/components/ui/button (already has the "ghost" variant and
 // "icon" size the original relies on — no need to duplicate shadcn's
 // button.tsx). Adapted for autoplaying background-style use: autoPlay/loop/
-// playsInline/muted on the <video>, and the play/mute UI state initialized
-// to match (the source clip has no audio track at all, so mute is moot —
-// it's set purely for browser autoplay policies).
+// playsInline/muted on the <video> (browsers block autoplay-with-sound
+// otherwise) — the clip has a real audio track, so unmuting via the UI
+// actually plays sound.
 "use client";
 
 import { useRef, useState } from "react";

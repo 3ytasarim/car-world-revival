@@ -242,7 +242,7 @@ function Home() {
         {/* Werkstatt-Video — gleiche Breite wie die 4 Vertrauenspunkte-Karten darüber */}
         <section className="relative bg-white py-14">
           <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
-            <VideoPlayer src="/videos/hero-bg.mp4" className="max-w-none" />
+            <VideoPlayer src="/videos/werkstatt-video.mp4" className="max-w-none" />
           </div>
         </section>
 
