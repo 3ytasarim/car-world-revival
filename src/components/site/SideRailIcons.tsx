@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-import carIcon from "@/assets/car.png.asset.json";
-import breakdownIcon from "@/assets/breakdown.png.asset.json";
-import towIcon from "@/assets/tow-truck.png.asset.json";
-import accidentIcon from "@/assets/car-accident.png.asset.json";
-import trafficIcon from "@/assets/traffic.png.asset.json";
-import bumpIcon from "@/assets/bump.png.asset.json";
+import carIcon from "@/assets/rail-car.png";
+import breakdownIcon from "@/assets/rail-breakdown.png";
+import towIcon from "@/assets/rail-tow-truck.png";
+import accidentIcon from "@/assets/rail-car-accident.png";
+import trafficIcon from "@/assets/rail-traffic.png";
+import bumpIcon from "@/assets/rail-bump.png";
 
 const ICONS = [carIcon, breakdownIcon, towIcon, accidentIcon, trafficIcon, bumpIcon];
 
@@ -23,7 +23,7 @@ function buildItems(seed: number): Item[] {
   return Array.from({ length: 11 }, (_, i) => {
     const n = i + seed;
     return {
-      src: ICONS[(n * 2 + seed) % ICONS.length]!.url,
+      src: ICONS[(n * 2 + seed) % ICONS.length]!,
       offset: 12 + ((n * 23) % 60),
       size: 38 + ((n * 11) % 30),
       duration: 18 + ((n * 7) % 14),

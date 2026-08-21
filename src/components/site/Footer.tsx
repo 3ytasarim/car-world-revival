@@ -106,8 +106,8 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="relative border-t border-white/10 px-4 py-4 md:px-10 lg:px-14">
-        <div className="mx-auto flex max-w-[1600px] flex-col items-center justify-between gap-2 text-xs opacity-60 sm:flex-row">
+      <div className="relative border-t border-white/10">
+        <div className="mx-auto flex max-w-[1600px] flex-col items-center justify-between gap-2 px-4 py-4 text-xs opacity-60 sm:flex-row md:px-10 lg:px-14">
           <p>© {new Date().getFullYear()} Car-World Kfz-Werkstatt · Alle Rechte vorbehalten</p>
           <p>Kfz-Meisterbetrieb · Mitglied der Kfz-Innung Ahrweiler</p>
         </div>

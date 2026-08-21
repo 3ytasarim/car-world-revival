@@ -13,10 +13,10 @@ import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
 import { ScannerCardStream } from "@/components/ui/scanner-card-stream";
 import { WA_PARTNER } from "./site-data";
-import tuv from "@/assets/tuv.png.asset.json";
-import innung from "@/assets/innung.png.asset.json";
-import autoglas from "@/assets/autoglas.png.asset.json";
-import hwk from "@/assets/hwk.png.asset.json";
+import tuv from "@/assets/partner-tuv.png";
+import innung from "@/assets/partner-innung.png";
+import autoglas from "@/assets/partner-autoglas.png";
+import hwk from "@/assets/partner-hwk.png";
 
 // Nur die im Kundengespräch verbindlich bestätigten Vorteile — bewusst
 // noch nicht auf 5–6 aufgefüllt, bis weitere mit dem Kunden abgestimmt sind.
@@ -39,10 +39,10 @@ const benefits = [
 ];
 
 const logos = [
-  { src: tuv.url, alt: "TÜV Rheinland" },
-  { src: innung.url, alt: "KFZ-Innung Ahrweiler" },
-  { src: autoglas.url, alt: "Autoglas Spezialist" },
-  { src: hwk.url, alt: "Handwerkskammer Koblenz" },
+  { src: tuv, alt: "TÜV Rheinland" },
+  { src: innung, alt: "KFZ-Innung Ahrweiler" },
+  { src: autoglas, alt: "Autoglas Spezialist" },
+  { src: hwk, alt: "Handwerkskammer Koblenz" },
 ];
 
 function logoAt(i: number) {
