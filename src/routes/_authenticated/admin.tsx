@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Briefcase, Handshake, Images, LogOut, Plus, Quote, Search, Tag, Trash2 } from "lucide-react";
+import { BarChart3, Briefcase, Globe2, Handshake, Images, LogOut, MousePointerClick, Plus, Quote, Search, Tag, Trash2, Users } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -12,9 +12,27 @@ import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
+import { logoutFn } from "@/lib/auth.functions";
+import {
+  getAdminOffers,
+  createAdminOffer,
+  updateAdminOffer,
+  deleteAdminOffer,
+  uploadAdminImage,
+  getAdminJobOpenings,
+  createAdminJobOpening,
+  updateAdminJobOpening,
+  deleteAdminJobOpening,
+  getAdminQuoteRequests,
+  updateAdminQuoteRequestStatus,
+  getAdminPartnerRequests,
+} from "@/lib/admin-content.functions";
+import { getOnlineNow, getAnalyticsSummary } from "@/lib/analytics.functions";
+import type { AdminOfferRow, AdminJobOpeningRow } from "@/lib/admin-content.server";
+import logoWhite from "@/assets/logo-white.png";
+import badge10Jahre from "@/assets/badge-10jahre.png";
 
-type Offer = Database["public"]["Tables"]["offers"]["Row"];
-type Job = Database["public"]["Tables"]["job_openings"]["Row"];
+type Offer = AdminOfferRow;
 type Seo = Database["public"]["Tables"]["seo_settings"]["Row"];
 type Testimonial = Database["public"]["Tables"]["testimonials"]["Row"];
 
@@ -33,56 +51,31 @@ export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminPage,
 });
 
+// Der Zugriffs-Check selbst passiert schon eine Ebene höher, im beforeLoad
+// von _authenticated/route.tsx (redirect zu /auth ohne gültige Session) —
+// wer bis hierhin kommt, ist eingeloggt. Kein separater Rollen-Check mehr
+// nötig: eine Zeile in cw_admin_users, mit der man sich einloggen kann,
+// *ist* die Admin-Rolle (kein Multi-Rollen-RBAC für diese Einzelzweck-Seite).
 function AdminPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    (async () => {
-      const { data: userData } = await supabase.auth.getUser();
-      if (!userData.user) return setIsAdmin(false);
-      const { data } = await supabase.rpc("has_role", { _user_id: userData.user.id, _role: "admin" });
-      setIsAdmin(Boolean(data));
-    })();
-  }, []);
 
   async function signOut() {
     await queryClient.cancelQueries();
     queryClient.clear();
-    await supabase.auth.signOut();
+    await logoutFn();
     navigate({ to: "/auth", replace: true });
-  }
-
-  if (isAdmin === null) {
-    return <div className="grid min-h-screen place-items-center bg-brand-surface text-sm">Wird geladen…</div>;
-  }
-
-  if (!isAdmin) {
-    return (
-      <div className="grid min-h-screen place-items-center bg-brand-surface px-4 text-center">
-        <div className="max-w-md rounded-3xl bg-white p-8 shadow-xl">
-          <h1 className="text-xl font-bold">Kein Zugriff</h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Ihr Konto hat keine Adminrechte. Bitte wenden Sie sich an die Geschäftsleitung.
-          </p>
-          <Button onClick={signOut} variant="outline" className="mt-6">
-            Abmelden
-          </Button>
-        </div>
-      </div>
-    );
   }
 
   return (
     <div className="min-h-screen bg-brand-surface">
       <header className="sticky top-0 z-20 border-b border-black/10 bg-brand-navy text-brand-navy-foreground">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-          <div>
-            <p className="text-xs uppercase tracking-widest text-brand-orange">Car-World</p>
-            <h1 className="text-lg font-bold">Verwaltung</h1>
+        <div className="relative mx-auto flex h-24 max-w-6xl items-center justify-center px-4 sm:px-6">
+          <div className="flex items-center gap-3">
+            <img src={logoWhite} alt="Car-World Verwaltung" className="h-14 w-auto sm:h-16" />
+            <img src={badge10Jahre} alt="" aria-hidden="true" className="h-12 w-auto sm:h-14" />
           </div>
-          <Button onClick={signOut} variant="secondary" size="sm" className="gap-2">
+          <Button onClick={signOut} variant="secondary" size="sm" className="absolute top-1/2 right-4 -translate-y-1/2 gap-2 sm:right-6">
             <LogOut className="size-4" aria-hidden="true" />
             Abmelden
           </Button>
@@ -110,6 +103,9 @@ function AdminPage() {
             <TabsTrigger value="partners" className="gap-2">
               <Handshake className="size-4" aria-hidden="true" /> Partner
             </TabsTrigger>
+            <TabsTrigger value="analytics" className="gap-2">
+              <BarChart3 className="size-4" aria-hidden="true" /> Analytics
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="offers" className="mt-6">
@@ -130,6 +126,9 @@ function AdminPage() {
           <TabsContent value="partners" className="mt-6">
             <PartnersTab />
           </TabsContent>
+          <TabsContent value="analytics" className="mt-6">
+            <AnalyticsTab />
+          </TabsContent>
         </Tabs>
       </main>
     </div>
@@ -142,37 +141,92 @@ function Card({ children }: { children: React.ReactNode }) {
 
 /* ---------------- Angebote ---------------- */
 
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve((reader.result as string).split(",")[1] ?? "");
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function ImageField({
+  folder,
+  initialUrl,
+}: {
+  folder: string;
+  initialUrl: string | null;
+}) {
+  const [url, setUrl] = useState(initialUrl ?? "");
+  const [uploading, setUploading] = useState(false);
+
+  async function handleFile(file: File) {
+    setUploading(true);
+    try {
+      const dataBase64 = await fileToBase64(file);
+      const result = await uploadAdminImage({ data: { folder, filename: file.name, dataBase64 } });
+      setUrl(result.url);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Bild-Upload fehlgeschlagen");
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  return (
+    <div className="space-y-1">
+      <Label className="text-xs">Bild</Label>
+      <div className="flex items-center gap-3">
+        {url ? (
+          <img src={url} alt="" className="size-16 shrink-0 rounded-lg border object-cover" />
+        ) : (
+          <div className="grid size-16 shrink-0 place-items-center rounded-lg border border-dashed text-muted-foreground">
+            <Images className="size-5" aria-hidden="true" />
+          </div>
+        )}
+        <input
+          type="file"
+          accept="image/*"
+          disabled={uploading}
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (file) handleFile(file);
+          }}
+          className="text-xs file:mr-2 file:rounded-md file:border-0 file:bg-brand-navy file:px-2 file:py-1 file:text-xs file:text-brand-navy-foreground"
+        />
+      </div>
+      <input type="hidden" name="image_url" value={url} />
+    </div>
+  );
+}
+
 function OffersTab() {
   const qc = useQueryClient();
   const { data } = useQuery({
     queryKey: ["admin-offers"],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("offers").select("*").order("sort_order");
-      if (error) throw error;
-      return data;
-    },
+    queryFn: () => getAdminOffers(),
   });
+
+  const invalidate = () => {
+    qc.invalidateQueries({ queryKey: ["admin-offers"] });
+    qc.invalidateQueries({ queryKey: ["offers"] });
+  };
 
   const save = useMutation({
     mutationFn: async (offer: Partial<Offer> & { id: string }) => {
       const { id, ...rest } = offer;
-      const { error } = await supabase.from("offers").update(rest).eq("id", id);
-      if (error) throw error;
+      await updateAdminOffer({ data: { id, ...rest } });
     },
     onSuccess: () => {
       toast.success("Angebot gespeichert");
-      qc.invalidateQueries({ queryKey: ["admin-offers"] });
-      qc.invalidateQueries({ queryKey: ["offers"] });
+      invalidate();
     },
     onError: (e: Error) => toast.error(e.message),
   });
 
   const create = useMutation({
     mutationFn: async () => {
-      const { error } = await supabase
-        .from("offers")
-        .insert({ title: "Neues Angebot", sort_order: (data?.length ?? 0) + 1, is_active: false });
-      if (error) throw error;
+      await createAdminOffer({ data: { sortOrder: (data?.length ?? 0) + 1 } });
     },
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["admin-offers"] });
@@ -183,11 +237,10 @@ function OffersTab() {
 
   const remove = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase.from("offers").delete().eq("id", id);
-      if (error) throw error;
+      await deleteAdminOffer({ data: { id } });
     },
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["admin-offers"] });
+      invalidate();
       toast.success("Angebot gelöscht");
     },
     onError: (e: Error) => toast.error(e.message),
@@ -220,6 +273,7 @@ function OffersTab() {
                   description: String(fd.get("description")),
                   price_label: String(fd.get("price_label")),
                   badge: String(fd.get("badge")),
+                  image_url: String(fd.get("image_url")) || null,
                   cta_label: String(fd.get("cta_label")),
                   sort_order: Number(fd.get("sort_order")),
                   is_active: fd.get("is_active") === "on",
@@ -238,6 +292,7 @@ function OffersTab() {
                   <Trash2 className="size-4 text-destructive" aria-hidden="true" />
                 </Button>
               </div>
+              <ImageField folder="offers" initialUrl={offer.image_url} />
               <Textarea name="description" defaultValue={offer.description} rows={3} />
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
@@ -416,44 +471,45 @@ function JobsTab() {
   const qc = useQueryClient();
   const { data } = useQuery({
     queryKey: ["admin-jobs"],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("job_openings").select("*").order("sort_order");
-      if (error) throw error;
-      return data;
-    },
+    queryFn: () => getAdminJobOpenings(),
   });
 
+  const invalidate = () => {
+    qc.invalidateQueries({ queryKey: ["admin-jobs"] });
+    qc.invalidateQueries({ queryKey: ["jobs"] });
+  };
+
   const save = useMutation({
-    mutationFn: async (job: Partial<Job> & { id: string }) => {
+    mutationFn: async (job: Partial<AdminJobOpeningRow> & { id: string }) => {
       const { id, ...rest } = job;
-      const { error } = await supabase.from("job_openings").update(rest).eq("id", id);
-      if (error) throw error;
+      await updateAdminJobOpening({ data: { id, ...rest } });
     },
     onSuccess: () => {
       toast.success("Stelle gespeichert");
-      qc.invalidateQueries({ queryKey: ["admin-jobs"] });
-      qc.invalidateQueries({ queryKey: ["jobs"] });
+      invalidate();
     },
     onError: (e: Error) => toast.error(e.message),
   });
 
   const create = useMutation({
     mutationFn: async () => {
-      const { error } = await supabase
-        .from("job_openings")
-        .insert({ title: "Neue Stelle", sort_order: (data?.length ?? 0) + 1, is_active: false });
-      if (error) throw error;
+      await createAdminJobOpening({ data: { sortOrder: (data?.length ?? 0) + 1 } });
     },
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-jobs"] }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-jobs"] });
+      toast.success("Stelle angelegt");
+    },
     onError: (e: Error) => toast.error(e.message),
   });
 
   const remove = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase.from("job_openings").delete().eq("id", id);
-      if (error) throw error;
+      await deleteAdminJobOpening({ data: { id } });
     },
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-jobs"] }),
+    onSuccess: () => {
+      invalidate();
+      toast.success("Stelle gelöscht");
+    },
     onError: (e: Error) => toast.error(e.message),
   });
 
@@ -479,6 +535,7 @@ function JobsTab() {
                   employment_type: String(fd.get("employment_type")),
                   description: String(fd.get("description")),
                   requirements: String(fd.get("requirements")),
+                  image_url: String(fd.get("image_url")) || null,
                   sort_order: Number(fd.get("sort_order")),
                   is_active: fd.get("is_active") === "on",
                 });
@@ -496,6 +553,7 @@ function JobsTab() {
                   <Trash2 className="size-4 text-destructive" aria-hidden="true" />
                 </Button>
               </div>
+              <ImageField folder="jobs" initialUrl={job.image_url} />
               <Input name="subtitle" defaultValue={job.subtitle} placeholder="Untertitel" />
               <Input name="employment_type" defaultValue={job.employment_type} placeholder="Anstellungsart" />
               <Textarea name="description" defaultValue={job.description} rows={3} />
@@ -619,20 +677,12 @@ function QuotesTab() {
   const qc = useQueryClient();
   const { data } = useQuery({
     queryKey: ["admin-quotes"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("quote_requests")
-        .select("*")
-        .order("created_at", { ascending: false });
-      if (error) throw error;
-      return data;
-    },
+    queryFn: () => getAdminQuoteRequests(),
   });
 
   const setStatus = useMutation({
     mutationFn: async ({ id, status }: { id: string; status: string }) => {
-      const { error } = await supabase.from("quote_requests").update({ status }).eq("id", id);
-      if (error) throw error;
+      await updateAdminQuoteRequestStatus({ data: { id, status } });
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-quotes"] }),
     onError: (e: Error) => toast.error(e.message),
@@ -656,8 +706,14 @@ function QuotesTab() {
                 {q.email ? ` · ${q.email}` : ""} · {new Date(q.created_at).toLocaleString("de-DE")}
               </p>
               {q.message && <p className="mt-2 text-sm">{q.message}</p>}
-              {q.photo_urls?.length > 0 && (
-                <p className="mt-2 text-xs text-muted-foreground">{q.photo_urls.length} Foto(s) hochgeladen</p>
+              {q.photo_keys?.length > 0 && (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {q.photo_keys.map((url) => (
+                    <a key={url} href={url} target="_blank" rel="noopener noreferrer">
+                      <img src={url} alt="Schadenfoto" className="size-16 rounded-lg border object-cover" />
+                    </a>
+                  ))}
+                </div>
               )}
             </div>
             <div className="flex items-center gap-2">
@@ -682,14 +738,7 @@ function QuotesTab() {
 function PartnersTab() {
   const { data } = useQuery({
     queryKey: ["admin-partners"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("partner_requests")
-        .select("*")
-        .order("created_at", { ascending: false });
-      if (error) throw error;
-      return data;
-    },
+    queryFn: () => getAdminPartnerRequests(),
   });
 
   if (!data?.length) {
@@ -700,16 +749,181 @@ function PartnersTab() {
     <div className="space-y-4">
       {data.map((p) => (
         <Card key={p.id}>
-          <p className="font-semibold">
-            {p.company} · {p.partner_type}
-          </p>
+          <p className="font-semibold">{p.name}</p>
           <p className="text-sm text-muted-foreground">
-            {p.contact_name} · {p.email}
-            {p.phone ? ` · ${p.phone}` : ""} · {new Date(p.created_at).toLocaleString("de-DE")}
+            {p.email} · {new Date(p.created_at).toLocaleString("de-DE")}
           </p>
           {p.message && <p className="mt-2 text-sm">{p.message}</p>}
         </Card>
       ))}
+    </div>
+  );
+}
+
+/* ---------------- Analytics ---------------- */
+
+function AnalyticsTab() {
+  const [rangeDays, setRangeDays] = useState(7);
+
+  const { data: online } = useQuery({
+    queryKey: ["admin-analytics-online"],
+    queryFn: () => getOnlineNow(),
+    refetchInterval: 10_000,
+  });
+
+  const { data: summary } = useQuery({
+    queryKey: ["admin-analytics-summary", rangeDays],
+    queryFn: () => getAnalyticsSummary({ data: { rangeDays } }),
+  });
+
+  const onlineCountries = (online ?? []).reduce<Record<string, number>>((acc, v) => {
+    const key = v.country ?? "Unbekannt";
+    acc[key] = (acc[key] ?? 0) + 1;
+    return acc;
+  }, {});
+
+  const maxDailyPageviews = Math.max(1, ...(summary?.dailyVisits.map((d) => d.pageviews) ?? [1]));
+
+  return (
+    <div className="space-y-6">
+      {/* Live: gerade online */}
+      <Card>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="relative flex size-2.5">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-75" />
+              <span className="relative inline-flex size-2.5 rounded-full bg-success" />
+            </span>
+            <p className="text-sm font-semibold">Gerade online</p>
+          </div>
+          <p className="text-2xl font-bold">{online?.length ?? 0}</p>
+        </div>
+        {online && online.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-2">
+            {Object.entries(onlineCountries).map(([country, count]) => (
+              <span
+                key={country}
+                className="inline-flex items-center gap-1.5 rounded-full bg-brand-surface px-3 py-1 text-xs font-medium"
+              >
+                <Globe2 className="size-3.5" aria-hidden="true" />
+                {country} · {count}
+              </span>
+            ))}
+          </div>
+        )}
+      </Card>
+
+      {/* Zeitraum */}
+      <div className="flex items-center gap-2">
+        {[7, 30, 90].map((d) => (
+          <Button
+            key={d}
+            size="sm"
+            variant={rangeDays === d ? "default" : "outline"}
+            onClick={() => setRangeDays(d)}
+          >
+            {d} Tage
+          </Button>
+        ))}
+      </div>
+
+      {/* Kennzahlen */}
+      <div className="grid gap-4 sm:grid-cols-3">
+        <Card>
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <Users className="size-4" aria-hidden="true" />
+            <p className="text-xs font-semibold uppercase">Besuche</p>
+          </div>
+          <p className="mt-2 text-2xl font-bold">{summary?.totalSessions ?? 0}</p>
+        </Card>
+        <Card>
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <MousePointerClick className="size-4" aria-hidden="true" />
+            <p className="text-xs font-semibold uppercase">Seitenaufrufe</p>
+          </div>
+          <p className="mt-2 text-2xl font-bold">{summary?.totalPageviews ?? 0}</p>
+        </Card>
+        <Card>
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <BarChart3 className="size-4" aria-hidden="true" />
+            <p className="text-xs font-semibold uppercase">Bounce Rate</p>
+          </div>
+          <p className="mt-2 text-2xl font-bold">{summary?.bounceRate ?? 0}%</p>
+        </Card>
+      </div>
+
+      {/* Verlauf */}
+      {summary && summary.dailyVisits.length > 0 && (
+        <Card>
+          <p className="mb-3 text-sm font-semibold">Seitenaufrufe pro Tag</p>
+          <div className="flex h-32 items-end gap-1">
+            {summary.dailyVisits.map((d) => (
+              <div key={d.date} className="group relative flex-1" title={`${d.date}: ${d.pageviews}`}>
+                <div
+                  className="w-full rounded-t bg-brand-orange/70 transition-colors group-hover:bg-brand-orange"
+                  style={{ height: `${Math.max(4, (d.pageviews / maxDailyPageviews) * 100)}%` }}
+                />
+              </div>
+            ))}
+          </div>
+          <div className="mt-1 flex justify-between text-[10px] text-muted-foreground">
+            <span>{summary.dailyVisits[0]?.date}</span>
+            <span>{summary.dailyVisits[summary.dailyVisits.length - 1]?.date}</span>
+          </div>
+        </Card>
+      )}
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Card>
+          <p className="mb-3 text-sm font-semibold">Meistbesuchte Seiten</p>
+          {summary?.topPages.length ? (
+            <ul className="space-y-2">
+              {summary.topPages.map((p) => (
+                <li key={p.path} className="flex items-center justify-between text-sm">
+                  <span className="truncate text-muted-foreground">{p.path}</span>
+                  <span className="font-semibold">{p.views}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-muted-foreground">Noch keine Daten.</p>
+          )}
+        </Card>
+
+        <Card>
+          <p className="mb-3 text-sm font-semibold">Klicks nach Button (Konversionen)</p>
+          {summary?.topClicks.length ? (
+            <ul className="space-y-2">
+              {summary.topClicks.map((c) => (
+                <li key={`${c.label}-${c.page}`} className="flex items-center justify-between text-sm">
+                  <span className="truncate text-muted-foreground">
+                    {c.label} <span className="text-xs">({c.page})</span>
+                  </span>
+                  <span className="font-semibold">{c.count}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-muted-foreground">Noch keine Daten.</p>
+          )}
+        </Card>
+      </div>
+
+      <Card>
+        <p className="mb-3 text-sm font-semibold">Länder</p>
+        {summary?.countries.length ? (
+          <ul className="space-y-2">
+            {summary.countries.map((c) => (
+              <li key={c.country} className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">{c.country}</span>
+                <span className="font-semibold">{c.sessions}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm text-muted-foreground">Noch keine Daten.</p>
+        )}
+      </Card>
     </div>
   );
 }

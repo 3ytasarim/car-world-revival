@@ -6,8 +6,8 @@ export const WA_NUMBER = "4926413969555";
 
 const wa = (text: string) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
 
-export const WA_UNFALL = wa("Hallo, ich hatte einen Unfall und benötige sofort Hilfe.");
-export const WA_FRAGE = wa("Hallo, ich habe eine Frage zu meinem Fahrzeug.");
+export const WA_UNFALL = wa("Hallo Car-World, ich hatte einen Unfall und benötige sofort Hilfe.");
+export const WA_FRAGE = wa("Hallo Car-World, ich habe eine Frage zu meinem Fahrzeug.");
 export const WA_FOTO = wa(
   "Hallo Car-World, ich schicke Ihnen Fotos von meinem Schaden. Bitte erstellen Sie mir ein Angebot.",
 );
@@ -23,6 +23,19 @@ export const WA_PARTNER = wa(
 );
 export const WA_KARRIERE = wa("Hallo Car-World, ich interessiere mich für eine Stelle bei Ihnen.");
 export const WA_TERMIN = wa("Hallo Car-World, ich möchte gerne einen Werkstatt-Termin vereinbaren.");
+
+// Weitere Leistungen aus "Unsere Leistungen" / den Kernleistungen-Karten —
+// jede CTA soll die vorausgefüllte Nachricht tragen, die zum jeweiligen
+// Thema passt, statt überall auf eine generische Nachricht zu verlinken.
+export const WA_ABSCHLEPP = wa("Hallo Car-World, ich benötige einen Abschleppdienst / eine Fahrzeugbergung.");
+export const WA_REPARATUR = wa("Hallo Car-World, ich möchte eine Fahrzeugreparatur anfragen.");
+export const WA_ERSATZWAGEN = wa("Hallo Car-World, ich hätte gerne einen Ersatzwagen.");
+export const WA_VERSICHERUNG = wa(
+  "Hallo Car-World, ich benötige Hilfe bei der Versicherungsabwicklung nach einem Schaden.",
+);
+export const WA_REIFEN = wa("Hallo Car-World, ich möchte einen Reifenwechsel / eine Reifeneinlagerung vereinbaren.");
+export const WA_TUEV = wa("Hallo Car-World, ich möchte einen Termin für die TÜV-Prüfung vereinbaren.");
+export const WA_INSPEKTION = wa("Hallo Car-World, ich benötige ein Angebot für eine Inspektion.");
 
 /** Erreichbarkeit: bewusst ohne Öffnungszeiten – WhatsApp ist rund um die Uhr. */
 export const AVAILABILITY = "Per WhatsApp 7/24 erreichbar";

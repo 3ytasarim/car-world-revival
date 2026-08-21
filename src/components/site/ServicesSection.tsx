@@ -2,6 +2,17 @@ import { Sparkles } from "lucide-react";
 
 import { AnimatedText } from "@/components/ui/animated-text";
 import { Gallery4 } from "@/components/ui/gallery4";
+import {
+  WA_UNFALL,
+  WA_ABSCHLEPP,
+  WA_REPARATUR,
+  WA_ERSATZWAGEN,
+  WA_VERSICHERUNG,
+  WA_REIFEN,
+  WA_SCHEIBE,
+  WA_TUEV,
+  WA_INSPEKTION,
+} from "./site-data";
 import unfall from "@/assets/unfall.jpg";
 import abschlepp from "@/assets/svc-abschlepp.jpg";
 import reparatur from "@/assets/svc-reparatur.jpg";
@@ -13,15 +24,21 @@ import tuev from "@/assets/svc-tuev.jpg";
 import wartung from "@/assets/svc-wartung.jpg";
 
 const services = [
-  { id: "unfall", img: unfall, title: "Unfallservice", text: "Soforthilfe rund um die Uhr." },
-  { id: "abschlepp", img: abschlepp, title: "Abschleppdienst", text: "Schnelle Bergung und Transport." },
-  { id: "reparatur", img: reparatur, title: "Fahrzeugreparatur", text: "Meisterhafte Instandsetzung." },
-  { id: "ersatzwagen", img: ersatzwagen, title: "Ersatzwagen", text: "Mobil bleiben ohne Wartezeit." },
-  { id: "versicherung", img: versicherung, title: "Versicherungsabwicklung", text: "Papierkram? Übernehmen wir." },
-  { id: "reifen", img: reifen, title: "Reifenwechsel", text: "Wechsel und Einlagerung." },
-  { id: "scheibe", img: scheibe, title: "Windschutzscheiben", text: "Steinschlag in Minuten repariert." },
-  { id: "tuev", img: tuev, title: "TÜV", text: "Prüfung ohne lange Wartezeit." },
-  { id: "wartung", img: wartung, title: "Inspektion & Wartung", text: "Nach Herstellervorgabe." },
+  { id: "unfall", img: unfall, title: "Unfallservice", text: "Soforthilfe rund um die Uhr.", wa: WA_UNFALL },
+  { id: "abschlepp", img: abschlepp, title: "Abschleppdienst", text: "Schnelle Bergung und Transport.", wa: WA_ABSCHLEPP },
+  { id: "reparatur", img: reparatur, title: "Fahrzeugreparatur", text: "Meisterhafte Instandsetzung.", wa: WA_REPARATUR },
+  { id: "ersatzwagen", img: ersatzwagen, title: "Ersatzwagen", text: "Mobil bleiben ohne Wartezeit.", wa: WA_ERSATZWAGEN },
+  {
+    id: "versicherung",
+    img: versicherung,
+    title: "Versicherungsabwicklung",
+    text: "Papierkram? Übernehmen wir.",
+    wa: WA_VERSICHERUNG,
+  },
+  { id: "reifen", img: reifen, title: "Reifenwechsel", text: "Wechsel und Einlagerung.", wa: WA_REIFEN },
+  { id: "scheibe", img: scheibe, title: "Windschutzscheiben", text: "Steinschlag in Minuten repariert.", wa: WA_SCHEIBE },
+  { id: "tuev", img: tuev, title: "TÜV", text: "Prüfung ohne lange Wartezeit.", wa: WA_TUEV },
+  { id: "wartung", img: wartung, title: "Inspektion & Wartung", text: "Nach Herstellervorgabe.", wa: WA_INSPEKTION },
 ];
 
 export function ServicesSection() {
@@ -41,7 +58,7 @@ export function ServicesSection() {
 
         <div className="mt-12">
           <Gallery4
-            items={services.map((s) => ({ id: s.id, title: s.title, description: s.text, image: s.img, href: "/termin" }))}
+            items={services.map((s) => ({ id: s.id, title: s.title, description: s.text, image: s.img, href: s.wa }))}
           />
         </div>
       </div>

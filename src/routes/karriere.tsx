@@ -112,7 +112,7 @@ function KarrierePage() {
                 className="karriere-card relative flex h-full flex-col items-center rounded-2xl border border-black/10 bg-white p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
                 <div className="size-28 shrink-0 overflow-hidden rounded-full border-4 border-brand-surface shadow-md">
-                  <img src={werkstattFoto} alt="" loading="lazy" className="size-full object-cover" />
+                  <img src={job.image_url || werkstattFoto} alt="" loading="lazy" className="size-full object-cover" />
                 </div>
                 <span className="mt-4 w-fit rounded-full bg-brand-surface px-3 py-1 text-[11px] font-semibold text-muted-foreground">
                   {job.employment_type}
@@ -166,22 +166,22 @@ function KarrierePage() {
             <div className="rounded-2xl bg-brand-surface p-6">
               <h3 className="text-lg font-semibold">Bewerbungen an Car-World</h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Joun Hamsoro
+                Autowerkstatt CarWorld
                 <br />
                 Ehlinger Straße 45
                 <br />
                 53474 Bad Neuenahr-Ahrweiler (Heimersheim)
               </p>
               <div className="mt-5 flex flex-col gap-3">
-                <Button3D href={PHONE_HREF} variant="secondary" className="w-full">
+                <Button3D href={PHONE_HREF} variant="primary" className="w-full">
                   <Phone className="size-4" aria-hidden="true" />
                   {PHONE_LABEL}
                 </Button3D>
-                <Button3D href={`mailto:${EMAIL_KARRIERE}`} variant="secondary" className="w-full">
+                <Button3D href={`mailto:${EMAIL_KARRIERE}`} variant="primary" className="w-full">
                   <Mail className="size-4" aria-hidden="true" />
                   {EMAIL_KARRIERE}
                 </Button3D>
-                <Button3D href={WA_KARRIERE} target="_blank" rel="noopener noreferrer" className="w-full">
+                <Button3D href={WA_KARRIERE} target="_blank" rel="noopener noreferrer" variant="whatsapp" className="w-full">
                   <WhatsAppIcon className="size-4" />
                   Per WhatsApp bewerben
                 </Button3D>

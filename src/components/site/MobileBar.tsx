@@ -17,7 +17,7 @@ export function MobileBar() {
         href={WA_FRAGE}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex flex-col items-center gap-0.5 bg-brand-orange py-2.5 text-xs font-medium text-brand-orange-foreground"
+        className="flex flex-col items-center gap-0.5 bg-[#25D366] py-2.5 text-xs font-medium text-white"
       >
         <WhatsAppIcon className="size-4" />
         WhatsApp

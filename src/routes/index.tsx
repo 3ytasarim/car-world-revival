@@ -17,12 +17,14 @@ import AnimatedGradientBackground from "@/components/ui/animated-gradient-backgr
 
 
 import heroBg from "@/assets/hero-bg.jpg";
-import heroPhone1 from "@/assets/unfall-1.jpg";
-import heroPhone2 from "@/assets/unfall-2.jpg";
-import heroPhone3 from "@/assets/unfall-3.jpg";
+import heroPhoneUnfall from "@/assets/unfall-1.jpg";
+import heroPhoneSteinschlag from "@/assets/hero-steinschlag.jpg";
+import heroPhoneReifenwechsel from "@/assets/hero-reifenwechsel.jpg";
 import { Iphone15ProFrame, PhoneFanCarousel } from "@/components/ui/phone-mockups-1";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
+import { TrustArea } from "@/components/site/TrustArea";
+import { VideoPlayer } from "@/components/ui/video-player";
 import { VideoSection } from "@/components/site/VideoSection";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { PartnerSection } from "@/components/site/PartnerSection";
@@ -87,6 +89,31 @@ const stats = [
   ["4.800+", "Reparaturen abgeschlossen"],
   ["98%", "Kundenzufriedenheit"],
   ["12", "Versicherungspartner"],
+];
+
+// Hero-Phones: 3 verschiedene Themen statt 3x derselbe "Unfall gehabt?"-Karte.
+const heroPhones = [
+  {
+    image: heroPhoneUnfall,
+    imageAlt: "Unfallfahrzeug mit Frontschaden",
+    badge: "Notfall",
+    title: "Unfall gehabt?",
+    subtitle: "Wir kümmern uns um alles — sofort.",
+  },
+  {
+    image: heroPhoneSteinschlag,
+    imageAlt: "Steinschlag in der Frontscheibe",
+    badge: "Sofort-Termin",
+    title: "Steinschlag?",
+    subtitle: "In wenigen Minuten repariert.",
+  },
+  {
+    image: heroPhoneReifenwechsel,
+    imageAlt: "Reifenwechsel in der Werkstatt",
+    badge: "Schnell & fair",
+    title: "Reifenwechsel?",
+    subtitle: "Wechsel und Einlagerung ohne Wartezeit.",
+  },
 ];
 
 const coreServices = [
@@ -166,9 +193,9 @@ function Home() {
                       Deine
                     </span>
                     <span
-                      className="block bg-[linear-gradient(135deg,_#0B1626,_#1B3A63,_#2F6FB5,_#5088C8,_#8FB8E8)] bg-clip-text font-extrabold text-transparent sm:whitespace-nowrap"
+                      className="block bg-[linear-gradient(135deg,_#0B1626,_#1B3A63,_#2F6FB5,_#5088C8,_#8FB8E8)] bg-clip-text font-extrabold text-transparent"
                     >
-                      Nr. 1 Autowerkstatt
+                      Nummer 1 Autowerkstatt im Ahrtal
                     </span>
 
                   </h1>
@@ -190,9 +217,15 @@ function Home() {
                 <div className="mx-auto mt-8 flex h-full w-full max-w-2xl items-center justify-center lg:mt-0">
                   <PhoneFanCarousel
                     className="drop-shadow-2xl"
-                    items={[heroPhone1, heroPhone2, heroPhone3].map((img, i) => (
+                    items={heroPhones.map((p, i) => (
                       <Iphone15ProFrame key={i}>
-                        <PhoneScreen image={img} />
+                        <PhoneScreen
+                          image={p.image}
+                          imageAlt={p.imageAlt}
+                          badge={p.badge}
+                          title={p.title}
+                          subtitle={p.subtitle}
+                        />
                       </Iphone15ProFrame>
                     ))}
                   />
@@ -202,6 +235,16 @@ function Home() {
           </section>
 
         </div>
+
+        {/* Vertrauenspunkte — 3 starke Beweise gleich nach dem Hero */}
+        <TrustArea />
+
+        {/* Werkstatt-Video — gleiche Breite wie die 4 Vertrauenspunkte-Karten darüber */}
+        <section className="relative bg-white py-14">
+          <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
+            <VideoPlayer src="/videos/hero-bg.mp4" className="max-w-none" />
+          </div>
+        </section>
 
         {/* Rundum-sorglos-Paket */}
         <RundumSorglosSection />

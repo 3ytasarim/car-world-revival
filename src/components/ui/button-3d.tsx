@@ -1,13 +1,30 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { trackClickEvent } from "@/lib/analytics-client";
 
-type Button3DVariant = "primary" | "secondary" | "whatsapp" | "navy";
+// Nur 2 CTA-Familien site-weit: Haupt-CTA (primary = gefüllt, secondary =
+// Outline — gleiche Formsprache, nur andere Betonung) und WhatsApp-CTA
+// (natürlich grün). Kein drittes Farbschema — sonst genau die uneinheitliche
+// "andere Farbe pro Bereich"-Erfahrung, die vermieden werden soll.
+type Button3DVariant = "primary" | "secondary" | "whatsapp";
 
 type Button3DCommonProps = {
   variant?: Button3DVariant;
   className?: string;
   children?: React.ReactNode;
+  /** Klartext-Label fürs Klick-Tracking. Ohne Angabe wird der Text aus `children` extrahiert. */
+  trackLabel?: string;
 };
+
+// Jedes Button3D trackt sich selbst — so muss niemand jede einzelne CTA auf
+// der Seite manuell verkabeln, um die "Wo klicken Besucher"-Auswertung im
+// Admin-Panel zu bekommen. Extrahiert nur reinen Text (Icons haben keinen).
+function extractText(node: React.ReactNode): string {
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(extractText).join(" ").trim();
+  if (React.isValidElement<{ children?: React.ReactNode }>(node)) return extractText(node.props.children);
+  return "";
+}
 
 type Button3DAsButton = Button3DCommonProps &
   Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children"> & {
@@ -28,14 +45,12 @@ const edgeStyles: Record<Button3DVariant, string> = {
     "bg-[linear-gradient(to_left,hsl(220_14%_70%)_0%,hsl(220_14%_84%)_8%,hsl(220_14%_84%)_92%,hsl(220_14%_70%)_100%)]",
   whatsapp:
     "bg-[linear-gradient(to_left,hsl(147_64%_28%)_0%,hsl(147_64%_38%)_8%,hsl(147_64%_38%)_92%,hsl(147_64%_28%)_100%)]",
-  navy: "bg-[linear-gradient(to_left,hsl(215_45%_10%)_0%,hsl(215_45%_20%)_8%,hsl(215_45%_20%)_92%,hsl(215_45%_10%)_100%)]",
 };
 
 const faceStyles: Record<Button3DVariant, string> = {
   primary: "bg-brand-orange text-brand-orange-foreground",
   secondary: "border-[1.5px] border-black/10 bg-white text-gray-800",
   whatsapp: "bg-[#25D366] text-white",
-  navy: "bg-brand-navy text-brand-navy-foreground",
 };
 
 /**
@@ -44,7 +59,15 @@ const faceStyles: Record<Button3DVariant, string> = {
  * Renders as an <a> by default, or as a <button> (e.g. for form submits)
  * via `as="button"`.
  */
-export function Button3D({ variant = "primary", className, children, as, ...props }: Button3DProps) {
+export function Button3D({ variant = "primary", className, children, as, trackLabel, ...props }: Button3DProps) {
+  const label = trackLabel || extractText(children).slice(0, 120) || variant;
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    void trackClickEvent(label);
+    const onClick = (props as { onClick?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void })
+      .onClick;
+    onClick?.(e);
+  };
+
   const shared = (
     <>
       {/* shadow */}
@@ -71,7 +94,7 @@ export function Button3D({ variant = "primary", className, children, as, ...prop
   if (as === "button") {
     const buttonProps = props as Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children">;
     return (
-      <button {...buttonProps} className={wrapperClassName}>
+      <button {...buttonProps} onClick={handleClick} className={wrapperClassName}>
         {shared}
       </button>
     );
@@ -79,7 +102,7 @@ export function Button3D({ variant = "primary", className, children, as, ...prop
 
   const anchorProps = props as Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "className" | "children">;
   return (
-    <a {...anchorProps} className={wrapperClassName}>
+    <a {...anchorProps} onClick={handleClick} className={wrapperClassName}>
       {shared}
     </a>
   );

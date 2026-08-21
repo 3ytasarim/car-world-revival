@@ -30,15 +30,15 @@ export function ProfileCard(props: ProfileCardProps) {
   } = props;
 
   return (
-    <div className={cn("mx-auto w-full max-w-5xl px-4", className)}>
+    <div className={cn("mx-auto w-full max-w-7xl px-4", className)}>
       {/* Desktop */}
-      <div className="relative hidden items-center md:flex">
-        <div className="flex h-[300px] w-[300px] shrink-0 items-center justify-center overflow-hidden rounded-3xl bg-brand-surface">
+      <div className="relative hidden items-center justify-center md:flex">
+        <div className="flex h-[400px] w-[400px] shrink-0 items-center justify-center overflow-hidden rounded-3xl bg-brand-surface">
           <img src={imageUrl} alt="" draggable={false} className="size-full object-cover" loading="lazy" />
         </div>
-        <div className="z-10 ml-[-48px] max-w-xl flex-1 rounded-3xl bg-white p-7 shadow-2xl">
-          <h3 className="mb-2 text-xl font-bold text-brand-navy">{title}</h3>
-          <p className="mb-6 text-sm leading-relaxed text-muted-foreground">{description}</p>
+        <div className="z-10 ml-[-56px] max-w-2xl flex-1 rounded-3xl bg-white p-9 shadow-2xl">
+          <h3 className="mb-3 text-3xl font-bold text-brand-navy">{title}</h3>
+          <p className="mb-7 text-lg leading-relaxed text-muted-foreground">{description}</p>
           <Button3D href={ctaHref}>{ctaLabel}</Button3D>
         </div>
       </div>
@@ -102,7 +102,7 @@ export function ProfileCardCarousel({
 
   return (
     <div
-      className={cn("mx-auto w-full max-w-5xl", className)}
+      className={cn("mx-auto w-full max-w-7xl", className)}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >

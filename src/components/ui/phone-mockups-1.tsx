@@ -35,14 +35,13 @@ export function Iphone15ProFrame({
         <path d="M1 234C1 233.448 1.44772 233 2 233H3.5V300H2C1.44772 300 1 299.552 1 299V234Z" fill="#1B3A63" />
         <path d="M1 319C1 318.448 1.44772 318 2 318H3.5V385H2C1.44772 385 1 384.552 1 384V319Z" fill="#1B3A63" />
         <path d="M430 279H432C432.552 279 433 279.448 433 280V384C433 384.552 432.552 385 432 385H430V279Z" fill="#1B3A63" />
-        {/* inner body */}
+        {/* inner body — also covers the "screen area" the foreignObject sits
+            in (same #0B1626 fill), so there's no separate adjacent path
+            fighting it for that region. Two same-colour shapes with edges
+            only ~1 unit apart there used to show up as a hairline seam from
+            SVG anti-aliasing, more visible the bigger the phones render. */}
         <path
           d="M6 74C6 35.3401 37.3401 4 76 4H356C394.66 4 426 35.3401 426 74V808C426 846.66 394.66 878 356 878H76C37.3401 878 6 846.66 6 808V74Z"
-          fill="#0B1626"
-        />
-        {/* screen area (opaque so nothing behind the phone shows through the bezel) */}
-        <path
-          d="M21.25 75C21.25 44.2101 46.2101 19.25 77 19.25H355C385.79 19.25 410.75 44.2101 410.75 75V807C410.75 837.79 385.79 862.75 355 862.75H77C46.2101 862.75 21.25 837.79 21.25 807V75Z"
           fill="#0B1626"
         />
         {children && (
@@ -99,7 +98,7 @@ export function PhoneFanCarousel({
           <div
             key={i}
             className={cn(
-              "absolute w-[62%] max-w-[210px] transition-all duration-700 ease-in-out [container-type:inline-size]",
+              "absolute w-[62%] max-w-[240px] transition-all duration-700 ease-in-out [container-type:inline-size]",
               isActive && "z-20 translate-x-0 scale-100 opacity-100",
               isPrev && "z-10 -translate-x-[55%] scale-90 opacity-40",
               isNext && "z-10 translate-x-[55%] scale-90 opacity-40",
@@ -111,7 +110,7 @@ export function PhoneFanCarousel({
         );
       })}
       {/* Spacer so the relative container reports a real height (matches the SVG frame's 433:882 ratio) */}
-      <div className="invisible w-[62%] max-w-[210px] aspect-[433/882]" aria-hidden="true" />
+      <div className="invisible w-[62%] max-w-[240px] aspect-[433/882]" aria-hidden="true" />
     </div>
   );
 }

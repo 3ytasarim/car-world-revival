@@ -30,10 +30,23 @@ export function OrbitingLogos({
   const animName = reverse ? "orbit-spin-reverse" : "orbit-spin";
   const counterAnimName = reverse ? "orbit-counter-reverse" : "orbit-counter";
 
+  // Radius is read from the CSS custom property `--orbit-radius`, with the
+  // `radius` prop only as its *fallback* inside var(--orbit-radius, Npx) —
+  // never assigned via inline style. Inline style declarations always beat
+  // class-based rules at every breakpoint (highest cascade priority,
+  // regardless of media query), so if we set the variable inline here a
+  // caller's `sm:[--orbit-radius:170px]` class could never override it. This
+  // way callers can still widen the orbit responsively via arbitrary-value
+  // classes; when they don't, the fallback quietly applies the plain prop.
+  const fallback = `${radius}px`;
+
   return (
     <div
       className={`relative mx-auto flex items-center justify-center ${className}`}
-      style={{ width: radius * 2 + 96, height: radius * 2 + 96 }}
+      style={{
+        width: `calc(var(--orbit-radius, ${fallback}) * 2 + 96px)`,
+        height: `calc(var(--orbit-radius, ${fallback}) * 2 + 96px)`,
+      }}
     >
       <style>{`
         @keyframes orbit-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -48,7 +61,10 @@ export function OrbitingLogos({
       {/* Faint orbit path */}
       <div
         className="pointer-events-none absolute rounded-full border border-dashed border-[#5088C8]/20"
-        style={{ width: radius * 2, height: radius * 2 }}
+        style={{
+          width: `calc(var(--orbit-radius, ${fallback}) * 2)`,
+          height: `calc(var(--orbit-radius, ${fallback}) * 2)`,
+        }}
       />
 
       {/* Center */}
@@ -66,7 +82,7 @@ export function OrbitingLogos({
               key={item.key}
               className="absolute top-1/2 left-1/2"
               style={{
-                transform: `rotate(${angle}deg) translate(${radius}px) rotate(-${angle}deg)`,
+                transform: `rotate(${angle}deg) translate(var(--orbit-radius, ${fallback})) rotate(-${angle}deg)`,
               }}
             >
               <div

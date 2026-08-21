@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { ClientOnly } from "@tanstack/react-router";
 import { toast } from "sonner";
 
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { supabase } from "@/integrations/supabase/client";
+import { Button3D } from "@/components/ui/button-3d";
+import { DotGridBackground } from "@/components/ui/dot-grid-background";
+import { getCurrentAdminFn, loginFn } from "@/lib/auth.functions";
+import logoWhite from "@/assets/logo-white.png";
 
 export const Route = createFileRoute("/auth")({
   ssr: false,
@@ -23,16 +26,18 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
 });
 
+// Kein Selbst-Registrieren mehr — Admin-Konten werden direkt in Neon
+// angelegt, nicht über eine öffentliche Sign-up-Seite (anders als vorher
+// mit Supabase Auth, wo sich jeder registrieren konnte).
 function AuthPage() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/admin", replace: true });
+    getCurrentAdminFn().then((admin) => {
+      if (admin) navigate({ to: "/admin", replace: true });
     });
   }, [navigate]);
 
@@ -40,19 +45,8 @@ function AuthPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      if (mode === "signin") {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-        navigate({ to: "/admin", replace: true });
-      } else {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: { emailRedirectTo: `${window.location.origin}/admin` },
-        });
-        if (error) throw error;
-        toast.success("Bitte bestätigen Sie Ihre E-Mail-Adresse.");
-      }
+      await loginFn({ data: { email, password } });
+      navigate({ to: "/admin", replace: true });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Anmeldung fehlgeschlagen");
     } finally {
@@ -61,19 +55,37 @@ function AuthPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-brand-navy px-4">
-      <div className="w-full max-w-sm rounded-3xl bg-white p-8 shadow-2xl">
-        <h1 className="text-2xl font-bold">Car-World Verwaltung</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {mode === "signin" ? "Melden Sie sich an." : "Konto erstellen."}
-        </p>
-        <form onSubmit={onSubmit} className="mt-6 space-y-4">
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-brand-navy px-4">
+      <ClientOnly fallback={null}>
+        <DotGridBackground color="#DCEDFA" />
+      </ClientOnly>
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(5,11,20,0.55)_100%)]" />
+
+      <div className="relative z-10 w-full max-w-sm rounded-3xl border border-white/10 bg-[#0E1D33]/90 p-8 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] backdrop-blur-md">
+        <div className="flex flex-col items-center text-center">
+          <img src={logoWhite} alt="Car-World" className="h-14 w-auto" />
+          <h1 className="mt-4 text-xl font-bold text-white">Car-World Verwaltung</h1>
+          <p className="mt-1 text-sm text-white/60">Melden Sie sich an.</p>
+        </div>
+
+        <form onSubmit={onSubmit} className="mt-7 space-y-4">
           <div className="space-y-1.5">
-            <Label htmlFor="email">E-Mail</Label>
-            <Input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Label htmlFor="email" className="text-white/80">
+              Benutzername
+            </Label>
+            <Input
+              id="email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border-white/15 bg-white/5 text-white placeholder:text-white/30 focus-visible:border-[#8FB8E8] focus-visible:ring-[#8FB8E8]/30"
+            />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="password">Passwort</Label>
+            <Label htmlFor="password" className="text-white/80">
+              Passwort
+            </Label>
             <Input
               id="password"
               type="password"
@@ -81,19 +93,13 @@ function AuthPage() {
               minLength={6}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className="border-white/15 bg-white/5 text-white placeholder:text-white/30 focus-visible:border-[#8FB8E8] focus-visible:ring-[#8FB8E8]/30"
             />
           </div>
-          <Button type="submit" disabled={loading} className="w-full">
-            {loading ? "Bitte warten…" : mode === "signin" ? "Anmelden" : "Registrieren"}
-          </Button>
+          <Button3D as="button" type="submit" disabled={loading} className="mt-2 w-full">
+            {loading ? "Bitte warten…" : "Login"}
+          </Button3D>
         </form>
-        <button
-          type="button"
-          onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
-          className="mt-4 w-full text-center text-sm text-muted-foreground underline"
-        >
-          {mode === "signin" ? "Noch kein Konto? Registrieren" : "Bereits registriert? Anmelden"}
-        </button>
       </div>
     </main>
   );

@@ -1,37 +1,37 @@
 import { useRef } from "react";
-import { CarFront, Clock4, FileCheck2, PhoneCall, ShieldCheck, Star, Truck, UsersRound, Wrench } from "lucide-react";
-import { motion, useInView, useSpring, useTransform } from "framer-motion";
+import { AlertTriangle, FileCheck2, PhoneCall, ShieldCheck, Wrench } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 
 import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
 import { RevealSlider } from "@/components/ui/reveal2";
+import { OrbitingLogos } from "@/components/ui/orbiting-logos";
+import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { PHONE_HREF } from "@/components/site/site-data";
+import { TowTruckIcon } from "@/components/site/TowTruckIcon";
 import rundumBefore from "@/assets/rundum-before.jpg";
 import rundumAfter from "@/assets/rundum-after.jpg";
 
-const highlights = [
-  {
-    icon: Truck,
-    title: "Abholen & Abschleppen",
-    description: "Wir holen Ihr Fahrzeug ab und bringen es sicher zu uns in die Werkstatt.",
-  },
-  {
-    icon: CarFront,
-    title: "Ersatzwagen",
-    description: "Bleiben Sie mobil — mit einem kostenlosen Ersatzwagen.",
-  },
-  {
-    icon: FileCheck2,
-    title: "Versicherungsabwicklung",
-    description: "Wir übernehmen die komplette Kommunikation mit Ihrer Versicherung.",
-  },
+// Der Ablauf nach einem Unfall — als Orbit um "UNFALL?" statt als Liste,
+// damit er möglichst über Icons erzählt wird statt über Fließtext.
+const processSteps = [
+  { icon: PhoneCall, title: "Kontakt" },
+  { icon: TowTruckIcon, title: "Abholung" },
+  { icon: Wrench, title: "Reparatur" },
+  { icon: FileCheck2, title: "Abwicklung" },
 ];
 
-const stats = [
-  { icon: Wrench, value: 4800, suffix: "+", label: "Reparierte Fahrzeuge" },
-  { icon: Clock4, value: 15, suffix: "+", label: "Jahre Erfahrung" },
-  { icon: Star, value: 98, suffix: "%", label: "Kundenzufriedenheit" },
-  { icon: UsersRound, value: 12, suffix: "", label: "Versicherungspartner" },
+const insurancePartners = [
+  { src: "/logos/axa.png", alt: "AXA" },
+  { src: "/logos/ergo.png", alt: "ERGO" },
+  { src: "/logos/allianz.png", alt: "Allianz" },
+  { src: "/logos/debeka.png", alt: "Debeka" },
+  { src: "/logos/rv.png", alt: "R+V Versicherung" },
+  { src: "/logos/devk.png", alt: "DEVK" },
+  { src: "/logos/huk.png", alt: "HUK-COBURG" },
+  { src: "/logos/signal-iduna.png", alt: "Signal Iduna" },
+  { src: "/logos/gothaer.png", alt: "Gothaer" },
+  { src: "/logos/wuerttembergische.png", alt: "Württembergische" },
 ];
 
 export function RundumSorglosSection() {
@@ -42,60 +42,91 @@ export function RundumSorglosSection() {
     <section ref={sectionRef} aria-labelledby="rundum-title" className="relative w-full overflow-hidden">
       <div className="relative py-16 sm:py-24">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-            {/* Inhalt */}
+          {/* Intro: oben, zentriert, über der gesamten Breite */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="mx-auto max-w-2xl text-center"
+          >
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#5088C8]/30 bg-[#5088C8]/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-[#1B3A63] uppercase">
+              <ShieldCheck className="size-4" aria-hidden="true" />
+              Rundum abgesichert
+            </span>
+
+            <h2 id="rundum-title" className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
+              <AnimatedText text="Rundum-" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#131F35]" />
+              <AnimatedText text="sorglos" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#5088C8]" />
+              <AnimatedText text="-Paket" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#131F35]" />
+            </h2>
+
+            <p className="mt-4 text-base text-muted-foreground sm:text-lg">
+              Wir kümmern uns um alles — von der Abholung bis zur kompletten Abwicklung mit Ihrer Versicherung. Sie
+              lehnen sich zurück, wir machen den Rest.
+            </p>
+          </motion.div>
+
+          {/* Darunter: links der Orbit, rechts Vorher/Nachher — auf gleicher
+              Höhe, der Orbit darf breit atmen (Kreise überlappen nicht). */}
+          <div className="mt-12 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="relative flex justify-center [--orbit-radius:145px] sm:[--orbit-radius:168px] lg:[--orbit-radius:162px] xl:[--orbit-radius:190px]"
             >
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#5088C8]/30 bg-[#5088C8]/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-[#1B3A63] uppercase">
-                <ShieldCheck className="size-4" aria-hidden="true" />
-                Rundum abgesichert
-              </span>
+              {/* Konzentrische Glow-Kreise hinter dem Orbit, wie in der
+                  Referenz — aber in den Blautönen der Seite statt Lila. */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl"
+                style={{
+                  width: "calc(var(--orbit-radius) * 2.7)",
+                  height: "calc(var(--orbit-radius) * 2.7)",
+                  background:
+                    "radial-gradient(circle, rgba(80,136,200,0.30) 0%, rgba(80,136,200,0.14) 45%, rgba(80,136,200,0) 72%)",
+                }}
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-xl"
+                style={{
+                  width: "calc(var(--orbit-radius) * 1.75)",
+                  height: "calc(var(--orbit-radius) * 1.75)",
+                  background:
+                    "radial-gradient(circle, rgba(143,184,232,0.55) 0%, rgba(143,184,232,0.22) 55%, rgba(143,184,232,0) 78%)",
+                }}
+              />
 
-              <h2 id="rundum-title" className="mt-4 text-4xl tracking-tight sm:text-5xl">
-                <AnimatedText text="Rundum-" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#131F35]" />
-                <AnimatedText text="sorglos" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#5088C8]" />
-                <AnimatedText text="-Paket" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#131F35]" />
-              </h2>
-
-              <p className="mt-4 max-w-lg text-base text-muted-foreground sm:text-lg">
-                Wir kümmern uns um alles — von der Abholung bis zur kompletten Abwicklung mit Ihrer Versicherung. Sie
-                lehnen sich zurück, wir machen den Rest.
-              </p>
-
-              <div className="mt-6 grid gap-3">
-                {highlights.map((h, i) => (
-                  <motion.div
-                    key={h.title}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    className="group flex items-center gap-4 rounded-2xl border border-[#5088C8]/15 bg-white p-4 shadow-[0_20px_40px_-34px_rgba(19,31,53,0.4)] transition-colors hover:border-[#5088C8]/40"
-                  >
-                    <motion.span
-                      animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
-                      transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 3, delay: i * 0.15, ease: "easeInOut" }}
-                      className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-[#5088C8]/12 text-[#1B3A63]"
-                    >
-                      <h.icon className="size-5" aria-hidden="true" />
-                    </motion.span>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-semibold text-[#131F35] sm:text-base">{h.title}</p>
-                      <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">{h.description}</p>
+              <OrbitingLogos
+                radius={145}
+                duration={26}
+                className="relative [--orbit-radius:145px] sm:[--orbit-radius:168px] lg:[--orbit-radius:162px] xl:[--orbit-radius:190px]"
+                center={
+                  <div className="flex size-24 flex-col items-center justify-center gap-1 rounded-full border-2 border-brand-orange/40 bg-white text-center shadow-lg sm:size-28 lg:size-28 xl:size-32">
+                    <AlertTriangle
+                      className="size-6 animate-pulse text-yellow-400 sm:size-7"
+                      aria-hidden="true"
+                    />
+                    <span className="text-sm leading-none font-extrabold tracking-tight text-[#131F35] sm:text-base">
+                      UNFALL?
+                    </span>
+                  </div>
+                }
+                items={processSteps.map((step) => ({
+                  key: step.title,
+                  content: (
+                    <div className="flex flex-col items-center gap-1.5">
+                      <div className="flex size-14 items-center justify-center rounded-full border border-[#5088C8]/20 bg-white shadow-md sm:size-16">
+                        <step.icon className="size-5 text-[#1B3A63] sm:size-6" aria-hidden="true" />
+                      </div>
+                      <span className="text-[11px] font-semibold whitespace-nowrap text-[#131F35] sm:text-xs">
+                        {step.title}
+                      </span>
                     </div>
-                    <ShieldCheck className="size-5 shrink-0 text-[#5088C8]" aria-hidden="true" />
-                  </motion.div>
-                ))}
-              </div>
-
-              <div className="mt-8">
-                <Button3D href={PHONE_HREF}>
-                  <PhoneCall className="size-4" aria-hidden="true" />
-                  Jetzt anrufen
-                </Button3D>
-              </div>
+                  ),
+                }))}
+              />
             </motion.div>
 
             {/* Vorher/Nachher */}
@@ -111,10 +142,29 @@ export function RundumSorglosSection() {
             </motion.div>
           </div>
 
-          <div className="mt-16 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-            {stats.map((s, i) => (
-              <StatCounter key={s.label} {...s} delay={i * 0.1} />
-            ))}
+          {/* Jetzt-anrufen-Button: mittig unter beiden Spalten */}
+          <div className="mt-10 flex justify-center">
+            <Button3D href={PHONE_HREF}>
+              <PhoneCall className="size-4" aria-hidden="true" />
+              Jetzt anrufen
+            </Button3D>
+          </div>
+
+          {/* Versicherungspartner — Logo-Marquee statt Zahlen-Kacheln */}
+          <div className="mt-16">
+            <div className="mx-auto grid max-w-md grid-cols-2 gap-5">
+              {/* Links: unten nach oben. Rechts: oben nach unten. */}
+              <InfiniteSlider direction="vertical" gap={24} duration={28} durationOnHover={70} className="h-[420px]">
+                {insurancePartners.map((p) => (
+                  <PartnerLogoCard key={p.alt} partner={p} />
+                ))}
+              </InfiniteSlider>
+              <InfiniteSlider direction="vertical" reverse gap={24} duration={28} durationOnHover={70} className="h-[420px]">
+                {insurancePartners.map((p) => (
+                  <PartnerLogoCard key={p.alt} partner={p} />
+                ))}
+              </InfiniteSlider>
+            </div>
           </div>
         </div>
       </div>
@@ -122,43 +172,11 @@ export function RundumSorglosSection() {
   );
 }
 
-function StatCounter({
-  icon: Icon,
-  value,
-  suffix,
-  label,
-  delay,
-}: {
-  icon: typeof Wrench;
-  value: number;
-  suffix: string;
-  label: string;
-  delay: number;
-}) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.4 });
-  const spring = useSpring(0, { stiffness: 50, damping: 12 });
-  const display = useTransform(spring, (latest) => Math.floor(latest).toLocaleString("de-DE"));
-
-  if (isInView) spring.set(value);
-
+function PartnerLogoCard({ partner }: { partner: { src: string; alt: string } }) {
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay }}
-      className="flex flex-col items-center rounded-2xl border border-[#5088C8]/15 bg-gradient-to-b from-white to-[#F4F7FB] p-5 text-center shadow-[0_20px_40px_-34px_rgba(19,31,53,0.8)]"
-    >
-      <span className="flex size-11 items-center justify-center rounded-full bg-[#5088C8]/12 text-[#1B3A63]">
-        <Icon className="size-5" aria-hidden="true" />
-      </span>
-      <p className="mt-3 flex items-baseline text-2xl font-bold text-[#131F35] sm:text-3xl">
-        <motion.span>{display}</motion.span>
-        <span>{suffix}</span>
-      </p>
-      <p className="mt-1 text-xs font-medium text-[#1B3A63]/70 sm:text-sm">{label}</p>
-    </motion.div>
+    <div className="flex size-48 shrink-0 items-center justify-center rounded-2xl border border-black/10 bg-white p-5 shadow-md">
+      <img src={partner.src} alt={partner.alt} loading="lazy" className="max-h-full max-w-full object-contain" />
+    </div>
   );
 }
 

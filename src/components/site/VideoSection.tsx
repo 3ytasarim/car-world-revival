@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Car, Droplets, Play, ShieldAlert, Wrench } from "lucide-react";
 
 import { useInView } from "@/hooks/use-in-view";
-import { WA_FOTO } from "./site-data";
+import { WA_FOTO, WA_UNFALL, WA_LACK, WA_SCHEIBE, WA_REPARATUR } from "./site-data";
 import { Button3D } from "@/components/ui/button-3d";
 import { AnimatedText } from "@/components/ui/animated-text";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 type Clip = {
   title: string;
@@ -12,13 +13,15 @@ type Clip = {
   icon: typeof Car;
   /** YouTube/Vimeo embed URL – vom Admin austauschbar */
   src?: string;
+  /** Vorausgefüllte WhatsApp-Nachricht passend zu diesem Thema */
+  wa: string;
 };
 
 const clips: Clip[] = [
-  { title: "Nach dem Unfall", text: "So läuft der Unfallservice ab.", icon: ShieldAlert },
-  { title: "Lackschaden", text: "Vom Kratzer zum Neuzustand.", icon: Droplets },
-  { title: "Frontscheibe", text: "Steinschlag in Minuten repariert.", icon: Car },
-  { title: "Reparatur", text: "Ein Blick in unsere Meisterwerkstatt.", icon: Wrench },
+  { title: "Nach dem Unfall", text: "So läuft der Unfallservice ab.", icon: ShieldAlert, wa: WA_UNFALL },
+  { title: "Lackschaden", text: "Vom Kratzer zum Neuzustand.", icon: Droplets, wa: WA_LACK },
+  { title: "Frontscheibe", text: "Steinschlag in Minuten repariert.", icon: Car, wa: WA_SCHEIBE },
+  { title: "Reparatur", text: "Ein Blick in unsere Meisterwerkstatt.", icon: Wrench, wa: WA_REPARATUR },
 ];
 
 export function VideoSection() {
@@ -29,7 +32,7 @@ export function VideoSection() {
     <section aria-labelledby="video-title" className="relative scroll-mt-28">
       <div ref={ref} className="mx-auto max-w-6xl px-4 pt-28 pb-16 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 id="video-title" className="text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
+          <h2 id="video-title" className="text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
             <AnimatedText text="Sehen statt lesen" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
           </h2>
           <p className="mt-3 text-muted-foreground">Kurze Videos zeigen, wie wir Ihnen helfen.</p>
@@ -67,6 +70,16 @@ export function VideoSection() {
                       <Play className="relative size-6" aria-hidden="true" />
                     </span>
                   </span>
+                  <a
+                    href={clip.wa}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    aria-label={`Per WhatsApp zu "${clip.title}" schreiben`}
+                    className="absolute top-6 right-6 flex size-9 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-110"
+                  >
+                    <WhatsAppIcon className="size-4" />
+                  </a>
                   <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-5 text-white">
                     <span className="block text-base font-semibold">{clip.title}</span>
                     <span className="block text-xs opacity-80">{clip.text}</span>

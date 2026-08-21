@@ -2,9 +2,10 @@ import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { Quote, Star } from "lucide-react";
 
-import { supabase } from "@/integrations/supabase/client";
+import { getTestimonials } from "@/lib/public-content.functions";
 import { WA_FRAGE } from "./site-data";
 import { Button3D } from "@/components/ui/button-3d";
+import { AnimatedText } from "@/components/ui/animated-text";
 
 type Testimonial = {
   id: string;
@@ -53,24 +54,19 @@ function initials(name: string) {
 
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
-    <div className="mb-6 w-full max-w-xs rounded-3xl border border-black/10 bg-white p-6 shadow-[0_10px_40px_-20px_rgba(19,31,53,.5)] transition-colors hover:border-brand-orange/50">
+    <div className="mb-6 w-full max-w-xl rounded-3xl border border-black/10 bg-white p-6 shadow-[0_10px_40px_-20px_rgba(19,31,53,.5)] transition-colors hover:border-brand-orange/50 sm:p-7">
       <Quote className="size-5 text-brand-orange/50" aria-hidden="true" />
-      <p className="mt-3 text-sm leading-relaxed">{t.text}</p>
+      <p className="mt-3 text-base leading-relaxed">{t.text}</p>
       <div className="mt-4 flex" aria-label={`${t.rating} von 5 Sternen`}>
         {Array.from({ length: t.rating }).map((_, i) => (
-          <Star key={i} className="size-3.5 fill-brand-orange text-brand-orange" aria-hidden="true" />
+          <Star key={i} className="size-4 fill-brand-orange text-brand-orange" aria-hidden="true" />
         ))}
       </div>
       <div className="mt-4 flex items-center gap-3">
         {t.image_url ? (
-          <img
-            src={t.image_url}
-            alt={t.name}
-            loading="lazy"
-            className="size-10 rounded-full object-cover"
-          />
+          <img src={t.image_url} alt={t.name} loading="lazy" className="size-12 rounded-full object-cover" />
         ) : (
-          <span className="grid size-10 place-items-center rounded-full bg-brand-navy text-xs font-bold text-brand-navy-foreground">
+          <span className="grid size-12 place-items-center rounded-full bg-brand-navy text-sm font-bold text-brand-navy-foreground">
             {initials(t.name)}
           </span>
         )}
@@ -83,58 +79,39 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   );
 }
 
-function TestimonialsColumn({
-  items,
-  duration = 18,
-  className,
-}: {
-  items: Testimonial[];
-  duration?: number;
-  className?: string;
-}) {
+// Eine einzige Spalte, kontinuierlich nach oben scrollend — kein Rechts/Links
+// mehr, damit der Blick nur einem Weg nach unten folgt (statt zwischen
+// mehreren Spalten hin- und herzuspringen).
+function TestimonialsMarquee({ items, duration = 24 }: { items: Testimonial[]; duration?: number }) {
   if (items.length === 0) return null;
   return (
-    <div className={className}>
-      <motion.div
-        animate={{ translateY: "-50%" }}
-        transition={{ duration, repeat: Infinity, ease: "linear", repeatType: "loop" }}
-        className="flex flex-col items-center gap-0 pb-6"
-      >
-        {[0, 1].map((round) => (
-          <div key={round} className="flex flex-col items-center">
-            {items.map((t) => (
-              <TestimonialCard key={`${round}-${t.id}`} t={t} />
-            ))}
-          </div>
-        ))}
-      </motion.div>
-    </div>
+    <motion.div
+      animate={{ translateY: "-50%" }}
+      transition={{ duration, repeat: Infinity, ease: "linear", repeatType: "loop" }}
+      className="flex flex-col items-center gap-0"
+    >
+      {[0, 1].map((round) => (
+        <div key={round} className="flex flex-col items-center">
+          {items.map((t) => (
+            <TestimonialCard key={`${round}-${t.id}`} t={t} />
+          ))}
+        </div>
+      ))}
+    </motion.div>
   );
 }
 
 export function TestimonialsSection() {
   const { data } = useQuery({
     queryKey: ["testimonials"],
-    queryFn: async (): Promise<Testimonial[]> => {
-      const { data, error } = await supabase
-        .from("testimonials")
-        .select("id,name,role,text,image_url,rating")
-        .eq("is_active", true)
-        .order("sort_order");
-      if (error) throw error;
-      return data ?? [];
-    },
+    queryFn: () => getTestimonials(),
   });
 
   const items = data && data.length > 0 ? data : fallback;
-  const per = Math.ceil(items.length / 3);
-  const columns = [items.slice(0, per), items.slice(per, per * 2), items.slice(per * 2)].filter(
-    (c) => c.length > 0,
-  );
 
   return (
     <section aria-labelledby="reviews-title" className="relative overflow-hidden">
-      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -148,22 +125,20 @@ export function TestimonialsSection() {
             ))}
             <span className="ml-2">4,9 / 5 bei Google</span>
           </span>
-          <h2 id="reviews-title" className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-            Das sagen unsere Kunden
+          <h2 id="reviews-title" className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
+            <AnimatedText text="Das sagen unsere Kunden" minWeight={300} maxWeight={800} delayMultiplier={0.03} />
           </h2>
           <p className="mt-3 text-muted-foreground">
             Echte Bewertungen von Kundinnen und Kunden aus der Region — Unfallservice, Reparatur und mehr.
           </p>
         </motion.div>
 
-        <div className="relative mt-12 flex max-h-[640px] justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]">
-          <TestimonialsColumn items={columns[0] ?? []} duration={22} />
-          <TestimonialsColumn items={columns[1] ?? columns[0] ?? []} duration={28} className="hidden md:block" />
-          <TestimonialsColumn items={columns[2] ?? columns[0] ?? []} duration={25} className="hidden lg:block" />
+        <div className="relative mt-12 flex max-h-[640px] justify-center overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]">
+          <TestimonialsMarquee items={items} />
         </div>
 
         <div className="mt-10 text-center">
-          <Button3D href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="navy">
+          <Button3D href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="whatsapp">
             Jetzt Frage per WhatsApp stellen
           </Button3D>
         </div>

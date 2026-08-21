@@ -14,6 +14,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import logo from "@/assets/logo.png.asset.json";
 import { SideRailIcons } from "@/components/site/SideRailIcons";
+import { AnalyticsTracker } from "@/components/site/AnalyticsTracker";
 
 function NotFoundComponent() {
   return (
@@ -131,6 +132,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <AnalyticsTracker />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <SideRailIcons />
       <Outlet />

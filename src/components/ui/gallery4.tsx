@@ -90,7 +90,11 @@ export function Gallery4({ title, description, items, autoplayInterval = 4500 }:
         <CarouselContent className="ml-0">
           {items.map((item) => (
             <CarouselItem key={item.id} className="max-w-[320px] pl-[20px] lg:max-w-[360px]">
-              <a href={item.href} className="group block rounded-xl">
+              <a
+                href={item.href}
+                {...(item.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="group block rounded-xl"
+              >
                 <div className="group relative h-full min-h-[27rem] max-w-full overflow-hidden rounded-xl md:aspect-[5/4] lg:aspect-[16/9]">
                   <img
                     src={item.image}
@@ -103,7 +107,7 @@ export function Gallery4({ title, description, items, autoplayInterval = 4500 }:
                     <div className="mb-2 pt-4 text-xl font-semibold md:mb-3 md:pt-4 lg:pt-4">{item.title}</div>
                     <div className="mb-8 line-clamp-2 text-white/80 md:mb-12 lg:mb-9">{item.description}</div>
                     <div className="flex items-center text-sm font-semibold">
-                      Termin anfragen
+                      Per WhatsApp anfragen
                       <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                     </div>
                   </div>

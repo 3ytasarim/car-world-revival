@@ -11,6 +11,7 @@ import { getPublicOffers } from "@/lib/public-content.functions";
 import { WA_FRAGE } from "@/components/site/site-data";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 import { Button3D } from "@/components/ui/button-3d";
+import { OfferCard } from "@/components/ui/offer-card";
 
 export const Route = createFileRoute("/aktuelle-angebote")({
   head: () => ({
@@ -63,42 +64,28 @@ function OffersPage() {
           subtitle="Kurz anfragen, schnell erledigt — direkt per WhatsApp."
         />
 
-        <section className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        <section className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6">
           {isLoading ? (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {[0, 1, 2, 3, 4, 5].map((i) => (
-                <div key={i} className="h-52 animate-pulse rounded-2xl bg-white" />
+                <div key={i} className="h-[430px] animate-pulse rounded-3xl bg-white" />
               ))}
             </div>
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {data?.map((offer) => (
-                <article
+                <OfferCard
                   key={offer.id}
-                  className="group relative flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-orange/50 hover:shadow-xl"
-                >
-                  {offer.badge && (
-                    <span className="absolute top-4 right-4 rounded-full bg-brand-orange px-3 py-1 text-[11px] font-bold text-brand-orange-foreground">
-                      {offer.badge}
-                    </span>
-                  )}
-                  <h2 className="pr-16 text-lg font-semibold">{offer.title}</h2>
-                  <p className="mt-2 flex-1 text-sm text-muted-foreground">{offer.description}</p>
-                  {offer.price_label && (
-                    <p className="mt-4 text-2xl font-bold text-brand-orange">{offer.price_label}</p>
-                  )}
-                  <Button3D
-                    href={`https://wa.me/4926413969555?text=${encodeURIComponent(
-                      `Hallo Car-World, ich interessiere mich für das Angebot: ${offer.title}`,
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="navy"
-                    className="mt-5 w-full"
-                  >
-                    {offer.cta_label}
-                  </Button3D>
-                </article>
+                  title={offer.title}
+                  description={offer.description}
+                  priceLabel={offer.price_label}
+                  image={offer.image_url}
+                  imageAlt={offer.title}
+                  whatsappHref={`https://wa.me/4926413969555?text=${encodeURIComponent(
+                    `Hallo Car-World, ich interessiere mich für das Angebot: ${offer.title}`,
+                  )}`}
+                  whatsappLabel={offer.cta_label}
+                />
               ))}
             </div>
           )}
