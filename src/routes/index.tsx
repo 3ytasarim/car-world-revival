@@ -195,7 +195,7 @@ function Home() {
                     <span
                       className="block bg-[linear-gradient(135deg,_#0B1626,_#1B3A63,_#2F6FB5,_#5088C8,_#8FB8E8)] bg-clip-text font-extrabold text-transparent"
                     >
-                      Nummer 1 Autowerkstatt im Ahrtal
+                      Nummer 1 Autowerkstatt
                     </span>
 
                   </h1>
