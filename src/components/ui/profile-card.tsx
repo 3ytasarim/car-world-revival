@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 import { Button3D } from "@/components/ui/button-3d";
-import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 // Adapted from 21st.dev (arunachalam/profile-card) — the original is a
 // "team member" bio card (name/title/description + social icon row,
@@ -55,101 +51,6 @@ export function ProfileCard(props: ProfileCardProps) {
             {ctaLabel}
           </Button3D>
         </div>
-      </div>
-    </div>
-  );
-}
-
-// One slide visible at a time, auto-advancing. Built on the same
-// embla-carousel-react primitives as Gallery4 (already proven working in
-// this codebase) instead of a hand-rolled index/AnimatePresence state
-// machine — an earlier version of that hand-rolled approach had a bug
-// where the dot indicator advanced but the card content stayed frozen on
-// the first slide; embla owns the actual slide position, so there's no
-// separate index state that can drift out of sync with what's rendered.
-export function ProfileCardCarousel({
-  items,
-  interval = 6000,
-  className,
-}: {
-  items: ProfileCardProps[];
-  interval?: number;
-  className?: string;
-}) {
-  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    if (!carouselApi) return;
-    const onSelect = () => setCurrentSlide(carouselApi.selectedScrollSnap());
-    onSelect();
-    carouselApi.on("select", onSelect);
-    return () => {
-      carouselApi.off("select", onSelect);
-    };
-  }, [carouselApi]);
-
-  useEffect(() => {
-    if (!carouselApi || paused || items.length <= 1) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => {
-      if (carouselApi.canScrollNext()) carouselApi.scrollNext();
-      else carouselApi.scrollTo(0);
-    }, interval);
-    return () => clearInterval(t);
-  }, [carouselApi, paused, items.length, interval]);
-
-  return (
-    <div
-      className={cn("mx-auto w-full max-w-7xl", className)}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <Carousel setApi={setCarouselApi} opts={{ loop: true }}>
-        <CarouselContent className="ml-0">
-          {items.map((item, i) => (
-            <CarouselItem key={i} className="basis-full pl-0">
-              <ProfileCard {...item} />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
-
-      <div className="mt-8 flex items-center justify-center gap-4">
-        <button
-          type="button"
-          aria-label="Vorherige Leistung"
-          onClick={() => carouselApi?.scrollPrev()}
-          className="flex size-10 items-center justify-center rounded-full border border-black/10 bg-white text-brand-navy shadow-md transition-transform hover:scale-105"
-        >
-          <ChevronLeft className="size-4" aria-hidden="true" />
-        </button>
-
-        <div className="flex items-center gap-2">
-          {items.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-label={`Leistung ${i + 1}`}
-              aria-current={i === currentSlide}
-              onClick={() => carouselApi?.scrollTo(i)}
-              className={cn(
-                "size-2 rounded-full transition-all",
-                i === currentSlide ? "w-6 bg-brand-navy" : "bg-brand-navy/25 hover:bg-brand-navy/40",
-              )}
-            />
-          ))}
-        </div>
-
-        <button
-          type="button"
-          aria-label="Nächste Leistung"
-          onClick={() => carouselApi?.scrollNext()}
-          className="flex size-10 items-center justify-center rounded-full border border-black/10 bg-white text-brand-navy shadow-md transition-transform hover:scale-105"
-        >
-          <ChevronRight className="size-4" aria-hidden="true" />
-        </button>
       </div>
     </div>
   );

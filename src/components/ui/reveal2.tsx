@@ -1,16 +1,15 @@
 "use client";
 
-import { GripVertical } from "lucide-react";
+import { GripHorizontal } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
-// From 21st.dev (ziegfiroyt/reveal2) — the source was already framework-
-// agnostic (plain <img>, no next/image), so this is a near-direct port.
-// Simplified to the before/after slider itself; the site's own heading/
-// badge/highlight markup lives in RundumSorglosSection instead of this
-// component's built-in layout, since the site already has its own
-// conventions for those (AnimatedText, brand badge styling, etc.).
+// From 21st.dev (ziegfiroyt/reveal2) — the original was a horizontal
+// left/right slider. Per the client's revision brief the whole site now
+// flows top-to-bottom (no left/right interactions anywhere), so this was
+// rebuilt as a vertical top/bottom reveal: "Vorher" on top, "Nachher"
+// revealed by dragging the divider down.
 export function RevealSlider({
   beforeImage,
   afterImage,
@@ -32,18 +31,18 @@ export function RevealSlider({
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleMove = useCallback((clientX: number) => {
+  const handleMove = useCallback((clientY: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    const x = clientX - rect.left;
-    setPosition(Math.max(0, Math.min(100, (x / rect.width) * 100)));
+    const y = clientY - rect.top;
+    setPosition(Math.max(0, Math.min(100, (y / rect.height) * 100)));
   }, []);
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
       setIsDragging(true);
-      handleMove(e.clientX);
+      handleMove(e.clientY);
     },
     [handleMove],
   );
@@ -52,17 +51,17 @@ export function RevealSlider({
     (e: React.TouchEvent) => {
       setIsDragging(true);
       const touch = e.touches[0];
-      if (touch) handleMove(touch.clientX);
+      if (touch) handleMove(touch.clientY);
     },
     [handleMove],
   );
 
   useEffect(() => {
-    const onMouseMove = (e: MouseEvent) => isDragging && handleMove(e.clientX);
+    const onMouseMove = (e: MouseEvent) => isDragging && handleMove(e.clientY);
     const onTouchMove = (e: TouchEvent) => {
       if (!isDragging) return;
       const touch = e.touches[0];
-      if (touch) handleMove(touch.clientX);
+      if (touch) handleMove(touch.clientY);
     };
     const onEnd = () => setIsDragging(false);
 
@@ -85,12 +84,13 @@ export function RevealSlider({
       ref={containerRef}
       role="slider"
       aria-label="Vorher/Nachher Vergleich"
+      aria-orientation="vertical"
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(position)}
       tabIndex={0}
       className={cn(
-        "relative aspect-[16/10] w-full cursor-ew-resize overflow-hidden rounded-3xl border border-[#5088C8]/20 shadow-[0_30px_60px_-30px_rgba(19,31,53,0.35)] select-none",
+        "relative aspect-[4/5] w-full cursor-ns-resize overflow-hidden rounded-3xl border border-[#5088C8]/20 shadow-[0_30px_60px_-30px_rgba(19,31,53,0.35)] select-none sm:aspect-[16/10]",
         className,
       )}
       onMouseDown={handleMouseDown}
@@ -100,13 +100,13 @@ export function RevealSlider({
         <img className="absolute inset-0 size-full object-cover" src={afterImage.src} alt={afterImage.alt} />
       </div>
 
-      <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
+      <div className="absolute inset-0" style={{ clipPath: `inset(0 0 ${100 - position}% 0)` }}>
         <img className="absolute inset-0 size-full object-cover" src={beforeImage.src} alt={beforeImage.alt} />
       </div>
 
       <div
-        className="absolute top-0 bottom-0 z-10 -translate-x-1/2 bg-white shadow-lg"
-        style={{ left: `${position}%`, width: `${dividerWidth}px` }}
+        className="absolute right-0 left-0 z-10 -translate-y-1/2 bg-white shadow-lg"
+        style={{ top: `${position}%`, height: `${dividerWidth}px` }}
       >
         <div
           className={cn(
@@ -114,14 +114,14 @@ export function RevealSlider({
             isDragging && "scale-110",
           )}
         >
-          <GripVertical className="size-5 text-[#1B3A63]" aria-hidden="true" />
+          <GripHorizontal className="size-5 text-[#1B3A63]" aria-hidden="true" />
         </div>
       </div>
 
       <div className="absolute top-4 left-4 z-20 rounded-full bg-[#131F35]/70 px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
         {beforeLabel}
       </div>
-      <div className="absolute top-4 right-4 z-20 rounded-full bg-[#5088C8] px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
+      <div className="absolute bottom-4 left-4 z-20 rounded-full bg-[#5088C8] px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
         {afterLabel}
       </div>
     </div>
