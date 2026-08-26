@@ -36,10 +36,10 @@ export function FloatingIcons({ className = "" }: { className?: string }) {
     >
       <style>{`
         @keyframes hero-icon-rise {
-          0%   { transform: translate3d(0, 20%, 0) rotate(-6deg); opacity: 0; }
+          0%   { transform: translate3d(0, -20%, 0) rotate(-6deg); opacity: 0; }
           12%  { opacity: var(--icon-opacity, .35); }
           80%  { opacity: var(--icon-opacity, .35); }
-          100% { transform: translate3d(var(--drift, 0px), -120vh, 0) rotate(6deg); opacity: 0; }
+          100% { transform: translate3d(var(--drift, 0px), 120vh, 0) rotate(6deg); opacity: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
           .hero-icon { animation: none !important; opacity: .18; }
@@ -52,7 +52,7 @@ export function FloatingIcons({ className = "" }: { className?: string }) {
           alt=""
           width={it.size}
           height={it.size}
-          className="hero-icon absolute bottom-0"
+          className="hero-icon absolute top-0"
           style={{
             left: `${it.left}%`,
             width: it.size,
