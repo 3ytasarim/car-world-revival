@@ -21,7 +21,6 @@ import heroPhoneUnfall from "@/assets/unfall-1.jpg";
 import heroPhoneSteinschlag from "@/assets/hero-steinschlag.jpg";
 import heroPhoneReifenwechsel from "@/assets/hero-reifenwechsel.jpg";
 import { ResponsivePhoneMockup, PhoneVerticalCarousel } from "@/components/ui/phone-mockups-1";
-import { FotoAngebot } from "@/components/site/FotoAngebot";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
 import { IhreVorteile } from "@/components/site/IhreVorteile";
 import { VideoPlayer } from "@/components/ui/video-player";
@@ -251,11 +250,6 @@ function Home() {
 
         {/* Unsere Leistungen — vertikale Tabs */}
         <LeistungenTabs />
-
-        {/* Foto senden → Angebot in 24 Stunden */}
-        <FotoAngebot />
-
-
 
         {/* Videos */}
         <VideoSection />

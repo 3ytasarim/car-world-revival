@@ -65,9 +65,7 @@ export function Header() {
             </div>
           </nav>
 
-          {/* Service-Team-Foto direkt neben Kontakt — anklickbar, ruft direkt
-              an. Dasselbe Foto wie im Foto-Angebot-Bereich ("Sarah"), hier
-              zusätzlich im Header, nicht als Ersatz dafür. */}
+          {/* Service-Team-Foto direkt neben Kontakt — anklickbar, ruft direkt an. */}
           <a
             href={PHONE_HREF}
             aria-label={`Sarah aus dem Serviceteam anrufen: ${PHONE_HREF.replace("tel:", "")}`}

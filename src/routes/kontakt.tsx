@@ -7,7 +7,6 @@ import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
 import { FloatingActions } from "@/components/site/FloatingActions";
 import { PageHero } from "@/components/site/PageHero";
-import { FotoAngebot } from "@/components/site/FotoAngebot";
 import { ADDRESS, EMAIL, PHONE_LABEL, PHONE_HREF, WA_FRAGE } from "@/components/site/site-data";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 import { Button3D } from "@/components/ui/button-3d";
@@ -91,8 +90,6 @@ function KontaktPage() {
             </div>
           </div>
         </section>
-
-        <FotoAngebot />
       </main>
       <Footer />
       <FloatingActions />

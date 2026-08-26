@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AktuelleAngeboteRouteImport } from './routes/aktuelle-angebote'
-import { Route as AngebotRouteImport } from './routes/angebot'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as KarriereRouteImport } from './routes/karriere'
 import { Route as KontaktRouteImport } from './routes/kontakt'
@@ -34,11 +33,6 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AktuelleAngeboteRoute = AktuelleAngeboteRouteImport.update({
   id: '/aktuelle-angebote',
   path: '/aktuelle-angebote',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AngebotRoute = AngebotRouteImport.update({
-  id: '/angebot',
-  path: '/angebot',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -85,7 +79,6 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/aktuelle-angebote': typeof AktuelleAngeboteRoute
-  '/angebot': typeof AngebotRoute
   '/auth': typeof AuthRoute
   '/karriere': typeof KarriereRoute
   '/kontakt': typeof KontaktRoute
@@ -98,7 +91,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/aktuelle-angebote': typeof AktuelleAngeboteRoute
-  '/angebot': typeof AngebotRoute
   '/auth': typeof AuthRoute
   '/karriere': typeof KarriereRoute
   '/kontakt': typeof KontaktRoute
@@ -113,7 +105,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/aktuelle-angebote': typeof AktuelleAngeboteRoute
-  '/angebot': typeof AngebotRoute
   '/auth': typeof AuthRoute
   '/karriere': typeof KarriereRoute
   '/kontakt': typeof KontaktRoute
@@ -128,7 +119,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/aktuelle-angebote'
-    | '/angebot'
     | '/auth'
     | '/karriere'
     | '/kontakt'
@@ -141,7 +131,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/aktuelle-angebote'
-    | '/angebot'
     | '/auth'
     | '/karriere'
     | '/kontakt'
@@ -155,7 +144,6 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/aktuelle-angebote'
-    | '/angebot'
     | '/auth'
     | '/karriere'
     | '/kontakt'
@@ -170,7 +158,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AktuelleAngeboteRoute: typeof AktuelleAngeboteRoute
-  AngebotRoute: typeof AngebotRoute
   AuthRoute: typeof AuthRoute
   KarriereRoute: typeof KarriereRoute
   KontaktRoute: typeof KontaktRoute
@@ -201,13 +188,6 @@ declare module '@tanstack/react-router' {
       path: '/aktuelle-angebote'
       fullPath: '/aktuelle-angebote'
       preLoaderRoute: typeof AktuelleAngeboteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/angebot': {
-      id: '/angebot'
-      path: '/angebot'
-      fullPath: '/angebot'
-      preLoaderRoute: typeof AngebotRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -284,7 +264,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AktuelleAngeboteRoute: AktuelleAngeboteRoute,
-  AngebotRoute: AngebotRoute,
   AuthRoute: AuthRoute,
   KarriereRoute: KarriereRoute,
   KontaktRoute: KontaktRoute,

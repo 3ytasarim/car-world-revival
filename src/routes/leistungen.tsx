@@ -8,7 +8,6 @@ import { FloatingActions } from "@/components/site/FloatingActions";
 import { PageHero } from "@/components/site/PageHero";
 import { ServicesSection } from "@/components/site/ServicesSection";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
-import { FotoAngebot } from "@/components/site/FotoAngebot";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 
 export const Route = createFileRoute("/leistungen")({
@@ -58,7 +57,6 @@ function LeistungenPage() {
         />
         <ServicesSection />
         <RundumSorglosSection />
-        <FotoAngebot />
       </main>
       <Footer />
       <FloatingActions />

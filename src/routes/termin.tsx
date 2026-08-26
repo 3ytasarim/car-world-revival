@@ -6,7 +6,6 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
 import { FloatingActions } from "@/components/site/FloatingActions";
-import { FotoAngebot } from "@/components/site/FotoAngebot";
 import { PHONE_LABEL, PHONE_HREF, WA_TERMIN } from "@/components/site/site-data";
 import { Button3D } from "@/components/ui/button-3d";
 
@@ -16,11 +15,10 @@ export const Route = createFileRoute("/termin")({
       { title: "Termin buchen — Car-World Autowerkstatt" },
       {
         name: "description",
-        content:
-          "Werkstatt-Termin bei Car-World buchen: per WhatsApp, telefonisch oder direkt online mit Fotos vom Schaden.",
+        content: "Werkstatt-Termin bei Car-World buchen: per WhatsApp oder telefonisch — schnelle Antwort.",
       },
       { property: "og:title", content: "Termin buchen — Car-World" },
-      { property: "og:description", content: "Termin per WhatsApp, Telefon oder Formular — Antwort in 24 Stunden." },
+      { property: "og:description", content: "Termin per WhatsApp oder Telefon — schnelle Antwort." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/termin" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -51,7 +49,6 @@ function TerminPage() {
             </div>
           </div>
         </section>
-        <FotoAngebot />
       </main>
       <Footer />
       <FloatingActions />
