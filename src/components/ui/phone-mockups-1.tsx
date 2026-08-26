@@ -38,7 +38,7 @@ export function ResponsivePhoneMockup({
         model="15-pro"
         color="#5088C8"
         scale={scale}
-        screenBg="#0B1626"
+        screenBg="#131F35"
         shadow="0 25px 50px -12px rgba(27,58,99,0.45), 0 8px 20px -8px rgba(27,58,99,0.35)"
       >
         {children}
