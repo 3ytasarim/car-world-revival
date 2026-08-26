@@ -79,14 +79,15 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   );
 }
 
-// Eine einzige Spalte, kontinuierlich nach oben scrollend — kein Rechts/Links
+// Eine einzige Spalte, kontinuierlich nach unten scrollend — kein Rechts/Links
 // mehr, damit der Blick nur einem Weg nach unten folgt (statt zwischen
 // mehreren Spalten hin- und herzuspringen).
 function TestimonialsMarquee({ items, duration = 24 }: { items: Testimonial[]; duration?: number }) {
   if (items.length === 0) return null;
   return (
     <motion.div
-      animate={{ translateY: "-50%" }}
+      initial={{ translateY: "-50%" }}
+      animate={{ translateY: "0%" }}
       transition={{ duration, repeat: Infinity, ease: "linear", repeatType: "loop" }}
       className="flex flex-col items-center gap-0"
     >

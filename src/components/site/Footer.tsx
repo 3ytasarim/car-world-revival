@@ -68,17 +68,17 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="flex size-10 items-center justify-center rounded-full bg-white p-2 shadow-md transition-transform hover:scale-110"
+                className="flex size-9 items-center justify-center transition-transform hover:scale-110"
               >
-                <s.icon className="size-full" />
+                <s.icon className="size-full drop-shadow-md" />
               </a>
             ))}
           </div>
         </div>
 
         <div>
-          <p className="text-xs font-bold tracking-widest text-white uppercase">Legal</p>
-          <ul className="mt-4 flex flex-col gap-3 text-sm">
+          <p className="text-sm font-bold tracking-widest text-white uppercase">Legal</p>
+          <ul className="mt-4 flex flex-col gap-3 text-base">
             {legal.map(([label, href]) => (
               <li key={href}>
                 <a className="font-semibold text-white opacity-90 transition-opacity hover:opacity-100" href={href}>
@@ -90,8 +90,8 @@ export function Footer() {
         </div>
 
         <div>
-          <p className="text-xs font-bold tracking-widest text-white uppercase">Kontakt</p>
-          <ul className="mt-4 flex flex-col gap-3 text-sm">
+          <p className="text-sm font-bold tracking-widest text-white uppercase">Kontakt</p>
+          <ul className="mt-4 flex flex-col gap-3 text-base">
             <li>
               <a
                 className="flex items-center gap-2 font-semibold text-white opacity-90 transition-opacity hover:opacity-100"
