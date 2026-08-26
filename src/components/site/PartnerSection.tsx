@@ -6,9 +6,7 @@ import { toast } from "sonner";
 
 import { submitPartnerRequest } from "@/lib/public-content.functions";
 import { useInView } from "@/hooks/use-in-view";
-import { OrbitingCircles02 } from "@/components/ui/orbiting-circles-02";
-import ParticleSphereAnimation from "@/components/ui/particle-sphere";
-import { TrustCard } from "@/components/ui/trust-card";
+import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
 import { ScannerCardStream } from "@/components/ui/scanner-card-stream";
@@ -38,6 +36,32 @@ const benefits = [
   },
 ];
 
+function GrosskundeCard({ icon: Icon, title, text }: (typeof benefits)[number]) {
+  return (
+    <div className="relative flex flex-col gap-3 overflow-hidden rounded-2xl bg-gradient-to-br from-brand-orange to-[#3D6FA8] p-6 text-white shadow-[0_20px_45px_-20px_rgba(80,136,200,0.55)]">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.12]"
+        style={{
+          backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
+          backgroundSize: "0.75rem 0.75rem",
+        }}
+      />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -inset-x-10 -top-24 h-40 -translate-x-full rotate-12 bg-linear-to-r from-transparent via-white/15 to-transparent"
+      />
+      <span className="relative flex size-12 shrink-0 items-center justify-center rounded-xl bg-white/15 ring-1 ring-white/25">
+        <Icon className="size-6" aria-hidden="true" />
+      </span>
+      <div className="relative">
+        <h4 className="text-lg font-bold tracking-tight">{title}</h4>
+        <p className="mt-1 text-sm text-white/85">{text}</p>
+      </div>
+    </div>
+  );
+}
+
 const logos = [
   { src: tuv, alt: "TÜV Rheinland" },
   { src: innung, alt: "KFZ-Innung Ahrweiler" },
@@ -45,12 +69,12 @@ const logos = [
   { src: hwk, alt: "Handwerkskammer Koblenz" },
 ];
 
-function logoAt(i: number) {
-  return logos[i % logos.length]!;
-}
-
-function RingLogo({ logo: l }: { logo: { src: string; alt: string } }) {
-  return <img src={l.src} alt={l.alt} loading="lazy" className="size-14 object-contain md:size-18" />;
+function PartnerLogoCard({ logo: l }: { logo: { src: string; alt: string } }) {
+  return (
+    <div className="flex size-40 shrink-0 items-center justify-center rounded-2xl border border-black/10 bg-white p-4 shadow-md sm:size-48 sm:p-5">
+      <img src={l.src} alt={l.alt} loading="lazy" className="max-h-full max-w-full object-contain" />
+    </div>
+  );
 }
 
 export function PartnerSection() {
@@ -110,67 +134,47 @@ export function PartnerSection() {
           </h3>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             {benefits.map((b) => (
-              <TrustCard
-                key={b.title}
-                title={b.title}
-                description={b.text}
-                icon={<b.icon className="size-6" aria-hidden="true" />}
-              />
+              <GrosskundeCard key={b.title} {...b} />
             ))}
           </div>
         </div>
 
-        <div className="my-14">
-          <ClientOnly fallback={<div className="h-[250px]" />}>
+        <div className="my-14 flex justify-center">
+          <ClientOnly fallback={<div className="h-[420px] w-[340px]" />}>
             <ScannerCardStream
+              orientation="vertical"
               cardImages={["/cards/grosskunde-1.png", "/cards/business-1.png", "/cards/grosskunde-2.png", "/cards/business-2.png"]}
               repeat={3}
               cardWidth={340}
               cardHeight={213}
-              className="h-[250px]"
+              className="h-[420px]"
             />
           </ClientOnly>
         </div>
 
-        {/* Unsere Partner & Zertifizierungen — 1:1-Portierung von 21st.dev
-            (shadcnspace/orbiting-circles-02): 3 Ringe in exakt denselben
-            Größen/Positionen/Timings wie das Original, Logos zyklisch auf
-            die 8 Original-Icon-Plätze verteilt (nur 4 eigene Logos
-            vorhanden, das Original hat 8 verschiedene Tech-Icons). */}
+        {/* Unsere Partner & Zertifizierungen — dieselbe vertikale
+            Karten-Marquee wie die Versicherungspartner im
+            Rundum-sorglos-Bereich, statt einer rotierenden Ring-Animation. */}
         <div className="mt-14">
           <h2 className="text-center text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
             <AnimatedText text="Unsere Partner & Zertifizierungen" minWeight={300} maxWeight={800} delayMultiplier={0.03} />
           </h2>
-          <OrbitingCircles02
-            className="mt-2"
-            heightClassName="h-[440px] md:h-[600px]"
-            centerClassName="w-[280px] md:w-[480px]"
-            center={
-              <ClientOnly fallback={<div className="size-full rounded-full bg-[#EAF2FA]" />}>
-                <ParticleSphereAnimation />
-              </ClientOnly>
-            }
-            rings={[
-              {
-                sizeClassName: "w-125 h-125 md:w-185 md:h-185",
-                duration: 10,
-                icons: [-30, 30].map((angle, i) => ({
-                  key: `r1-${i}`,
-                  angle,
-                  content: <RingLogo logo={logoAt(i)} />,
-                })),
-              },
-              {
-                sizeClassName: "w-195 h-195 md:w-270 md:h-270",
-                duration: 14,
-                icons: [-30, 30].map((angle, i) => ({
-                  key: `r2-${i}`,
-                  angle,
-                  content: <RingLogo logo={logoAt(i + 2)} />,
-                })),
-              },
-            ]}
-          />
+          <div className="mx-auto mt-8 grid max-w-xs grid-cols-2 gap-3 sm:max-w-md sm:gap-5">
+            <div className="[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]">
+              <InfiniteSlider direction="vertical" reverse gap={16} duration={22} durationOnHover={60} className="h-[340px] sm:h-[420px]">
+                {logos.map((l) => (
+                  <PartnerLogoCard key={l.alt} logo={l} />
+                ))}
+              </InfiniteSlider>
+            </div>
+            <div className="[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]">
+              <InfiniteSlider direction="vertical" gap={16} duration={22} durationOnHover={60} className="h-[340px] sm:h-[420px]">
+                {logos.map((l) => (
+                  <PartnerLogoCard key={l.alt} logo={l} />
+                ))}
+              </InfiniteSlider>
+            </div>
+          </div>
         </div>
 
         <div className="mx-auto mt-14 max-w-xl rounded-3xl border border-black/10 bg-white p-6 shadow-lg sm:p-8">
