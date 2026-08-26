@@ -60,6 +60,12 @@ export function PhoneScreen({
           24/7 per WhatsApp erreichbar
         </div>
       </div>
+
+      {/* Deckt einen hartnäckigen 1-2px-Saum am unteren Bildschirmrand ab
+          (Rendering-Artefakt der IPhoneMockup-Zoom-Skalierung, liess sich
+          nicht sauber an der Quelle beheben) — einfach mit derselben
+          Vollton-Farbe übermalen, statt weiter Ursachenforschung zu betreiben. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[3%] bg-brand-navy" aria-hidden="true" />
     </div>
   );
 }
