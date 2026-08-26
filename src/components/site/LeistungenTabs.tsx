@@ -37,7 +37,7 @@ export function LeistungenTabs() {
   useEffect(() => {
     if (paused) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => setActive((i) => (i + 1) % features.length), 4500);
+    const t = setInterval(() => setActive((i) => (i + 1) % features.length), 2500);
     return () => clearInterval(t);
   }, [paused]);
 
