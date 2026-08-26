@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ChevronRight, Phone } from "lucide-react";
+import { ChevronRight, Phone, Star } from "lucide-react";
 
 
 import { Header } from "@/components/site/Header";
+import { GoogleIcon } from "@/components/site/GoogleIcon";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
 
@@ -194,6 +195,20 @@ function Home() {
                     Alles aus einer Hand
                     <ChevronRight className="ml-2 inline size-4 text-brand-orange duration-300 group-hover:translate-x-1" aria-hidden="true" />
                   </span>
+
+                  {/* Google + 5 Sterne Trust-Badge — Vertrauenssignal noch
+                      vor dem ersten Scroll, gleicher 4,9-Wert wie im
+                      Kundenmeinungen-Bereich (keine zweite, abweichende Zahl). */}
+                  <div className="flex w-fit items-center gap-2 rounded-full border border-black/10 bg-white/90 px-4 py-2 shadow-sm">
+                    <GoogleIcon className="size-5 shrink-0" />
+                    <div className="flex items-center gap-0.5">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star key={i} className="size-3.5 fill-brand-orange text-brand-orange" aria-hidden="true" />
+                      ))}
+                    </div>
+                    <span className="text-sm font-semibold text-[#131F35]">4,9 / 5 bei Google</span>
+                  </div>
+
                   <h1 className="text-left text-[2.5rem] leading-[0.95] tracking-tighter sm:text-[3.5rem] md:text-[4.75rem] lg:text-[4.75rem] xl:text-[5.5rem]">
                     <span
                       className="block bg-[linear-gradient(180deg,_#0B1626_0%,_rgba(11,_22,_38,_0.8)_100%)] bg-clip-text text-transparent"
