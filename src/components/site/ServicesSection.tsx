@@ -1,7 +1,7 @@
-import { Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 import { AnimatedText } from "@/components/ui/animated-text";
-import { Gallery4 } from "@/components/ui/gallery4";
+import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import {
   WA_UNFALL,
   WA_ABSCHLEPP,
@@ -41,6 +41,38 @@ const services = [
   { id: "wartung", img: wartung, title: "Inspektion & Wartung", text: "Nach Herstellervorgabe.", wa: WA_INSPEKTION },
 ];
 
+// Gleiche dunkle Bild-Overlay-Karte wie zuvor (Gallery4), aber jetzt in
+// einer einzigen, automatisch von oben nach unten laufenden Spalte statt
+// eines horizontalen Klick-Carousels mit Pfeilen/Punkten.
+function ServiceCard({ img, title, text, wa }: (typeof services)[number]) {
+  return (
+    <a
+      href={wa}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block w-[min(90vw,420px)] shrink-0 overflow-hidden rounded-xl"
+    >
+      <div className="relative aspect-[5/4] overflow-hidden rounded-xl">
+        <img
+          src={img}
+          alt={title}
+          loading="lazy"
+          className="absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 h-full bg-gradient-to-t from-brand-navy from-10% via-brand-navy/60 via-60% to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-6 text-white">
+          <div className="text-xl font-semibold">{title}</div>
+          <div className="mt-2 mb-4 text-white/80">{text}</div>
+          <div className="flex items-center text-sm font-semibold">
+            Per WhatsApp anfragen
+            <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+          </div>
+        </div>
+      </div>
+    </a>
+  );
+}
+
 export function ServicesSection() {
   return (
     <section aria-labelledby="leistungen-title" className="relative overflow-hidden py-20">
@@ -56,10 +88,19 @@ export function ServicesSection() {
           <p className="mt-3 text-lg text-muted-foreground">Ein Ansprechpartner für alles rund um Ihr Fahrzeug.</p>
         </div>
 
-        <div className="mt-12">
-          <Gallery4
-            items={services.map((s) => ({ id: s.id, title: s.title, description: s.text, image: s.img, href: s.wa }))}
-          />
+        <div className="mt-12 flex justify-center">
+          <InfiniteSlider
+            direction="vertical"
+            reverse
+            gap={24}
+            duration={34}
+            durationOnHover={90}
+            className="h-[600px] w-full max-w-md [mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)]"
+          >
+            {services.map((s) => (
+              <ServiceCard key={s.id} {...s} />
+            ))}
+          </InfiniteSlider>
         </div>
       </div>
     </section>

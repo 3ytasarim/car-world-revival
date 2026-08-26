@@ -178,7 +178,7 @@ function Home() {
             aria-hidden="true"
             width={1920}
             height={1080}
-            className="pointer-events-none absolute inset-0 size-full object-cover opacity-[0.4]"
+            className="pointer-events-none absolute inset-0 size-full object-cover opacity-[0.52]"
           />
           <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-white/80 via-white/70 to-white" />
           <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-b from-white to-transparent" />
