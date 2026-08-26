@@ -23,7 +23,7 @@ import heroPhoneReifenwechsel from "@/assets/hero-reifenwechsel.jpg";
 import { ResponsivePhoneMockup, PhoneVerticalCarousel } from "@/components/ui/phone-mockups-1";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
-import { TrustArea } from "@/components/site/TrustArea";
+import { IhreVorteile } from "@/components/site/IhreVorteile";
 import { VideoPlayer } from "@/components/ui/video-player";
 import { VideoSection } from "@/components/site/VideoSection";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
@@ -236,8 +236,8 @@ function Home() {
 
         </div>
 
-        {/* Vertrauenspunkte — 3 starke Beweise gleich nach dem Hero */}
-        <TrustArea />
+        {/* Ihre Vorteile — Kundennutzen statt KPI-Zahlen, gleich nach dem Hero */}
+        <IhreVorteile />
 
         {/* Werkstatt-Video — gleiche Breite wie die 4 Vertrauenspunkte-Karten darüber */}
         <section className="relative bg-white py-14">
