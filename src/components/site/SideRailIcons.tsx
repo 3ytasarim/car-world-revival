@@ -20,14 +20,14 @@ type Item = {
 };
 
 function buildItems(seed: number): Item[] {
-  return Array.from({ length: 11 }, (_, i) => {
+  return Array.from({ length: 20 }, (_, i) => {
     const n = i + seed;
     return {
       src: ICONS[(n * 2 + seed) % ICONS.length]!,
       offset: 12 + ((n * 23) % 60),
       size: 38 + ((n * 11) % 30),
       duration: 18 + ((n * 7) % 14),
-      delay: -((n * 3.7) % 24),
+      delay: -((n * 2.1) % 24),
       drift: (n % 2 === 0 ? 1 : -1) * (8 + ((n * 5) % 18)),
       opacity: 0.5 + ((n % 3) * 0.15),
     };
