@@ -19,7 +19,7 @@ export function ResponsivePhoneMockup({
   className?: string;
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(0.6);
+  const [scale, setScale] = useState(0.72);
 
   useEffect(() => {
     const el = wrapperRef.current;
@@ -33,8 +33,14 @@ export function ResponsivePhoneMockup({
   }, []);
 
   return (
-    <div ref={wrapperRef} className={cn("mx-auto w-[62%] max-w-[240px] overflow-hidden", className)}>
-      <IPhoneMockup model="15-pro" color="#5088C8" scale={scale} screenBg="#0B1626">
+    <div ref={wrapperRef} className={cn("mx-auto w-[78%] max-w-[300px]", className)}>
+      <IPhoneMockup
+        model="15-pro"
+        color="#5088C8"
+        scale={scale}
+        screenBg="#0B1626"
+        shadow="0 25px 50px -12px rgba(27,58,99,0.45), 0 8px 20px -8px rgba(27,58,99,0.35)"
+      >
         {children}
       </IPhoneMockup>
     </div>
