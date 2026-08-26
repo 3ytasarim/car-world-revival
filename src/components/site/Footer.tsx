@@ -1,9 +1,19 @@
-import { Facebook, Instagram, Mail, Star } from "lucide-react";
+import { Mail } from "lucide-react";
 
 import { EMAIL, WA_FRAGE } from "./site-data";
 import carWorldLogo from "@/assets/car-world-logo.png";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+import { GoogleIcon } from "@/components/site/GoogleIcon";
+import { FacebookIcon } from "@/components/site/FacebookIcon";
+import { InstagramIcon } from "@/components/site/InstagramIcon";
 import { StarsCanvas } from "@/components/ui/stars-canvas";
+
+// Echte Profil-URLs noch nicht vorhanden — Platzhalter, bis der Kunde sie liefert.
+const socialLinks = [
+  { icon: GoogleIcon, label: "Google Bewertungen", href: "#" },
+  { icon: FacebookIcon, label: "Facebook", href: "#" },
+  { icon: InstagramIcon, label: "Instagram", href: "https://www.instagram.com/kfz_car_world" },
+];
 
 const legal = [
   ["Impressum", "/impressum"],
@@ -50,6 +60,20 @@ export function Footer() {
             <br />
             in Bad Neuenahr-Ahrweiler.
           </p>
+          <div className="mt-5 flex items-center gap-3">
+            {socialLinks.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                className="flex size-10 items-center justify-center rounded-full bg-white p-2 shadow-md transition-transform hover:scale-110"
+              >
+                <s.icon className="size-full" />
+              </a>
+            ))}
+          </div>
         </div>
 
         <div>
@@ -86,41 +110,6 @@ export function Footer() {
               >
                 <WhatsAppIcon className="size-4 shrink-0" />
                 Kostenlose Beratung per WhatsApp
-              </a>
-            </li>
-            <li>
-              <a
-                className="flex items-center gap-2 font-semibold text-white opacity-90 transition-opacity hover:opacity-100"
-                href="https://www.instagram.com/kfz_car_world"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram className="size-4 shrink-0" aria-hidden="true" />
-                Auf Instagram folgen
-              </a>
-            </li>
-            <li>
-              {/* TODO: echte Google-Profil-URL einsetzen, sobald vorhanden. */}
-              <a
-                className="flex items-center gap-2 font-semibold text-white opacity-90 transition-opacity hover:opacity-100"
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Star className="size-4 shrink-0" aria-hidden="true" />
-                Google Bewertungen
-              </a>
-            </li>
-            <li>
-              {/* TODO: echte Facebook-Seiten-URL einsetzen, sobald vorhanden. */}
-              <a
-                className="flex items-center gap-2 font-semibold text-white opacity-90 transition-opacity hover:opacity-100"
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Facebook className="size-4 shrink-0" aria-hidden="true" />
-                Auf Facebook folgen
               </a>
             </li>
           </ul>
