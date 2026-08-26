@@ -36,7 +36,7 @@ const fallback: Testimonial[] = [
   {
     id: "3",
     name: "Tolga Y.",
-    role: "Foto-Angebot",
+    role: "WhatsApp-Anfrage",
     text: "Fotos per WhatsApp geschickt, am nächsten Tag hatte ich mein Angebot.",
     image_url: null,
     rating: 5,

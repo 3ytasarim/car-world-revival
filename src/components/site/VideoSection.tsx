@@ -93,7 +93,7 @@ export function VideoSection() {
 
         <div className="mt-8 text-center">
           <Button3D href={WA_FOTO} target="_blank" rel="noopener noreferrer">
-            Fotos senden & Angebot erhalten
+            Fotos per WhatsApp senden
           </Button3D>
         </div>
       </div>

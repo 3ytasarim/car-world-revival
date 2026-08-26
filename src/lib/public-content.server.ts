@@ -104,9 +104,8 @@ export async function insertQuoteRequest(input: {
   );
 }
 
-// Datei-Upload ohne Admin-Session — von QuoteForm auf mehreren öffentlichen
-// Seiten genutzt (anonyme Kunden laden Schadenfotos hoch). Gleiche
-// Größenbegrenzung/Zielordner-Logik wie admin-content.server.ts's
+// Datei-Upload ohne Admin-Session (anonyme Kunden laden Schadenfotos hoch).
+// Gleiche Größenbegrenzung/Zielordner-Logik wie admin-content.server.ts's
 // saveUploadedImage, hier separat gehalten, damit dieses Modul (öffentlich
 // erreichbar) keine Admin-Interna importiert.
 export async function savePublicUpload(folder: string, filename: string, dataBase64: string): Promise<{ url: string }> {
