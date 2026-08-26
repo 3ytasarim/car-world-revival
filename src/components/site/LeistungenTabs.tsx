@@ -67,7 +67,7 @@ export function LeistungenTabs() {
                 key={f.id}
                 className={cn(
                   "absolute inset-0 transition-transform duration-700 ease-in-out",
-                  isActive ? "translate-y-0" : isPrev ? "-translate-y-full" : "translate-y-full",
+                  isActive ? "translate-y-0" : isPrev ? "translate-y-full" : "-translate-y-full",
                 )}
               >
                 <ProfileCard imageUrl={f.image} title={f.label} description={f.description} />
