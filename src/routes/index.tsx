@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ChevronRight, Phone } from "lucide-react";
-import { motion } from "framer-motion";
 
 
 import { Header } from "@/components/site/Header";
@@ -10,6 +9,7 @@ import { MobileBar } from "@/components/site/MobileBar";
 import { LeistungenTabs } from "@/components/site/LeistungenTabs";
 import { FloatingActions } from "@/components/site/FloatingActions";
 import { PhoneScreen } from "@/components/site/PhoneScreen";
+import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 
 
@@ -130,6 +130,20 @@ const coreServices = [
     text: "Als Kfz-Meisterwerkstatt führen wir alle Tätigkeiten und Reparaturen einer modernen Werkstatt durch.",
   },
 ];
+
+function KernleistungCard({ img, title, text }: (typeof coreServices)[number]) {
+  return (
+    <div className="w-[min(90vw,420px)] shrink-0 overflow-hidden rounded-2xl border border-black/10 bg-white shadow-[0_20px_45px_-20px_rgba(19,31,53,0.35)]">
+      <div className="aspect-[969/669] overflow-hidden">
+        <img src={img} alt={title} loading="lazy" className="size-full object-cover" />
+      </div>
+      <div className="p-5">
+        <h3 className="text-lg font-semibold text-brand-navy">{title}</h3>
+        <p className="mt-1 text-sm text-muted-foreground">{text}</p>
+      </div>
+    </div>
+  );
+}
 
 
 
@@ -257,9 +271,8 @@ function Home() {
         {/* Kundenmeinungen */}
         <TestimonialsSection />
 
-        {/* Unsere Kernleistungen — image/title/text cards, adapted from
-            21st.dev prebuiltui/feature-sections. Each card wiggles
-            periodically (staggered) instead of the old sticky-scroll stack. */}
+        {/* Unsere Kernleistungen — 1 Spalte, automatisch von oben nach
+            unten, statt der alten wackelnden 3er-Reihe. */}
         <section className="relative py-16">
           <div className="mx-auto max-w-3xl px-4 text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-4 py-1.5 text-sm font-semibold text-brand-orange">
@@ -270,22 +283,19 @@ function Home() {
             </h2>
             <p className="mt-3 text-lg text-muted-foreground">Schnelle Hilfe, wenn es darauf ankommt.</p>
           </div>
-          <div className="mx-auto mt-10 flex max-w-6xl flex-wrap items-start justify-center gap-10 px-4">
-            {coreServices.map((s, i) => (
-              <motion.div
-                key={s.title}
-                animate={{ rotate: [0, -3, 3, -3, 3, 0] }}
-                transition={{ duration: 0.7, repeat: Infinity, repeatDelay: 4, delay: i * 0.6, ease: "easeInOut" }}
-                whileHover={{ y: -4 }}
-                className="w-full max-w-80"
-              >
-                <div className="aspect-[969/669] overflow-hidden rounded-xl shadow-[0_20px_40px_-30px_rgba(19,31,53,0.35)]">
-                  <img src={s.img} alt={s.title} loading="lazy" className="size-full object-cover" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-brand-navy">{s.title}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{s.text}</p>
-              </motion.div>
-            ))}
+          <div className="mt-10 flex justify-center px-4">
+            <InfiniteSlider
+              direction="vertical"
+              reverse
+              gap={24}
+              duration={26}
+              durationOnHover={70}
+              className="h-[560px] w-full max-w-md [mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)]"
+            >
+              {coreServices.map((s) => (
+                <KernleistungCard key={s.title} {...s} />
+              ))}
+            </InfiniteSlider>
           </div>
         </section>
 
