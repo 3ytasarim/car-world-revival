@@ -54,7 +54,7 @@ function Rail({ items, side }: { items: Item[]; side: "left" | "right" }) {
           alt=""
           width={it.size}
           height={it.size}
-          className="rail-icon absolute bottom-0"
+          className="rail-icon absolute top-0"
           style={{
             left: `${it.offset}%`,
             width: it.size,
@@ -74,7 +74,7 @@ function Rail({ items, side }: { items: Item[]; side: "left" | "right" }) {
 
 /**
  * Global decorative rails in the left/right page gutters: car icons drift
- * from the bottom of the viewport upwards and fade out near the top.
+ * from the top of the viewport downwards and fade out near the bottom.
  * Hidden while the footer is on screen, and hidden on small screens where
  * there is no free gutter space.
  */
@@ -101,10 +101,10 @@ export function SideRailIcons() {
     >
       <style>{`
         @keyframes rail-icon-rise {
-          0%   { transform: translate3d(0, 30%, 0) rotate(-8deg); opacity: 0; }
+          0%   { transform: translate3d(0, -30%, 0) rotate(-8deg); opacity: 0; }
           10%  { opacity: var(--rail-opacity, .3); }
           78%  { opacity: var(--rail-opacity, .3); }
-          100% { transform: translate3d(var(--drift, 0px), -110vh, 0) rotate(8deg); opacity: 0; }
+          100% { transform: translate3d(var(--drift, 0px), 110vh, 0) rotate(8deg); opacity: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
           .rail-icon { animation: none !important; opacity: .3; }
