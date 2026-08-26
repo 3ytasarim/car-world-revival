@@ -20,7 +20,7 @@ import heroBg from "@/assets/hero-bg.jpg";
 import heroPhoneUnfall from "@/assets/unfall-1.jpg";
 import heroPhoneSteinschlag from "@/assets/hero-steinschlag.jpg";
 import heroPhoneReifenwechsel from "@/assets/hero-reifenwechsel.jpg";
-import { Iphone15ProFrame, PhoneFanCarousel } from "@/components/ui/phone-mockups-1";
+import { ResponsivePhoneMockup, PhoneVerticalCarousel } from "@/components/ui/phone-mockups-1";
 import { FotoAngebot } from "@/components/site/FotoAngebot";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
 import { TrustArea } from "@/components/site/TrustArea";
@@ -213,22 +213,22 @@ function Home() {
 
                 </div>
 
-                {/* Mockup-Spalte: 3 Smartphones im Fan-Carousel, automatisch wechselnd */}
+                {/* Mockup-Spalte: 1 fester Telefon-Rahmen, Inhalt wechselt vertikal */}
                 <div className="mx-auto mt-8 flex h-full w-full max-w-2xl items-center justify-center lg:mt-0">
-                  <PhoneFanCarousel
-                    className="drop-shadow-2xl"
-                    items={heroPhones.map((p, i) => (
-                      <Iphone15ProFrame key={i}>
+                  <ResponsivePhoneMockup className="drop-shadow-2xl">
+                    <PhoneVerticalCarousel
+                      items={heroPhones.map((p, i) => (
                         <PhoneScreen
+                          key={i}
                           image={p.image}
                           imageAlt={p.imageAlt}
                           badge={p.badge}
                           title={p.title}
                           subtitle={p.subtitle}
                         />
-                      </Iphone15ProFrame>
-                    ))}
-                  />
+                      ))}
+                    />
+                  </ResponsivePhoneMockup>
                 </div>
               </div>
             </div>
