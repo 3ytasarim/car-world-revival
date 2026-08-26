@@ -2,10 +2,8 @@ import { useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { Briefcase, Handshake, House, Mail, Menu, Tag, Wrench, X } from "lucide-react";
 
-import logoWhite from "@/assets/logo-white.png";
-import badge10Jahre from "@/assets/badge-10jahre.png";
+import carWorldLogo from "@/assets/car-world-logo.png";
 import supportImg from "@/assets/support-team.jpg";
-import { SpinningLogo } from "./SpinningLogo";
 import { NAV, PHONE_HREF } from "./site-data";
 
 const icons = {
@@ -17,14 +15,10 @@ const icons = {
   handshake: Handshake,
 } as const;
 
-// Logo bleibt jetzt fest/statisch (das Wortmarke-Lockup soll immer lesbar
-// sein) — nur das "10 Jahre"-Siegel daneben dreht sich weiter, wie zuvor
-// der ganze Logo-Block.
 function AnimatedLogo() {
   return (
-    <a aria-label="Car-World — 10 Jahre Kfz-Meisterbetrieb" href="/" className="relative flex items-center gap-3 sm:gap-4">
-      <img src={logoWhite} alt="Car-World Kfz-Meisterbetrieb & Gutachter" className="h-14 w-auto sm:h-20 lg:h-24" />
-      <SpinningLogo src={badge10Jahre} alt="10 Jahre Car-World" className="h-12 w-auto sm:h-16 lg:h-20" duration={8} />
+    <a aria-label="Car-World Kfz-Meisterbetrieb" href="/" className="relative flex items-center gap-3 sm:gap-4">
+      <img src={carWorldLogo} alt="Car-World Kfz-Meisterbetrieb" className="h-14 w-auto sm:h-20 lg:h-24" />
     </a>
   );
 }
@@ -34,7 +28,7 @@ export function Header() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
-    <header className="sticky top-0 z-40 bg-[#1B3A63] shadow-lg">
+    <header className="sticky top-0 z-40 bg-brand-orange shadow-lg">
       <div className="mx-auto flex h-20 max-w-[1600px] items-center justify-between gap-6 px-4 sm:h-24 md:px-10 lg:h-28 lg:px-14">
         <AnimatedLogo />
 
@@ -88,7 +82,7 @@ export function Header() {
                 height={128}
                 className="size-10 rounded-full border-2 border-white/40 object-cover shadow-md transition-transform duration-300 group-hover:scale-105 lg:size-12"
               />
-              <span className="absolute right-0 bottom-0 size-3 rounded-full border-2 border-[#1B3A63] bg-[#25D366]" />
+              <span className="absolute right-0 bottom-0 size-3 rounded-full border-2 border-brand-orange bg-[#25D366]" />
             </span>
           </a>
         </div>

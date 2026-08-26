@@ -1,11 +1,9 @@
 import { Instagram, Mail } from "lucide-react";
 
 import { EMAIL, WA_FRAGE } from "./site-data";
-import logoWhite from "@/assets/logo-white.png";
-import badge10Jahre from "@/assets/badge-10jahre.png";
+import carWorldLogo from "@/assets/car-world-logo.png";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { StarsCanvas } from "@/components/ui/stars-canvas";
-import { SpinningLogo } from "@/components/site/SpinningLogo";
 
 const legal = [
   ["Impressum", "/impressum"],
@@ -16,7 +14,7 @@ const marqueeText = "CARWORLD-WERKSTATT.DE";
 
 export function Footer() {
   return (
-    <footer className="relative mt-auto overflow-hidden rounded-t-[2.5rem] bg-[#1B3A63] text-white">
+    <footer className="relative mt-auto overflow-hidden rounded-t-[2.5rem] bg-brand-orange text-white">
       <StarsCanvas />
 
       <div className="relative overflow-hidden border-b border-white/10 py-4">
@@ -45,8 +43,7 @@ export function Footer() {
       <div className="relative mx-auto grid max-w-[1600px] grid-cols-1 gap-10 px-4 py-16 md:px-10 lg:grid-cols-[1.4fr_1fr_1fr] lg:px-14">
         <div>
           <div className="flex items-center gap-3 sm:gap-4">
-            <img src={logoWhite} alt="Car-World Kfz-Meisterbetrieb & Gutachter" className="h-14 w-auto sm:h-20" />
-            <SpinningLogo src={badge10Jahre} alt="10 Jahre Car-World" className="h-12 w-auto sm:h-16" duration={8} />
+            <img src={carWorldLogo} alt="Car-World Kfz-Meisterbetrieb" className="h-14 w-auto sm:h-20" />
           </div>
           <p className="mt-4 text-sm leading-relaxed font-medium text-white/70">
             Ihre Nr. 1 Autowerkstatt

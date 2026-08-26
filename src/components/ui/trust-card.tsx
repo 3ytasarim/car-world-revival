@@ -41,7 +41,7 @@ export const TrustCard = React.forwardRef<HTMLDivElement, TrustCardProps>(
           color: "#fff",
           backgroundImage: `
             radial-gradient(circle at 1px 1px, hsla(0,0%,100%,0.14) 1px, transparent 0),
-            linear-gradient(to bottom right, #1B3A63, #2F6FB5)
+            linear-gradient(to bottom right, #5088C8, #6FA0D8)
           `,
           backgroundSize: "0.5rem 0.5rem, 100% 100%",
         }}
@@ -51,7 +51,7 @@ export const TrustCard = React.forwardRef<HTMLDivElement, TrustCardProps>(
       >
         {/* Lesezeichen-Form mit Icon */}
         <div className="absolute top-0 right-6 h-16 w-12 bg-white/95 [clip-path:polygon(0%_0%,_100%_0%,_100%_100%,_50%_75%,_0%_100%)]">
-          <div className="absolute inset-0 flex items-center justify-center text-[#1B3A63]">{icon}</div>
+          <div className="absolute inset-0 flex items-center justify-center text-brand-orange">{icon}</div>
         </div>
 
         <motion.h3 variants={itemVariants} className="mt-2 pr-16 text-xl font-bold tracking-tight">
