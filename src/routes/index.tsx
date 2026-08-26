@@ -215,7 +215,7 @@ function Home() {
 
                 {/* Mockup-Spalte: 1 fester Telefon-Rahmen, Inhalt wechselt vertikal */}
                 <div className="mx-auto mt-8 flex h-full w-full max-w-2xl items-center justify-center lg:mt-0">
-                  <ResponsivePhoneMockup className="drop-shadow-2xl">
+                  <ResponsivePhoneMockup>
                     <PhoneVerticalCarousel
                       items={heroPhones.map((p, i) => (
                         <PhoneScreen
