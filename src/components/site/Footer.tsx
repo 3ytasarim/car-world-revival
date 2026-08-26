@@ -53,11 +53,11 @@ export function Footer() {
         </div>
 
         <div>
-          <p className="text-xs font-semibold tracking-widest text-white/50 uppercase">Legal</p>
+          <p className="text-xs font-bold tracking-widest text-white uppercase">Legal</p>
           <ul className="mt-4 flex flex-col gap-3 text-sm">
             {legal.map(([label, href]) => (
               <li key={href}>
-                <a className="opacity-80 transition-opacity hover:opacity-100" href={href}>
+                <a className="font-semibold text-white opacity-90 transition-opacity hover:opacity-100" href={href}>
                   {label}
                 </a>
               </li>
@@ -66,11 +66,11 @@ export function Footer() {
         </div>
 
         <div>
-          <p className="text-xs font-semibold tracking-widest text-white/50 uppercase">Kontakt</p>
+          <p className="text-xs font-bold tracking-widest text-white uppercase">Kontakt</p>
           <ul className="mt-4 flex flex-col gap-3 text-sm">
             <li>
               <a
-                className="flex items-center gap-2 opacity-80 transition-opacity hover:opacity-100"
+                className="flex items-center gap-2 font-semibold text-white opacity-90 transition-opacity hover:opacity-100"
                 href={`mailto:${EMAIL}`}
               >
                 <Mail className="size-4 shrink-0" aria-hidden="true" />
@@ -79,7 +79,7 @@ export function Footer() {
             </li>
             <li>
               <a
-                className="flex items-center gap-2 opacity-80 transition-opacity hover:opacity-100"
+                className="flex items-center gap-2 font-semibold text-white opacity-90 transition-opacity hover:opacity-100"
                 href={WA_FRAGE}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -90,7 +90,7 @@ export function Footer() {
             </li>
             <li>
               <a
-                className="flex items-center gap-2 opacity-80 transition-opacity hover:opacity-100"
+                className="flex items-center gap-2 font-semibold text-white opacity-90 transition-opacity hover:opacity-100"
                 href="https://www.instagram.com/kfz_car_world"
                 target="_blank"
                 rel="noopener noreferrer"

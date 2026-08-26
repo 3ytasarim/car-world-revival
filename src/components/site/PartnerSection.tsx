@@ -36,9 +36,9 @@ const benefits = [
   },
 ];
 
-function GrosskundeCard({ icon: Icon, title, text }: (typeof benefits)[number]) {
+function GrosskundeCard({ icon: Icon, title }: (typeof benefits)[number]) {
   return (
-    <div className="relative flex flex-col gap-3 overflow-hidden rounded-2xl bg-gradient-to-br from-brand-orange to-[#3D6FA8] p-6 text-white shadow-[0_20px_45px_-20px_rgba(80,136,200,0.55)]">
+    <div className="relative flex w-[min(88vw,420px)] shrink-0 items-center gap-5 overflow-hidden rounded-2xl bg-gradient-to-br from-brand-orange to-[#3D6FA8] px-7 py-7 text-white shadow-[0_20px_45px_-20px_rgba(80,136,200,0.55)]">
       <span
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.12]"
@@ -51,13 +51,10 @@ function GrosskundeCard({ icon: Icon, title, text }: (typeof benefits)[number]) 
         aria-hidden="true"
         className="pointer-events-none absolute -inset-x-10 -top-24 h-40 -translate-x-full rotate-12 bg-linear-to-r from-transparent via-white/15 to-transparent"
       />
-      <span className="relative flex size-12 shrink-0 items-center justify-center rounded-xl bg-white/15 ring-1 ring-white/25">
-        <Icon className="size-6" aria-hidden="true" />
+      <span className="relative flex size-16 shrink-0 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/25">
+        <Icon className="size-8" aria-hidden="true" />
       </span>
-      <div className="relative">
-        <h4 className="text-lg font-bold tracking-tight">{title}</h4>
-        <p className="mt-1 text-sm text-white/85">{text}</p>
-      </div>
+      <h4 className="relative text-xl font-bold tracking-tight">{title}</h4>
     </div>
   );
 }
@@ -132,10 +129,19 @@ export function PartnerSection() {
           <h3 className="text-center text-xl font-bold tracking-tight text-brand-navy sm:text-2xl">
             Vorteile als Großkunde
           </h3>
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            {benefits.map((b) => (
-              <GrosskundeCard key={b.title} {...b} />
-            ))}
+          <div className="mt-6 flex justify-center">
+            <InfiniteSlider
+              direction="vertical"
+              reverse
+              gap={20}
+              duration={30}
+              durationOnHover={80}
+              className="h-[420px] w-full max-w-md [mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)]"
+            >
+              {benefits.map((b) => (
+                <GrosskundeCard key={b.title} {...b} />
+              ))}
+            </InfiniteSlider>
           </div>
         </div>
 
