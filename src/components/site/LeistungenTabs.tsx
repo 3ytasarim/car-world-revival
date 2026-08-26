@@ -58,7 +58,7 @@ export function LeistungenTabs() {
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <div className="relative h-[520px] w-full max-w-3xl overflow-hidden sm:h-[440px]">
+        <div className="relative h-[640px] w-full max-w-3xl overflow-hidden md:h-[440px]">
           {features.map((f, i) => {
             const isActive = i === active;
             const isPrev = i < active;

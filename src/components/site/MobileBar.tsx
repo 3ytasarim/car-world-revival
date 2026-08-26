@@ -7,7 +7,7 @@ import { PHONE_HREF, WA_FRAGE } from "./site-data";
 // Anrufen — kein Formular/Angebot-CTA mehr, auch nicht hier.
 export function MobileBar() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 bg-brand-navy md:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 bg-brand-orange md:hidden">
       <a
         href={PHONE_HREF}
         className="flex flex-col items-center gap-0.5 border-t border-white/10 py-2.5 text-xs font-medium text-brand-navy-foreground"
