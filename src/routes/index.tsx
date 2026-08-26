@@ -10,13 +10,11 @@ import { MobileBar } from "@/components/site/MobileBar";
 import { LeistungenTabs } from "@/components/site/LeistungenTabs";
 import { FloatingActions } from "@/components/site/FloatingActions";
 import { PhoneScreen } from "@/components/site/PhoneScreen";
-import { ClientOnly } from "@tanstack/react-router";
-import { MeshyBackground } from "@/components/ui/meshy-background";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 
 
 
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/hero-werkstatt.jpg";
 import heroPhoneUnfall from "@/assets/unfall-1.jpg";
 import heroPhoneSteinschlag from "@/assets/hero-steinschlag.jpg";
 import heroPhoneReifenwechsel from "@/assets/hero-reifenwechsel.jpg";
@@ -165,11 +163,8 @@ function Home() {
             aria-hidden="true"
             width={1920}
             height={1080}
-            className="pointer-events-none absolute inset-0 size-full object-cover opacity-[0.14]"
+            className="pointer-events-none absolute inset-0 size-full object-cover opacity-[0.4]"
           />
-          <ClientOnly fallback={null}>
-            <MeshyBackground className="opacity-40" />
-          </ClientOnly>
           <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-white/80 via-white/70 to-white" />
           <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-linear-to-b from-white to-transparent" />
 
