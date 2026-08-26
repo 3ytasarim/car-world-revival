@@ -1,4 +1,4 @@
-import { Instagram, Mail } from "lucide-react";
+import { Facebook, Instagram, Mail, Star } from "lucide-react";
 
 import { EMAIL, WA_FRAGE } from "./site-data";
 import carWorldLogo from "@/assets/car-world-logo.png";
@@ -97,6 +97,30 @@ export function Footer() {
               >
                 <Instagram className="size-4 shrink-0" aria-hidden="true" />
                 Auf Instagram folgen
+              </a>
+            </li>
+            <li>
+              {/* TODO: echte Google-Profil-URL einsetzen, sobald vorhanden. */}
+              <a
+                className="flex items-center gap-2 font-semibold text-white opacity-90 transition-opacity hover:opacity-100"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Star className="size-4 shrink-0" aria-hidden="true" />
+                Google Bewertungen
+              </a>
+            </li>
+            <li>
+              {/* TODO: echte Facebook-Seiten-URL einsetzen, sobald vorhanden. */}
+              <a
+                className="flex items-center gap-2 font-semibold text-white opacity-90 transition-opacity hover:opacity-100"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Facebook className="size-4 shrink-0" aria-hidden="true" />
+                Auf Facebook folgen
               </a>
             </li>
           </ul>
