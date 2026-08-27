@@ -21,7 +21,7 @@ const processSteps = [
   { icon: FileCheck2, title: "Abwicklung" },
 ];
 
-const insurancePartners = [
+export const insurancePartners = [
   { src: "/logos/axa.png", alt: "AXA" },
   { src: "/logos/ergo.png", alt: "ERGO" },
   { src: "/logos/allianz.png", alt: "Allianz" },
@@ -34,7 +34,7 @@ const insurancePartners = [
   { src: "/logos/wuerttembergische.png", alt: "Württembergische" },
 ];
 
-export function RundumSorglosSection() {
+export function RundumSorglosSection({ hideInsuranceMarquee = false }: { hideInsuranceMarquee?: boolean }) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
 
@@ -157,40 +157,41 @@ export function RundumSorglosSection() {
             </Button3D>
           </div>
 
-          {/* Versicherungspartner — Logo-Marquee statt Zahlen-Kacheln */}
-          <div className="mt-16">
-            <div className="mx-auto grid max-w-xs grid-cols-2 gap-3 sm:max-w-md sm:gap-5">
-              {/* Links: unten nach oben. Rechts: oben nach unten. Die
-                  Fade-Maske oben/unten sorgt dafür, dass rein/raus-scrollende
-                  Karten weich ausblenden statt hart abgeschnitten zu wirken
-                  ("iç içe" — als würden sie ineinander laufen). */}
-              <div
-                className="[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]"
-              >
-                <InfiniteSlider direction="vertical" gap={16} duration={28} durationOnHover={70} className="h-[340px] sm:h-[420px]">
-                  {insurancePartners.map((p) => (
-                    <PartnerLogoCard key={p.alt} partner={p} />
-                  ))}
-                </InfiniteSlider>
-              </div>
-              <div
-                className="[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]"
-              >
-                <InfiniteSlider direction="vertical" reverse gap={16} duration={28} durationOnHover={70} className="h-[340px] sm:h-[420px]">
-                  {insurancePartners.map((p) => (
-                    <PartnerLogoCard key={p.alt} partner={p} />
-                  ))}
-                </InfiniteSlider>
+          {/* Versicherungspartner — Logo-Marquee statt Zahlen-Kacheln.
+              Auf der Startseite ausgeblendet: dort steht dieselbe Marquee
+              zusammen mit den Partner-Zertifizierungen in einem
+              gemeinsamen 2-spaltigen Block (siehe index.tsx). */}
+          {!hideInsuranceMarquee && (
+            <div className="mt-16">
+              <div className="mx-auto grid max-w-xs grid-cols-2 gap-3 sm:max-w-md sm:gap-5">
+                {/* Links: unten nach oben. Rechts: oben nach unten. Die
+                    Fade-Maske oben/unten sorgt dafür, dass rein/raus-scrollende
+                    Karten weich ausblenden statt hart abgeschnitten zu wirken
+                    ("iç içe" — als würden sie ineinander laufen). */}
+                <div className="[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]">
+                  <InfiniteSlider direction="vertical" gap={16} duration={28} durationOnHover={70} className="h-[340px] sm:h-[420px]">
+                    {insurancePartners.map((p) => (
+                      <PartnerLogoCard key={p.alt} partner={p} />
+                    ))}
+                  </InfiniteSlider>
+                </div>
+                <div className="[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]">
+                  <InfiniteSlider direction="vertical" reverse gap={16} duration={28} durationOnHover={70} className="h-[340px] sm:h-[420px]">
+                    {insurancePartners.map((p) => (
+                      <PartnerLogoCard key={p.alt} partner={p} />
+                    ))}
+                  </InfiniteSlider>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>
   );
 }
 
-function PartnerLogoCard({ partner }: { partner: { src: string; alt: string } }) {
+export function PartnerLogoCard({ partner }: { partner: { src: string; alt: string } }) {
   return (
     <div className="flex size-40 shrink-0 items-center justify-center rounded-2xl border border-black/10 bg-white p-4 shadow-md sm:size-48 sm:p-5">
       <img src={partner.src} alt={partner.alt} loading="lazy" className="max-h-full max-w-full object-contain" />

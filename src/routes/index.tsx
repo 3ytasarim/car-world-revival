@@ -26,6 +26,7 @@ import { VideoPlayer } from "@/components/ui/video-player";
 import { VideoSection } from "@/components/site/VideoSection";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { PartnerSection } from "@/components/site/PartnerSection";
+import { PartnerLogosCombined } from "@/components/site/PartnerLogosCombined";
 
 import { PHONE_HREF } from "@/components/site/site-data";
 import { AnimatedText } from "@/components/ui/animated-text";
@@ -270,7 +271,11 @@ function Home() {
         </section>
 
         {/* Rundum-sorglos-Paket */}
-        <RundumSorglosSection />
+        <RundumSorglosSection hideInsuranceMarquee />
+
+        {/* Versicherungspartner + Partner & Zertifizierungen — auf der
+            Startseite zu einem gemeinsamen 2-spaltigen Block kombiniert. */}
+        <PartnerLogosCombined />
 
         {/* Unsere Leistungen — vertikale Tabs */}
         <LeistungenTabs />
@@ -315,7 +320,7 @@ function Home() {
         </section>
 
         {/* Partner */}
-        <PartnerSection />
+        <PartnerSection hideCertificationBlock />
 
 
       </main>

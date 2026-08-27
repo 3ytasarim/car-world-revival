@@ -59,14 +59,14 @@ function GrosskundeCard({ icon: Icon, title }: (typeof benefits)[number]) {
   );
 }
 
-const logos = [
+export const certificationLogos = [
   { src: tuv, alt: "TÜV Rheinland" },
   { src: innung, alt: "KFZ-Innung Ahrweiler" },
   { src: autoglas, alt: "Autoglas Spezialist" },
   { src: hwk, alt: "Handwerkskammer Koblenz" },
 ];
 
-function PartnerLogoCard({ logo: l }: { logo: { src: string; alt: string } }) {
+export function CertificationLogoCard({ logo: l }: { logo: { src: string; alt: string } }) {
   return (
     <div className="flex size-40 shrink-0 items-center justify-center rounded-2xl border border-black/10 bg-white p-4 shadow-md sm:size-48 sm:p-5">
       <img src={l.src} alt={l.alt} loading="lazy" className="max-h-full max-w-full object-contain" />
@@ -74,7 +74,7 @@ function PartnerLogoCard({ logo: l }: { logo: { src: string; alt: string } }) {
   );
 }
 
-export function PartnerSection() {
+export function PartnerSection({ hideCertificationBlock = false }: { hideCertificationBlock?: boolean }) {
   const { ref } = useInView<HTMLDivElement>(0.15);
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
@@ -160,28 +160,33 @@ export function PartnerSection() {
 
         {/* Unsere Partner & Zertifizierungen — dieselbe vertikale
             Karten-Marquee wie die Versicherungspartner im
-            Rundum-sorglos-Bereich, statt einer rotierenden Ring-Animation. */}
-        <div className="mt-14">
-          <h2 className="text-center text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
-            <AnimatedText text="Unsere Partner & Zertifizierungen" minWeight={300} maxWeight={800} delayMultiplier={0.03} />
-          </h2>
-          <div className="mx-auto mt-8 grid max-w-xs grid-cols-2 gap-3 sm:max-w-md sm:gap-5">
-            <div className="[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]">
-              <InfiniteSlider direction="vertical" reverse gap={16} duration={22} durationOnHover={60} className="h-[340px] sm:h-[420px]">
-                {logos.map((l) => (
-                  <PartnerLogoCard key={l.alt} logo={l} />
-                ))}
-              </InfiniteSlider>
-            </div>
-            <div className="[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]">
-              <InfiniteSlider direction="vertical" gap={16} duration={22} durationOnHover={60} className="h-[340px] sm:h-[420px]">
-                {logos.map((l) => (
-                  <PartnerLogoCard key={l.alt} logo={l} />
-                ))}
-              </InfiniteSlider>
+            Rundum-sorglos-Bereich, statt einer rotierenden Ring-Animation.
+            Auf der Startseite ausgeblendet: dort steht dieser Block
+            zusammen mit den Versicherungspartnern in einem gemeinsamen
+            2-spaltigen Block (siehe index.tsx). */}
+        {!hideCertificationBlock && (
+          <div className="mt-14">
+            <h2 className="text-center text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
+              <AnimatedText text="Unsere Partner & Zertifizierungen" minWeight={300} maxWeight={800} delayMultiplier={0.03} />
+            </h2>
+            <div className="mx-auto mt-8 grid max-w-xs grid-cols-2 gap-3 sm:max-w-md sm:gap-5">
+              <div className="[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]">
+                <InfiniteSlider direction="vertical" reverse gap={16} duration={22} durationOnHover={60} className="h-[340px] sm:h-[420px]">
+                  {certificationLogos.map((l) => (
+                    <CertificationLogoCard key={l.alt} logo={l} />
+                  ))}
+                </InfiniteSlider>
+              </div>
+              <div className="[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]">
+                <InfiniteSlider direction="vertical" gap={16} duration={22} durationOnHover={60} className="h-[340px] sm:h-[420px]">
+                  {certificationLogos.map((l) => (
+                    <CertificationLogoCard key={l.alt} logo={l} />
+                  ))}
+                </InfiniteSlider>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className="mx-auto mt-14 max-w-xl rounded-3xl border border-black/10 bg-white p-6 shadow-lg sm:p-8">
           {done ? (
