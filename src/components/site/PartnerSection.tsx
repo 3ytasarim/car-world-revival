@@ -1,15 +1,10 @@
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
-import { useState } from "react";
-import { ClientOnly } from "@tanstack/react-router";
-import { CarFront, CheckCircle2, Handshake, Loader2, Percent, Zap } from "lucide-react";
-import { toast } from "sonner";
+import { Handshake, CarFront, Percent, Zap } from "lucide-react";
 
-import { submitPartnerRequest } from "@/lib/public-content.functions";
 import { useInView } from "@/hooks/use-in-view";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
-import { ScannerCardStream } from "@/components/ui/scanner-card-stream";
 import { WA_PARTNER } from "./site-data";
 import tuv from "@/assets/partner-tuv.png";
 import innung from "@/assets/partner-innung.png";
@@ -76,31 +71,6 @@ export function CertificationLogoCard({ logo: l }: { logo: { src: string; alt: s
 
 export function PartnerSection({ hideCertificationBlock = false }: { hideCertificationBlock?: boolean }) {
   const { ref } = useInView<HTMLDivElement>(0.15);
-  const [sending, setSending] = useState(false);
-  const [done, setDone] = useState(false);
-
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const data = new FormData(form);
-    setSending(true);
-    try {
-      await submitPartnerRequest({
-        data: {
-          name: String(data.get("name") ?? "").trim(),
-          email: String(data.get("email") ?? "").trim(),
-          message: String(data.get("message") ?? "").trim() || undefined,
-        },
-      });
-      setDone(true);
-      form.reset();
-      toast.success("Danke! Wir melden uns kurzfristig bei Ihnen.");
-    } catch {
-      toast.error("Senden fehlgeschlagen. Bitte melden Sie sich per WhatsApp.");
-    } finally {
-      setSending(false);
-    }
-  }
 
   return (
     <section aria-labelledby="partner-title" className="relative">
@@ -121,6 +91,13 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
             Fahrzeugen. Arbeiten Sie mit einem zuverlässigen Meisterbetrieb zusammen, statt sich um jedes Fahrzeug
             einzeln zu kümmern.
           </p>
+
+          <div className="mt-6 flex justify-center">
+            <Button3D href={WA_PARTNER} target="_blank" rel="noopener noreferrer" variant="whatsapp">
+              <WhatsAppIcon className="size-5" />
+              Per WhatsApp anfragen
+            </Button3D>
+          </div>
         </div>
 
         {/* Vorteile als Großkunde — nur die verbindlich bestätigten 3, keine
@@ -143,19 +120,6 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
               ))}
             </InfiniteSlider>
           </div>
-        </div>
-
-        <div className="my-14 flex justify-center">
-          <ClientOnly fallback={<div className="h-[420px] w-[340px]" />}>
-            <ScannerCardStream
-              orientation="vertical"
-              cardImages={["/cards/grosskunde-1.png", "/cards/business-1.png", "/cards/grosskunde-2.png", "/cards/business-2.png"]}
-              repeat={3}
-              cardWidth={340}
-              cardHeight={213}
-              className="h-[420px]"
-            />
-          </ClientOnly>
         </div>
 
         {/* Unsere Partner & Zertifizierungen — dieselbe vertikale
@@ -187,60 +151,6 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
             </div>
           </div>
         )}
-
-        <div className="mx-auto mt-14 max-w-xl rounded-3xl border border-black/10 bg-white p-6 shadow-lg sm:p-8">
-          {done ? (
-            <div className="flex flex-col items-center gap-3 py-10 text-center">
-              <CheckCircle2 className="size-12 text-success" aria-hidden="true" />
-              <p className="text-lg font-semibold">Anfrage erhalten!</p>
-              <p className="text-sm text-muted-foreground">Wir setzen uns zeitnah mit Ihnen in Verbindung.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <p className="text-sm font-semibold">Großkundenanfrage senden</p>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <input
-                  name="name"
-                  required
-                  maxLength={150}
-                  placeholder="Name"
-                  className="h-11 w-full rounded-lg border border-black/10 px-3 text-sm outline-none focus:border-brand-orange"
-                />
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  maxLength={255}
-                  placeholder="E-Mail"
-                  className="h-11 w-full rounded-lg border border-black/10 px-3 text-sm outline-none focus:border-brand-orange"
-                />
-              </div>
-              <textarea
-                name="message"
-                rows={3}
-                maxLength={1000}
-                placeholder="Ihre Nachricht (optional)"
-                className="w-full rounded-lg border border-black/10 px-3 py-2 text-sm outline-none focus:border-brand-orange"
-              />
-              <div className="flex flex-col gap-3 sm:flex-row [&>*]:flex-1">
-                <Button3D
-                  href={WA_PARTNER}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variant="whatsapp"
-                  className="whitespace-nowrap"
-                >
-                  <WhatsAppIcon className="size-5" />
-                  Per WhatsApp
-                </Button3D>
-                <Button3D as="button" type="submit" disabled={sending} className="whitespace-nowrap">
-                  {sending && <Loader2 className="size-4 animate-spin" aria-hidden="true" />}
-                  Anfrage senden
-                </Button3D>
-              </div>
-            </form>
-          )}
-        </div>
       </div>
     </section>
   );
