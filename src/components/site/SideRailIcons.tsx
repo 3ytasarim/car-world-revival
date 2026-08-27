@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 
 import carIcon from "@/assets/rail-car.png";
 import breakdownIcon from "@/assets/rail-breakdown.png";
@@ -87,13 +88,17 @@ function Rail({
 /**
  * Global decorative rails in the left/right page gutters: car icons drift
  * from the top of the viewport downwards and fade out near the bottom.
- * Hidden while the footer is on screen, and hidden on small screens where
- * there is no free gutter space.
+ * Hidden while the footer is on screen, hidden on small screens where there
+ * is no free gutter space, and — per Kundenwunsch — nur auf der Startseite,
+ * auf allen anderen Seiten komplett ausgeblendet.
  */
 export function SideRailIcons() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isHome = pathname === "/";
   const [footerVisible, setFooterVisible] = useState(false);
 
   useEffect(() => {
+    if (!isHome) return;
     const footer = document.querySelector("footer");
     if (!footer) return;
     const io = new IntersectionObserver(
@@ -102,7 +107,9 @@ export function SideRailIcons() {
     );
     io.observe(footer);
     return () => io.disconnect();
-  }, []);
+  }, [isHome]);
+
+  if (!isHome) return null;
 
   return (
     <div
