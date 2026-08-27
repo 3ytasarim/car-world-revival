@@ -1,42 +1,30 @@
-import { Car, CalendarClock, FileCheck2, ShieldCheck } from "lucide-react";
-
 import { AnimatedText } from "@/components/ui/animated-text";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
-import { TowTruckIcon } from "@/components/site/TowTruckIcon";
-import { cn } from "@/lib/utils";
 
-// Ersetzt die alte KPI-Kachelreihe (12 Jahre Erfahrung, Nr. 1 im Ahrtal, ...)
-// direkt unter dem Hero. Statt Zahlen, die nur zeigen wie gut die Firma ist,
-// beantwortet jede Karte direkt "Was habe ich davon?" — reiner Kundennutzen.
+import imgMobilitaetsgarantie from "@/assets/vorteil-mobilitaetsgarantie.jpg";
+import imgAbschleppservice from "@/assets/vorteil-abschleppservice.jpg";
+import imgTerminvereinbarung from "@/assets/vorteil-terminvereinbarung.jpg";
+import imgVersicherungsabwicklung from "@/assets/vorteil-versicherungsabwicklung.jpg";
+
+// Echte Fotos statt generischer Icons — jede Karte zeigt ein Bild mit
+// Bildunterschrift, angelehnt an 21st.dev (ravikatiyar162/marquee-logo-scroller),
+// aber ohne dessen eigenen Titel/Description-Header (die Sektion hat bereits
+// ihre eigene Überschrift oben) und vertikal statt horizontal scrollend,
+// damit es zur Bewegungsrichtung aller anderen Marquees auf der Seite passt.
 const vorteile = [
-  { icon: Car, title: "Mobilitätsgarantie" },
-  { icon: ShieldCheck, title: "TÜV-zertifiziert" },
-  { icon: CalendarClock, title: "Schnelle Terminvereinbarung" },
-  { icon: FileCheck2, title: "Komplette Versicherungsabwicklung" },
-  // TowTruckIcon ist ein eingefärbtes PNG (kein currentColor-SVG wie die
-  // anderen), braucht daher einen Filter statt einer Textfarbe für Weiß.
-  { icon: TowTruckIcon, title: "Abhol- & Abschleppservice", iconClassName: "brightness-0 invert" },
+  { image: imgMobilitaetsgarantie, title: "Mobilitätsgarantie" },
+  { image: imgAbschleppservice, title: "Abhol- & Abschleppservice" },
+  { image: imgTerminvereinbarung, title: "Schnelle Terminvereinbarung" },
+  { image: imgVersicherungsabwicklung, title: "Versicherungsabwicklung" },
 ];
 
-function VorteilCard({ icon: Icon, title, iconClassName }: (typeof vorteile)[number]) {
+function VorteilPhotoCard({ image, title }: (typeof vorteile)[number]) {
   return (
-    <div className="relative flex w-[min(88vw,420px)] shrink-0 items-center gap-5 overflow-hidden rounded-2xl bg-gradient-to-br from-brand-orange to-[#3D6FA8] px-7 py-7 text-white shadow-[0_20px_45px_-20px_rgba(80,136,200,0.55)]">
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.12]"
-        style={{
-          backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
-          backgroundSize: "0.75rem 0.75rem",
-        }}
-      />
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute -inset-x-10 -top-24 h-40 -translate-x-full rotate-12 bg-linear-to-r from-transparent via-white/15 to-transparent"
-      />
-      <span className="relative flex size-16 shrink-0 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/25">
-        <Icon className={cn("size-8", iconClassName)} aria-hidden="true" />
-      </span>
-      <h3 className="relative text-xl font-bold tracking-tight">{title}</h3>
+    <div className="mx-auto flex w-[min(90vw,460px)] shrink-0 flex-col items-center gap-4">
+      <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[0_20px_45px_-20px_rgba(19,31,53,0.4)]">
+        <img src={image} alt={title} loading="lazy" className="size-full object-cover" />
+      </div>
+      <h3 className="text-center text-xl font-bold tracking-tight text-brand-navy">{title}</h3>
     </div>
   );
 }
@@ -57,13 +45,13 @@ export function IhreVorteile() {
           <InfiniteSlider
             direction="vertical"
             reverse
-            gap={20}
-            duration={38}
-            durationOnHover={90}
-            className="h-[520px] w-full max-w-md [mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)]"
+            gap={32}
+            duration={42}
+            durationOnHover={100}
+            className="h-[620px] w-full max-w-lg [mask-image:linear-gradient(to_bottom,transparent_0%,#000_8%,#000_92%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_8%,#000_92%,transparent_100%)]"
           >
             {vorteile.map((v) => (
-              <VorteilCard key={v.title} {...v} />
+              <VorteilPhotoCard key={v.title} {...v} />
             ))}
           </InfiniteSlider>
         </div>
