@@ -7,10 +7,11 @@ import imgTerminvereinbarung from "@/assets/vorteil-terminvereinbarung.jpg";
 import imgVersicherungsabwicklung from "@/assets/vorteil-versicherungsabwicklung.jpg";
 
 // Echte Fotos statt generischer Icons — jede Karte zeigt ein Bild mit
-// Bildunterschrift, angelehnt an 21st.dev (ravikatiyar162/marquee-logo-scroller),
-// aber ohne dessen eigenen Titel/Description-Header (die Sektion hat bereits
-// ihre eigene Überschrift oben) und vertikal statt horizontal scrollend,
-// damit es zur Bewegungsrichtung aller anderen Marquees auf der Seite passt.
+// Bildunterschrift, angelehnt an 21st.dev (ravikatiyar162/marquee-logo-scroller):
+// horizontal scrollend wie das Original, aber ohne dessen eigenen
+// Titel/Description-Header (die Sektion hat bereits ihre eigene Überschrift
+// oben) und mit deutlich größeren Bildern + Bildunterschrift statt kleiner
+// Logo-Kacheln.
 const vorteile = [
   { image: imgMobilitaetsgarantie, title: "Mobilitätsgarantie" },
   { image: imgAbschleppservice, title: "Abhol- & Abschleppservice" },
@@ -20,7 +21,7 @@ const vorteile = [
 
 function VorteilPhotoCard({ image, title }: (typeof vorteile)[number]) {
   return (
-    <div className="mx-auto flex w-[min(90vw,460px)] shrink-0 flex-col items-center gap-4">
+    <div className="flex w-[280px] shrink-0 flex-col items-center gap-4 sm:w-[340px]">
       <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[0_20px_45px_-20px_rgba(19,31,53,0.4)]">
         <img src={image} alt={title} loading="lazy" className="size-full object-cover" />
       </div>
@@ -41,14 +42,13 @@ export function IhreVorteile() {
           <p className="mt-3 text-muted-foreground">Das bekommen Sie, wenn Sie sich für Car-World entscheiden.</p>
         </div>
 
-        <div className="mt-10 flex justify-center">
+        <div className="mt-10">
           <InfiniteSlider
-            direction="vertical"
-            reverse
-            gap={32}
-            duration={42}
-            durationOnHover={100}
-            className="h-[620px] w-full max-w-lg [mask-image:linear-gradient(to_bottom,transparent_0%,#000_8%,#000_92%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_8%,#000_92%,transparent_100%)]"
+            direction="horizontal"
+            gap={24}
+            duration={32}
+            durationOnHover={80}
+            className="w-full [mask-image:linear-gradient(to_right,transparent_0%,#000_6%,#000_94%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_6%,#000_94%,transparent_100%)]"
           >
             {vorteile.map((v) => (
               <VorteilPhotoCard key={v.title} {...v} />
