@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { BarChart3, Briefcase, Globe2, Handshake, Images, LogOut, MousePointerClick, Plus, Quote, Search, Tag, Trash2, Users } from "lucide-react";
+import { BarChart3, Briefcase, Globe2, Images, LogOut, MousePointerClick, Plus, Quote, Search, Tag, Trash2, Users } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -21,9 +21,6 @@ import {
   createAdminJobOpening,
   updateAdminJobOpening,
   deleteAdminJobOpening,
-  getAdminQuoteRequests,
-  updateAdminQuoteRequestStatus,
-  getAdminPartnerRequests,
   getAdminTestimonials,
   createAdminTestimonial,
   updateAdminTestimonial,
@@ -87,51 +84,39 @@ function AdminPage() {
       </header>
 
       <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-        <Tabs defaultValue="offers">
+        <Tabs defaultValue="analytics">
           <TabsList className="flex h-auto w-full flex-wrap justify-start gap-1">
+            <TabsTrigger value="analytics" className="gap-2">
+              <BarChart3 className="size-4" aria-hidden="true" /> Analytics
+            </TabsTrigger>
+            <TabsTrigger value="seo" className="gap-2">
+              <Search className="size-4" aria-hidden="true" /> SEO
+            </TabsTrigger>
             <TabsTrigger value="offers" className="gap-2">
               <Tag className="size-4" aria-hidden="true" /> Angebote
             </TabsTrigger>
             <TabsTrigger value="jobs" className="gap-2">
               <Briefcase className="size-4" aria-hidden="true" /> Stellen
             </TabsTrigger>
-            <TabsTrigger value="seo" className="gap-2">
-              <Search className="size-4" aria-hidden="true" /> SEO
-            </TabsTrigger>
             <TabsTrigger value="testimonials" className="gap-2">
               <Quote className="size-4" aria-hidden="true" /> Kundenmeinungen
             </TabsTrigger>
-            <TabsTrigger value="quotes" className="gap-2">
-              <Images className="size-4" aria-hidden="true" /> Anfragen
-            </TabsTrigger>
-            <TabsTrigger value="partners" className="gap-2">
-              <Handshake className="size-4" aria-hidden="true" /> Partner
-            </TabsTrigger>
-            <TabsTrigger value="analytics" className="gap-2">
-              <BarChart3 className="size-4" aria-hidden="true" /> Analytics
-            </TabsTrigger>
           </TabsList>
 
+          <TabsContent value="analytics" className="mt-6">
+            <AnalyticsTab />
+          </TabsContent>
+          <TabsContent value="seo" className="mt-6">
+            <SeoTab />
+          </TabsContent>
           <TabsContent value="offers" className="mt-6">
             <OffersTab />
           </TabsContent>
           <TabsContent value="jobs" className="mt-6">
             <JobsTab />
           </TabsContent>
-          <TabsContent value="seo" className="mt-6">
-            <SeoTab />
-          </TabsContent>
           <TabsContent value="testimonials" className="mt-6">
             <TestimonialsTab />
-          </TabsContent>
-          <TabsContent value="quotes" className="mt-6">
-            <QuotesTab />
-          </TabsContent>
-          <TabsContent value="partners" className="mt-6">
-            <PartnersTab />
-          </TabsContent>
-          <TabsContent value="analytics" className="mt-6">
-            <AnalyticsTab />
           </TabsContent>
         </Tabs>
       </main>
@@ -657,95 +642,6 @@ function SeoTab() {
           </Card>
         );
       })}
-    </div>
-  );
-}
-
-/* ---------------- Anfragen ---------------- */
-
-function QuotesTab() {
-  const qc = useQueryClient();
-  const { data } = useQuery({
-    queryKey: ["admin-quotes"],
-    queryFn: () => getAdminQuoteRequests(),
-  });
-
-  const setStatus = useMutation({
-    mutationFn: async ({ id, status }: { id: string; status: string }) => {
-      await updateAdminQuoteRequestStatus({ data: { id, status } });
-    },
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-quotes"] }),
-    onError: (e: Error) => toast.error(e.message),
-  });
-
-  if (!data?.length) {
-    return <p className="text-sm text-muted-foreground">Noch keine Anfragen.</p>;
-  }
-
-  return (
-    <div className="space-y-4">
-      {data.map((q) => (
-        <Card key={q.id}>
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <p className="font-semibold">
-                {q.name} · {q.service_type}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                {q.phone}
-                {q.email ? ` · ${q.email}` : ""} · {new Date(q.created_at).toLocaleString("de-DE")}
-              </p>
-              {q.message && <p className="mt-2 text-sm">{q.message}</p>}
-              {q.photo_keys?.length > 0 && (
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {q.photo_keys.map((url) => (
-                    <a key={url} href={url} target="_blank" rel="noopener noreferrer">
-                      <img src={url} alt="Schadenfoto" className="size-16 rounded-lg border object-cover" />
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="rounded-full bg-brand-surface px-3 py-1 text-xs font-semibold">{q.status}</span>
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => setStatus.mutate({ id: q.id, status: q.status === "neu" ? "erledigt" : "neu" })}
-              >
-                {q.status === "neu" ? "Als erledigt markieren" : "Wieder öffnen"}
-              </Button>
-            </div>
-          </div>
-        </Card>
-      ))}
-    </div>
-  );
-}
-
-/* ---------------- Partner ---------------- */
-
-function PartnersTab() {
-  const { data } = useQuery({
-    queryKey: ["admin-partners"],
-    queryFn: () => getAdminPartnerRequests(),
-  });
-
-  if (!data?.length) {
-    return <p className="text-sm text-muted-foreground">Noch keine Partneranfragen.</p>;
-  }
-
-  return (
-    <div className="space-y-4">
-      {data.map((p) => (
-        <Card key={p.id}>
-          <p className="font-semibold">{p.name}</p>
-          <p className="text-sm text-muted-foreground">
-            {p.email} · {new Date(p.created_at).toLocaleString("de-DE")}
-          </p>
-          {p.message && <p className="mt-2 text-sm">{p.message}</p>}
-        </Card>
-      ))}
     </div>
   );
 }
