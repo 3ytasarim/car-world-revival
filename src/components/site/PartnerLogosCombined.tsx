@@ -1,7 +1,10 @@
 import { AnimatedText } from "@/components/ui/animated-text";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
+import { Button3D } from "@/components/ui/button-3d";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { insurancePartners, PartnerLogoCard } from "@/components/site/RundumSorglosSection";
 import { certificationLogos, CertificationLogoCard } from "@/components/site/PartnerSection";
+import { WA_PARTNER } from "@/components/site/site-data";
 
 const FADE_MASK =
   "[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]";
@@ -60,6 +63,13 @@ export function PartnerLogosCombined() {
               </InfiniteSlider>
             </div>
           </div>
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <Button3D href={WA_PARTNER} target="_blank" rel="noopener noreferrer" variant="whatsapp">
+            <WhatsAppIcon className="size-5" />
+            Per WhatsApp anfragen
+          </Button3D>
         </div>
       </div>
     </section>

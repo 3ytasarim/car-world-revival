@@ -53,6 +53,7 @@ function PartnerPage() {
           }
           title="Partnerschaft mit Car-World"
           subtitle="Ein starker Werkstattpartner für Versicherungen, Flotten und Firmen."
+          photoBackground
         />
         <PartnerSection />
       </main>

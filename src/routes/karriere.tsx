@@ -76,6 +76,7 @@ function KarrierePage() {
           }
           title="Karriere bei Car-World"
           subtitle="Kfz-Meisterbetrieb | Mitglied der Kfz-Innung Ahrweiler"
+          photoBackground
         />
 
         <section className="relative mx-auto max-w-5xl px-4 py-14 sm:px-6">
