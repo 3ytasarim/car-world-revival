@@ -107,7 +107,11 @@ export function SideRailIcons() {
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none fixed inset-0 z-0 hidden overflow-hidden transition-opacity duration-500 md:block ${
+      // z-20: über allen normalen Seiteninhalten (Sections liegen bei
+      // z-10 oder z-auto, deshalb haben undurchsichtige bg-white-Sections
+      // die Icons bisher komplett verdeckt), aber unter Header/MobileBar
+      // (z-40) und FloatingActions (z-50).
+      className={`pointer-events-none fixed inset-0 z-20 hidden overflow-hidden transition-opacity duration-500 md:block ${
         footerVisible ? "opacity-0" : "opacity-100"
       }`}
     >
