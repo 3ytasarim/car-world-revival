@@ -62,6 +62,7 @@ function OffersPage() {
           }
           title="Aktuelle Angebote"
           subtitle="Kurz anfragen, schnell erledigt — direkt per WhatsApp."
+          photoBackground
         />
 
         <section className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6">

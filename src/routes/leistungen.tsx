@@ -54,6 +54,7 @@ function LeistungenPage() {
           }
           title="Alles aus einer Hand"
           subtitle="Ihre Autowerkstatt in meiner Nähe — vom Unfallschaden bis zur Inspektion."
+          photoBackground
         />
         <ServicesSection />
         <RundumSorglosSection />
