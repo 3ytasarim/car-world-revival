@@ -30,8 +30,7 @@ import {
 } from "@/lib/admin-content.functions";
 import { getOnlineNow, getAnalyticsSummary } from "@/lib/analytics.functions";
 import type { AdminOfferRow, AdminJobOpeningRow, AdminTestimonialRow, AdminSeoRow } from "@/lib/admin-content.server";
-import logoWhite from "@/assets/logo-white.png";
-import badge10Jahre from "@/assets/badge-10jahre.png";
+import carWorldLogo from "@/assets/car-world-logo.png";
 
 type Offer = AdminOfferRow;
 type Seo = AdminSeoRow;
@@ -70,11 +69,10 @@ function AdminPage() {
 
   return (
     <div className="min-h-screen bg-brand-surface">
-      <header className="sticky top-0 z-20 border-b border-black/10 bg-brand-navy text-brand-navy-foreground">
+      <header className="sticky top-0 z-20 border-b border-black/10 bg-brand-orange text-white">
         <div className="relative mx-auto flex h-24 max-w-6xl items-center justify-center px-4 sm:px-6">
           <div className="flex items-center gap-3">
-            <img src={logoWhite} alt="Car-World Verwaltung" className="h-14 w-auto sm:h-16" />
-            <img src={badge10Jahre} alt="" aria-hidden="true" className="h-12 w-auto sm:h-14" />
+            <img src={carWorldLogo} alt="Car-World Verwaltung" className="h-14 w-auto sm:h-16" />
           </div>
           <Button onClick={signOut} variant="secondary" size="sm" className="absolute top-1/2 right-4 -translate-y-1/2 gap-2 sm:right-6">
             <LogOut className="size-4" aria-hidden="true" />
@@ -181,7 +179,7 @@ function ImageField({
             const file = e.target.files?.[0];
             if (file) handleFile(file);
           }}
-          className="text-xs file:mr-2 file:rounded-md file:border-0 file:bg-brand-navy file:px-2 file:py-1 file:text-xs file:text-brand-navy-foreground"
+          className="text-xs file:mr-2 file:rounded-md file:border-0 file:bg-brand-orange file:px-2 file:py-1 file:text-xs file:text-white"
         />
       </div>
       <input type="hidden" name="image_url" value={url} />
