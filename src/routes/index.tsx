@@ -19,7 +19,7 @@ import heroBg from "@/assets/hero-werkstatt.jpg";
 import heroPhoneUnfall from "@/assets/unfall-1.jpg";
 import heroPhoneSteinschlag from "@/assets/hero-steinschlag.jpg";
 import heroPhoneReifenwechsel from "@/assets/hero-reifenwechsel.jpg";
-import { ResponsivePhoneMockup, PhoneVerticalCarousel } from "@/components/ui/phone-mockups-1";
+import { Iphone15ProFrame, PhoneFanCarousel } from "@/components/ui/phone-mockups-1";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
 import { IhreVorteile } from "@/components/site/IhreVorteile";
 import { VideoPlayer } from "@/components/ui/video-player";
@@ -237,22 +237,24 @@ function Home() {
 
                 </div>
 
-                {/* Mockup-Spalte: 1 fester Telefon-Rahmen, Inhalt wechselt vertikal */}
-                <div className="mx-auto mt-8 flex h-full w-full max-w-2xl items-center justify-center lg:mt-0">
-                  <ResponsivePhoneMockup>
-                    <PhoneVerticalCarousel
-                      items={heroPhones.map((p, i) => (
+                {/* Mockup-Spalte: 3 Smartphones im Fan-Carousel, automatisch
+                    wechselnd — nur auf Desktop (ab lg), auf Mobile komplett
+                    ausgeblendet statt verkleinert dargestellt. */}
+                <div className="mx-auto hidden h-full w-full max-w-2xl items-center justify-center lg:flex">
+                  <PhoneFanCarousel
+                    className="drop-shadow-2xl"
+                    items={heroPhones.map((p, i) => (
+                      <Iphone15ProFrame key={i}>
                         <PhoneScreen
-                          key={i}
                           image={p.image}
                           imageAlt={p.imageAlt}
                           badge={p.badge}
                           title={p.title}
                           subtitle={p.subtitle}
                         />
-                      ))}
-                    />
-                  </ResponsivePhoneMockup>
+                      </Iphone15ProFrame>
+                    ))}
+                  />
                 </div>
               </div>
             </div>
