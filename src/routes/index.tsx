@@ -133,7 +133,7 @@ function Home() {
 
       <main className="flex-1 pb-16 md:pb-0">
         {/* Hero */}
-        <div className="relative overflow-hidden bg-white">
+        <div id="hero" className="relative overflow-hidden bg-white">
           <img
             src={heroBg}
             alt=""
@@ -190,9 +190,6 @@ function Home() {
                     <Button3D href={PHONE_HREF}>
                       <Phone className="size-4" aria-hidden="true" />
                       Jetzt anrufen
-                    </Button3D>
-                    <Button3D href="/termin" variant="secondary">
-                      Termin buchen
                     </Button3D>
                   </div>
 

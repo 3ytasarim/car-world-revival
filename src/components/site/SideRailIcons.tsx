@@ -88,28 +88,48 @@ function Rail({
 /**
  * Global decorative rails in the left/right page gutters: car icons drift
  * from the top of the viewport downwards and fade out near the bottom.
- * Hidden while the footer is on screen, hidden on small screens where there
- * is no free gutter space, and — per Kundenwunsch — nur auf der Startseite,
- * auf allen anderen Seiten komplett ausgeblendet.
+ * Hidden while the hero (top of the homepage, id="hero") or the footer is
+ * on screen, hidden on small screens where there is no free gutter space,
+ * and — per Kundenwunsch — nur auf der Startseite, auf allen anderen Seiten
+ * komplett ausgeblendet.
  */
 export function SideRailIcons() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHome = pathname === "/";
   const [footerVisible, setFooterVisible] = useState(false);
+  const [heroVisible, setHeroVisible] = useState(true);
 
   useEffect(() => {
     if (!isHome) return;
     const footer = document.querySelector("footer");
-    if (!footer) return;
-    const io = new IntersectionObserver(
-      (entries) => setFooterVisible(entries.some((e) => e.isIntersecting)),
-      { threshold: 0 },
-    );
-    io.observe(footer);
-    return () => io.disconnect();
+    const hero = document.getElementById("hero");
+    const observers: IntersectionObserver[] = [];
+
+    if (footer) {
+      const io = new IntersectionObserver(
+        (entries) => setFooterVisible(entries.some((e) => e.isIntersecting)),
+        { threshold: 0 },
+      );
+      io.observe(footer);
+      observers.push(io);
+    }
+    if (hero) {
+      const io = new IntersectionObserver(
+        (entries) => setHeroVisible(entries.some((e) => e.isIntersecting)),
+        { threshold: 0 },
+      );
+      io.observe(hero);
+      observers.push(io);
+    } else {
+      setHeroVisible(false);
+    }
+
+    return () => observers.forEach((io) => io.disconnect());
   }, [isHome]);
 
   if (!isHome) return null;
+
+  const hidden = footerVisible || heroVisible;
 
   return (
     <div
@@ -119,7 +139,7 @@ export function SideRailIcons() {
       // die Icons bisher komplett verdeckt), aber unter Header/MobileBar
       // (z-40) und FloatingActions (z-50).
       className={`pointer-events-none fixed inset-0 z-20 hidden overflow-hidden transition-opacity duration-500 md:block ${
-        footerVisible ? "opacity-0" : "opacity-100"
+        hidden ? "opacity-0" : "opacity-100"
       }`}
     >
       <style>{`
