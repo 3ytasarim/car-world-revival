@@ -5,6 +5,7 @@ import imgMobilitaetsgarantie from "@/assets/vorteil-mobilitaetsgarantie.jpg";
 import imgAbschleppservice from "@/assets/vorteil-abschleppservice.jpg";
 import imgTerminvereinbarung from "@/assets/vorteil-terminvereinbarung.jpg";
 import imgVersicherungsabwicklung from "@/assets/vorteil-versicherungsabwicklung.jpg";
+import imgVersicherung from "@/assets/vorteil-versicherung.jpg";
 
 // Echte Fotos statt generischer Icons — jede Karte zeigt ein Bild mit
 // Bildunterschrift, angelehnt an 21st.dev (ravikatiyar162/marquee-logo-scroller):
@@ -25,11 +26,14 @@ export const MARQUEE_FADE_PX = 48;
 // ursprüngliche Datei-Reihenfolge) — vom Kunden nachträglich pro Bild
 // korrigiert: TÜV-Logo→TÜV Zertifiziert, Schlüsselübergabe→Mobilitätsgarantie,
 // Abschleppwagen→Abhol-&Abschleppservice, Bürotelefon→Terminvereinbarung.
+// "Versicherungsabwicklung" hat jetzt ein eigenes, dediziertes 5. Foto
+// (Schadensgutachten vor Ort) statt das Bürotelefon-Foto mitzunutzen.
 const vorteile = [
   { image: imgMobilitaetsgarantie, title: "TÜV Zertifiziert" },
   { image: imgAbschleppservice, title: "Mobilitätsgarantie" },
   { image: imgTerminvereinbarung, title: "Abhol- & Abschleppservice" },
   { image: imgVersicherungsabwicklung, title: "Schnelle Terminvereinbarung" },
+  { image: imgVersicherung, title: "Versicherungsabwicklung" },
 ];
 
 function VorteilPhotoCard({ image, title }: (typeof vorteile)[number]) {
