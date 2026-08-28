@@ -10,7 +10,6 @@ import { MobileBar } from "@/components/site/MobileBar";
 import { LeistungenTabs } from "@/components/site/LeistungenTabs";
 import { FloatingActions } from "@/components/site/FloatingActions";
 import { PhoneScreen } from "@/components/site/PhoneScreen";
-import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 
 
@@ -29,14 +28,10 @@ import { PartnerSection } from "@/components/site/PartnerSection";
 import { PartnerLogosCombined } from "@/components/site/PartnerLogosCombined";
 
 import { PHONE_HREF } from "@/components/site/site-data";
-import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
 
 
 
-import kernAbschleppen from "@/assets/kern-abschleppen.png";
-import kernWerkstatt from "@/assets/kern-werkstatt.png";
-import kernSteinschlag from "@/assets/kern-steinschlag.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -114,40 +109,6 @@ const heroPhones = [
     subtitle: "Wechsel und Einlagerung ohne Wartezeit.",
   },
 ];
-
-const coreServices = [
-  {
-    title: "Steinschlag",
-    img: kernSteinschlag,
-    text: "Wir wechseln Ihre Windschutzscheibe oder reparieren sie innerhalb Minuten! Rufen Sie uns an, wir helfen sofort!",
-  },
-  {
-    title: "Unfall? Abschleppen!",
-    img: kernAbschleppen,
-    text: "Wir schleppen Ihr Fahrzeug nach einem Unfall gerne ab! Rufen Sie uns an, wir helfen sofort!",
-  },
-  {
-    title: "Werkstatt",
-    img: kernWerkstatt,
-    text: "Als Kfz-Meisterwerkstatt führen wir alle Tätigkeiten und Reparaturen einer modernen Werkstatt durch.",
-  },
-];
-
-function KernleistungCard({ img, title, text }: (typeof coreServices)[number]) {
-  return (
-    <div className="w-[min(90vw,420px)] shrink-0 overflow-hidden rounded-2xl border border-black/10 bg-white shadow-[0_20px_45px_-20px_rgba(19,31,53,0.35)]">
-      <div className="aspect-[969/669] overflow-hidden">
-        <img src={img} alt={title} loading="lazy" className="size-full object-cover" />
-      </div>
-      <div className="p-5">
-        <h3 className="text-lg font-semibold text-brand-navy">{title}</h3>
-        <p className="mt-1 text-sm text-muted-foreground">{text}</p>
-      </div>
-    </div>
-  );
-}
-
-
 
 function Home() {
   return (
@@ -292,34 +253,6 @@ function Home() {
 
         {/* Kundenmeinungen */}
         <TestimonialsSection />
-
-        {/* Unsere Kernleistungen — 1 Spalte, automatisch von oben nach
-            unten, statt der alten wackelnden 3er-Reihe. */}
-        <section className="relative py-16">
-          <div className="mx-auto max-w-3xl px-4 text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-4 py-1.5 text-sm font-semibold text-brand-orange">
-              Autowerkstatt in meiner Nähe
-            </span>
-            <h2 className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
-              <AnimatedText text="Unsere Kernleistungen" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
-            </h2>
-            <p className="mt-3 text-lg text-muted-foreground">Schnelle Hilfe, wenn es darauf ankommt.</p>
-          </div>
-          <div className="mt-10 flex justify-center px-4">
-            <InfiniteSlider
-              direction="vertical"
-              reverse
-              gap={24}
-              duration={26}
-              durationOnHover={70}
-              className="h-[560px] w-full max-w-md [mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)]"
-            >
-              {coreServices.map((s) => (
-                <KernleistungCard key={s.title} {...s} />
-              ))}
-            </InfiniteSlider>
-          </div>
-        </section>
 
         {/* Partner */}
         <PartnerSection hideCertificationBlock />
