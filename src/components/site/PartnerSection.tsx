@@ -27,7 +27,7 @@ const benefits = [
 
 function GrosskundeCard({ image, title }: (typeof benefits)[number]) {
   return (
-    <div className="flex flex-col items-center gap-2.5">
+    <div className="flex w-[165px] shrink-0 flex-col items-center gap-2.5 sm:w-[195px]">
       <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[0_20px_45px_-20px_rgba(19,31,53,0.4)]">
         <img src={image} alt={title} loading="lazy" className="size-full object-cover" />
       </div>
@@ -88,10 +88,18 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
           <h3 className="text-center text-xl font-bold tracking-tight text-brand-navy sm:text-2xl">
             Vorteile als Großkunde
           </h3>
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            {benefits.map((b) => (
-              <GrosskundeCard key={b.title} {...b} />
-            ))}
+          <div className="mt-6">
+            <InfiniteSlider
+              direction="horizontal"
+              gap={20}
+              duration={26}
+              durationOnHover={70}
+              className="w-full [mask-image:linear-gradient(to_right,transparent_0,#000_48px,#000_calc(100%-48px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0,#000_48px,#000_calc(100%-48px),transparent_100%)]"
+            >
+              {benefits.map((b) => (
+                <GrosskundeCard key={b.title} {...b} />
+              ))}
+            </InfiniteSlider>
           </div>
         </div>
 
