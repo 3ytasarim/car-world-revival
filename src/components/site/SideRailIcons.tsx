@@ -21,7 +21,7 @@ type Item = {
 };
 
 function buildItems(seed: number): Item[] {
-  return Array.from({ length: 20 }, (_, i) => {
+  return Array.from({ length: 7 }, (_, i) => {
     const n = i + seed;
     return {
       src: ICONS[(n * 2 + seed) % ICONS.length]!,
@@ -37,25 +37,13 @@ function buildItems(seed: number): Item[] {
 
 const LEFT = buildItems(0);
 const RIGHT = buildItems(3);
-const LEFT2 = buildItems(6);
-const RIGHT2 = buildItems(9);
 
-function Rail({
-  items,
-  side,
-  inset = 0,
-  className = "",
-}: {
-  items: Item[];
-  side: "left" | "right";
-  inset?: number;
-  className?: string;
-}) {
+function Rail({ items, side }: { items: Item[]; side: "left" | "right" }) {
   return (
     <div
-      className={`absolute top-0 bottom-0 w-[clamp(56px,8vw,150px)] overflow-hidden ${className}`}
+      className="absolute top-0 bottom-0 w-[clamp(56px,8vw,150px)] overflow-hidden"
       style={{
-        [side]: inset,
+        [side]: 0,
         maskImage: "linear-gradient(to top, transparent 0%, #000 12%, #000 55%, transparent 92%)",
         WebkitMaskImage: "linear-gradient(to top, transparent 0%, #000 12%, #000 55%, transparent 92%)",
       }}
@@ -155,8 +143,6 @@ export function SideRailIcons() {
       `}</style>
       <Rail items={LEFT} side="left" />
       <Rail items={RIGHT} side="right" />
-      <Rail items={LEFT2} side="left" inset={140} className="hidden lg:block" />
-      <Rail items={RIGHT2} side="right" inset={140} className="hidden lg:block" />
     </div>
   );
 }
