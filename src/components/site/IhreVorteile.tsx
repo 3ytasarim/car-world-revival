@@ -1,5 +1,4 @@
 import { AnimatedText } from "@/components/ui/animated-text";
-import { InfiniteSlider } from "@/components/ui/infinite-slider";
 
 import imgMobilitaetsgarantie from "@/assets/vorteil-mobilitaetsgarantie.jpg";
 import imgAbschleppservice from "@/assets/vorteil-abschleppservice.jpg";
@@ -7,11 +6,13 @@ import imgTerminvereinbarung from "@/assets/vorteil-terminvereinbarung.jpg";
 import imgVersicherungsabwicklung from "@/assets/vorteil-versicherungsabwicklung.jpg";
 
 // Echte Fotos statt generischer Icons — jede Karte zeigt ein Bild mit
-// Bildunterschrift, angelehnt an 21st.dev (ravikatiyar162/marquee-logo-scroller):
-// horizontal scrollend wie das Original, aber ohne dessen eigenen
-// Titel/Description-Header (die Sektion hat bereits ihre eigene Überschrift
-// oben) und mit deutlich größeren Bildern + Bildunterschrift statt kleiner
-// Logo-Kacheln.
+// Bildunterschrift. Statisches Grid statt Marquee: eine kontinuierlich
+// laufende Karten-Reihe hat NIE eine Karte exakt an der Container-Kante
+// (die Karte ist ja immer irgendwo mitten in der Scroll-Bewegung) — darum
+// liess sich "genau auf Höhe des Video-Grids darunter" mit einem Marquee
+// nicht erreichen, egal wie eng die Fade-Maske gesetzt wurde. Dasselbe
+// Grid wie in VideoSection (gap-4 sm:grid-cols-2 lg:grid-cols-4) garantiert
+// die exakt gleiche linke/rechte Kante, weil es dieselbe Layout-Mechanik ist.
 const vorteile = [
   { image: imgMobilitaetsgarantie, title: "Mobilitätsgarantie" },
   { image: imgAbschleppservice, title: "Abhol- & Abschleppservice" },
@@ -21,7 +22,7 @@ const vorteile = [
 
 function VorteilPhotoCard({ image, title }: (typeof vorteile)[number]) {
   return (
-    <div className="flex w-[165px] shrink-0 flex-col items-center gap-2.5 sm:w-[195px]">
+    <div className="flex flex-col items-center gap-2.5">
       <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[0_20px_45px_-20px_rgba(19,31,53,0.4)]">
         <img src={image} alt={title} loading="lazy" className="size-full object-cover" />
       </div>
@@ -42,18 +43,10 @@ export function IhreVorteile() {
           <p className="mt-3 text-muted-foreground">Das bekommen Sie, wenn Sie sich für Car-World entscheiden.</p>
         </div>
 
-        <div className="mt-10">
-          <InfiniteSlider
-            direction="horizontal"
-            gap={24}
-            duration={32}
-            durationOnHover={80}
-            className="w-full [mask-image:linear-gradient(to_right,transparent_0%,#000_1.5%,#000_98.5%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_1.5%,#000_98.5%,transparent_100%)]"
-          >
-            {vorteile.map((v) => (
-              <VorteilPhotoCard key={v.title} {...v} />
-            ))}
-          </InfiniteSlider>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {vorteile.map((v) => (
+            <VorteilPhotoCard key={v.title} {...v} />
+          ))}
         </div>
       </div>
     </section>
