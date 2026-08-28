@@ -31,7 +31,7 @@ function GrosskundeCard({ image, title }: (typeof benefits)[number]) {
       <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[0_20px_45px_-20px_rgba(19,31,53,0.4)]">
         <img src={image} alt={title} loading="lazy" className="size-full object-cover" />
       </div>
-      <h4 className="text-center text-sm font-bold tracking-tight text-brand-navy sm:text-base">{title}</h4>
+      <h4 className="w-full text-center text-[11px] font-bold tracking-tight whitespace-nowrap text-brand-navy sm:text-xs">{title}</h4>
     </div>
   );
 }
