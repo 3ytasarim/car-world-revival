@@ -29,6 +29,7 @@ import { PartnerLogosCombined } from "@/components/site/PartnerLogosCombined";
 
 import { PHONE_HREF } from "@/components/site/site-data";
 import { Button3D } from "@/components/ui/button-3d";
+import { GradientShimmer } from "@/components/ui/gradient-shimmer";
 
 
 
@@ -189,7 +190,9 @@ function Home() {
                   <div className="flex flex-wrap items-center gap-4 lg:mt-auto lg:mb-[10rem]">
                     <Button3D href={PHONE_HREF}>
                       <Phone className="size-4" aria-hidden="true" />
-                      Jetzt anrufen
+                      <GradientShimmer gradient="bay" duration={2}>
+                        Jetzt anrufen
+                      </GradientShimmer>
                     </Button3D>
                   </div>
 
@@ -231,7 +234,7 @@ function Home() {
         </section>
 
         {/* Rundum-sorglos-Paket */}
-        <RundumSorglosSection hideInsuranceMarquee />
+        <RundumSorglosSection hideInsuranceMarquee shimmerButton />
 
         {/* Versicherungspartner + Partner & Zertifizierungen — auf der
             Startseite zu einem gemeinsamen 2-spaltigen Block kombiniert. */}

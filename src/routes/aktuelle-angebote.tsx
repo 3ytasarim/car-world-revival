@@ -8,9 +8,7 @@ import { MobileBar } from "@/components/site/MobileBar";
 import { FloatingActions } from "@/components/site/FloatingActions";
 import { PageHero } from "@/components/site/PageHero";
 import { getPublicOffers } from "@/lib/public-content.functions";
-import { WA_FRAGE } from "@/components/site/site-data";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
-import { Button3D } from "@/components/ui/button-3d";
 import { OfferCard } from "@/components/ui/offer-card";
 
 export const Route = createFileRoute("/aktuelle-angebote")({
@@ -90,12 +88,6 @@ function OffersPage() {
               ))}
             </div>
           )}
-
-          <div className="mt-12 text-center">
-            <Button3D href={WA_FRAGE} target="_blank" rel="noopener noreferrer">
-              Angebot nicht dabei? Schreiben Sie uns
-            </Button3D>
-          </div>
         </section>
       </main>
       <Footer />

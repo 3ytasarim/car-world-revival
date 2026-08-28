@@ -88,7 +88,22 @@ export function ServicesSection() {
           <p className="mt-3 text-lg text-muted-foreground">Ein Ansprechpartner für alles rund um Ihr Fahrzeug.</p>
         </div>
 
-        <div className="mt-12 flex justify-center">
+        {/* Desktop/Tablet: horizontal, wie ursprünglich auf dieser Seite.
+            Mobile: vertikal (kein Platz für eine breite horizontale Reihe). */}
+        <div className="mt-12 hidden sm:block">
+          <InfiniteSlider
+            direction="horizontal"
+            gap={24}
+            duration={40}
+            durationOnHover={100}
+            className="w-full [mask-image:linear-gradient(to_right,transparent_0%,#000_1.5%,#000_98.5%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_1.5%,#000_98.5%,transparent_100%)]"
+          >
+            {services.map((s) => (
+              <ServiceCard key={s.id} {...s} />
+            ))}
+          </InfiniteSlider>
+        </div>
+        <div className="mt-12 flex justify-center sm:hidden">
           <InfiniteSlider
             direction="vertical"
             reverse

@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 
 import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
+import { GradientShimmer } from "@/components/ui/gradient-shimmer";
 import { RevealSlider } from "@/components/ui/reveal2";
 import { OrbitingLogos } from "@/components/ui/orbiting-logos";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
@@ -34,7 +35,15 @@ export const insurancePartners = [
   { src: "/logos/wuerttembergische.png", alt: "Württembergische" },
 ];
 
-export function RundumSorglosSection({ hideInsuranceMarquee = false }: { hideInsuranceMarquee?: boolean }) {
+export function RundumSorglosSection({
+  hideInsuranceMarquee = false,
+  shimmerButton = false,
+}: {
+  hideInsuranceMarquee?: boolean;
+  /** Shimmer-Textanimation im "Jetzt anrufen"-Button, wie in den Seiten-Hero-Titeln
+   * (GradientShimmer). Nur auf der Startseite aktiviert. */
+  shimmerButton?: boolean;
+}) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
 
@@ -153,7 +162,13 @@ export function RundumSorglosSection({ hideInsuranceMarquee = false }: { hideIns
           <div className="mt-10 flex justify-center">
             <Button3D href={PHONE_HREF}>
               <PhoneCall className="size-4" aria-hidden="true" />
-              Jetzt anrufen
+              {shimmerButton ? (
+                <GradientShimmer gradient="bay" duration={2}>
+                  Jetzt anrufen
+                </GradientShimmer>
+              ) : (
+                "Jetzt anrufen"
+              )}
             </Button3D>
           </div>
 
