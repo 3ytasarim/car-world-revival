@@ -57,7 +57,7 @@ function LeistungenPage() {
           photoBackground
         />
         <ServicesSection />
-        <RundumSorglosSection />
+        <RundumSorglosSection hideInsuranceMarquee />
       </main>
       <Footer />
       <FloatingActions />

@@ -7,6 +7,7 @@ import { MobileBar } from "@/components/site/MobileBar";
 import { FloatingActions } from "@/components/site/FloatingActions";
 import { PageHero } from "@/components/site/PageHero";
 import { PartnerSection } from "@/components/site/PartnerSection";
+import { PartnerLogosCombined } from "@/components/site/PartnerLogosCombined";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 
 export const Route = createFileRoute("/partner")({
@@ -55,7 +56,12 @@ function PartnerPage() {
           subtitle="Ein starker Werkstattpartner für Versicherungen, Flotten und Firmen."
           photoBackground
         />
-        <PartnerSection />
+        <PartnerSection hideCertificationBlock />
+
+        {/* Versicherungspartner + Partner & Zertifizierungen — auf der
+            Partner-Seite zu einem gemeinsamen 2-spaltigen Block kombiniert,
+            statt PartnerSection's eigenem (nur-Zertifizierungen) Block. */}
+        <PartnerLogosCombined />
       </main>
       <Footer />
       <FloatingActions />
