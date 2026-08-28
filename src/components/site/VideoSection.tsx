@@ -38,7 +38,11 @@ export function VideoSection() {
           <p className="mt-3 text-muted-foreground">Kurze Videos zeigen, wie wir Ihnen helfen.</p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* px-12 (48px) zusätzlich zum Container-Padding: exakt derselbe Inset
+            wie die Fade-Maske der "Ihre Vorteile"-Marquee darüber
+            (MARQUEE_FADE_PX), damit beide Abschnitte an derselben Stelle
+            beginnen/enden. */}
+        <div className="mt-10 grid gap-4 px-12 sm:grid-cols-2 lg:grid-cols-4">
           {clips.map((clip, i) => (
             <button
               key={clip.title}
