@@ -236,10 +236,6 @@ function Home() {
         {/* Rundum-sorglos-Paket */}
         <RundumSorglosSection hideInsuranceMarquee shimmerButton />
 
-        {/* Versicherungspartner + Partner & Zertifizierungen — auf der
-            Startseite zu einem gemeinsamen 2-spaltigen Block kombiniert. */}
-        <PartnerLogosCombined />
-
         {/* Unsere Leistungen — vertikale Tabs */}
         <LeistungenTabs />
 
@@ -257,6 +253,10 @@ function Home() {
         {/* Partner */}
         <PartnerSection hideCertificationBlock />
 
+        {/* Versicherungspartner + Partner & Zertifizierungen — auf der
+            Startseite zu einem gemeinsamen 2-spaltigen Block kombiniert,
+            direkt über dem Footer (wie auf /partner). */}
+        <PartnerLogosCombined />
 
       </main>
 
