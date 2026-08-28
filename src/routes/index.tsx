@@ -226,10 +226,14 @@ function Home() {
         {/* Ihre Vorteile — Kundennutzen statt KPI-Zahlen, gleich nach dem Hero */}
         <IhreVorteile />
 
-        {/* Werkstatt-Video — gleiche Breite wie die 4 Vertrauenspunkte-Karten darüber */}
+        {/* Werkstatt-Video — exakt dieselbe Breite wie die Ihre-Vorteile-Marquee
+            darüber: gleicher max-w-6xl-Container plus dasselbe zusätzliche
+            48px-Inset (px-12), das dort die Fade-Maske erzeugt. */}
         <section className="relative bg-white py-14">
-          <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
-            <VideoPlayer src="/videos/werkstatt-video.mp4" className="max-w-none" />
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="px-12">
+              <VideoPlayer src="/videos/werkstatt-video.mp4" className="max-w-none" />
+            </div>
           </div>
         </section>
 
