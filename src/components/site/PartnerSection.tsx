@@ -26,11 +26,11 @@ const benefits = [
 
 function GrosskundeCard({ image, title }: (typeof benefits)[number]) {
   return (
-    <div className="flex w-[200px] shrink-0 flex-col items-center gap-3 sm:w-[240px]">
+    <div className="flex w-[165px] shrink-0 flex-col items-center gap-2.5 sm:w-[195px]">
       <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[0_20px_45px_-20px_rgba(19,31,53,0.4)]">
         <img src={image} alt={title} loading="lazy" className="size-full object-cover" />
       </div>
-      <h4 className="text-center text-base font-bold tracking-tight text-brand-navy sm:text-lg">{title}</h4>
+      <h4 className="text-center text-sm font-bold tracking-tight text-brand-navy sm:text-base">{title}</h4>
     </div>
   );
 }
@@ -93,7 +93,7 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
               gap={20}
               duration={26}
               durationOnHover={70}
-              className="w-full [mask-image:linear-gradient(to_right,transparent_0%,#000_6%,#000_94%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_6%,#000_94%,transparent_100%)]"
+              className="w-full [mask-image:linear-gradient(to_right,transparent_0%,#000_1.5%,#000_98.5%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_1.5%,#000_98.5%,transparent_100%)]"
             >
               {benefits.map((b) => (
                 <GrosskundeCard key={b.title} {...b} />
