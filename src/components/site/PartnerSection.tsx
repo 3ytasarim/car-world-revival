@@ -1,5 +1,5 @@
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
-import { Handshake, CarFront, Percent, Zap } from "lucide-react";
+import { Handshake } from "lucide-react";
 
 import { useInView } from "@/hooks/use-in-view";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
@@ -10,46 +10,27 @@ import tuv from "@/assets/partner-tuv.png";
 import innung from "@/assets/partner-innung.png";
 import autoglas from "@/assets/partner-autoglas.png";
 import hwk from "@/assets/partner-hwk.png";
+import imgLeihwagen from "@/assets/grosskunde-leihwagen.jpg";
+import imgFastlane from "@/assets/grosskunde-fastlane.jpg";
+import imgRabatte from "@/assets/grosskunde-rabatte.jpg";
 
 // Nur die im Kundengespräch verbindlich bestätigten Vorteile — bewusst
 // noch nicht auf 5–6 aufgefüllt, bis weitere mit dem Kunden abgestimmt sind.
+// Echte Fotos statt Icons, gleicher Kartenstil wie "Ihre Vorteile" auf der
+// Startseite (Bild + Bildunterschrift, horizontal scrollend).
 const benefits = [
-  {
-    icon: Zap,
-    title: "Fast-Lane Termin",
-    text: "Schnelle, bevorzugte Terminvergabe für Partner- und Großkunden.",
-  },
-  {
-    icon: Percent,
-    title: "Besondere Großkundenrabatte",
-    text: "Spezielle Konditionen und Preise für große Kunden.",
-  },
-  {
-    icon: CarFront,
-    title: "Kostenlose Leihwagen",
-    text: "Ersatzwagen ohne Aufpreis, wenn verfügbar.",
-  },
+  { image: imgFastlane, title: "Fast-Lane Termin" },
+  { image: imgRabatte, title: "Besondere Großkundenrabatte" },
+  { image: imgLeihwagen, title: "Kostenlose Leihwagen" },
 ];
 
-function GrosskundeCard({ icon: Icon, title }: (typeof benefits)[number]) {
+function GrosskundeCard({ image, title }: (typeof benefits)[number]) {
   return (
-    <div className="relative flex w-[min(88vw,420px)] shrink-0 items-center gap-5 overflow-hidden rounded-2xl bg-gradient-to-br from-brand-orange to-[#3D6FA8] px-7 py-7 text-white shadow-[0_20px_45px_-20px_rgba(80,136,200,0.55)]">
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.12]"
-        style={{
-          backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
-          backgroundSize: "0.75rem 0.75rem",
-        }}
-      />
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute -inset-x-10 -top-24 h-40 -translate-x-full rotate-12 bg-linear-to-r from-transparent via-white/15 to-transparent"
-      />
-      <span className="relative flex size-16 shrink-0 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/25">
-        <Icon className="size-8" aria-hidden="true" />
-      </span>
-      <h4 className="relative text-xl font-bold tracking-tight">{title}</h4>
+    <div className="flex w-[200px] shrink-0 flex-col items-center gap-3 sm:w-[240px]">
+      <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[0_20px_45px_-20px_rgba(19,31,53,0.4)]">
+        <img src={image} alt={title} loading="lazy" className="size-full object-cover" />
+      </div>
+      <h4 className="text-center text-base font-bold tracking-tight text-brand-navy sm:text-lg">{title}</h4>
     </div>
   );
 }
@@ -106,14 +87,13 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
           <h3 className="text-center text-xl font-bold tracking-tight text-brand-navy sm:text-2xl">
             Vorteile als Großkunde
           </h3>
-          <div className="mt-6 flex justify-center">
+          <div className="mt-6">
             <InfiniteSlider
-              direction="vertical"
-              reverse
+              direction="horizontal"
               gap={20}
-              duration={30}
-              durationOnHover={80}
-              className="h-[420px] w-full max-w-md [mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)]"
+              duration={26}
+              durationOnHover={70}
+              className="w-full [mask-image:linear-gradient(to_right,transparent_0%,#000_6%,#000_94%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_6%,#000_94%,transparent_100%)]"
             >
               {benefits.map((b) => (
                 <GrosskundeCard key={b.title} {...b} />
