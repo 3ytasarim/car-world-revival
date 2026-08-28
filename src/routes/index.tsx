@@ -22,7 +22,6 @@ import { Iphone15ProFrame, PhoneFanCarousel } from "@/components/ui/phone-mockup
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
 import { IhreVorteile } from "@/components/site/IhreVorteile";
 import { VideoPlayer } from "@/components/ui/video-player";
-import { VideoSection } from "@/components/site/VideoSection";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { PartnerSection } from "@/components/site/PartnerSection";
 import { PartnerLogosCombined } from "@/components/site/PartnerLogosCombined";
@@ -246,11 +245,6 @@ function Home() {
 
         {/* Unsere Leistungen — vertikale Tabs */}
         <LeistungenTabs />
-
-        {/* Videos */}
-        <VideoSection />
-
-
 
 
 

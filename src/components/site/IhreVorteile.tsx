@@ -21,11 +21,15 @@ import imgVersicherungsabwicklung from "@/assets/vorteil-versicherungsabwicklung
 // Abschnitte an derselben Stelle beginnt/endet.
 export const MARQUEE_FADE_PX = 48;
 
+// Bildunterschriften jetzt inhaltlich zum Foto passend (nicht mehr die
+// ursprüngliche Datei-Reihenfolge) — vom Kunden nachträglich pro Bild
+// korrigiert: TÜV-Logo→TÜV Zertifiziert, Schlüsselübergabe→Mobilitätsgarantie,
+// Abschleppwagen→Abhol-&Abschleppservice, Bürotelefon→Terminvereinbarung.
 const vorteile = [
-  { image: imgMobilitaetsgarantie, title: "Mobilitätsgarantie" },
-  { image: imgAbschleppservice, title: "Abhol- & Abschleppservice" },
-  { image: imgTerminvereinbarung, title: "Schnelle Terminvereinbarung" },
-  { image: imgVersicherungsabwicklung, title: "Versicherungsabwicklung" },
+  { image: imgMobilitaetsgarantie, title: "TÜV Zertifiziert" },
+  { image: imgAbschleppservice, title: "Mobilitätsgarantie" },
+  { image: imgTerminvereinbarung, title: "Abhol- & Abschleppservice" },
+  { image: imgVersicherungsabwicklung, title: "Schnelle Terminvereinbarung" },
 ];
 
 function VorteilPhotoCard({ image, title }: (typeof vorteile)[number]) {
