@@ -225,11 +225,12 @@ function Home() {
 
         </div>
 
-        {/* Ihre Vorteile — Kundennutzen statt KPI-Zahlen, direkt nach dem Hero */}
-        <IhreVorteile />
-
-        {/* Rundum-sorglos-Paket, inkl. Werkstatt-Video und Vorher/Nachher */}
+        {/* Rundum-sorglos-Paket — direkt nach dem Hero, inkl. Werkstatt-Video
+            und Vorher/Nachher. */}
         <RundumSorglosSection hideInsuranceMarquee shimmerButton videoSrc="/videos/werkstatt-video.mp4" />
+
+        {/* Ihre Vorteile — Kundennutzen statt KPI-Zahlen */}
+        <IhreVorteile />
 
         {/* Kundenmeinungen (Google-Bewertungen) */}
         <TestimonialsSection />
