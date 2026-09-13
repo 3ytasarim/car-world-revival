@@ -20,9 +20,9 @@ import heroPhoneSteinschlag from "@/assets/hero-steinschlag.jpg";
 import heroPhoneReifenwechsel from "@/assets/hero-reifenwechsel.jpg";
 import { Iphone15ProFrame, PhoneFanCarousel } from "@/components/ui/phone-mockups-1";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
-import { IhreVorteile } from "@/components/site/IhreVorteile";
+import { checkPoints, CheckPointCard } from "@/components/site/IhreVorteile";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
-import { PartnerSection } from "@/components/site/PartnerSection";
+import { PartnerSection, certificationLogos } from "@/components/site/PartnerSection";
 import { PartnerLogosCombined } from "@/components/site/PartnerLogosCombined";
 
 import { PHONE_HREF, WA_FRAGE, WA_UNFALL, WA_SCHEIBE, WA_REIFEN } from "@/components/site/site-data";
@@ -153,7 +153,7 @@ function Home() {
             <div className="relative z-10 mx-auto flex w-full max-w-[1600px] items-center px-4 pt-24 pb-10 md:px-10 md:pt-28 md:pb-12 lg:min-h-[620px] lg:px-14 lg:pt-28 lg:pb-12">
 
 
-              <div className="grid w-full items-center gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-stretch lg:gap-8">
+              <div className="grid w-full items-center gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-stretch lg:gap-8">
                 {/* Text-Spalte */}
                 <div className="max-w-4xl space-y-7 pt-6 text-left lg:flex lg:flex-col lg:pt-20">
                   {/* Google + 5 Sterne Trust-Badge — Vertrauenssignal noch
@@ -184,7 +184,7 @@ function Home() {
                   </h1>
 
 
-                  <div className="flex flex-wrap items-center gap-4 lg:mt-auto lg:mb-[10rem]">
+                  <div className="flex flex-wrap items-center gap-4 lg:mt-auto">
                     <Button3D href={PHONE_HREF}>
                       <Phone className="size-4" aria-hidden="true" />
                       Jetzt anrufen
@@ -197,12 +197,35 @@ function Home() {
                     </Button3D>
                   </div>
 
+                  {/* 3 Checkmark-Kernversprechen direkt unter den Buttons —
+                      aus IhreVorteile.tsx wiederverwendet (die Sektion
+                      selbst ist aktuell ausgeblendet, siehe unten). */}
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:mb-4">
+                    {checkPoints.map((c) => (
+                      <CheckPointCard key={c.title} {...c} />
+                    ))}
+                  </div>
+
+                  {/* Zertifizierungs-Logos — bewusst transparent/ohne
+                      Karten-Box, direkt nebeneinander. */}
+                  <div className="flex flex-wrap items-center justify-center gap-6 sm:justify-start lg:mb-[4rem]">
+                    {certificationLogos.map((l) => (
+                      <img
+                        key={l.alt}
+                        src={l.src}
+                        alt={l.alt}
+                        loading="lazy"
+                        className="h-12 w-auto object-contain sm:h-14"
+                      />
+                    ))}
+                  </div>
+
                 </div>
 
                 {/* Mockup-Spalte: 3 Smartphones im Fan-Carousel, automatisch
                     wechselnd — nur auf Desktop (ab lg), auf Mobile komplett
                     ausgeblendet statt verkleinert dargestellt. */}
-                <div className="mx-auto hidden h-full w-full max-w-2xl items-center justify-center lg:flex">
+                <div className="mx-auto hidden h-full w-full max-w-2xl items-center justify-center lg:flex lg:translate-x-10 xl:translate-x-10">
                   <PhoneFanCarousel
                     className="drop-shadow-2xl"
                     items={heroPhones.map((p, i) => (
@@ -229,8 +252,10 @@ function Home() {
             und Vorher/Nachher. */}
         <RundumSorglosSection hideInsuranceMarquee shimmerButton videoSrc="/videos/werkstatt-video.mp4" />
 
-        {/* Ihre Vorteile — Kundennutzen statt KPI-Zahlen */}
-        <IhreVorteile />
+        {/* Ihre Vorteile ist aktuell deaktiviert (Kundenwunsch) — Checkmark-
+            Karten + Zertifizierungs-Logos werden stattdessen im Hero
+            wiederverwendet (siehe oben). Bei Bedarf hier einfach
+            <IhreVorteile /> wieder einfügen. */}
 
         {/* Kundenmeinungen (Google-Bewertungen) */}
         <TestimonialsSection />

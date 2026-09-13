@@ -100,7 +100,7 @@ export function PhoneFanCarousel({
           <div
             key={i}
             className={cn(
-              "absolute w-[62%] max-w-[280px] transition-all duration-700 ease-in-out [container-type:inline-size]",
+              "absolute w-[62%] max-w-[220px] xl:max-w-[280px] transition-all duration-700 ease-in-out [container-type:inline-size]",
               isActive && "z-20 translate-x-0 scale-100 opacity-100",
               isPrev && "z-10 -translate-x-[55%] scale-90 opacity-40",
               isNext && "z-10 translate-x-[55%] scale-90 opacity-40",
@@ -112,7 +112,7 @@ export function PhoneFanCarousel({
         );
       })}
       {/* Spacer so the relative container reports a real height (matches the SVG frame's 433:882 ratio) */}
-      <div className="invisible w-[62%] max-w-[280px] aspect-[433/882]" aria-hidden="true" />
+      <div className="invisible w-[62%] max-w-[220px] xl:max-w-[280px] aspect-[433/882]" aria-hidden="true" />
     </div>
   );
 }

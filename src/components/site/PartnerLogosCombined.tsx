@@ -11,7 +11,7 @@ const FADE_MASK =
 
 function MiniLogoCard({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="flex size-16 shrink-0 items-center justify-center rounded-xl border border-black/10 bg-white p-2 shadow-sm sm:size-20">
+    <div className="flex size-20 items-center justify-center rounded-xl border border-black/10 bg-white p-3 shadow-sm sm:size-24">
       <img src={src} alt={alt} loading="lazy" className="max-h-full max-w-full object-contain" />
     </div>
   );
@@ -37,17 +37,18 @@ export function PartnerLogosCombined({
   hideWhatsAppButton?: boolean;
 }) {
   if (compact) {
-    const allLogos = [...insurancePartners, ...certificationLogos];
     return (
       <section aria-labelledby="partner-logos-title" className="relative bg-white py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <h2 id="partner-logos-title" className="text-center text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
             <AnimatedText text={title} minWeight={300} maxWeight={800} delayMultiplier={0.03} />
           </h2>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-            {allLogos.map((l) => (
-              <MiniLogoCard key={l.alt} src={l.src} alt={l.alt} />
+          {/* Nur Versicherungspartner (10), fest 4-4-2 angeordnet — keine
+              Zertifizierungs-Logos hier, kein Auto-Scroll. */}
+          <div className="mx-auto mt-8 grid max-w-md grid-cols-2 justify-items-center gap-4 sm:grid-cols-4">
+            {insurancePartners.map((p) => (
+              <MiniLogoCard key={p.alt} src={p.src} alt={p.alt} />
             ))}
           </div>
 
