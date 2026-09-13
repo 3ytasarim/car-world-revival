@@ -1,7 +1,6 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 
 import { AnimatedText } from "@/components/ui/animated-text";
-import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import {
   WA_UNFALL,
   WA_ABSCHLEPP,
@@ -46,12 +45,7 @@ const services = [
 // eines horizontalen Klick-Carousels mit Pfeilen/Punkten.
 function ServiceCard({ img, title, text, wa }: (typeof services)[number]) {
   return (
-    <a
-      href={wa}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group block w-[min(90vw,420px)] shrink-0 overflow-hidden rounded-xl"
-    >
+    <a href={wa} target="_blank" rel="noopener noreferrer" className="group block overflow-hidden rounded-xl">
       <div className="relative aspect-[5/4] overflow-hidden rounded-xl">
         <img
           src={img}
@@ -88,34 +82,13 @@ export function ServicesSection() {
           <p className="mt-3 text-lg text-muted-foreground">Ein Ansprechpartner für alles rund um Ihr Fahrzeug.</p>
         </div>
 
-        {/* Desktop/Tablet: horizontal, wie ursprünglich auf dieser Seite.
-            Mobile: vertikal (kein Platz für eine breite horizontale Reihe). */}
-        <div className="mt-12 hidden sm:block">
-          <InfiniteSlider
-            direction="horizontal"
-            gap={24}
-            duration={40}
-            durationOnHover={100}
-            className="w-full [mask-image:linear-gradient(to_right,transparent_0%,#000_1.5%,#000_98.5%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_1.5%,#000_98.5%,transparent_100%)]"
-          >
-            {services.map((s) => (
-              <ServiceCard key={s.id} {...s} />
-            ))}
-          </InfiniteSlider>
-        </div>
-        <div className="mt-12 flex justify-center sm:hidden">
-          <InfiniteSlider
-            direction="vertical"
-            reverse
-            gap={24}
-            duration={34}
-            durationOnHover={90}
-            className="h-[600px] w-full max-w-md [mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_90%,transparent_100%)]"
-          >
-            {services.map((s) => (
-              <ServiceCard key={s.id} {...s} />
-            ))}
-          </InfiniteSlider>
+        {/* Statisches Karten-Grid statt Marquee — gleiche Darstellung wie
+            "Unsere Leistungen" auf der Startseite: alle Karten gleichzeitig
+            sichtbar, auf Mobile gestapelt. */}
+        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-3">
+          {services.map((s) => (
+            <ServiceCard key={s.id} {...s} />
+          ))}
         </div>
       </div>
     </section>
