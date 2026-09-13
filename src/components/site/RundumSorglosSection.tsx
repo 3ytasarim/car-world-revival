@@ -8,8 +8,9 @@ import { GradientShimmer } from "@/components/ui/gradient-shimmer";
 import { RevealSlider } from "@/components/ui/reveal2";
 import { OrbitingLogos } from "@/components/ui/orbiting-logos";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
-import { PHONE_HREF } from "@/components/site/site-data";
+import { PHONE_HREF, WA_UNFALL } from "@/components/site/site-data";
 import { TowTruckIcon } from "@/components/site/TowTruckIcon";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import rundumBefore from "@/assets/rundum-before.jpg";
 import rundumAfter from "@/assets/rundum-after.jpg";
 
@@ -158,8 +159,9 @@ export function RundumSorglosSection({
             </motion.div>
           </div>
 
-          {/* Jetzt-anrufen-Button: mittig unter beiden Spalten */}
-          <div className="mt-10 flex justify-center">
+          {/* Jetzt-anrufen + WhatsApp: mittig unter beiden Spalten, gleich
+              wichtig nebeneinander. */}
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button3D href={PHONE_HREF}>
               <PhoneCall className="size-4" aria-hidden="true" />
               {shimmerButton ? (
@@ -169,6 +171,10 @@ export function RundumSorglosSection({
               ) : (
                 "Jetzt anrufen"
               )}
+            </Button3D>
+            <Button3D href={WA_UNFALL} target="_blank" rel="noopener noreferrer" variant="whatsapp">
+              <WhatsAppIcon className="size-4" />
+              WhatsApp
             </Button3D>
           </div>
 
