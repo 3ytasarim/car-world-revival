@@ -1,8 +1,17 @@
-import { useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
 
 import { AnimatedText } from "@/components/ui/animated-text";
-import { ProfileCard } from "@/components/ui/profile-card";
-import { cn } from "@/lib/utils";
+import {
+  WA_UNFALL,
+  WA_ABSCHLEPP,
+  WA_REPARATUR,
+  WA_ERSATZWAGEN,
+  WA_VERSICHERUNG,
+  WA_REIFEN,
+  WA_SCHEIBE,
+  WA_TUEV,
+  WA_INSPEKTION,
+} from "@/components/site/site-data";
 
 import unfall from "@/assets/unfall.jpg";
 import abschlepp from "@/assets/svc-abschlepp.jpg";
@@ -15,32 +24,44 @@ import tuev from "@/assets/svc-tuev.jpg";
 import wartung from "@/assets/svc-wartung.jpg";
 
 const features = [
-  { id: "unfall", label: "Unfallservice", image: unfall, description: "Soforthilfe rund um die Uhr — wir organisieren alles nach dem Unfall." },
-  { id: "abschlepp", label: "Abschleppdienst", image: abschlepp, description: "Schnelle Bergung und sicherer Transport in unsere Meisterwerkstatt." },
-  { id: "reparatur", label: "Fahrzeugreparatur", image: reparatur, description: "Meisterhafte Instandsetzung von Karosserie, Lack und Technik." },
-  { id: "ersatzwagen", label: "Ersatzwagen", image: ersatzwagen, description: "Mobil bleiben ohne Wartezeit — Ersatzfahrzeug direkt vor Ort." },
-  { id: "versicherung", label: "Versicherungsabwicklung", image: versicherung, description: "Den Papierkram mit Ihrer Versicherung übernehmen wir komplett." },
-  { id: "reifen", label: "Reifenwechsel", image: reifen, description: "Wechsel, Auswuchten und Einlagerung Ihrer Räder." },
-  { id: "scheibe", label: "Windschutzscheiben", image: scheibe, description: "Steinschlag in Minuten repariert oder Scheibe komplett getauscht." },
-  { id: "tuev", label: "TÜV & AU", image: tuev, description: "Hauptuntersuchung ohne lange Wartezeit direkt bei uns." },
-  { id: "wartung", label: "Inspektion & Wartung", image: wartung, description: "Service nach Herstellervorgabe — mit Garantieerhalt." },
+  { id: "unfall", label: "Unfallservice", image: unfall, description: "Soforthilfe rund um die Uhr — wir organisieren alles nach dem Unfall.", wa: WA_UNFALL },
+  { id: "abschlepp", label: "Abschleppdienst", image: abschlepp, description: "Schnelle Bergung und sicherer Transport in unsere Meisterwerkstatt.", wa: WA_ABSCHLEPP },
+  { id: "reparatur", label: "Fahrzeugreparatur", image: reparatur, description: "Meisterhafte Instandsetzung von Karosserie, Lack und Technik.", wa: WA_REPARATUR },
+  { id: "ersatzwagen", label: "Ersatzwagen", image: ersatzwagen, description: "Mobil bleiben ohne Wartezeit — Ersatzfahrzeug direkt vor Ort.", wa: WA_ERSATZWAGEN },
+  { id: "versicherung", label: "Versicherungsabwicklung", image: versicherung, description: "Den Papierkram mit Ihrer Versicherung übernehmen wir komplett.", wa: WA_VERSICHERUNG },
+  { id: "reifen", label: "Reifenwechsel", image: reifen, description: "Wechsel, Auswuchten und Einlagerung Ihrer Räder.", wa: WA_REIFEN },
+  { id: "scheibe", label: "Windschutzscheiben", image: scheibe, description: "Steinschlag in Minuten repariert oder Scheibe komplett getauscht.", wa: WA_SCHEIBE },
+  { id: "tuev", label: "TÜV & AU", image: tuev, description: "Hauptuntersuchung ohne lange Wartezeit direkt bei uns.", wa: WA_TUEV },
+  { id: "wartung", label: "Inspektion & Wartung", image: wartung, description: "Service nach Herstellervorgabe — mit Garantieerhalt.", wa: WA_INSPEKTION },
 ];
 
-// Ersetzt den horizontalen Klick-Carousel (Pfeile + Punkte unten) durch
-// einen automatisch von oben nach unten wechselnden Kartenstapel — Punkte
-// jetzt als vertikale Spalte rechts neben der Karte statt als Zeile
-// darunter, passend zur vertikalen Bewegungsrichtung.
+// Statisches 3x3-Karten-Grid statt des automatisch wechselnden Kartenstapels
+// — alle 9 Leistungen gleichzeitig sichtbar, auf Mobile gestapelt.
+function LeistungCard({ image, label, description, wa }: (typeof features)[number]) {
+  return (
+    <a href={wa} target="_blank" rel="noopener noreferrer" className="group block overflow-hidden rounded-xl">
+      <div className="relative aspect-[5/4] overflow-hidden rounded-xl">
+        <img
+          src={image}
+          alt={label}
+          loading="lazy"
+          className="absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 h-full bg-gradient-to-t from-brand-navy from-10% via-brand-navy/60 via-60% to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-5 text-white">
+          <div className="text-lg font-semibold">{label}</div>
+          <div className="mt-1.5 mb-3 text-sm text-white/80">{description}</div>
+          <div className="flex items-center text-sm font-semibold">
+            Per WhatsApp anfragen
+            <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+          </div>
+        </div>
+      </div>
+    </a>
+  );
+}
+
 export function LeistungenTabs() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    if (paused) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => setActive((i) => (i + 1) % features.length), 2500);
-    return () => clearInterval(t);
-  }, [paused]);
-
   return (
     <section aria-labelledby="leistungen-title" className="relative overflow-hidden py-20">
       <div className="relative z-10 mx-auto mb-10 max-w-3xl px-4 text-center">
@@ -53,45 +74,10 @@ export function LeistungenTabs() {
         <p className="mt-3 text-lg text-muted-foreground">Ein Ansprechpartner für alles rund um Ihr Fahrzeug.</p>
       </div>
 
-      <div
-        className="relative z-10 mx-auto flex max-w-7xl items-center justify-center gap-4 px-4 sm:gap-6 sm:px-6"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
-        <div className="relative h-[640px] w-full max-w-3xl overflow-hidden md:h-[440px]">
-          {features.map((f, i) => {
-            const isActive = i === active;
-            const isPrev = i < active;
-            return (
-              <div
-                key={f.id}
-                className={cn(
-                  "absolute inset-0 transition-transform duration-700 ease-in-out",
-                  isActive ? "translate-y-0" : isPrev ? "translate-y-full" : "-translate-y-full",
-                )}
-              >
-                <ProfileCard imageUrl={f.image} title={f.label} description={f.description} />
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Vertikale Fortschritts-Punkte rechts neben der Karte */}
-        <div className="flex shrink-0 flex-col items-center gap-2.5">
-          {features.map((f, i) => (
-            <button
-              key={f.id}
-              type="button"
-              aria-label={f.label}
-              aria-current={i === active}
-              onClick={() => setActive(i)}
-              className={cn(
-                "w-1.5 rounded-full transition-all",
-                i === active ? "h-6 bg-brand-orange" : "h-1.5 bg-brand-navy/20 hover:bg-brand-navy/40",
-              )}
-            />
-          ))}
-        </div>
+      <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 gap-5 px-4 sm:grid-cols-3 sm:px-6">
+        {features.map((f) => (
+          <LeistungCard key={f.id} {...f} />
+        ))}
       </div>
     </section>
   );

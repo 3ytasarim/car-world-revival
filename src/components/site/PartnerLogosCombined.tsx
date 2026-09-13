@@ -9,22 +9,66 @@ import { WA_PARTNER } from "@/components/site/site-data";
 const FADE_MASK =
   "[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]";
 
+function MiniLogoCard({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="flex size-16 shrink-0 items-center justify-center rounded-xl border border-black/10 bg-white p-2 shadow-sm sm:size-20">
+      <img src={src} alt={alt} loading="lazy" className="max-h-full max-w-full object-contain" />
+    </div>
+  );
+}
+
 /**
- * Startseiten-exklusiver Block: fasst die Versicherungspartner-Marquee (aus
- * RundumSorglosSection) und die Partner-&-Zertifizierungen-Marquee (aus
- * PartnerSection) unter einer gemeinsamen, zentrierten Überschrift zusammen
- * — auf Desktop nebeneinander (links Versicherungen, rechts
- * Zertifizierungen), auf Mobile gestapelt (erst links, dann rechts), beide
- * exakt gleich hoch (h-[340px] sm:h-[420px], identisch mit den
- * Original-Blöcken). Auf /leistungen und /partner bleiben die Original-
- * Blöcke unverändert an ihrem jeweiligen Platz.
+ * Fasst die Versicherungspartner-Marquee (aus RundumSorglosSection) und die
+ * Partner-&-Zertifizierungen-Marquee (aus PartnerSection) unter einer
+ * gemeinsamen Überschrift zusammen.
+ *
+ * Zwei Darstellungen:
+ * - Standard (auf /leistungen, /partner): scrollende Marquee, 2-spaltig.
+ * - `compact` (Startseite): alle Logos statisch, klein, in einer einzigen
+ *   Reihe — kein Auto-Scroll, eigener Titel.
  */
-export function PartnerLogosCombined() {
+export function PartnerLogosCombined({
+  compact = false,
+  title = "Unsere Partner & Zertifizierungen",
+  hideWhatsAppButton = false,
+}: {
+  compact?: boolean;
+  title?: string;
+  hideWhatsAppButton?: boolean;
+}) {
+  if (compact) {
+    const allLogos = [...insurancePartners, ...certificationLogos];
+    return (
+      <section aria-labelledby="partner-logos-title" className="relative bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <h2 id="partner-logos-title" className="text-center text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
+            <AnimatedText text={title} minWeight={300} maxWeight={800} delayMultiplier={0.03} />
+          </h2>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            {allLogos.map((l) => (
+              <MiniLogoCard key={l.alt} src={l.src} alt={l.alt} />
+            ))}
+          </div>
+
+          {!hideWhatsAppButton && (
+            <div className="mt-10 flex justify-center">
+              <Button3D href={WA_PARTNER} target="_blank" rel="noopener noreferrer" variant="whatsapp">
+                <WhatsAppIcon className="size-5" />
+                Per WhatsApp anfragen
+              </Button3D>
+            </div>
+          )}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section aria-labelledby="partner-logos-title" className="relative bg-white py-16 sm:py-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <h2 id="partner-logos-title" className="text-center text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
-          <AnimatedText text="Unsere Partner & Zertifizierungen" minWeight={300} maxWeight={800} delayMultiplier={0.03} />
+          <AnimatedText text={title} minWeight={300} maxWeight={800} delayMultiplier={0.03} />
         </h2>
 
         <div className="mt-10 grid grid-cols-1 items-start justify-items-center gap-10 lg:grid-cols-2 lg:gap-8">
@@ -65,12 +109,14 @@ export function PartnerLogosCombined() {
           </div>
         </div>
 
-        <div className="mt-10 flex justify-center">
-          <Button3D href={WA_PARTNER} target="_blank" rel="noopener noreferrer" variant="whatsapp">
-            <WhatsAppIcon className="size-5" />
-            Per WhatsApp anfragen
-          </Button3D>
-        </div>
+        {!hideWhatsAppButton && (
+          <div className="mt-10 flex justify-center">
+            <Button3D href={WA_PARTNER} target="_blank" rel="noopener noreferrer" variant="whatsapp">
+              <WhatsAppIcon className="size-5" />
+              Per WhatsApp anfragen
+            </Button3D>
+          </div>
+        )}
       </div>
     </section>
   );

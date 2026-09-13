@@ -21,7 +21,6 @@ import heroPhoneReifenwechsel from "@/assets/hero-reifenwechsel.jpg";
 import { Iphone15ProFrame, PhoneFanCarousel } from "@/components/ui/phone-mockups-1";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
 import { IhreVorteile } from "@/components/site/IhreVorteile";
-import { VideoPlayer } from "@/components/ui/video-player";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { PartnerSection } from "@/components/site/PartnerSection";
 import { PartnerLogosCombined } from "@/components/site/PartnerLogosCombined";
@@ -226,37 +225,41 @@ function Home() {
 
         </div>
 
-        {/* Ihre Vorteile — Kundennutzen statt KPI-Zahlen, gleich nach dem Hero */}
+        {/* Ihre Vorteile — Kundennutzen statt KPI-Zahlen, direkt nach dem Hero */}
         <IhreVorteile />
 
-        {/* Werkstatt-Video — exakt dieselbe Breite wie die Ihre-Vorteile-Marquee
-            darüber: gleicher max-w-6xl-Container plus dasselbe zusätzliche
-            48px-Inset (px-12), das dort die Fade-Maske erzeugt. */}
-        <section className="relative bg-white py-14">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="px-12">
-              <VideoPlayer src="/videos/werkstatt-video.mp4" className="max-w-none" />
+        {/* Rundum-sorglos-Paket, inkl. Werkstatt-Video und Vorher/Nachher */}
+        <RundumSorglosSection hideInsuranceMarquee shimmerButton videoSrc="/videos/werkstatt-video.mp4" />
+
+        {/* Kundenmeinungen (Google-Bewertungen) */}
+        <TestimonialsSection />
+
+        {/* Schnell erreichbar: Jetzt-anrufen + WhatsApp, direkt vor den
+            Versicherungspartner-Logos. */}
+        <section className="relative bg-brand-navy py-14">
+          <div className="mx-auto max-w-2xl px-4 text-center sm:px-6">
+            <h2 className="text-2xl font-bold text-white sm:text-3xl">Schnell erreichbar</h2>
+            <p className="mt-2 text-white/70">Rufen Sie uns direkt an oder schreiben Sie uns per WhatsApp.</p>
+            <div className="mt-6 flex flex-wrap justify-center gap-4">
+              <Button3D href={PHONE_HREF}>
+                <Phone className="size-4" aria-hidden="true" />
+                Jetzt anrufen
+              </Button3D>
+              <Button3D href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="whatsapp">
+                <WhatsAppIcon className="size-4" />
+                WhatsApp
+              </Button3D>
             </div>
           </div>
         </section>
 
-        {/* Rundum-sorglos-Paket */}
-        <RundumSorglosSection hideInsuranceMarquee shimmerButton />
+        {/* Versicherungspartner + Zertifizierungen — kompakt, statisch, klein */}
+        <PartnerLogosCombined compact title="Partner mit allen Versicherungen" hideWhatsAppButton />
 
-        {/* Versicherungspartner + Partner & Zertifizierungen — auf der
-            Startseite zu einem gemeinsamen 2-spaltigen Block kombiniert. */}
-        <PartnerLogosCombined />
-
-        {/* Unsere Leistungen — vertikale Tabs */}
+        {/* Unsere Leistungen — 3x3 Karten-Grid */}
         <LeistungenTabs />
 
-
-
-
-        {/* Kundenmeinungen */}
-        <TestimonialsSection />
-
-        {/* Partner */}
+        {/* Partner / Großkunden — letzter Abschnitt vor dem Footer */}
         <PartnerSection hideCertificationBlock />
 
       </main>
