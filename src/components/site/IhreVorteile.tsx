@@ -3,6 +3,7 @@ import { CheckCircle2 } from "lucide-react";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { certificationLogos, CertificationLogoCard } from "@/components/site/PartnerSection";
+import { insurancePartners, PartnerLogoCard } from "@/components/site/RundumSorglosSection";
 
 import imgMobilitaetsgarantie from "@/assets/vorteil-mobilitaetsgarantie.jpg";
 import imgAbschleppservice from "@/assets/vorteil-abschleppservice.jpg";
@@ -89,10 +90,14 @@ export function IhreVorteile() {
           ))}
         </div>
 
-        {/* Zertifizierungs-Logos direkt unter den Vorteilen — dieselben
-            Logos/Karten wie im "Unsere Partner & Zertifizierungen"-Bereich
-            weiter unten, hier als einzelne, nicht scrollende Reihe. */}
+        {/* Versicherungspartner- + Zertifizierungs-Logos direkt unter den
+            Vorteilen — dieselben Logos/Karten wie im "Unsere Partner &
+            Zertifizierungen"-Bereich weiter unten, hier als einzelne, nicht
+            scrollende Reihe. */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          {insurancePartners.map((p) => (
+            <PartnerLogoCard key={p.alt} partner={p} />
+          ))}
           {certificationLogos.map((l) => (
             <CertificationLogoCard key={l.alt} logo={l} />
           ))}

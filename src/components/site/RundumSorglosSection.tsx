@@ -6,21 +6,37 @@ import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
 import { GradientShimmer } from "@/components/ui/gradient-shimmer";
 import { RevealSlider } from "@/components/ui/reveal2";
-import { OrbitingLogos } from "@/components/ui/orbiting-logos";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
+import { VideoPlayer } from "@/components/ui/video-player";
 import { PHONE_HREF, WA_UNFALL } from "@/components/site/site-data";
 import { TowTruckIcon } from "@/components/site/TowTruckIcon";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import rundumBefore from "@/assets/rundum-before.jpg";
 import rundumAfter from "@/assets/rundum-after.jpg";
 
-// Der Ablauf nach einem Unfall — als Orbit um "UNFALL?" statt als Liste,
-// damit er möglichst über Icons erzählt wird statt über Fließtext.
+// Der Ablauf nach einem Unfall — als Karten-Grid statt Orbit, mit
+// ausführlichem Text statt nur Icon+Titel.
 const processSteps = [
-  { icon: PhoneCall, title: "Kontakt" },
-  { icon: TowTruckIcon, title: "Abholung" },
-  { icon: Wrench, title: "Reparatur" },
-  { icon: FileCheck2, title: "Abwicklung" },
+  {
+    icon: PhoneCall,
+    title: "Kontakt",
+    text: "Sie rufen uns direkt an und nehmen Kontakt zu uns auf, sei es telefonisch, per WhatsApp oder über unser Kontaktformular, um Ihre Anfrage zu stellen. Wir sind jederzeit für Sie da!",
+  },
+  {
+    icon: TowTruckIcon,
+    title: "Abholung",
+    text: "Wir schleppen Ihr Fahrzeug ab und kümmern uns um den sicheren Transport zu unserer Werkstatt.",
+  },
+  {
+    icon: Wrench,
+    title: "Reparatur",
+    text: "Wir kalkulieren den Schaden fachgerecht und reparieren Ihr Fahrzeug professionell.",
+  },
+  {
+    icon: FileCheck2,
+    title: "Unfallabwicklung",
+    text: "Wir übernehmen die komplette Kommunikation und Abwicklung mit der Versicherung.",
+  },
 ];
 
 export const insurancePartners = [
@@ -39,11 +55,14 @@ export const insurancePartners = [
 export function RundumSorglosSection({
   hideInsuranceMarquee = false,
   shimmerButton = false,
+  videoSrc,
 }: {
   hideInsuranceMarquee?: boolean;
   /** Shimmer-Textanimation im "Jetzt anrufen"-Button, wie in den Seiten-Hero-Titeln
    * (GradientShimmer). Nur auf der Startseite aktiviert. */
   shimmerButton?: boolean;
+  /** Werkstatt-Video direkt unter Titel/Beschreibung — nur auf der Startseite gesetzt. */
+  videoSrc?: string;
 }) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
@@ -70,94 +89,54 @@ export function RundumSorglosSection({
               <AnimatedText text="-Paket" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#131F35]" />
             </h2>
 
-            <p className="mt-4 text-base text-muted-foreground sm:text-lg">
-              Wir kümmern uns um alles — von der Abholung bis zur kompletten Abwicklung mit Ihrer Versicherung. Sie
-              lehnen sich zurück, wir machen den Rest.
+            <p className="mt-4 text-sm text-muted-foreground sm:text-base">
+              Wir kümmern uns um deinen Unfall von A-Z
             </p>
           </motion.div>
 
-          {/* Darunter: links der Orbit, rechts Vorher/Nachher — auf gleicher
-              Höhe, der Orbit darf breit atmen (Kreise überlappen nicht). */}
-          <div className="mt-12 grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="relative flex justify-center [--orbit-radius:145px] sm:[--orbit-radius:168px] lg:[--orbit-radius:162px] xl:[--orbit-radius:190px]"
-            >
-              {/* Konzentrische Glow-Kreise hinter dem Orbit, wie in der
-                  Referenz — aber in den Blautönen der Seite statt Lila. */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl"
-                style={{
-                  width: "calc(var(--orbit-radius) * 2.7)",
-                  height: "calc(var(--orbit-radius) * 2.7)",
-                  background:
-                    "radial-gradient(circle, rgba(80,136,200,0.30) 0%, rgba(80,136,200,0.14) 45%, rgba(80,136,200,0) 72%)",
-                }}
-              />
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-xl"
-                style={{
-                  width: "calc(var(--orbit-radius) * 1.75)",
-                  height: "calc(var(--orbit-radius) * 1.75)",
-                  background:
-                    "radial-gradient(circle, rgba(143,184,232,0.55) 0%, rgba(143,184,232,0.22) 55%, rgba(143,184,232,0) 78%)",
-                }}
-              />
+          {videoSrc && (
+            <div className="mx-auto mt-10 max-w-5xl px-12">
+              <VideoPlayer src={videoSrc} className="max-w-none" />
+            </div>
+          )}
 
-              <OrbitingLogos
-                radius={145}
-                duration={26}
-                className="relative [--orbit-radius:145px] sm:[--orbit-radius:168px] lg:[--orbit-radius:162px] xl:[--orbit-radius:190px]"
-                center={
-                  <div className="flex size-24 flex-col items-center justify-center gap-1 rounded-full border-2 border-brand-orange/40 bg-white text-center shadow-lg sm:size-28 lg:size-28 xl:size-32">
-                    <AlertTriangle
-                      className="size-6 animate-pulse text-yellow-400 sm:size-7"
-                      aria-hidden="true"
-                    />
-                    <span className="text-sm leading-none font-extrabold tracking-tight text-[#131F35] sm:text-base">
-                      UNFALL?
+          {/* Ablauf als Karten-Grid statt Orbit — responsive, auf Mobile
+              gestapelt. */}
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {processSteps.map((step, i) => (
+              <motion.div
+                key={step.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
+                className="relative flex flex-col gap-3 rounded-2xl border border-black/5 bg-white p-6 shadow-[0_10px_30px_-18px_rgba(19,31,53,0.3)]"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="relative flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#5088C8]/10 text-[#1B3A63]">
+                    <step.icon className="size-6" aria-hidden="true" />
+                    <span className="absolute -top-2 -right-2 flex size-6 items-center justify-center rounded-full border-2 border-white bg-brand-orange text-[11px] font-bold text-brand-orange-foreground shadow-sm">
+                      {i + 1}
                     </span>
-                  </div>
-                }
-                items={processSteps.map((step, i) => ({
-                  key: step.title,
-                  content: (
-                    <div className="flex flex-col items-center gap-1.5">
-                      <div className="relative flex size-14 items-center justify-center rounded-full border border-[#5088C8]/20 bg-white shadow-md sm:size-16">
-                        <step.icon className="size-5 text-[#1B3A63] sm:size-6" aria-hidden="true" />
-                        <span
-                          className="animate-step-badge absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-full border-2 border-white bg-brand-orange text-[10px] font-bold text-brand-orange-foreground shadow-sm sm:size-6 sm:text-xs"
-                          style={{ animationDelay: `${i * 0.3}s` }}
-                          aria-hidden="true"
-                        >
-                          {i + 1}
-                        </span>
-                      </div>
-                      <span className="text-[11px] font-semibold whitespace-nowrap text-[#131F35] sm:text-xs">
-                        {step.title}
-                      </span>
-                    </div>
-                  ),
-                }))}
-              />
-            </motion.div>
-
-            {/* Vorher/Nachher */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.7 }}
-            >
-              <RevealSlider
-                beforeImage={{ src: rundumBefore, alt: "Unfallfahrzeug vor der Reparatur" }}
-                afterImage={{ src: rundumAfter, alt: "Fahrzeug nach der Reparatur bei Car-World" }}
-              />
-            </motion.div>
+                  </span>
+                  <h3 className="font-bold text-brand-navy">{step.title}</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">{step.text}</p>
+              </motion.div>
+            ))}
           </div>
+
+          {/* Vorher/Nachher */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.7 }}
+            className="mx-auto mt-10 max-w-2xl"
+          >
+            <RevealSlider
+              beforeImage={{ src: rundumBefore, alt: "Unfallfahrzeug vor der Reparatur" }}
+              afterImage={{ src: rundumAfter, alt: "Fahrzeug nach der Reparatur bei Car-World" }}
+            />
+          </motion.div>
 
           {/* Jetzt-anrufen + WhatsApp: mittig unter beiden Spalten, gleich
               wichtig nebeneinander. */}

@@ -1,5 +1,5 @@
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
-import { Handshake } from "lucide-react";
+import { CalendarClock, Handshake, Receipt, ShieldCheck, Truck } from "lucide-react";
 
 import { useInView } from "@/hooks/use-in-view";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
@@ -10,28 +10,30 @@ import tuv from "@/assets/partner-tuv.png";
 import innung from "@/assets/partner-innung.png";
 import autoglas from "@/assets/partner-autoglas.png";
 import hwk from "@/assets/partner-hwk.png";
-import imgLeihwagen from "@/assets/grosskunde-leihwagen.jpg";
-import imgFastlane from "@/assets/grosskunde-fastlane.jpg";
-import imgRabatte from "@/assets/grosskunde-rabatte.jpg";
 
-// Nur die im Kundengespräch verbindlich bestätigten Vorteile — bewusst
-// noch nicht auf 5–6 aufgefüllt, bis weitere mit dem Kunden abgestimmt sind.
-// Echte Fotos statt Icons, gleicher Kartenstil wie "Ihre Vorteile" auf der
-// Startseite: statisches Grid (kein Marquee — eine kontinuierlich laufende
-// Reihe hat nie eine Karte exakt an der Container-Kante).
+// Vom Kunden final bestätigte Vorteile als Großkunde.
 const benefits = [
-  { image: imgFastlane, title: "Fast-Lane Termin" },
-  { image: imgRabatte, title: "Besondere Großkundenrabatte" },
-  { image: imgLeihwagen, title: "Kostenlose Leihwagen" },
+  { icon: CalendarClock, title: "Bevorzugte Terminvergabe" },
+  { icon: Receipt, title: "Sammelabrechnung" },
+  { icon: Truck, title: "Hol- & Bringservice" },
+  { icon: ShieldCheck, title: "Mobilitätsgarantie" },
 ];
 
-function GrosskundeCard({ image, title }: (typeof benefits)[number]) {
+function GrosskundeCard({ icon: Icon, title }: (typeof benefits)[number]) {
   return (
-    <div className="flex w-[165px] shrink-0 flex-col items-center gap-2.5 sm:w-[195px]">
-      <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[0_20px_45px_-20px_rgba(19,31,53,0.4)]">
-        <img src={image} alt={title} loading="lazy" className="size-full object-cover" />
-      </div>
-      <h4 className="w-full text-center text-[11px] font-bold tracking-tight whitespace-nowrap text-brand-navy sm:text-xs">{title}</h4>
+    <div className="relative flex w-[min(88vw,380px)] shrink-0 items-center gap-5 overflow-hidden rounded-2xl bg-gradient-to-br from-brand-orange to-[#3D6FA8] px-7 py-7 text-white shadow-[0_20px_45px_-20px_rgba(80,136,200,0.55)]">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.12]"
+        style={{
+          backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
+          backgroundSize: "0.75rem 0.75rem",
+        }}
+      />
+      <span className="relative flex size-16 shrink-0 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/25">
+        <Icon className="size-8" aria-hidden="true" />
+      </span>
+      <h4 className="relative text-xl font-bold tracking-tight">{title}</h4>
     </div>
   );
 }
@@ -63,7 +65,12 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
             Für Unternehmen & Flotten
           </span>
           <h2 id="partner-title" className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
-            <AnimatedText text="Werden Sie Großkunde" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
+            <AnimatedText
+              text="Partner werden – Fuhrpark- & Flottenservice für Gewerbekunden"
+              minWeight={300}
+              maxWeight={800}
+              delayMultiplier={0.05}
+            />
           </h2>
           <p className="mt-2 text-sm font-semibold tracking-wide text-brand-orange uppercase">
             Werden Sie Car-World Partner
