@@ -43,13 +43,13 @@ const vorteile = [
 // Kurze Checkmark-Kartenreihe direkt unter Titel/Untertitel, oberhalb der
 // bestehenden Foto-Karten — 3 knappe Kernversprechen statt der ausführlichen
 // Foto-Galerie darunter.
-const checkPoints = [
+export const checkPoints = [
   { title: "Unfall - Rundum-Service", text: "Wir kümmern uns um ihren Unfall von A-Z" },
   { title: "Mobilitätsgarantie", text: "Wir verfügen über moderne Leihfahrzeuge" },
   { title: "Schnelle Terminvergabe", text: undefined },
 ];
 
-function CheckPointCard({ title, text }: (typeof checkPoints)[number]) {
+export function CheckPointCard({ title, text }: (typeof checkPoints)[number]) {
   return (
     <div className="flex flex-col gap-1.5 rounded-2xl border border-black/5 bg-white p-5 shadow-[0_10px_30px_-18px_rgba(19,31,53,0.3)]">
       <div className="flex items-center gap-2.5">
