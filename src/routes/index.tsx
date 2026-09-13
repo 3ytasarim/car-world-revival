@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ChevronRight, Phone, Star } from "lucide-react";
+import { Phone, Star } from "lucide-react";
 
 
 import { Header } from "@/components/site/Header";
@@ -153,11 +153,6 @@ function Home() {
               <div className="grid w-full items-center gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-stretch lg:gap-8">
                 {/* Text-Spalte */}
                 <div className="max-w-4xl space-y-7 pt-6 text-left lg:flex lg:flex-col lg:pt-20">
-                  <span className="group flex w-fit items-center rounded-3xl border-[2px] border-brand-orange/25 bg-gradient-to-tr from-brand-orange/15 via-sky-400/15 to-transparent px-6 py-2.5 text-base text-[#1B3A63] shadow-[0_10px_25px_-18px_rgba(80,136,200,0.9)]">
-                    Alles aus einer Hand
-                    <ChevronRight className="ml-2 inline size-4 text-brand-orange duration-300 group-hover:translate-x-1" aria-hidden="true" />
-                  </span>
-
                   {/* Google + 5 Sterne Trust-Badge — Vertrauenssignal noch
                       vor dem ersten Scroll, gleicher 4,9-Wert wie im
                       Kundenmeinungen-Bereich (keine zweite, abweichende Zahl). */}
@@ -180,7 +175,7 @@ function Home() {
                     <span
                       className="block bg-[linear-gradient(135deg,_#0B1626,_#1B3A63,_#2F6FB5,_#5088C8,_#8FB8E8)] bg-clip-text font-extrabold text-transparent"
                     >
-                      Nummer 1 Autowerkstatt
+                      Nr. 1 Autowerkstatt in Bad Neuenahr-Ahrweiler
                     </span>
 
                   </h1>
