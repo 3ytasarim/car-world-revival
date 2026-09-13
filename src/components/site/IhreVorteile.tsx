@@ -1,3 +1,5 @@
+import { CheckCircle2 } from "lucide-react";
+
 import { AnimatedText } from "@/components/ui/animated-text";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 
@@ -36,6 +38,27 @@ const vorteile = [
   { image: imgVersicherung, title: "Versicherungsabwicklung" },
 ];
 
+// Kurze Checkmark-Kartenreihe direkt unter Titel/Untertitel, oberhalb der
+// bestehenden Foto-Karten — 3 knappe Kernversprechen statt der ausführlichen
+// Foto-Galerie darunter.
+const checkPoints = [
+  { title: "Unfall - Rundum-Service", text: "Wir kümmern uns um ihren Unfall von A-Z" },
+  { title: "Mobilitätsgarantie", text: "Wir verfügen über moderne Leihfahrzeuge" },
+  { title: "Schnelle Terminvergabe", text: undefined },
+];
+
+function CheckPointCard({ title, text }: (typeof checkPoints)[number]) {
+  return (
+    <div className="flex flex-col gap-1.5 rounded-2xl border border-black/5 bg-white p-5 shadow-[0_10px_30px_-18px_rgba(19,31,53,0.3)]">
+      <div className="flex items-center gap-2.5">
+        <CheckCircle2 className="size-5 shrink-0 text-brand-orange" aria-hidden="true" />
+        <h3 className="font-bold text-brand-navy">{title}</h3>
+      </div>
+      {text && <p className="text-sm text-muted-foreground">{text}</p>}
+    </div>
+  );
+}
+
 function VorteilPhotoCard({ image, title }: (typeof vorteile)[number]) {
   return (
     <div className="flex w-[165px] shrink-0 flex-col items-center gap-2.5 sm:w-[195px]">
@@ -57,6 +80,12 @@ export function IhreVorteile() {
             <AnimatedText text="Vorteile" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-brand-orange" />
           </h2>
           <p className="mt-3 text-muted-foreground">Das bekommen Sie, wenn Sie sich für Car-World entscheiden.</p>
+        </div>
+
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {checkPoints.map((c) => (
+            <CheckPointCard key={c.title} {...c} />
+          ))}
         </div>
 
         <div className="mt-10">

@@ -26,9 +26,10 @@ import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { PartnerSection } from "@/components/site/PartnerSection";
 import { PartnerLogosCombined } from "@/components/site/PartnerLogosCombined";
 
-import { PHONE_HREF } from "@/components/site/site-data";
+import { PHONE_HREF, WA_FRAGE, WA_UNFALL, WA_SCHEIBE, WA_REIFEN } from "@/components/site/site-data";
 import { Button3D } from "@/components/ui/button-3d";
 import { GradientShimmer } from "@/components/ui/gradient-shimmer";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 
 
@@ -93,6 +94,7 @@ const heroPhones = [
     badge: "Notfall",
     title: "Unfall gehabt?",
     subtitle: "Wir kümmern uns um alles — sofort.",
+    wa: WA_UNFALL,
   },
   {
     image: heroPhoneSteinschlag,
@@ -100,6 +102,7 @@ const heroPhones = [
     badge: "Sofort-Termin",
     title: "Steinschlag?",
     subtitle: "In wenigen Minuten repariert.",
+    wa: WA_SCHEIBE,
   },
   {
     image: heroPhoneReifenwechsel,
@@ -107,6 +110,7 @@ const heroPhones = [
     badge: "Schnell & fair",
     title: "Reifenwechsel?",
     subtitle: "Wechsel und Einlagerung ohne Wartezeit.",
+    wa: WA_REIFEN,
   },
 ];
 
@@ -184,8 +188,12 @@ function Home() {
                   <div className="flex flex-wrap items-center gap-4 lg:mt-auto lg:mb-[10rem]">
                     <Button3D href={PHONE_HREF}>
                       <Phone className="size-4" aria-hidden="true" />
+                      Jetzt anrufen
+                    </Button3D>
+                    <Button3D href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="whatsapp">
+                      <WhatsAppIcon className="size-4" />
                       <GradientShimmer gradient="bay" duration={2}>
-                        Jetzt anrufen
+                        WhatsApp
                       </GradientShimmer>
                     </Button3D>
                   </div>
@@ -206,6 +214,7 @@ function Home() {
                           badge={p.badge}
                           title={p.title}
                           subtitle={p.subtitle}
+                          wa={p.wa}
                         />
                       </Iphone15ProFrame>
                     ))}
