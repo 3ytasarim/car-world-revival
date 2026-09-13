@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 interface AnimatedTextProps {
@@ -51,19 +51,27 @@ export function AnimatedText({
           100% { font-variation-settings: "wght" ${maxWeight}; }
         }
       `}</style>
-      {text.split("").map((char, index) => (
-        <span
-          key={`${char}-${index}`}
-          data-letter
-          aria-hidden="true"
-          className="inline-block whitespace-pre"
-          style={{
-            animation: `${uid} ${animationDuration}s ease-in-out infinite alternate`,
-          }}
-        >
-          {char === " " ? "\u00A0" : char}
+      {text.split(" ").map((word, wordIndex, words) => (
+        <span key={wordIndex} className="inline-block whitespace-nowrap">
+          {word.split("").map((char, index) => (
+            <span
+              key={`${char}-${index}`}
+              data-letter
+              aria-hidden="true"
+              className="inline-block"
+              style={{
+                animation: `${uid} ${animationDuration}s ease-in-out infinite alternate`,
+              }}
+            >
+              {char}
+            </span>
+          ))}
         </span>
-      ))}
+      )).reduce<ReactNode[]>((acc, word, i) => {
+        if (i > 0) acc.push(" ");
+        acc.push(word);
+        return acc;
+      }, [])}
     </span>
   );
 }
