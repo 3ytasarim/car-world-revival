@@ -16,17 +16,17 @@ export interface ServiceDetailFaq {
 
 /**
  * Wiederverwendbarer Inhaltsblock für die einzelnen Leistungs-Detailseiten
- * (/leistungen/<slug>) — Textabschnitte, optionale FAQ, dann Anruf- +
- * WhatsApp-CTA. Jede Seite bringt nur ihre eigenen Daten (sections/faq/wa)
+ * (/leistungen/<slug>) — Textabschnitte, null/eine/mehrere FAQs, dann Anruf- +
+ * WhatsApp-CTA. Jede Seite bringt nur ihre eigenen Daten (sections/faqs/wa)
  * mit, das Layout bleibt für alle gleich.
  */
 export function ServiceDetailContent({
   sections,
-  faq,
+  faqs,
   wa,
 }: {
   sections: ServiceDetailSection[];
-  faq?: ServiceDetailFaq;
+  faqs?: ServiceDetailFaq[];
   wa: string;
 }) {
   return (
@@ -39,12 +39,12 @@ export function ServiceDetailContent({
           </div>
         ))}
 
-        {faq && (
-          <div className="mt-10 rounded-2xl border border-black/5 bg-muted/40 p-6 sm:p-8">
+        {faqs?.map((faq) => (
+          <div key={faq.question} className="mt-6 rounded-2xl border border-black/5 bg-muted/40 p-6 sm:p-8">
             <h2 className="text-xl font-bold tracking-tight text-brand-navy sm:text-2xl">{faq.question}</h2>
             <p className="mt-3 leading-relaxed text-muted-foreground">{faq.answer}</p>
           </div>
-        )}
+        ))}
 
         <div className="mt-12 text-center">
           <h3 className="text-lg font-semibold text-brand-navy">Jetzt Kontakt aufnehmen</h3>

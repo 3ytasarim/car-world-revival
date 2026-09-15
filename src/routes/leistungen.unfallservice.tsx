@@ -80,7 +80,7 @@ function UnfallservicePage() {
           subtitle="Soforthilfe rund um die Uhr – wir koordinieren die nächsten Schritte nach Ihrem Autounfall."
           photoBackground
         />
-        <ServiceDetailContent sections={sections} faq={faq} wa={WA_UNFALL} />
+        <ServiceDetailContent sections={sections} faqs={[faq]} wa={WA_UNFALL} />
       </main>
       <Footer />
       <FloatingActions />

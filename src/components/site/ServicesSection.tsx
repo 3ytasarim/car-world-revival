@@ -50,7 +50,14 @@ const services: Service[] = [
     wa: WA_ABSCHLEPP,
     href: "/leistungen/abschleppdienst",
   },
-  { id: "reparatur", img: reparatur, title: "Fahrzeugreparatur", text: "Meisterhafte Instandsetzung.", wa: WA_REPARATUR },
+  {
+    id: "reparatur",
+    img: reparatur,
+    title: "Fahrzeugreparatur",
+    text: "Meisterhafte Instandsetzung.",
+    wa: WA_REPARATUR,
+    href: "/leistungen/fahrzeugreparatur",
+  },
   { id: "ersatzwagen", img: ersatzwagen, title: "Ersatzwagen", text: "Mobil bleiben ohne Wartezeit.", wa: WA_ERSATZWAGEN },
   {
     id: "versicherung",
