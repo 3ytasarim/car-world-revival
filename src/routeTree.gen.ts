@@ -25,6 +25,7 @@ import { Route as LeistungenAbschleppdienstRouteImport } from './routes/leistung
 import { Route as LeistungenErsatzwagenRouteImport } from './routes/leistungen.ersatzwagen'
 import { Route as LeistungenFahrzeugreparaturRouteImport } from './routes/leistungen.fahrzeugreparatur'
 import { Route as LeistungenReifenwechselRouteImport } from './routes/leistungen.reifenwechsel'
+import { Route as LeistungenTuevRouteImport } from './routes/leistungen.tuev'
 import { Route as LeistungenUnfallserviceRouteImport } from './routes/leistungen.unfallservice'
 import { Route as LeistungenVersicherungsabwicklungRouteImport } from './routes/leistungen.versicherungsabwicklung'
 import { Route as LeistungenWindschutzscheibenRouteImport } from './routes/leistungen.windschutzscheiben'
@@ -110,6 +111,11 @@ const LeistungenReifenwechselRoute = LeistungenReifenwechselRouteImport.update({
   path: '/reifenwechsel',
   getParentRoute: () => LeistungenRoute,
 } as any)
+const LeistungenTuevRoute = LeistungenTuevRouteImport.update({
+  id: '/tuev',
+  path: '/tuev',
+  getParentRoute: () => LeistungenRoute,
+} as any)
 const LeistungenUnfallserviceRoute = LeistungenUnfallserviceRouteImport.update({
   id: '/unfallservice',
   path: '/unfallservice',
@@ -143,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/leistungen/ersatzwagen': typeof LeistungenErsatzwagenRoute
   '/leistungen/fahrzeugreparatur': typeof LeistungenFahrzeugreparaturRoute
   '/leistungen/reifenwechsel': typeof LeistungenReifenwechselRoute
+  '/leistungen/tuev': typeof LeistungenTuevRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/versicherungsabwicklung': typeof LeistungenVersicherungsabwicklungRoute
   '/leistungen/windschutzscheiben': typeof LeistungenWindschutzscheibenRoute
@@ -162,6 +169,7 @@ export interface FileRoutesByTo {
   '/leistungen/ersatzwagen': typeof LeistungenErsatzwagenRoute
   '/leistungen/fahrzeugreparatur': typeof LeistungenFahrzeugreparaturRoute
   '/leistungen/reifenwechsel': typeof LeistungenReifenwechselRoute
+  '/leistungen/tuev': typeof LeistungenTuevRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/versicherungsabwicklung': typeof LeistungenVersicherungsabwicklungRoute
   '/leistungen/windschutzscheiben': typeof LeistungenWindschutzscheibenRoute
@@ -184,6 +192,7 @@ export interface FileRoutesById {
   '/leistungen/ersatzwagen': typeof LeistungenErsatzwagenRoute
   '/leistungen/fahrzeugreparatur': typeof LeistungenFahrzeugreparaturRoute
   '/leistungen/reifenwechsel': typeof LeistungenReifenwechselRoute
+  '/leistungen/tuev': typeof LeistungenTuevRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/versicherungsabwicklung': typeof LeistungenVersicherungsabwicklungRoute
   '/leistungen/windschutzscheiben': typeof LeistungenWindschutzscheibenRoute
@@ -206,6 +215,7 @@ export interface FileRouteTypes {
     | '/leistungen/ersatzwagen'
     | '/leistungen/fahrzeugreparatur'
     | '/leistungen/reifenwechsel'
+    | '/leistungen/tuev'
     | '/leistungen/unfallservice'
     | '/leistungen/versicherungsabwicklung'
     | '/leistungen/windschutzscheiben'
@@ -225,6 +235,7 @@ export interface FileRouteTypes {
     | '/leistungen/ersatzwagen'
     | '/leistungen/fahrzeugreparatur'
     | '/leistungen/reifenwechsel'
+    | '/leistungen/tuev'
     | '/leistungen/unfallservice'
     | '/leistungen/versicherungsabwicklung'
     | '/leistungen/windschutzscheiben'
@@ -246,6 +257,7 @@ export interface FileRouteTypes {
     | '/leistungen/ersatzwagen'
     | '/leistungen/fahrzeugreparatur'
     | '/leistungen/reifenwechsel'
+    | '/leistungen/tuev'
     | '/leistungen/unfallservice'
     | '/leistungen/versicherungsabwicklung'
     | '/leistungen/windschutzscheiben'
@@ -379,6 +391,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeistungenReifenwechselRouteImport
       parentRoute: typeof LeistungenRoute
     }
+    '/leistungen/tuev': {
+      id: '/leistungen/tuev'
+      path: '/tuev'
+      fullPath: '/leistungen/tuev'
+      preLoaderRoute: typeof LeistungenTuevRouteImport
+      parentRoute: typeof LeistungenRoute
+    }
     '/leistungen/unfallservice': {
       id: '/leistungen/unfallservice'
       path: '/unfallservice'
@@ -419,6 +438,7 @@ interface LeistungenRouteChildren {
   LeistungenErsatzwagenRoute: typeof LeistungenErsatzwagenRoute
   LeistungenFahrzeugreparaturRoute: typeof LeistungenFahrzeugreparaturRoute
   LeistungenReifenwechselRoute: typeof LeistungenReifenwechselRoute
+  LeistungenTuevRoute: typeof LeistungenTuevRoute
   LeistungenUnfallserviceRoute: typeof LeistungenUnfallserviceRoute
   LeistungenVersicherungsabwicklungRoute: typeof LeistungenVersicherungsabwicklungRoute
   LeistungenWindschutzscheibenRoute: typeof LeistungenWindschutzscheibenRoute
@@ -430,6 +450,7 @@ const LeistungenRouteChildren: LeistungenRouteChildren = {
   LeistungenErsatzwagenRoute: LeistungenErsatzwagenRoute,
   LeistungenFahrzeugreparaturRoute: LeistungenFahrzeugreparaturRoute,
   LeistungenReifenwechselRoute: LeistungenReifenwechselRoute,
+  LeistungenTuevRoute: LeistungenTuevRoute,
   LeistungenUnfallserviceRoute: LeistungenUnfallserviceRoute,
   LeistungenVersicherungsabwicklungRoute:
     LeistungenVersicherungsabwicklungRoute,

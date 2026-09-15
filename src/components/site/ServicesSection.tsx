@@ -90,7 +90,14 @@ const services: Service[] = [
     wa: WA_SCHEIBE,
     href: "/leistungen/windschutzscheiben",
   },
-  { id: "tuev", img: tuev, title: "TÜV", text: "Prüfung ohne lange Wartezeit.", wa: WA_TUEV },
+  {
+    id: "tuev",
+    img: tuev,
+    title: "TÜV",
+    text: "Prüfung ohne lange Wartezeit.",
+    wa: WA_TUEV,
+    href: "/leistungen/tuev",
+  },
   { id: "wartung", img: wartung, title: "Inspektion & Wartung", text: "Nach Herstellervorgabe.", wa: WA_INSPEKTION },
 ];
 
