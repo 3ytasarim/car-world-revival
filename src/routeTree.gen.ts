@@ -24,6 +24,7 @@ import { Route as LeistungenIndexRouteImport } from './routes/leistungen.index'
 import { Route as LeistungenAbschleppdienstRouteImport } from './routes/leistungen.abschleppdienst'
 import { Route as LeistungenErsatzwagenRouteImport } from './routes/leistungen.ersatzwagen'
 import { Route as LeistungenFahrzeugreparaturRouteImport } from './routes/leistungen.fahrzeugreparatur'
+import { Route as LeistungenReifenwechselRouteImport } from './routes/leistungen.reifenwechsel'
 import { Route as LeistungenUnfallserviceRouteImport } from './routes/leistungen.unfallservice'
 import { Route as LeistungenVersicherungsabwicklungRouteImport } from './routes/leistungen.versicherungsabwicklung'
 
@@ -103,6 +104,11 @@ const LeistungenFahrzeugreparaturRoute =
     path: '/fahrzeugreparatur',
     getParentRoute: () => LeistungenRoute,
   } as any)
+const LeistungenReifenwechselRoute = LeistungenReifenwechselRouteImport.update({
+  id: '/reifenwechsel',
+  path: '/reifenwechsel',
+  getParentRoute: () => LeistungenRoute,
+} as any)
 const LeistungenUnfallserviceRoute = LeistungenUnfallserviceRouteImport.update({
   id: '/unfallservice',
   path: '/unfallservice',
@@ -129,6 +135,7 @@ export interface FileRoutesByFullPath {
   '/leistungen/abschleppdienst': typeof LeistungenAbschleppdienstRoute
   '/leistungen/ersatzwagen': typeof LeistungenErsatzwagenRoute
   '/leistungen/fahrzeugreparatur': typeof LeistungenFahrzeugreparaturRoute
+  '/leistungen/reifenwechsel': typeof LeistungenReifenwechselRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/versicherungsabwicklung': typeof LeistungenVersicherungsabwicklungRoute
   '/leistungen/': typeof LeistungenIndexRoute
@@ -146,6 +153,7 @@ export interface FileRoutesByTo {
   '/leistungen/abschleppdienst': typeof LeistungenAbschleppdienstRoute
   '/leistungen/ersatzwagen': typeof LeistungenErsatzwagenRoute
   '/leistungen/fahrzeugreparatur': typeof LeistungenFahrzeugreparaturRoute
+  '/leistungen/reifenwechsel': typeof LeistungenReifenwechselRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/versicherungsabwicklung': typeof LeistungenVersicherungsabwicklungRoute
   '/leistungen': typeof LeistungenIndexRoute
@@ -166,6 +174,7 @@ export interface FileRoutesById {
   '/leistungen/abschleppdienst': typeof LeistungenAbschleppdienstRoute
   '/leistungen/ersatzwagen': typeof LeistungenErsatzwagenRoute
   '/leistungen/fahrzeugreparatur': typeof LeistungenFahrzeugreparaturRoute
+  '/leistungen/reifenwechsel': typeof LeistungenReifenwechselRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/versicherungsabwicklung': typeof LeistungenVersicherungsabwicklungRoute
   '/leistungen/': typeof LeistungenIndexRoute
@@ -186,6 +195,7 @@ export interface FileRouteTypes {
     | '/leistungen/abschleppdienst'
     | '/leistungen/ersatzwagen'
     | '/leistungen/fahrzeugreparatur'
+    | '/leistungen/reifenwechsel'
     | '/leistungen/unfallservice'
     | '/leistungen/versicherungsabwicklung'
     | '/leistungen/'
@@ -203,6 +213,7 @@ export interface FileRouteTypes {
     | '/leistungen/abschleppdienst'
     | '/leistungen/ersatzwagen'
     | '/leistungen/fahrzeugreparatur'
+    | '/leistungen/reifenwechsel'
     | '/leistungen/unfallservice'
     | '/leistungen/versicherungsabwicklung'
     | '/leistungen'
@@ -222,6 +233,7 @@ export interface FileRouteTypes {
     | '/leistungen/abschleppdienst'
     | '/leistungen/ersatzwagen'
     | '/leistungen/fahrzeugreparatur'
+    | '/leistungen/reifenwechsel'
     | '/leistungen/unfallservice'
     | '/leistungen/versicherungsabwicklung'
     | '/leistungen/'
@@ -347,6 +359,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeistungenFahrzeugreparaturRouteImport
       parentRoute: typeof LeistungenRoute
     }
+    '/leistungen/reifenwechsel': {
+      id: '/leistungen/reifenwechsel'
+      path: '/reifenwechsel'
+      fullPath: '/leistungen/reifenwechsel'
+      preLoaderRoute: typeof LeistungenReifenwechselRouteImport
+      parentRoute: typeof LeistungenRoute
+    }
     '/leistungen/unfallservice': {
       id: '/leistungen/unfallservice'
       path: '/unfallservice'
@@ -379,6 +398,7 @@ interface LeistungenRouteChildren {
   LeistungenAbschleppdienstRoute: typeof LeistungenAbschleppdienstRoute
   LeistungenErsatzwagenRoute: typeof LeistungenErsatzwagenRoute
   LeistungenFahrzeugreparaturRoute: typeof LeistungenFahrzeugreparaturRoute
+  LeistungenReifenwechselRoute: typeof LeistungenReifenwechselRoute
   LeistungenUnfallserviceRoute: typeof LeistungenUnfallserviceRoute
   LeistungenVersicherungsabwicklungRoute: typeof LeistungenVersicherungsabwicklungRoute
   LeistungenIndexRoute: typeof LeistungenIndexRoute
@@ -388,6 +408,7 @@ const LeistungenRouteChildren: LeistungenRouteChildren = {
   LeistungenAbschleppdienstRoute: LeistungenAbschleppdienstRoute,
   LeistungenErsatzwagenRoute: LeistungenErsatzwagenRoute,
   LeistungenFahrzeugreparaturRoute: LeistungenFahrzeugreparaturRoute,
+  LeistungenReifenwechselRoute: LeistungenReifenwechselRoute,
   LeistungenUnfallserviceRoute: LeistungenUnfallserviceRoute,
   LeistungenVersicherungsabwicklungRoute:
     LeistungenVersicherungsabwicklungRoute,
