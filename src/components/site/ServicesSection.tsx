@@ -82,7 +82,14 @@ const services: Service[] = [
     wa: WA_REIFEN,
     href: "/leistungen/reifenwechsel",
   },
-  { id: "scheibe", img: scheibe, title: "Windschutzscheiben", text: "Steinschlag in Minuten repariert.", wa: WA_SCHEIBE },
+  {
+    id: "scheibe",
+    img: scheibe,
+    title: "Windschutzscheiben",
+    text: "Steinschlag in Minuten repariert.",
+    wa: WA_SCHEIBE,
+    href: "/leistungen/windschutzscheiben",
+  },
   { id: "tuev", img: tuev, title: "TÜV", text: "Prüfung ohne lange Wartezeit.", wa: WA_TUEV },
   { id: "wartung", img: wartung, title: "Inspektion & Wartung", text: "Nach Herstellervorgabe.", wa: WA_INSPEKTION },
 ];

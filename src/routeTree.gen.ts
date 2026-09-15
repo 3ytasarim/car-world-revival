@@ -27,6 +27,7 @@ import { Route as LeistungenFahrzeugreparaturRouteImport } from './routes/leistu
 import { Route as LeistungenReifenwechselRouteImport } from './routes/leistungen.reifenwechsel'
 import { Route as LeistungenUnfallserviceRouteImport } from './routes/leistungen.unfallservice'
 import { Route as LeistungenVersicherungsabwicklungRouteImport } from './routes/leistungen.versicherungsabwicklung'
+import { Route as LeistungenWindschutzscheibenRouteImport } from './routes/leistungen.windschutzscheiben'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -120,6 +121,12 @@ const LeistungenVersicherungsabwicklungRoute =
     path: '/versicherungsabwicklung',
     getParentRoute: () => LeistungenRoute,
   } as any)
+const LeistungenWindschutzscheibenRoute =
+  LeistungenWindschutzscheibenRouteImport.update({
+    id: '/windschutzscheiben',
+    path: '/windschutzscheiben',
+    getParentRoute: () => LeistungenRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -138,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/leistungen/reifenwechsel': typeof LeistungenReifenwechselRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/versicherungsabwicklung': typeof LeistungenVersicherungsabwicklungRoute
+  '/leistungen/windschutzscheiben': typeof LeistungenWindschutzscheibenRoute
   '/leistungen/': typeof LeistungenIndexRoute
 }
 export interface FileRoutesByTo {
@@ -156,6 +164,7 @@ export interface FileRoutesByTo {
   '/leistungen/reifenwechsel': typeof LeistungenReifenwechselRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/versicherungsabwicklung': typeof LeistungenVersicherungsabwicklungRoute
+  '/leistungen/windschutzscheiben': typeof LeistungenWindschutzscheibenRoute
   '/leistungen': typeof LeistungenIndexRoute
 }
 export interface FileRoutesById {
@@ -177,6 +186,7 @@ export interface FileRoutesById {
   '/leistungen/reifenwechsel': typeof LeistungenReifenwechselRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/versicherungsabwicklung': typeof LeistungenVersicherungsabwicklungRoute
+  '/leistungen/windschutzscheiben': typeof LeistungenWindschutzscheibenRoute
   '/leistungen/': typeof LeistungenIndexRoute
 }
 export interface FileRouteTypes {
@@ -198,6 +208,7 @@ export interface FileRouteTypes {
     | '/leistungen/reifenwechsel'
     | '/leistungen/unfallservice'
     | '/leistungen/versicherungsabwicklung'
+    | '/leistungen/windschutzscheiben'
     | '/leistungen/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/leistungen/reifenwechsel'
     | '/leistungen/unfallservice'
     | '/leistungen/versicherungsabwicklung'
+    | '/leistungen/windschutzscheiben'
     | '/leistungen'
   id:
     | '__root__'
@@ -236,6 +248,7 @@ export interface FileRouteTypes {
     | '/leistungen/reifenwechsel'
     | '/leistungen/unfallservice'
     | '/leistungen/versicherungsabwicklung'
+    | '/leistungen/windschutzscheiben'
     | '/leistungen/'
   fileRoutesById: FileRoutesById
 }
@@ -380,6 +393,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeistungenVersicherungsabwicklungRouteImport
       parentRoute: typeof LeistungenRoute
     }
+    '/leistungen/windschutzscheiben': {
+      id: '/leistungen/windschutzscheiben'
+      path: '/windschutzscheiben'
+      fullPath: '/leistungen/windschutzscheiben'
+      preLoaderRoute: typeof LeistungenWindschutzscheibenRouteImport
+      parentRoute: typeof LeistungenRoute
+    }
   }
 }
 
@@ -401,6 +421,7 @@ interface LeistungenRouteChildren {
   LeistungenReifenwechselRoute: typeof LeistungenReifenwechselRoute
   LeistungenUnfallserviceRoute: typeof LeistungenUnfallserviceRoute
   LeistungenVersicherungsabwicklungRoute: typeof LeistungenVersicherungsabwicklungRoute
+  LeistungenWindschutzscheibenRoute: typeof LeistungenWindschutzscheibenRoute
   LeistungenIndexRoute: typeof LeistungenIndexRoute
 }
 
@@ -412,6 +433,7 @@ const LeistungenRouteChildren: LeistungenRouteChildren = {
   LeistungenUnfallserviceRoute: LeistungenUnfallserviceRoute,
   LeistungenVersicherungsabwicklungRoute:
     LeistungenVersicherungsabwicklungRoute,
+  LeistungenWindschutzscheibenRoute: LeistungenWindschutzscheibenRoute,
   LeistungenIndexRoute: LeistungenIndexRoute,
 }
 
