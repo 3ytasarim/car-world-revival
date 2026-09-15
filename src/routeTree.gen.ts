@@ -21,6 +21,7 @@ import { Route as PartnerRouteImport } from './routes/partner'
 import { Route as TerminRouteImport } from './routes/termin'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as LeistungenIndexRouteImport } from './routes/leistungen.index'
+import { Route as LeistungenAbschleppdienstRouteImport } from './routes/leistungen.abschleppdienst'
 import { Route as LeistungenUnfallserviceRouteImport } from './routes/leistungen.unfallservice'
 
 const IndexRoute = IndexRouteImport.update({
@@ -82,6 +83,12 @@ const LeistungenIndexRoute = LeistungenIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LeistungenRoute,
 } as any)
+const LeistungenAbschleppdienstRoute =
+  LeistungenAbschleppdienstRouteImport.update({
+    id: '/abschleppdienst',
+    path: '/abschleppdienst',
+    getParentRoute: () => LeistungenRoute,
+  } as any)
 const LeistungenUnfallserviceRoute = LeistungenUnfallserviceRouteImport.update({
   id: '/unfallservice',
   path: '/unfallservice',
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/partner': typeof PartnerRoute
   '/termin': typeof TerminRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/leistungen/abschleppdienst': typeof LeistungenAbschleppdienstRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/': typeof LeistungenIndexRoute
 }
@@ -112,6 +120,7 @@ export interface FileRoutesByTo {
   '/partner': typeof PartnerRoute
   '/termin': typeof TerminRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/leistungen/abschleppdienst': typeof LeistungenAbschleppdienstRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen': typeof LeistungenIndexRoute
 }
@@ -128,6 +137,7 @@ export interface FileRoutesById {
   '/partner': typeof PartnerRoute
   '/termin': typeof TerminRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/leistungen/abschleppdienst': typeof LeistungenAbschleppdienstRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/': typeof LeistungenIndexRoute
 }
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
     | '/partner'
     | '/termin'
     | '/admin'
+    | '/leistungen/abschleppdienst'
     | '/leistungen/unfallservice'
     | '/leistungen/'
   fileRoutesByTo: FileRoutesByTo
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/partner'
     | '/termin'
     | '/admin'
+    | '/leistungen/abschleppdienst'
     | '/leistungen/unfallservice'
     | '/leistungen'
   id:
@@ -172,6 +184,7 @@ export interface FileRouteTypes {
     | '/partner'
     | '/termin'
     | '/_authenticated/admin'
+    | '/leistungen/abschleppdienst'
     | '/leistungen/unfallservice'
     | '/leistungen/'
   fileRoutesById: FileRoutesById
@@ -275,6 +288,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeistungenIndexRouteImport
       parentRoute: typeof LeistungenRoute
     }
+    '/leistungen/abschleppdienst': {
+      id: '/leistungen/abschleppdienst'
+      path: '/abschleppdienst'
+      fullPath: '/leistungen/abschleppdienst'
+      preLoaderRoute: typeof LeistungenAbschleppdienstRouteImport
+      parentRoute: typeof LeistungenRoute
+    }
     '/leistungen/unfallservice': {
       id: '/leistungen/unfallservice'
       path: '/unfallservice'
@@ -297,11 +317,13 @@ const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface LeistungenRouteChildren {
+  LeistungenAbschleppdienstRoute: typeof LeistungenAbschleppdienstRoute
   LeistungenUnfallserviceRoute: typeof LeistungenUnfallserviceRoute
   LeistungenIndexRoute: typeof LeistungenIndexRoute
 }
 
 const LeistungenRouteChildren: LeistungenRouteChildren = {
+  LeistungenAbschleppdienstRoute: LeistungenAbschleppdienstRoute,
   LeistungenUnfallserviceRoute: LeistungenUnfallserviceRoute,
   LeistungenIndexRoute: LeistungenIndexRoute,
 }
