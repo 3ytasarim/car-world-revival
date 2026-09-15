@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { Quote, Star } from "lucide-react";
@@ -96,22 +97,53 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 // Eine einzige Spalte, kontinuierlich nach unten scrollend — kein Rechts/Links
 // mehr, damit der Blick nur einem Weg nach unten folgt (statt zwischen
 // mehreren Spalten hin- und herzuspringen).
-function TestimonialsMarquee({ items, duration = 24 }: { items: Testimonial[]; duration?: number }) {
+//
+// Die Scroll-Distanz wird per ResizeObserver direkt an der echten Höhe einer
+// Runde gemessen (in Pixel, nicht in %). So bleibt der Loop immer exakt so
+// lang wie der tatsächliche Inhalt — egal wie viele Bewertungen es gibt oder
+// wie lang die Texte sind. Vorher war die Distanz auf die kurzen Platzhalter-
+// Daten "eingefroren" und lief nach 1-2 Bewertungen bereits wieder von vorn.
+function TestimonialsMarquee({ items, pxPerSecond = 55 }: { items: Testimonial[]; pxPerSecond?: number }) {
+  const roundRef = useRef<HTMLDivElement>(null);
+  const [roundHeight, setRoundHeight] = useState(0);
+
+  useEffect(() => {
+    const el = roundRef.current;
+    if (!el) return;
+    const measure = () => setRoundHeight(el.getBoundingClientRect().height);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [items]);
+
   if (items.length === 0) return null;
+
+  const motionProps =
+    roundHeight > 0
+      ? {
+          animate: { translateY: [0, -roundHeight] },
+          transition: {
+            duration: roundHeight / pxPerSecond,
+            repeat: Infinity,
+            ease: "linear" as const,
+            repeatType: "loop" as const,
+          },
+        }
+      : { animate: { translateY: 0 } };
+
   return (
-    <motion.div
-      initial={{ translateY: "-50%" }}
-      animate={{ translateY: "0%" }}
-      transition={{ duration, repeat: Infinity, ease: "linear", repeatType: "loop" }}
-      className="flex flex-col items-center gap-0"
-    >
-      {[0, 1].map((round) => (
-        <div key={round} className="flex flex-col items-center">
-          {items.map((t) => (
-            <TestimonialCard key={`${round}-${t.id}`} t={t} />
-          ))}
-        </div>
-      ))}
+    <motion.div {...motionProps} className="flex flex-col items-center gap-0">
+      <div ref={roundRef} className="flex flex-col items-center">
+        {items.map((t) => (
+          <TestimonialCard key={`0-${t.id}`} t={t} />
+        ))}
+      </div>
+      <div aria-hidden="true" className="flex flex-col items-center">
+        {items.map((t) => (
+          <TestimonialCard key={`1-${t.id}`} t={t} />
+        ))}
+      </div>
     </motion.div>
   );
 }
@@ -149,7 +181,7 @@ export function TestimonialsSection() {
         </motion.div>
 
         <div className="relative mt-12 flex max-h-[640px] justify-center overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]">
-          <TestimonialsMarquee items={items} duration={items.length * 9} />
+          <TestimonialsMarquee items={items} />
         </div>
 
         <div className="mt-10 text-center">
