@@ -22,6 +22,7 @@ import { Route as TerminRouteImport } from './routes/termin'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as LeistungenIndexRouteImport } from './routes/leistungen.index'
 import { Route as LeistungenAbschleppdienstRouteImport } from './routes/leistungen.abschleppdienst'
+import { Route as LeistungenFahrzeugreparaturRouteImport } from './routes/leistungen.fahrzeugreparatur'
 import { Route as LeistungenUnfallserviceRouteImport } from './routes/leistungen.unfallservice'
 
 const IndexRoute = IndexRouteImport.update({
@@ -89,6 +90,12 @@ const LeistungenAbschleppdienstRoute =
     path: '/abschleppdienst',
     getParentRoute: () => LeistungenRoute,
   } as any)
+const LeistungenFahrzeugreparaturRoute =
+  LeistungenFahrzeugreparaturRouteImport.update({
+    id: '/fahrzeugreparatur',
+    path: '/fahrzeugreparatur',
+    getParentRoute: () => LeistungenRoute,
+  } as any)
 const LeistungenUnfallserviceRoute = LeistungenUnfallserviceRouteImport.update({
   id: '/unfallservice',
   path: '/unfallservice',
@@ -107,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/termin': typeof TerminRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/leistungen/abschleppdienst': typeof LeistungenAbschleppdienstRoute
+  '/leistungen/fahrzeugreparatur': typeof LeistungenFahrzeugreparaturRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/': typeof LeistungenIndexRoute
 }
@@ -121,6 +129,7 @@ export interface FileRoutesByTo {
   '/termin': typeof TerminRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/leistungen/abschleppdienst': typeof LeistungenAbschleppdienstRoute
+  '/leistungen/fahrzeugreparatur': typeof LeistungenFahrzeugreparaturRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen': typeof LeistungenIndexRoute
 }
@@ -138,6 +147,7 @@ export interface FileRoutesById {
   '/termin': typeof TerminRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/leistungen/abschleppdienst': typeof LeistungenAbschleppdienstRoute
+  '/leistungen/fahrzeugreparatur': typeof LeistungenFahrzeugreparaturRoute
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/': typeof LeistungenIndexRoute
 }
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/termin'
     | '/admin'
     | '/leistungen/abschleppdienst'
+    | '/leistungen/fahrzeugreparatur'
     | '/leistungen/unfallservice'
     | '/leistungen/'
   fileRoutesByTo: FileRoutesByTo
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/termin'
     | '/admin'
     | '/leistungen/abschleppdienst'
+    | '/leistungen/fahrzeugreparatur'
     | '/leistungen/unfallservice'
     | '/leistungen'
   id:
@@ -185,6 +197,7 @@ export interface FileRouteTypes {
     | '/termin'
     | '/_authenticated/admin'
     | '/leistungen/abschleppdienst'
+    | '/leistungen/fahrzeugreparatur'
     | '/leistungen/unfallservice'
     | '/leistungen/'
   fileRoutesById: FileRoutesById
@@ -295,6 +308,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeistungenAbschleppdienstRouteImport
       parentRoute: typeof LeistungenRoute
     }
+    '/leistungen/fahrzeugreparatur': {
+      id: '/leistungen/fahrzeugreparatur'
+      path: '/fahrzeugreparatur'
+      fullPath: '/leistungen/fahrzeugreparatur'
+      preLoaderRoute: typeof LeistungenFahrzeugreparaturRouteImport
+      parentRoute: typeof LeistungenRoute
+    }
     '/leistungen/unfallservice': {
       id: '/leistungen/unfallservice'
       path: '/unfallservice'
@@ -318,12 +338,14 @@ const AuthenticatedRouteRouteWithChildren =
 
 interface LeistungenRouteChildren {
   LeistungenAbschleppdienstRoute: typeof LeistungenAbschleppdienstRoute
+  LeistungenFahrzeugreparaturRoute: typeof LeistungenFahrzeugreparaturRoute
   LeistungenUnfallserviceRoute: typeof LeistungenUnfallserviceRoute
   LeistungenIndexRoute: typeof LeistungenIndexRoute
 }
 
 const LeistungenRouteChildren: LeistungenRouteChildren = {
   LeistungenAbschleppdienstRoute: LeistungenAbschleppdienstRoute,
+  LeistungenFahrzeugreparaturRoute: LeistungenFahrzeugreparaturRoute,
   LeistungenUnfallserviceRoute: LeistungenUnfallserviceRoute,
   LeistungenIndexRoute: LeistungenIndexRoute,
 }
