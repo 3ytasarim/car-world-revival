@@ -91,7 +91,14 @@ const features: Feature[] = [
     wa: WA_SCHEIBE,
     href: "/leistungen/windschutzscheiben",
   },
-  { id: "tuev", label: "TÜV & AU", image: tuev, description: "Hauptuntersuchung ohne lange Wartezeit direkt bei uns.", wa: WA_TUEV },
+  {
+    id: "tuev",
+    label: "TÜV & AU",
+    image: tuev,
+    description: "Hauptuntersuchung ohne lange Wartezeit direkt bei uns.",
+    wa: WA_TUEV,
+    href: "/leistungen/tuev",
+  },
   { id: "wartung", label: "Inspektion & Wartung", image: wartung, description: "Service nach Herstellervorgabe — mit Garantieerhalt.", wa: WA_INSPEKTION },
 ];
 
