@@ -58,7 +58,14 @@ const services: Service[] = [
     wa: WA_REPARATUR,
     href: "/leistungen/fahrzeugreparatur",
   },
-  { id: "ersatzwagen", img: ersatzwagen, title: "Ersatzwagen", text: "Mobil bleiben ohne Wartezeit.", wa: WA_ERSATZWAGEN },
+  {
+    id: "ersatzwagen",
+    img: ersatzwagen,
+    title: "Ersatzwagen",
+    text: "Mobil bleiben ohne Wartezeit.",
+    wa: WA_ERSATZWAGEN,
+    href: "/leistungen/ersatzwagen",
+  },
   {
     id: "versicherung",
     img: versicherung,
