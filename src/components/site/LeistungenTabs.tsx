@@ -99,7 +99,14 @@ const features: Feature[] = [
     wa: WA_TUEV,
     href: "/leistungen/tuev",
   },
-  { id: "wartung", label: "Inspektion & Wartung", image: wartung, description: "Service nach Herstellervorgabe — mit Garantieerhalt.", wa: WA_INSPEKTION },
+  {
+    id: "wartung",
+    label: "Inspektion & Wartung",
+    image: wartung,
+    description: "Service nach Herstellervorgabe — mit Garantieerhalt.",
+    wa: WA_INSPEKTION,
+    href: "/leistungen/inspektion-wartung",
+  },
 ];
 
 // Statisches 3x3-Karten-Grid statt des automatisch wechselnden Kartenstapels

@@ -98,7 +98,14 @@ const services: Service[] = [
     wa: WA_TUEV,
     href: "/leistungen/tuev",
   },
-  { id: "wartung", img: wartung, title: "Inspektion & Wartung", text: "Nach Herstellervorgabe.", wa: WA_INSPEKTION },
+  {
+    id: "wartung",
+    img: wartung,
+    title: "Inspektion & Wartung",
+    text: "Nach Herstellervorgabe.",
+    wa: WA_INSPEKTION,
+    href: "/leistungen/inspektion-wartung",
+  },
 ];
 
 // Gleiche dunkle Bild-Overlay-Karte wie zuvor (Gallery4), aber jetzt in
