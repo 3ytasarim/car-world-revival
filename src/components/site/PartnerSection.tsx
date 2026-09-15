@@ -81,10 +81,14 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
             einzeln zu kümmern.
           </p>
 
-          <div className="mt-6 flex justify-center">
+          <div className="mt-6 flex flex-wrap justify-center gap-4">
             <Button3D href={WA_PARTNER} target="_blank" rel="noopener noreferrer" variant="whatsapp">
               <WhatsAppIcon className="size-5" />
-              Per WhatsApp anfragen
+              Flottenanfrage stellen
+            </Button3D>
+            <Button3D href={WA_PARTNER} target="_blank" rel="noopener noreferrer" variant="whatsapp">
+              <WhatsAppIcon className="size-5" />
+              Partner werden
             </Button3D>
           </div>
         </div>

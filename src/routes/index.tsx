@@ -150,14 +150,14 @@ function Home() {
 
           <section className="relative z-1 mx-auto flex max-w-full items-center">
 
-            <div className="relative z-10 mx-auto flex w-full max-w-[1600px] items-center px-4 pt-24 pb-10 md:px-10 md:pt-28 md:pb-12 lg:min-h-[620px] lg:px-14 lg:pt-28 lg:pb-12">
+            <div className="relative z-10 mx-auto flex w-full max-w-[1600px] items-center px-4 pt-6 pb-10 md:px-10 md:pt-28 md:pb-12 lg:min-h-[620px] lg:px-14 lg:pt-28 lg:pb-12">
 
 
               <div className="grid w-full items-center gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-stretch lg:gap-8">
                 {/* Text-Spalte */}
                 <div className="max-w-4xl space-y-7 pt-6 text-left lg:flex lg:flex-col lg:pt-20">
                   {/* Google + 5 Sterne Trust-Badge — Vertrauenssignal noch
-                      vor dem ersten Scroll, gleicher 4,9-Wert wie im
+                      vor dem ersten Scroll, gleicher 5,0-Wert wie im
                       Kundenmeinungen-Bereich (keine zweite, abweichende Zahl). */}
                   <div className="flex w-fit items-center gap-2 rounded-full border border-black/10 bg-white/90 px-4 py-2 shadow-sm">
                     <GoogleIcon className="size-5 shrink-0" />
@@ -166,7 +166,7 @@ function Home() {
                         <Star key={i} className="size-3.5 fill-brand-orange text-brand-orange" aria-hidden="true" />
                       ))}
                     </div>
-                    <span className="text-sm font-semibold text-[#131F35]">4,9 / 5 bei Google</span>
+                    <span className="text-sm font-semibold text-[#131F35]">5,0 / 5 bei Google</span>
                   </div>
 
                   <h1 className="text-left text-[2.5rem] leading-[0.95] tracking-tighter sm:text-[3.5rem] md:text-[4.75rem] lg:text-[4.75rem] xl:text-[5.5rem]">

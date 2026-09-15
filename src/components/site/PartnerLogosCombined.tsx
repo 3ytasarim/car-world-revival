@@ -44,9 +44,10 @@ export function PartnerLogosCombined({
             <AnimatedText text={title} minWeight={300} maxWeight={800} delayMultiplier={0.03} />
           </h2>
 
-          {/* Nur Versicherungspartner (10), fest 4-4-2 angeordnet — keine
-              Zertifizierungs-Logos hier, kein Auto-Scroll. */}
-          <div className="mx-auto mt-8 grid max-w-md grid-cols-2 justify-items-center gap-4 sm:grid-cols-4">
+          {/* Nur Versicherungspartner (10), fest 5-5 angeordnet auf Desktop
+              (2-spaltig gestapelt auf Mobile) — keine Zertifizierungs-Logos
+              hier, kein Auto-Scroll. */}
+          <div className="mx-auto mt-8 grid max-w-md grid-cols-2 justify-items-center gap-4 sm:max-w-xl sm:grid-cols-5">
             {insurancePartners.map((p) => (
               <MiniLogoCard key={p.alt} src={p.src} alt={p.alt} />
             ))}
