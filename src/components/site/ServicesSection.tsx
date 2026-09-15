@@ -72,6 +72,7 @@ const services: Service[] = [
     title: "Versicherungsabwicklung",
     text: "Papierkram? Übernehmen wir.",
     wa: WA_VERSICHERUNG,
+    href: "/leistungen/versicherungsabwicklung",
   },
   { id: "reifen", img: reifen, title: "Reifenwechsel", text: "Wechsel und Einlagerung.", wa: WA_REIFEN },
   { id: "scheibe", img: scheibe, title: "Windschutzscheiben", text: "Steinschlag in Minuten repariert.", wa: WA_SCHEIBE },
