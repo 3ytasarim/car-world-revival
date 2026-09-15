@@ -43,36 +43,50 @@ const fallback: Testimonial[] = [
   },
 ];
 
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((p) => p[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
+// Nur der erste Buchstabe des Namens (nicht Initialen pro Wort) — "M W"
+// wird zu "M", "Josef Lieber" zu "J", wie gewünscht.
+function firstLetter(name: string) {
+  return name.trim().charAt(0).toUpperCase() || "?";
+}
+
+// Feste Avatar-Farbe pro (echtem) Kunden, vom Kunden selbst vorgegeben.
+// Neue Bewertungen ohne Eintrag hier bekommen die Navy-Standardfarbe.
+const AVATAR_COLORS: Record<string, string> = {
+  "Josef Lieber": "#7B1E3A",
+  "M W": "#1D4ED8",
+  "Hugo Bert": "#16A34A",
+  "Karlo Hamsoro": "#059669",
+  "A R": "#0D9488",
+  Saskia: "#14532D",
+  "Andreas Herbst": "#7C3AED",
+  "Eduardo S.": "#65A30D",
+  "Max Pausr": "#DC2626",
+};
+
+function avatarColor(name: string) {
+  return AVATAR_COLORS[name] ?? "#131F35";
 }
 
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
     <div className="mb-6 w-full max-w-xl rounded-3xl border border-black/10 bg-white p-6 shadow-[0_10px_40px_-20px_rgba(19,31,53,.5)] transition-colors hover:border-brand-orange/50 sm:p-7">
       <Quote className="size-5 text-brand-orange/50" aria-hidden="true" />
-      <p className="mt-3 text-base leading-relaxed">{t.text}</p>
+      <p className="mt-3 text-base leading-relaxed whitespace-pre-line">{t.text}</p>
       <div className="mt-4 flex" aria-label={`${t.rating} von 5 Sternen`}>
         {Array.from({ length: t.rating }).map((_, i) => (
-          <Star key={i} className="size-4 fill-brand-orange text-brand-orange" aria-hidden="true" />
+          <Star key={i} className="size-4 fill-[#FBBC04] text-[#FBBC04]" aria-hidden="true" />
         ))}
       </div>
       <div className="mt-4 flex items-center gap-3">
-        {t.image_url ? (
-          <img src={t.image_url} alt={t.name} loading="lazy" className="size-12 rounded-full object-cover" />
-        ) : (
-          <span className="grid size-12 place-items-center rounded-full bg-brand-navy text-sm font-bold text-brand-navy-foreground">
-            {initials(t.name)}
-          </span>
-        )}
+        <span
+          className="grid size-12 shrink-0 place-items-center rounded-full text-base font-bold text-white"
+          style={{ backgroundColor: avatarColor(t.name) }}
+        >
+          {firstLetter(t.name)}
+        </span>
         <div className="leading-tight">
           <div className="text-sm font-semibold">{t.name}</div>
-          <div className="text-xs text-muted-foreground">{t.role}</div>
+          {t.role && <div className="text-xs text-muted-foreground">{t.role}</div>}
         </div>
       </div>
     </div>
@@ -122,7 +136,7 @@ export function TestimonialsSection() {
         >
           <span className="inline-flex items-center gap-1 rounded-full border border-black/10 bg-white px-4 py-1.5 text-xs font-semibold">
             {[0, 1, 2, 3, 4].map((i) => (
-              <Star key={i} className="size-4 fill-brand-orange text-brand-orange" aria-hidden="true" />
+              <Star key={i} className="size-4 fill-[#FBBC04] text-[#FBBC04]" aria-hidden="true" />
             ))}
             <span className="ml-2">5,0 / 5 bei Google</span>
           </span>
@@ -135,7 +149,7 @@ export function TestimonialsSection() {
         </motion.div>
 
         <div className="relative mt-12 flex max-h-[640px] justify-center overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]">
-          <TestimonialsMarquee items={items} />
+          <TestimonialsMarquee items={items} duration={items.length * 9} />
         </div>
 
         <div className="mt-10 text-center">

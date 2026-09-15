@@ -163,7 +163,7 @@ function Home() {
                     <GoogleIcon className="size-5 shrink-0" />
                     <div className="flex items-center gap-0.5">
                       {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className="size-3.5 fill-brand-orange text-brand-orange" aria-hidden="true" />
+                        <Star key={i} className="size-3.5 fill-[#FBBC04] text-[#FBBC04]" aria-hidden="true" />
                       ))}
                     </div>
                     <span className="text-sm font-semibold text-[#131F35]">5,0 / 5 bei Google</span>
