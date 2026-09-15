@@ -83,7 +83,14 @@ const features: Feature[] = [
     wa: WA_REIFEN,
     href: "/leistungen/reifenwechsel",
   },
-  { id: "scheibe", label: "Windschutzscheiben", image: scheibe, description: "Steinschlag in Minuten repariert oder Scheibe komplett getauscht.", wa: WA_SCHEIBE },
+  {
+    id: "scheibe",
+    label: "Windschutzscheiben",
+    image: scheibe,
+    description: "Steinschlag in Minuten repariert oder Scheibe komplett getauscht.",
+    wa: WA_SCHEIBE,
+    href: "/leistungen/windschutzscheiben",
+  },
   { id: "tuev", label: "TÜV & AU", image: tuev, description: "Hauptuntersuchung ohne lange Wartezeit direkt bei uns.", wa: WA_TUEV },
   { id: "wartung", label: "Inspektion & Wartung", image: wartung, description: "Service nach Herstellervorgabe — mit Garantieerhalt.", wa: WA_INSPEKTION },
 ];
