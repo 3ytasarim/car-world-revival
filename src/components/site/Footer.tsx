@@ -6,7 +6,6 @@ import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { GoogleIcon } from "@/components/site/GoogleIcon";
 import { FacebookIcon } from "@/components/site/FacebookIcon";
 import { InstagramIcon } from "@/components/site/InstagramIcon";
-import { StarsCanvas } from "@/components/ui/stars-canvas";
 
 // Echte Profil-URLs noch nicht vorhanden — Platzhalter, bis der Kunde sie liefert.
 const socialLinks = [
@@ -25,8 +24,6 @@ const marqueeText = "CARWORLD-WERKSTATT.DE";
 export function Footer() {
   return (
     <footer className="relative mt-auto overflow-hidden rounded-t-[2.5rem] bg-brand-orange text-white">
-      <StarsCanvas />
-
       <div className="relative overflow-hidden border-b border-white/10 py-4">
         <style>{`
           @keyframes footer-marquee {
