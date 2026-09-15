@@ -124,7 +124,7 @@ export function TestimonialsSection() {
             {[0, 1, 2, 3, 4].map((i) => (
               <Star key={i} className="size-4 fill-brand-orange text-brand-orange" aria-hidden="true" />
             ))}
-            <span className="ml-2">4,9 / 5 bei Google</span>
+            <span className="ml-2">5,0 / 5 bei Google</span>
           </span>
           <h2 id="reviews-title" className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
             <AnimatedText text="Das sagen unsere Kunden" minWeight={300} maxWeight={800} delayMultiplier={0.03} />

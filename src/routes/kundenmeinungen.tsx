@@ -16,7 +16,7 @@ export const Route = createFileRoute("/kundenmeinungen")({
           "Echte Kundenstimmen zur Autowerkstatt in meiner Nähe: Unfallservice, Frontscheibe und Reparatur bei Car-World in Bad Neuenahr-Ahrweiler.",
       },
       { property: "og:title", content: "Kundenmeinungen — Car-World" },
-      { property: "og:description", content: "4,9 von 5 Sternen: Das sagen unsere Kunden über Car-World." },
+      { property: "og:description", content: "5,0 von 5 Sternen: Das sagen unsere Kunden über Car-World." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/kundenmeinungen" },
       { name: "twitter:card", content: "summary_large_image" },

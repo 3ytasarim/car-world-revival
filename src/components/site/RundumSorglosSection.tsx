@@ -5,14 +5,11 @@ import { motion, useInView } from "framer-motion";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
 import { GradientShimmer } from "@/components/ui/gradient-shimmer";
-import { RevealSlider } from "@/components/ui/reveal2";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { VideoPlayer } from "@/components/ui/video-player";
 import { PHONE_HREF, WA_UNFALL } from "@/components/site/site-data";
 import { TowTruckIcon } from "@/components/site/TowTruckIcon";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
-import rundumBefore from "@/assets/rundum-before.jpg";
-import rundumAfter from "@/assets/rundum-after.jpg";
 
 // Der Ablauf nach einem Unfall — als Karten-Grid statt Orbit, mit
 // ausführlichem Text statt nur Icon+Titel.
@@ -124,19 +121,6 @@ export function RundumSorglosSection({
               </motion.div>
             ))}
           </div>
-
-          {/* Vorher/Nachher */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.7 }}
-            className="mx-auto mt-10 max-w-2xl"
-          >
-            <RevealSlider
-              beforeImage={{ src: rundumBefore, alt: "Unfallfahrzeug vor der Reparatur" }}
-              afterImage={{ src: rundumAfter, alt: "Fahrzeug nach der Reparatur bei Car-World" }}
-            />
-          </motion.div>
 
           {/* Jetzt-anrufen + WhatsApp: mittig unter beiden Spalten, gleich
               wichtig nebeneinander. */}
