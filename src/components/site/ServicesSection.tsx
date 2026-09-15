@@ -22,8 +22,26 @@ import scheibe from "@/assets/svc-scheibe.jpg";
 import tuev from "@/assets/svc-tuev.jpg";
 import wartung from "@/assets/svc-wartung.jpg";
 
-const services = [
-  { id: "unfall", img: unfall, title: "Unfallservice", text: "Soforthilfe rund um die Uhr.", wa: WA_UNFALL },
+interface Service {
+  id: string;
+  img: string;
+  title: string;
+  text: string;
+  wa: string;
+  /** Eigene Detailseite (/leistungen/<slug>) statt direktem WhatsApp-Link —
+   * wird pro Leistung erst gesetzt, sobald die Seite existiert. */
+  href?: string;
+}
+
+const services: Service[] = [
+  {
+    id: "unfall",
+    img: unfall,
+    title: "Unfallservice",
+    text: "Soforthilfe rund um die Uhr.",
+    wa: WA_UNFALL,
+    href: "/leistungen/unfallservice",
+  },
   { id: "abschlepp", img: abschlepp, title: "Abschleppdienst", text: "Schnelle Bergung und Transport.", wa: WA_ABSCHLEPP },
   { id: "reparatur", img: reparatur, title: "Fahrzeugreparatur", text: "Meisterhafte Instandsetzung.", wa: WA_REPARATUR },
   { id: "ersatzwagen", img: ersatzwagen, title: "Ersatzwagen", text: "Mobil bleiben ohne Wartezeit.", wa: WA_ERSATZWAGEN },
@@ -43,9 +61,15 @@ const services = [
 // Gleiche dunkle Bild-Overlay-Karte wie zuvor (Gallery4), aber jetzt in
 // einer einzigen, automatisch von oben nach unten laufenden Spalte statt
 // eines horizontalen Klick-Carousels mit Pfeilen/Punkten.
-function ServiceCard({ img, title, text, wa }: (typeof services)[number]) {
+function ServiceCard({ img, title, text, wa, href }: Service) {
+  const isInternal = Boolean(href);
   return (
-    <a href={wa} target="_blank" rel="noopener noreferrer" className="group block overflow-hidden rounded-xl">
+    <a
+      href={href ?? wa}
+      target={isInternal ? undefined : "_blank"}
+      rel={isInternal ? undefined : "noopener noreferrer"}
+      className="group block overflow-hidden rounded-xl"
+    >
       <div className="relative aspect-[5/4] overflow-hidden rounded-xl">
         <img
           src={img}
@@ -58,7 +82,7 @@ function ServiceCard({ img, title, text, wa }: (typeof services)[number]) {
           <div className="text-xl font-semibold">{title}</div>
           <div className="mt-2 mb-4 text-white/80">{text}</div>
           <div className="flex items-center text-sm font-semibold">
-            Per WhatsApp anfragen
+            {isInternal ? "Zum Service" : "Per WhatsApp anfragen"}
             <ArrowRight className="ml-2 size-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
           </div>
         </div>

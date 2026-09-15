@@ -20,6 +20,8 @@ import { Route as LeistungenRouteImport } from './routes/leistungen'
 import { Route as PartnerRouteImport } from './routes/partner'
 import { Route as TerminRouteImport } from './routes/termin'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as LeistungenIndexRouteImport } from './routes/leistungen.index'
+import { Route as LeistungenUnfallserviceRouteImport } from './routes/leistungen.unfallservice'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -75,6 +77,16 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const LeistungenIndexRoute = LeistungenIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LeistungenRoute,
+} as any)
+const LeistungenUnfallserviceRoute = LeistungenUnfallserviceRouteImport.update({
+  id: '/unfallservice',
+  path: '/unfallservice',
+  getParentRoute: () => LeistungenRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -83,10 +95,12 @@ export interface FileRoutesByFullPath {
   '/karriere': typeof KarriereRoute
   '/kontakt': typeof KontaktRoute
   '/kundenmeinungen': typeof KundenmeinungenRoute
-  '/leistungen': typeof LeistungenRoute
+  '/leistungen': typeof LeistungenRouteWithChildren
   '/partner': typeof PartnerRoute
   '/termin': typeof TerminRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
+  '/leistungen/': typeof LeistungenIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -95,10 +109,11 @@ export interface FileRoutesByTo {
   '/karriere': typeof KarriereRoute
   '/kontakt': typeof KontaktRoute
   '/kundenmeinungen': typeof KundenmeinungenRoute
-  '/leistungen': typeof LeistungenRoute
   '/partner': typeof PartnerRoute
   '/termin': typeof TerminRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
+  '/leistungen': typeof LeistungenIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -109,10 +124,12 @@ export interface FileRoutesById {
   '/karriere': typeof KarriereRoute
   '/kontakt': typeof KontaktRoute
   '/kundenmeinungen': typeof KundenmeinungenRoute
-  '/leistungen': typeof LeistungenRoute
+  '/leistungen': typeof LeistungenRouteWithChildren
   '/partner': typeof PartnerRoute
   '/termin': typeof TerminRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
+  '/leistungen/': typeof LeistungenIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -127,6 +144,8 @@ export interface FileRouteTypes {
     | '/partner'
     | '/termin'
     | '/admin'
+    | '/leistungen/unfallservice'
+    | '/leistungen/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -135,10 +154,11 @@ export interface FileRouteTypes {
     | '/karriere'
     | '/kontakt'
     | '/kundenmeinungen'
-    | '/leistungen'
     | '/partner'
     | '/termin'
     | '/admin'
+    | '/leistungen/unfallservice'
+    | '/leistungen'
   id:
     | '__root__'
     | '/'
@@ -152,6 +172,8 @@ export interface FileRouteTypes {
     | '/partner'
     | '/termin'
     | '/_authenticated/admin'
+    | '/leistungen/unfallservice'
+    | '/leistungen/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -162,7 +184,7 @@ export interface RootRouteChildren {
   KarriereRoute: typeof KarriereRoute
   KontaktRoute: typeof KontaktRoute
   KundenmeinungenRoute: typeof KundenmeinungenRoute
-  LeistungenRoute: typeof LeistungenRoute
+  LeistungenRoute: typeof LeistungenRouteWithChildren
   PartnerRoute: typeof PartnerRoute
   TerminRoute: typeof TerminRoute
 }
@@ -246,6 +268,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/leistungen/': {
+      id: '/leistungen/'
+      path: '/'
+      fullPath: '/leistungen/'
+      preLoaderRoute: typeof LeistungenIndexRouteImport
+      parentRoute: typeof LeistungenRoute
+    }
+    '/leistungen/unfallservice': {
+      id: '/leistungen/unfallservice'
+      path: '/unfallservice'
+      fullPath: '/leistungen/unfallservice'
+      preLoaderRoute: typeof LeistungenUnfallserviceRouteImport
+      parentRoute: typeof LeistungenRoute
+    }
   }
 }
 
@@ -260,6 +296,20 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface LeistungenRouteChildren {
+  LeistungenUnfallserviceRoute: typeof LeistungenUnfallserviceRoute
+  LeistungenIndexRoute: typeof LeistungenIndexRoute
+}
+
+const LeistungenRouteChildren: LeistungenRouteChildren = {
+  LeistungenUnfallserviceRoute: LeistungenUnfallserviceRoute,
+  LeistungenIndexRoute: LeistungenIndexRoute,
+}
+
+const LeistungenRouteWithChildren = LeistungenRoute._addFileChildren(
+  LeistungenRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
@@ -268,7 +318,7 @@ const rootRouteChildren: RootRouteChildren = {
   KarriereRoute: KarriereRoute,
   KontaktRoute: KontaktRoute,
   KundenmeinungenRoute: KundenmeinungenRoute,
-  LeistungenRoute: LeistungenRoute,
+  LeistungenRoute: LeistungenRouteWithChildren,
   PartnerRoute: PartnerRoute,
   TerminRoute: TerminRoute,
 }

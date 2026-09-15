@@ -23,8 +23,26 @@ import scheibe from "@/assets/svc-scheibe.jpg";
 import tuev from "@/assets/svc-tuev.jpg";
 import wartung from "@/assets/svc-wartung.jpg";
 
-const features = [
-  { id: "unfall", label: "Unfallservice", image: unfall, description: "Soforthilfe rund um die Uhr — wir organisieren alles nach dem Unfall.", wa: WA_UNFALL },
+interface Feature {
+  id: string;
+  label: string;
+  image: string;
+  description: string;
+  wa: string;
+  /** Eigene Detailseite (/leistungen/<slug>) statt direktem WhatsApp-Link —
+   * wird pro Leistung erst gesetzt, sobald die Seite existiert. */
+  href?: string;
+}
+
+const features: Feature[] = [
+  {
+    id: "unfall",
+    label: "Unfallservice",
+    image: unfall,
+    description: "Soforthilfe rund um die Uhr — wir organisieren alles nach dem Unfall.",
+    wa: WA_UNFALL,
+    href: "/leistungen/unfallservice",
+  },
   { id: "abschlepp", label: "Abschleppdienst", image: abschlepp, description: "Schnelle Bergung und sicherer Transport in unsere Meisterwerkstatt.", wa: WA_ABSCHLEPP },
   { id: "reparatur", label: "Fahrzeugreparatur", image: reparatur, description: "Meisterhafte Instandsetzung von Karosserie, Lack und Technik.", wa: WA_REPARATUR },
   { id: "ersatzwagen", label: "Ersatzwagen", image: ersatzwagen, description: "Mobil bleiben ohne Wartezeit — Ersatzfahrzeug direkt vor Ort.", wa: WA_ERSATZWAGEN },
@@ -37,9 +55,15 @@ const features = [
 
 // Statisches 3x3-Karten-Grid statt des automatisch wechselnden Kartenstapels
 // — alle 9 Leistungen gleichzeitig sichtbar, auf Mobile gestapelt.
-function LeistungCard({ image, label, description, wa }: (typeof features)[number]) {
+function LeistungCard({ image, label, description, wa, href }: Feature) {
+  const isInternal = Boolean(href);
   return (
-    <a href={wa} target="_blank" rel="noopener noreferrer" className="group block overflow-hidden rounded-xl">
+    <a
+      href={href ?? wa}
+      target={isInternal ? undefined : "_blank"}
+      rel={isInternal ? undefined : "noopener noreferrer"}
+      className="group block overflow-hidden rounded-xl"
+    >
       <div className="relative aspect-[5/4] overflow-hidden rounded-xl">
         <img
           src={image}
@@ -52,7 +76,7 @@ function LeistungCard({ image, label, description, wa }: (typeof features)[numbe
           <div className="text-lg font-semibold">{label}</div>
           <div className="mt-1.5 mb-3 text-sm text-white/80">{description}</div>
           <div className="flex items-center text-sm font-semibold">
-            Per WhatsApp anfragen
+            {isInternal ? "Zum Service" : "Per WhatsApp anfragen"}
             <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
           </div>
         </div>
