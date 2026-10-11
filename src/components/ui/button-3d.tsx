@@ -14,6 +14,9 @@ type Button3DCommonProps = {
   children?: React.ReactNode;
   /** Klartext-Label fürs Klick-Tracking. Ohne Angabe wird der Text aus `children` extrahiert. */
   trackLabel?: string;
+  /** Lichtstreifen, der periodisch über die Button-Fläche läuft — bewusst auf der
+   * Fläche, nicht auf dem Text (siehe GradientShimmer für Text-Shimmer). */
+  shimmer?: boolean;
 };
 
 // Jedes Button3D trackt sich selbst — so muss niemand jede einzelne CTA auf
@@ -59,7 +62,7 @@ const faceStyles: Record<Button3DVariant, string> = {
  * Renders as an <a> by default, or as a <button> (e.g. for form submits)
  * via `as="button"`.
  */
-export function Button3D({ variant = "primary", className, children, as, trackLabel, ...props }: Button3DProps) {
+export function Button3D({ variant = "primary", className, children, as, trackLabel, shimmer, ...props }: Button3DProps) {
   const label = trackLabel || extractText(children).slice(0, 120) || variant;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     void trackClickEvent(label);
@@ -81,6 +84,11 @@ export function Button3D({ variant = "primary", className, children, as, trackLa
           faceStyles[variant],
         )}
       >
+        {shimmer && (
+          <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-full" aria-hidden="true">
+            <span className="absolute inset-0 animate-hero-sheen bg-gradient-to-r from-transparent via-white/45 to-transparent" />
+          </span>
+        )}
         {children}
       </span>
     </>

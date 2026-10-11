@@ -42,11 +42,13 @@ const vorteile = [
 
 // Kurze Checkmark-Kartenreihe direkt unter Titel/Untertitel, oberhalb der
 // bestehenden Foto-Karten — 3 knappe Kernversprechen statt der ausführlichen
-// Foto-Galerie darunter.
+// Foto-Galerie darunter. Inhalte laut Revisionsliste (08.10.2026): Vertrauens-
+// signale statt Service-Versprechen, damit sie direkt unter dem Hero-CTA
+// als Trust-Badges funktionieren.
 export const checkPoints = [
-  { title: "Unfall - Rundum-Service", text: "Wir kümmern uns um ihren Unfall von A-Z" },
-  { title: "Mobilitätsgarantie", text: "Wir verfügen über moderne Leihfahrzeuge" },
-  { title: "Schnelle Terminvergabe", text: undefined },
+  { title: "TÜV-zertifiziert", text: undefined },
+  { title: "Langjährige Erfahrung", text: undefined },
+  { title: "TÜV Rheinland im Haus", text: undefined },
 ];
 
 export function CheckPointCard({ title, text }: (typeof checkPoints)[number]) {

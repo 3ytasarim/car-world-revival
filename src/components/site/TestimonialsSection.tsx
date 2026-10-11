@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import { Quote, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 
 import { getTestimonials } from "@/lib/public-content.functions";
 import { WA_FRAGE } from "./site-data";
@@ -70,9 +70,9 @@ function avatarColor(name: string) {
 
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
-    <div className="mb-6 w-full max-w-xl rounded-3xl border border-black/10 bg-white p-6 shadow-[0_10px_40px_-20px_rgba(19,31,53,.5)] transition-colors hover:border-brand-orange/50 sm:p-7">
+    <div className="w-full rounded-3xl border border-black/10 bg-white p-6 shadow-[0_10px_40px_-20px_rgba(19,31,53,.5)] sm:p-7">
       <Quote className="size-5 text-brand-orange/50" aria-hidden="true" />
-      <p className="mt-3 text-base leading-relaxed whitespace-pre-line">{t.text}</p>
+      <p className="mt-3 min-h-24 text-base leading-relaxed whitespace-pre-line">{t.text}</p>
       <div className="mt-4 flex" aria-label={`${t.rating} von 5 Sternen`}>
         {Array.from({ length: t.rating }).map((_, i) => (
           <Star key={i} className="size-4 fill-[#FBBC04] text-[#FBBC04]" aria-hidden="true" />
@@ -94,57 +94,78 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   );
 }
 
-// Eine einzige Spalte, kontinuierlich nach unten scrollend — kein Rechts/Links
-// mehr, damit der Blick nur einem Weg nach unten folgt (statt zwischen
-// mehreren Spalten hin- und herzuspringen).
-//
-// Die Scroll-Distanz wird per ResizeObserver direkt an der echten Höhe einer
-// Runde gemessen (in Pixel, nicht in %). So bleibt der Loop immer exakt so
-// lang wie der tatsächliche Inhalt — egal wie viele Bewertungen es gibt oder
-// wie lang die Texte sind. Vorher war die Distanz auf die kurzen Platzhalter-
-// Daten "eingefroren" und lief nach 1-2 Bewertungen bereits wieder von vorn.
-function TestimonialsMarquee({ items, pxPerSecond = 55 }: { items: Testimonial[]; pxPerSecond?: number }) {
-  const roundRef = useRef<HTMLDivElement>(null);
-  const [roundHeight, setRoundHeight] = useState(0);
-
-  useEffect(() => {
-    const el = roundRef.current;
-    if (!el) return;
-    const measure = () => setRoundHeight(el.getBoundingClientRect().height);
-    measure();
-    const observer = new ResizeObserver(measure);
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [items]);
+// Karussell statt Auto-Scroll-Marquee: der Besucher wählt selbst, welche
+// Bewertung er sieht (Pfeile + Punkte) — Kundenwunsch: "anderes Bauteil...
+// bei dem auswählbar ist, welche Bewertungen gezeigt werden". Welche
+// Bewertungen überhaupt im Pool sind, steuert weiterhin das Admin-Panel
+// (is_active je Kundenmeinung).
+function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
 
   if (items.length === 0) return null;
+  const current = items[index % items.length]!;
 
-  const motionProps =
-    roundHeight > 0
-      ? {
-          animate: { translateY: [0, -roundHeight] },
-          transition: {
-            duration: roundHeight / pxPerSecond,
-            repeat: Infinity,
-            ease: "linear" as const,
-            repeatType: "loop" as const,
-          },
-        }
-      : { animate: { translateY: 0 } };
+  function go(delta: 1 | -1) {
+    setDirection(delta);
+    setIndex((i) => (i + delta + items.length) % items.length);
+  }
 
   return (
-    <motion.div {...motionProps} className="flex flex-col items-center gap-0">
-      <div ref={roundRef} className="flex flex-col items-center">
-        {items.map((t) => (
-          <TestimonialCard key={`0-${t.id}`} t={t} />
-        ))}
+    <div className="mx-auto w-full max-w-xl">
+      <div className="relative overflow-hidden">
+        <AnimatePresence mode="wait" custom={direction} initial={false}>
+          <motion.div
+            key={current.id}
+            custom={direction}
+            initial={{ opacity: 0, x: direction > 0 ? 40 : -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: direction > 0 ? -40 : 40 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+          >
+            <TestimonialCard t={current} />
+          </motion.div>
+        </AnimatePresence>
       </div>
-      <div aria-hidden="true" className="flex flex-col items-center">
-        {items.map((t) => (
-          <TestimonialCard key={`1-${t.id}`} t={t} />
-        ))}
+
+      <div className="mt-6 flex items-center justify-center gap-5">
+        <button
+          type="button"
+          onClick={() => go(-1)}
+          aria-label="Vorherige Bewertung"
+          className="grid size-10 shrink-0 place-items-center rounded-full border border-black/10 bg-white text-brand-navy shadow-sm transition-colors hover:border-brand-orange/50 hover:text-brand-orange"
+        >
+          <ChevronLeft className="size-5" aria-hidden="true" />
+        </button>
+
+        <div className="flex items-center gap-2">
+          {items.map((t, i) => (
+            <button
+              key={t.id}
+              type="button"
+              onClick={() => {
+                setDirection(i > index ? 1 : -1);
+                setIndex(i);
+              }}
+              aria-label={`Bewertung von ${t.name} anzeigen`}
+              aria-current={i === index}
+              className={`size-2.5 rounded-full transition-colors ${
+                i === index ? "bg-brand-orange" : "bg-black/15 hover:bg-black/30"
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => go(1)}
+          aria-label="Nächste Bewertung"
+          className="grid size-10 shrink-0 place-items-center rounded-full border border-black/10 bg-white text-brand-navy shadow-sm transition-colors hover:border-brand-orange/50 hover:text-brand-orange"
+        >
+          <ChevronRight className="size-5" aria-hidden="true" />
+        </button>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -180,8 +201,8 @@ export function TestimonialsSection() {
           </p>
         </motion.div>
 
-        <div className="relative mt-12 flex max-h-[640px] justify-center overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]">
-          <TestimonialsMarquee items={items} />
+        <div className="relative mt-12 flex justify-center">
+          <TestimonialsCarousel items={items} />
         </div>
 
         <div className="mt-10 text-center">
