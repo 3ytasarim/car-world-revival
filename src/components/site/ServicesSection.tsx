@@ -33,20 +33,32 @@ interface Service {
   href?: string;
 }
 
+// Reihenfolge laut Revisionsliste (08.10.2026): Unfallservice zuerst,
+// Windschutzscheiben direkt danach, Rest in bisheriger Reihenfolge. Texte
+// direkter an den Besucher gerichtet, wie im gleichen Grid auf der Startseite
+// (LeistungenTabs.tsx).
 const services: Service[] = [
   {
     id: "unfall",
     img: unfall,
     title: "Unfallservice",
-    text: "Soforthilfe rund um die Uhr.",
+    text: "Jetzt einen Unfall gehabt? Wir sind sofort für Sie da.",
     wa: WA_UNFALL,
     href: "/leistungen/unfallservice",
+  },
+  {
+    id: "scheibe",
+    img: scheibe,
+    title: "Windschutzscheiben",
+    text: "Steinschlag entdeckt? In Minuten repariert.",
+    wa: WA_SCHEIBE,
+    href: "/leistungen/windschutzscheiben",
   },
   {
     id: "abschlepp",
     img: abschlepp,
     title: "Abschleppdienst",
-    text: "Schnelle Bergung und Transport.",
+    text: "Wir holen Ihr Fahrzeug schnell und sicher ab.",
     wa: WA_ABSCHLEPP,
     href: "/leistungen/abschleppdienst",
   },
@@ -54,7 +66,7 @@ const services: Service[] = [
     id: "reparatur",
     img: reparatur,
     title: "Fahrzeugreparatur",
-    text: "Meisterhafte Instandsetzung.",
+    text: "Meisterhafte Instandsetzung für Ihr Fahrzeug.",
     wa: WA_REPARATUR,
     href: "/leistungen/fahrzeugreparatur",
   },
@@ -62,7 +74,7 @@ const services: Service[] = [
     id: "ersatzwagen",
     img: ersatzwagen,
     title: "Ersatzwagen",
-    text: "Mobil bleiben ohne Wartezeit.",
+    text: "Bleiben Sie mobil, ohne Wartezeit.",
     wa: WA_ERSATZWAGEN,
     href: "/leistungen/ersatzwagen",
   },
@@ -70,7 +82,7 @@ const services: Service[] = [
     id: "versicherung",
     img: versicherung,
     title: "Versicherungsabwicklung",
-    text: "Papierkram? Übernehmen wir.",
+    text: "Den Papierkram übernehmen wir für Sie.",
     wa: WA_VERSICHERUNG,
     href: "/leistungen/versicherungsabwicklung",
   },
@@ -78,23 +90,15 @@ const services: Service[] = [
     id: "reifen",
     img: reifen,
     title: "Reifenwechsel",
-    text: "Wechsel und Einlagerung.",
+    text: "Wechsel und Einlagerung, schnell erledigt.",
     wa: WA_REIFEN,
     href: "/leistungen/reifenwechsel",
-  },
-  {
-    id: "scheibe",
-    img: scheibe,
-    title: "Windschutzscheiben",
-    text: "Steinschlag in Minuten repariert.",
-    wa: WA_SCHEIBE,
-    href: "/leistungen/windschutzscheiben",
   },
   {
     id: "tuev",
     img: tuev,
     title: "TÜV",
-    text: "Prüfung ohne lange Wartezeit.",
+    text: "Prüfung fällig? Ohne lange Wartezeit bei uns.",
     wa: WA_TUEV,
     href: "/leistungen/tuev",
   },
@@ -102,7 +106,7 @@ const services: Service[] = [
     id: "wartung",
     img: wartung,
     title: "Inspektion & Wartung",
-    text: "Nach Herstellervorgabe.",
+    text: "Nach Herstellervorgabe, mit Garantieerhalt.",
     wa: WA_INSPEKTION,
     href: "/leistungen/inspektion-wartung",
   },
@@ -125,9 +129,9 @@ function ServiceCard({ img, title, text, wa, href }: Service) {
           src={img}
           alt={title}
           loading="lazy"
-          className="absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+          className="absolute h-full w-full object-cover object-center brightness-110 transition-transform duration-300 group-hover:scale-105"
         />
-        <div className="absolute inset-0 h-full bg-gradient-to-t from-brand-navy from-10% via-brand-navy/60 via-60% to-transparent" />
+        <div className="absolute inset-0 h-full bg-gradient-to-t from-black/70 from-5% via-black/15 via-55% to-transparent" />
         <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-6 text-white">
           <div className="text-xl font-semibold">{title}</div>
           <div className="mt-2 mb-4 text-white/80">{text}</div>

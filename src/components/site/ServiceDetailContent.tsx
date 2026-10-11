@@ -3,6 +3,8 @@ import { Phone } from "lucide-react";
 import { Button3D } from "@/components/ui/button-3d";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { PHONE_HREF } from "@/components/site/site-data";
+import { checkPoints, CheckPointCard } from "@/components/site/IhreVorteile";
+import { certificationLogos } from "@/components/site/PartnerSection";
 
 export interface ServiceDetailSection {
   heading: string;
@@ -46,7 +48,24 @@ export function ServiceDetailContent({
           </div>
         ))}
 
-        <div className="mt-12 text-center">
+        {/* Vertrauenselemente am Ende der Seite — Kundenwunsch: mehr
+            Vertrauen vor dem abschließenden CTA. Keine neu erfundenen
+            Aussagen/Logos, sondern dieselben bereits bestätigten
+            Trust-Badges wie im Hero (checkPoints/certificationLogos). */}
+        <div className="mt-12 border-t border-black/5 pt-10">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {checkPoints.map((c) => (
+              <CheckPointCard key={c.title} {...c} />
+            ))}
+          </div>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-6">
+            {certificationLogos.map((l) => (
+              <img key={l.alt} src={l.src} alt={l.alt} loading="lazy" className="h-10 w-auto object-contain opacity-80 sm:h-12" />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10 text-center">
           <h3 className="text-lg font-semibold text-brand-navy">Jetzt Kontakt aufnehmen</h3>
           <div className="mt-4 flex flex-wrap justify-center gap-4">
             <Button3D href={PHONE_HREF}>
