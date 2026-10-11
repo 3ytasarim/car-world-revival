@@ -1,15 +1,14 @@
 import { useRef } from "react";
-import { AlertTriangle, FileCheck2, PhoneCall, ShieldCheck, Wrench } from "lucide-react";
+import { ChevronDown, ChevronRight, FileCheck2, PhoneCall, Wrench } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 
-import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
-import { GradientShimmer } from "@/components/ui/gradient-shimmer";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { VideoPlayer } from "@/components/ui/video-player";
 import { PHONE_HREF, WA_UNFALL } from "@/components/site/site-data";
 import { TowTruckIcon } from "@/components/site/TowTruckIcon";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+import { certificationLogos } from "@/components/site/PartnerSection";
 
 // Der Ablauf nach einem Unfall — als Karten-Grid statt Orbit, mit
 // ausführlichem Text statt nur Icon+Titel.
@@ -75,15 +74,8 @@ export function RundumSorglosSection({
             transition={{ duration: 0.6 }}
             className="mx-auto max-w-2xl text-center"
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#5088C8]/30 bg-[#5088C8]/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-[#1B3A63] uppercase">
-              <ShieldCheck className="size-4" aria-hidden="true" />
-              Rundum abgesichert
-            </span>
-
-            <h2 id="rundum-title" className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
-              <AnimatedText text="Rundum-" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#131F35]" />
-              <AnimatedText text="sorglos" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#5088C8]" />
-              <AnimatedText text="-Paket" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#131F35]" />
+            <h2 id="rundum-title" className="text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
+              Rundum sorglos Paket
             </h2>
 
             <p className="mt-4 text-sm text-muted-foreground sm:text-base">
@@ -97,9 +89,11 @@ export function RundumSorglosSection({
             </div>
           )}
 
-          {/* Ablauf als Karten-Grid statt Orbit — responsive, auf Mobile
-              gestapelt. */}
-          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Ablauf als Karten-Grid statt Orbit — auf Mobile/Tablet gestapelt
+              (Pfeil nach unten zwischen den Karten), ab Desktop 4 Spalten
+              nebeneinander (Pfeil nach rechts) — Kundenwunsch: die Schritte
+              sollen klar erkennbar durch Pfeile verbunden sein. */}
+          <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-4 lg:gap-8">
             {processSteps.map((step, i) => (
               <motion.div
                 key={step.title}
@@ -118,6 +112,27 @@ export function RundumSorglosSection({
                   <h3 className="font-bold text-brand-navy">{step.title}</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">{step.text}</p>
+
+                {i < processSteps.length - 1 && (
+                  <>
+                    <div
+                      className="absolute top-full left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 lg:hidden"
+                      aria-hidden="true"
+                    >
+                      <span className="flex size-8 items-center justify-center rounded-full border border-[#5088C8]/30 bg-white text-[#5088C8] shadow-sm">
+                        <ChevronDown className="size-4" />
+                      </span>
+                    </div>
+                    <div
+                      className="absolute top-1/2 left-full z-10 hidden -translate-x-1/2 -translate-y-1/2 lg:flex"
+                      aria-hidden="true"
+                    >
+                      <span className="flex size-8 items-center justify-center rounded-full border border-[#5088C8]/30 bg-white text-[#5088C8] shadow-sm">
+                        <ChevronRight className="size-4" />
+                      </span>
+                    </div>
+                  </>
+                )}
               </motion.div>
             ))}
           </div>
@@ -125,20 +140,23 @@ export function RundumSorglosSection({
           {/* Jetzt-anrufen + WhatsApp: mittig unter beiden Spalten, gleich
               wichtig nebeneinander. */}
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Button3D href={PHONE_HREF}>
+            <Button3D href={PHONE_HREF} shimmer={shimmerButton}>
               <PhoneCall className="size-4" aria-hidden="true" />
-              {shimmerButton ? (
-                <GradientShimmer gradient="bay" duration={2}>
-                  Jetzt anrufen
-                </GradientShimmer>
-              ) : (
-                "Jetzt anrufen"
-              )}
+              Jetzt anrufen
             </Button3D>
             <Button3D href={WA_UNFALL} target="_blank" rel="noopener noreferrer" variant="whatsapp">
               <WhatsAppIcon className="size-4" />
               WhatsApp
             </Button3D>
+          </div>
+
+          {/* TÜV, HWK, Innung — ruhiger, nicht scrollender Logo-Streifen
+              direkt unter den Buttons (Kundenwunsch: "ernst und schlicht",
+              kein Marquee/Effekt hier). */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-8">
+            {certificationLogos.map((l) => (
+              <img key={l.alt} src={l.src} alt={l.alt} loading="lazy" className="h-10 w-auto object-contain opacity-80 sm:h-12" />
+            ))}
           </div>
 
           {/* Versicherungspartner — Logo-Marquee statt Zahlen-Kacheln.

@@ -27,7 +27,6 @@ import { PartnerLogosCombined } from "@/components/site/PartnerLogosCombined";
 
 import { PHONE_HREF, WA_FRAGE, WA_UNFALL, WA_SCHEIBE, WA_REIFEN } from "@/components/site/site-data";
 import { Button3D } from "@/components/ui/button-3d";
-import { GradientShimmer } from "@/components/ui/gradient-shimmer";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 
@@ -169,7 +168,7 @@ function Home() {
                     <span className="text-sm font-semibold text-[#131F35]">5,0 / 5 bei Google</span>
                   </div>
 
-                  <h1 className="text-left text-[2.5rem] leading-[0.95] tracking-tighter sm:text-[3.5rem] md:text-[4.75rem] lg:text-[4.75rem] xl:text-[5.5rem]">
+                  <h1 className="text-left text-[2rem] leading-[1.05] tracking-tight sm:text-[2.5rem] md:text-[3rem] lg:text-[3rem] xl:text-[3.25rem]">
                     <span
                       className="block bg-[linear-gradient(180deg,_#0B1626_0%,_rgba(11,_22,_38,_0.8)_100%)] bg-clip-text text-transparent"
                     >
@@ -178,22 +177,48 @@ function Home() {
                     <span
                       className="block bg-[linear-gradient(135deg,_#0B1626,_#1B3A63,_#2F6FB5,_#5088C8,_#8FB8E8)] bg-clip-text font-extrabold text-transparent"
                     >
-                      Nr. 1 Autowerkstatt in Bad Neuenahr-Ahrweiler
+                      Nr. 1 Autowerkstatt in Bad Neuenahr
                     </span>
 
                   </h1>
 
+                  {/* Kaza + Ön cam görseli — Kundenwunsch: Başlığın hemen
+                      altında hizmeti anlatan fotoğraf (önceden sadece
+                      Desktop'taki Phone-Carousel'de vardı, Mobile'da hiç
+                      görünmüyordu). */}
+                  <div className="grid max-w-md grid-cols-2 gap-3">
+                    <div className="relative aspect-4/3 overflow-hidden rounded-2xl shadow-[0_20px_45px_-20px_rgba(19,31,53,0.4)]">
+                      <img
+                        src={heroPhoneUnfall}
+                        alt="Unfallfahrzeug mit Frontschaden"
+                        loading="eager"
+                        className="size-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                      <span className="absolute inset-x-0 bottom-0 p-2.5 text-xs font-semibold text-white">Unfallservice</span>
+                    </div>
+                    <div className="relative aspect-4/3 overflow-hidden rounded-2xl shadow-[0_20px_45px_-20px_rgba(19,31,53,0.4)]">
+                      <img
+                        src={heroPhoneSteinschlag}
+                        alt="Steinschlag in der Frontscheibe"
+                        loading="eager"
+                        className="size-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                      <span className="absolute inset-x-0 bottom-0 p-2.5 text-xs font-semibold text-white">Windschutzscheiben</span>
+                    </div>
+                  </div>
 
+                  {/* Buttons unter dem Görsel — Shimmer sitzt auf der
+                      Button-Fläche (shimmer-Prop), nicht mehr auf dem Text. */}
                   <div className="flex flex-wrap items-center gap-4 lg:mt-auto">
                     <Button3D href={PHONE_HREF}>
                       <Phone className="size-4" aria-hidden="true" />
                       Jetzt anrufen
                     </Button3D>
-                    <Button3D href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="whatsapp">
+                    <Button3D href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="whatsapp" shimmer>
                       <WhatsAppIcon className="size-4" />
-                      <GradientShimmer gradient="bay" duration={2}>
-                        WhatsApp
-                      </GradientShimmer>
+                      WhatsApp
                     </Button3D>
                   </div>
 

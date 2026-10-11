@@ -145,10 +145,7 @@ export function LeistungenTabs() {
   return (
     <section aria-labelledby="leistungen-title" className="relative overflow-hidden py-20">
       <div className="relative z-10 mx-auto mb-10 max-w-3xl px-4 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-4 py-1.5 text-sm font-semibold text-brand-orange">
-          Alles aus einer Hand
-        </span>
-        <h2 id="leistungen-title" className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
+        <h2 id="leistungen-title" className="text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
           <AnimatedText text="Unsere Leistungen" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
         </h2>
         <p className="mt-3 text-lg text-muted-foreground">Ein Ansprechpartner für alles rund um Ihr Fahrzeug.</p>
