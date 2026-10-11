@@ -19,6 +19,18 @@ export const getTestimonials = createServerFn({ method: "GET" }).handler(async (
   return fetchTestimonials();
 });
 
+export const getBlogPosts = createServerFn({ method: "GET" }).handler(async () => {
+  const { fetchBlogPosts } = await import("./public-content.server");
+  return fetchBlogPosts();
+});
+
+export const getBlogPostBySlug = createServerFn({ method: "GET" })
+  .validator(z.object({ slug: z.string().max(200) }))
+  .handler(async ({ data }) => {
+    const { fetchBlogPostBySlug } = await import("./public-content.server");
+    return fetchBlogPostBySlug(data.slug);
+  });
+
 export const submitPartnerRequest = createServerFn({ method: "POST" })
   .validator(
     z.object({

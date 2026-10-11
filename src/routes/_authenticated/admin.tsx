@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { BarChart3, Briefcase, Globe2, Images, LogOut, MousePointerClick, Plus, Quote, Search, Tag, Trash2, Users } from "lucide-react";
+import { BarChart3, Briefcase, Globe2, Images, LogOut, MousePointerClick, Newspaper, Plus, Quote, Search, Tag, Trash2, Users } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -25,16 +25,27 @@ import {
   createAdminTestimonial,
   updateAdminTestimonial,
   deleteAdminTestimonial,
+  getAdminBlogPosts,
+  createAdminBlogPost,
+  updateAdminBlogPost,
+  deleteAdminBlogPost,
   getAdminSeoSettings,
   upsertAdminSeoSettings,
 } from "@/lib/admin-content.functions";
 import { getOnlineNow, getAnalyticsSummary } from "@/lib/analytics.functions";
-import type { AdminOfferRow, AdminJobOpeningRow, AdminTestimonialRow, AdminSeoRow } from "@/lib/admin-content.server";
+import type {
+  AdminOfferRow,
+  AdminJobOpeningRow,
+  AdminTestimonialRow,
+  AdminBlogPostRow,
+  AdminSeoRow,
+} from "@/lib/admin-content.server";
 import carWorldLogo from "@/assets/car-world-logo.png";
 
 type Offer = AdminOfferRow;
 type Seo = AdminSeoRow;
 type Testimonial = AdminTestimonialRow;
+type BlogPost = AdminBlogPostRow;
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
@@ -99,6 +110,9 @@ function AdminPage() {
             <TabsTrigger value="testimonials" className="gap-2">
               <Quote className="size-4" aria-hidden="true" /> Kundenmeinungen
             </TabsTrigger>
+            <TabsTrigger value="blog" className="gap-2">
+              <Newspaper className="size-4" aria-hidden="true" /> Blog
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="analytics" className="mt-6">
@@ -115,6 +129,9 @@ function AdminPage() {
           </TabsContent>
           <TabsContent value="testimonials" className="mt-6">
             <TestimonialsTab />
+          </TabsContent>
+          <TabsContent value="blog" className="mt-6">
+            <BlogTab />
           </TabsContent>
         </Tabs>
       </main>
@@ -430,6 +447,133 @@ function TestimonialsTab() {
                 <label className="flex items-center gap-2 text-sm">
                   <Switch name="is_active" defaultChecked={t.is_active} />
                   Aktiv
+                </label>
+                <Button type="submit" size="sm">
+                  Speichern
+                </Button>
+              </div>
+            </form>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- Blog ---------------- */
+
+function BlogTab() {
+  const qc = useQueryClient();
+  const { data } = useQuery({
+    queryKey: ["admin-blog"],
+    queryFn: () => getAdminBlogPosts(),
+  });
+
+  const invalidate = () => {
+    qc.invalidateQueries({ queryKey: ["admin-blog"] });
+    qc.invalidateQueries({ queryKey: ["blog-posts"] });
+    qc.invalidateQueries({ queryKey: ["blog-post"] });
+  };
+
+  const save = useMutation({
+    mutationFn: async (p: Partial<BlogPost> & { id: string }) => {
+      const { id, ...rest } = p;
+      await updateAdminBlogPost({ data: { id, ...rest } });
+    },
+    onSuccess: () => {
+      toast.success("Beitrag gespeichert");
+      invalidate();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const create = useMutation({
+    mutationFn: async () => {
+      await createAdminBlogPost({ data: { title: "Neuer Beitrag" } });
+    },
+    onSuccess: () => {
+      toast.success("Beitrag angelegt");
+      invalidate();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const remove = useMutation({
+    mutationFn: async (id: string) => {
+      await deleteAdminBlogPost({ data: { id } });
+    },
+    onSuccess: () => {
+      toast.success("Beitrag gelöscht");
+      invalidate();
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-muted-foreground">
+          {data?.filter((p) => p.is_published).length ?? 0} veröffentlichte Beiträge auf der Website
+        </p>
+        <Button onClick={() => create.mutate()} className="gap-2">
+          <Plus className="size-4" aria-hidden="true" /> Beitrag hinzufügen
+        </Button>
+      </div>
+
+      <div className="grid gap-4">
+        {data?.map((p) => (
+          <Card key={p.id}>
+            <form
+              className="space-y-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const fd = new FormData(e.currentTarget);
+                save.mutate({
+                  id: p.id,
+                  title: String(fd.get("title")),
+                  slug: String(fd.get("slug")),
+                  excerpt: String(fd.get("excerpt")),
+                  content: String(fd.get("content")),
+                  cover_image_url: String(fd.get("cover_image_url")) || null,
+                  is_published: fd.get("is_published") === "on",
+                });
+              }}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <Input name="title" defaultValue={p.title} className="font-semibold" placeholder="Titel" />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Beitrag löschen"
+                  onClick={() => remove.mutate(p.id)}
+                >
+                  <Trash2 className="size-4 text-destructive" aria-hidden="true" />
+                </Button>
+              </div>
+              <div className="space-y-1">
+                <Label className="text-xs">URL-Pfad (car-world.de/blog/…)</Label>
+                <Input name="slug" defaultValue={p.slug} />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-xs">Kurzbeschreibung (für die Übersicht)</Label>
+                <Textarea name="excerpt" defaultValue={p.excerpt} rows={2} />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-xs">
+                  Inhalt — Absätze durch Leerzeile trennen. Links einfach als vollständige URL (https://…)
+                  eintragen, sie werden automatisch klickbar.
+                </Label>
+                <Textarea name="content" defaultValue={p.content} rows={10} />
+              </div>
+              <div className="space-y-1">
+                <Label className="text-xs">Titelbild-URL (optional)</Label>
+                <Input name="cover_image_url" defaultValue={p.cover_image_url ?? ""} />
+              </div>
+              <div className="flex items-center justify-between pt-1">
+                <label className="flex items-center gap-2 text-sm">
+                  <Switch name="is_published" defaultChecked={p.is_published} />
+                  Veröffentlicht
                 </label>
                 <Button type="submit" size="sm">
                   Speichern

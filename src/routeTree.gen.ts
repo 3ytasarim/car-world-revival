@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AktuelleAngeboteRouteImport } from './routes/aktuelle-angebote'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as KarriereRouteImport } from './routes/karriere'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as KundenmeinungenRouteImport } from './routes/kundenmeinungen'
@@ -20,6 +21,8 @@ import { Route as LeistungenRouteImport } from './routes/leistungen'
 import { Route as PartnerRouteImport } from './routes/partner'
 import { Route as TerminRouteImport } from './routes/termin'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as LeistungenIndexRouteImport } from './routes/leistungen.index'
 import { Route as LeistungenAbschleppdienstRouteImport } from './routes/leistungen.abschleppdienst'
 import { Route as LeistungenErsatzwagenRouteImport } from './routes/leistungen.ersatzwagen'
@@ -48,6 +51,11 @@ const AktuelleAngeboteRoute = AktuelleAngeboteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KarriereRoute = KarriereRouteImport.update({
@@ -84,6 +92,16 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogRoute,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
 } as any)
 const LeistungenIndexRoute = LeistungenIndexRouteImport.update({
   id: '/',
@@ -145,6 +163,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/aktuelle-angebote': typeof AktuelleAngeboteRoute
   '/auth': typeof AuthRoute
+  '/blog': typeof BlogRouteWithChildren
   '/karriere': typeof KarriereRoute
   '/kontakt': typeof KontaktRoute
   '/kundenmeinungen': typeof KundenmeinungenRoute
@@ -152,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/partner': typeof PartnerRoute
   '/termin': typeof TerminRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/leistungen/abschleppdienst': typeof LeistungenAbschleppdienstRoute
   '/leistungen/ersatzwagen': typeof LeistungenErsatzwagenRoute
   '/leistungen/fahrzeugreparatur': typeof LeistungenFahrzeugreparaturRoute
@@ -161,6 +181,7 @@ export interface FileRoutesByFullPath {
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/versicherungsabwicklung': typeof LeistungenVersicherungsabwicklungRoute
   '/leistungen/windschutzscheiben': typeof LeistungenWindschutzscheibenRoute
+  '/blog/': typeof BlogIndexRoute
   '/leistungen/': typeof LeistungenIndexRoute
 }
 export interface FileRoutesByTo {
@@ -173,6 +194,7 @@ export interface FileRoutesByTo {
   '/partner': typeof PartnerRoute
   '/termin': typeof TerminRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/leistungen/abschleppdienst': typeof LeistungenAbschleppdienstRoute
   '/leistungen/ersatzwagen': typeof LeistungenErsatzwagenRoute
   '/leistungen/fahrzeugreparatur': typeof LeistungenFahrzeugreparaturRoute
@@ -182,6 +204,7 @@ export interface FileRoutesByTo {
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/versicherungsabwicklung': typeof LeistungenVersicherungsabwicklungRoute
   '/leistungen/windschutzscheiben': typeof LeistungenWindschutzscheibenRoute
+  '/blog': typeof BlogIndexRoute
   '/leistungen': typeof LeistungenIndexRoute
 }
 export interface FileRoutesById {
@@ -190,6 +213,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/aktuelle-angebote': typeof AktuelleAngeboteRoute
   '/auth': typeof AuthRoute
+  '/blog': typeof BlogRouteWithChildren
   '/karriere': typeof KarriereRoute
   '/kontakt': typeof KontaktRoute
   '/kundenmeinungen': typeof KundenmeinungenRoute
@@ -197,6 +221,7 @@ export interface FileRoutesById {
   '/partner': typeof PartnerRoute
   '/termin': typeof TerminRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/leistungen/abschleppdienst': typeof LeistungenAbschleppdienstRoute
   '/leistungen/ersatzwagen': typeof LeistungenErsatzwagenRoute
   '/leistungen/fahrzeugreparatur': typeof LeistungenFahrzeugreparaturRoute
@@ -206,6 +231,7 @@ export interface FileRoutesById {
   '/leistungen/unfallservice': typeof LeistungenUnfallserviceRoute
   '/leistungen/versicherungsabwicklung': typeof LeistungenVersicherungsabwicklungRoute
   '/leistungen/windschutzscheiben': typeof LeistungenWindschutzscheibenRoute
+  '/blog/': typeof BlogIndexRoute
   '/leistungen/': typeof LeistungenIndexRoute
 }
 export interface FileRouteTypes {
@@ -214,6 +240,7 @@ export interface FileRouteTypes {
     | '/'
     | '/aktuelle-angebote'
     | '/auth'
+    | '/blog'
     | '/karriere'
     | '/kontakt'
     | '/kundenmeinungen'
@@ -221,6 +248,7 @@ export interface FileRouteTypes {
     | '/partner'
     | '/termin'
     | '/admin'
+    | '/blog/$slug'
     | '/leistungen/abschleppdienst'
     | '/leistungen/ersatzwagen'
     | '/leistungen/fahrzeugreparatur'
@@ -230,6 +258,7 @@ export interface FileRouteTypes {
     | '/leistungen/unfallservice'
     | '/leistungen/versicherungsabwicklung'
     | '/leistungen/windschutzscheiben'
+    | '/blog/'
     | '/leistungen/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -242,6 +271,7 @@ export interface FileRouteTypes {
     | '/partner'
     | '/termin'
     | '/admin'
+    | '/blog/$slug'
     | '/leistungen/abschleppdienst'
     | '/leistungen/ersatzwagen'
     | '/leistungen/fahrzeugreparatur'
@@ -251,6 +281,7 @@ export interface FileRouteTypes {
     | '/leistungen/unfallservice'
     | '/leistungen/versicherungsabwicklung'
     | '/leistungen/windschutzscheiben'
+    | '/blog'
     | '/leistungen'
   id:
     | '__root__'
@@ -258,6 +289,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/aktuelle-angebote'
     | '/auth'
+    | '/blog'
     | '/karriere'
     | '/kontakt'
     | '/kundenmeinungen'
@@ -265,6 +297,7 @@ export interface FileRouteTypes {
     | '/partner'
     | '/termin'
     | '/_authenticated/admin'
+    | '/blog/$slug'
     | '/leistungen/abschleppdienst'
     | '/leistungen/ersatzwagen'
     | '/leistungen/fahrzeugreparatur'
@@ -274,6 +307,7 @@ export interface FileRouteTypes {
     | '/leistungen/unfallservice'
     | '/leistungen/versicherungsabwicklung'
     | '/leistungen/windschutzscheiben'
+    | '/blog/'
     | '/leistungen/'
   fileRoutesById: FileRoutesById
 }
@@ -282,6 +316,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AktuelleAngeboteRoute: typeof AktuelleAngeboteRoute
   AuthRoute: typeof AuthRoute
+  BlogRoute: typeof BlogRouteWithChildren
   KarriereRoute: typeof KarriereRoute
   KontaktRoute: typeof KontaktRoute
   KundenmeinungenRoute: typeof KundenmeinungenRoute
@@ -318,6 +353,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/karriere': {
@@ -368,6 +410,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin'
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
     }
     '/leistungen/': {
       id: '/leistungen/'
@@ -453,6 +509,18 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 interface LeistungenRouteChildren {
   LeistungenAbschleppdienstRoute: typeof LeistungenAbschleppdienstRoute
   LeistungenErsatzwagenRoute: typeof LeistungenErsatzwagenRoute
@@ -489,6 +557,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AktuelleAngeboteRoute: AktuelleAngeboteRoute,
   AuthRoute: AuthRoute,
+  BlogRoute: BlogRouteWithChildren,
   KarriereRoute: KarriereRoute,
   KontaktRoute: KontaktRoute,
   KundenmeinungenRoute: KundenmeinungenRoute,

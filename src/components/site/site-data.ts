@@ -54,6 +54,7 @@ export const NAV = [
   { label: "Leistungen", href: "/leistungen", icon: "wrench" },
   { label: "Aktuelle Angebote", href: "/aktuelle-angebote", icon: "tag" },
   { label: "Partner", href: "/partner", icon: "handshake" },
+  { label: "Blog", href: "/blog", icon: "newspaper" },
   { label: "Karriere", href: "/karriere", icon: "briefcase" },
   { label: "Kontakt", href: "/kontakt", icon: "mail" },
 ] as const;

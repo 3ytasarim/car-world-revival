@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
-import { Briefcase, Handshake, House, Mail, Menu, Tag, Wrench, X } from "lucide-react";
+import { Briefcase, Handshake, House, Mail, Menu, Newspaper, Tag, Wrench, X } from "lucide-react";
 
 import carWorldLogo from "@/assets/car-world-logo.png";
 import supportImg from "@/assets/support-team.jpg";
@@ -13,6 +13,7 @@ const icons = {
   briefcase: Briefcase,
   mail: Mail,
   handshake: Handshake,
+  newspaper: Newspaper,
 } as const;
 
 function AnimatedLogo() {
