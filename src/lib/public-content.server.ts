@@ -82,6 +82,36 @@ export async function fetchTestimonials(): Promise<TestimonialRow[]> {
   return rows;
 }
 
+export interface BlogPostRow {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  cover_image_url: string | null;
+  created_at: string;
+}
+
+export async function fetchBlogPosts(): Promise<BlogPostRow[]> {
+  const { rows } = await getPool().query<BlogPostRow>(
+    `SELECT id, slug, title, excerpt, content, cover_image_url, created_at
+     FROM public.cw_blog_posts
+     WHERE is_published = true
+     ORDER BY created_at DESC`,
+  );
+  return rows;
+}
+
+export async function fetchBlogPostBySlug(slug: string): Promise<BlogPostRow | null> {
+  const { rows } = await getPool().query<BlogPostRow>(
+    `SELECT id, slug, title, excerpt, content, cover_image_url, created_at
+     FROM public.cw_blog_posts
+     WHERE slug = $1 AND is_published = true`,
+    [slug],
+  );
+  return rows[0] ?? null;
+}
+
 export async function insertPartnerRequest(input: { name: string; email: string; message: string | null }) {
   await getPool().query(
     `INSERT INTO public.cw_partner_requests (name, email, message) VALUES ($1, $2, $3)`,

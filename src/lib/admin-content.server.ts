@@ -241,6 +241,76 @@ export async function upsertSeoSettings(row: AdminSeoRow): Promise<void> {
   );
 }
 
+export interface AdminBlogPostRow {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  cover_image_url: string | null;
+  is_published: boolean;
+  created_at: string;
+}
+
+export async function fetchAllBlogPosts(): Promise<AdminBlogPostRow[]> {
+  const { rows } = await getPool().query<AdminBlogPostRow>(
+    `SELECT id, slug, title, excerpt, content, cover_image_url, is_published, created_at
+     FROM public.cw_blog_posts ORDER BY created_at DESC`,
+  );
+  return rows;
+}
+
+/** Erzeugt einen URL-sicheren, eindeutigen Slug aus dem Titel (Zähler bei Kollision). */
+async function uniqueSlugFromTitle(title: string): Promise<string> {
+  const base =
+    title
+      .toLowerCase()
+      .normalize("NFKD")
+      .replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "beitrag";
+  let slug = base;
+  let i = 1;
+  for (;;) {
+    const { rows } = await getPool().query<{ exists: boolean }>(
+      `SELECT EXISTS(SELECT 1 FROM public.cw_blog_posts WHERE slug = $1) AS exists`,
+      [slug],
+    );
+    if (!rows[0]!.exists) return slug;
+    i += 1;
+    slug = `${base}-${i}`;
+  }
+}
+
+export async function createBlogPost(title: string): Promise<{ id: string; slug: string }> {
+  const slug = await uniqueSlugFromTitle(title || "Neuer Beitrag");
+  const { rows } = await getPool().query<{ id: string }>(
+    `INSERT INTO public.cw_blog_posts (slug, title, is_published)
+     VALUES ($1, $2, false)
+     RETURNING id`,
+    [slug, title || "Neuer Beitrag"],
+  );
+  return { id: rows[0]!.id, slug };
+}
+
+export async function updateBlogPost(
+  id: string,
+  fields: { [K in keyof Omit<AdminBlogPostRow, "id">]?: AdminBlogPostRow[K] | undefined },
+): Promise<void> {
+  const entries = Object.entries(fields).filter(([, v]) => v !== undefined);
+  if (entries.length === 0) return;
+  const setClause = entries.map(([key], i) => `${key} = $${i + 2}`).join(", ");
+  const values = entries.map(([, v]) => v);
+  await getPool().query(`UPDATE public.cw_blog_posts SET ${setClause}, updated_at = now() WHERE id = $1`, [
+    id,
+    ...values,
+  ]);
+}
+
+export async function deleteBlogPost(id: string): Promise<void> {
+  await getPool().query(`DELETE FROM public.cw_blog_posts WHERE id = $1`, [id]);
+}
+
 const UPLOAD_ROOT = path.join(process.cwd(), "public", "uploads");
 const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
 

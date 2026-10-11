@@ -195,6 +195,55 @@ export const deleteAdminTestimonial = createServerFn({ method: "POST" })
     return { success: true as const };
   });
 
+/* ---------------- Blog ---------------- */
+
+export const getAdminBlogPosts = createServerFn({ method: "GET" }).handler(async () => {
+  await requireAdmin();
+  const { fetchAllBlogPosts } = await import("./admin-content.server");
+  return fetchAllBlogPosts();
+});
+
+export const createAdminBlogPost = createServerFn({ method: "POST" })
+  .validator(z.object({ title: z.string().max(200) }))
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    const { createBlogPost } = await import("./admin-content.server");
+    return createBlogPost(data.title);
+  });
+
+export const updateAdminBlogPost = createServerFn({ method: "POST" })
+  .validator(
+    z.object({
+      id: z.string(),
+      slug: z
+        .string()
+        .max(200)
+        .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Nur Kleinbuchstaben, Ziffern und Bindestriche erlaubt.")
+        .optional(),
+      title: z.string().max(200).optional(),
+      excerpt: z.string().max(400).optional(),
+      content: z.string().max(20000).optional(),
+      cover_image_url: z.string().max(500).nullable().optional(),
+      is_published: z.boolean().optional(),
+    }),
+  )
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    const { id, ...fields } = data;
+    const { updateBlogPost } = await import("./admin-content.server");
+    await updateBlogPost(id, fields);
+    return { success: true as const };
+  });
+
+export const deleteAdminBlogPost = createServerFn({ method: "POST" })
+  .validator(z.object({ id: z.string() }))
+  .handler(async ({ data }) => {
+    await requireAdmin();
+    const { deleteBlogPost } = await import("./admin-content.server");
+    await deleteBlogPost(data.id);
+    return { success: true as const };
+  });
+
 /* ---------------- SEO ---------------- */
 
 export const getAdminSeoSettings = createServerFn({ method: "GET" }).handler(async () => {
