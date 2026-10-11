@@ -34,20 +34,32 @@ interface Feature {
   href?: string;
 }
 
+// Reihenfolge laut Revisionsliste (08.10.2026): Unfallservice zuerst,
+// Windschutzscheiben direkt danach, Rest in bisheriger Reihenfolge.
+// Texte direkter an den Besucher gerichtet ("Sie"/"Ihr") statt reiner
+// Feature-Aufzählung.
 const features: Feature[] = [
   {
     id: "unfall",
     label: "Unfallservice",
     image: unfall,
-    description: "Soforthilfe rund um die Uhr — wir organisieren alles nach dem Unfall.",
+    description: "Jetzt einen Unfall gehabt? Wir sind sofort für Sie da — rund um die Uhr.",
     wa: WA_UNFALL,
     href: "/leistungen/unfallservice",
+  },
+  {
+    id: "scheibe",
+    label: "Windschutzscheiben",
+    image: scheibe,
+    description: "Steinschlag entdeckt? In Minuten repariert, bei Bedarf tauschen wir die Scheibe komplett.",
+    wa: WA_SCHEIBE,
+    href: "/leistungen/windschutzscheiben",
   },
   {
     id: "abschlepp",
     label: "Abschleppdienst",
     image: abschlepp,
-    description: "Schnelle Bergung und sicherer Transport in unsere Meisterwerkstatt.",
+    description: "Wir holen Ihr Fahrzeug schnell ab und bringen es sicher in unsere Meisterwerkstatt.",
     wa: WA_ABSCHLEPP,
     href: "/leistungen/abschleppdienst",
   },
@@ -55,7 +67,7 @@ const features: Feature[] = [
     id: "reparatur",
     label: "Fahrzeugreparatur",
     image: reparatur,
-    description: "Meisterhafte Instandsetzung von Karosserie, Lack und Technik.",
+    description: "Karosserie, Lack oder Technik — wir bringen Ihr Fahrzeug meisterhaft wieder in Form.",
     wa: WA_REPARATUR,
     href: "/leistungen/fahrzeugreparatur",
   },
@@ -63,7 +75,7 @@ const features: Feature[] = [
     id: "ersatzwagen",
     label: "Ersatzwagen",
     image: ersatzwagen,
-    description: "Mobil bleiben ohne Wartezeit — Ersatzfahrzeug direkt vor Ort.",
+    description: "Bleiben Sie mobil, ohne Wartezeit — Ihr Ersatzfahrzeug steht direkt vor Ort bereit.",
     wa: WA_ERSATZWAGEN,
     href: "/leistungen/ersatzwagen",
   },
@@ -71,7 +83,7 @@ const features: Feature[] = [
     id: "versicherung",
     label: "Versicherungsabwicklung",
     image: versicherung,
-    description: "Den Papierkram mit Ihrer Versicherung übernehmen wir komplett.",
+    description: "Den kompletten Papierkram mit Ihrer Versicherung übernehmen wir für Sie.",
     wa: WA_VERSICHERUNG,
     href: "/leistungen/versicherungsabwicklung",
   },
@@ -79,23 +91,15 @@ const features: Feature[] = [
     id: "reifen",
     label: "Reifenwechsel",
     image: reifen,
-    description: "Wechsel, Auswuchten und Einlagerung Ihrer Räder.",
+    description: "Reifenwechsel, Auswuchten und Einlagerung — schnell und ohne Umwege erledigt.",
     wa: WA_REIFEN,
     href: "/leistungen/reifenwechsel",
-  },
-  {
-    id: "scheibe",
-    label: "Windschutzscheiben",
-    image: scheibe,
-    description: "Steinschlag in Minuten repariert oder Scheibe komplett getauscht.",
-    wa: WA_SCHEIBE,
-    href: "/leistungen/windschutzscheiben",
   },
   {
     id: "tuev",
     label: "TÜV & AU",
     image: tuev,
-    description: "Hauptuntersuchung ohne lange Wartezeit direkt bei uns.",
+    description: "Hauptuntersuchung fällig? Bei uns ohne lange Wartezeit, direkt vor Ort.",
     wa: WA_TUEV,
     href: "/leistungen/tuev",
   },
@@ -103,7 +107,7 @@ const features: Feature[] = [
     id: "wartung",
     label: "Inspektion & Wartung",
     image: wartung,
-    description: "Service nach Herstellervorgabe — mit Garantieerhalt.",
+    description: "Service nach Herstellervorgabe — mit vollem Erhalt Ihrer Garantie.",
     wa: WA_INSPEKTION,
     href: "/leistungen/inspektion-wartung",
   },
@@ -125,9 +129,9 @@ function LeistungCard({ image, label, description, wa, href }: Feature) {
           src={image}
           alt={label}
           loading="lazy"
-          className="absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+          className="absolute h-full w-full object-cover object-center brightness-110 transition-transform duration-300 group-hover:scale-105"
         />
-        <div className="absolute inset-0 h-full bg-gradient-to-t from-brand-navy from-10% via-brand-navy/60 via-60% to-transparent" />
+        <div className="absolute inset-0 h-full bg-gradient-to-t from-black/70 from-5% via-black/15 via-55% to-transparent" />
         <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-5 text-white">
           <div className="text-lg font-semibold">{label}</div>
           <div className="mt-1.5 mb-3 text-sm text-white/80">{description}</div>

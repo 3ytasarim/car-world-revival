@@ -19,7 +19,9 @@ const legal = [
   ["Datenschutz", "/datenschutz"],
 ];
 
-const marqueeText = "CARWORLD-WERKSTATT.DE";
+// Statt der reinen Domain-Wiederholung jetzt eine Vertrauensaussage nach
+// Kundenvorlage (08.10.2026-Revisionsliste, Punkt 08B).
+const marqueeText = "CAR WORLD – MEISTERBETRIEB – TÜV ZERTIFIZIERT – 11 JAHRE ERFAHRUNG";
 
 export function Footer() {
   return (
@@ -106,7 +108,7 @@ export function Footer() {
                 rel="noopener noreferrer"
               >
                 <WhatsAppIcon className="size-4 shrink-0" />
-                Kostenlose Beratung per WhatsApp
+                Jetzt Kontakt aufnehmen!
               </a>
             </li>
           </ul>

@@ -1,5 +1,5 @@
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
-import { CalendarClock, Handshake, Receipt, ShieldCheck, Truck } from "lucide-react";
+import { CheckCircle2, Handshake } from "lucide-react";
 
 import { useInView } from "@/hooks/use-in-view";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
@@ -13,30 +13,11 @@ import hwk from "@/assets/partner-hwk.png";
 
 // Vom Kunden final bestätigte Vorteile als Großkunde.
 const benefits = [
-  { icon: CalendarClock, title: "Bevorzugte Terminvergabe" },
-  { icon: Receipt, title: "Sammelabrechnung" },
-  { icon: Truck, title: "Hol- & Bringservice" },
-  { icon: ShieldCheck, title: "Mobilitätsgarantie" },
+  { title: "Bevorzugte Terminvergabe" },
+  { title: "Sammelabrechnung" },
+  { title: "Hol- & Bringservice" },
+  { title: "Mobilitätsgarantie" },
 ];
-
-function GrosskundeCard({ icon: Icon, title }: (typeof benefits)[number]) {
-  return (
-    <div className="relative flex w-[min(88vw,380px)] shrink-0 items-center gap-5 overflow-hidden rounded-2xl bg-gradient-to-br from-brand-orange to-[#3D6FA8] px-7 py-7 text-white shadow-[0_20px_45px_-20px_rgba(80,136,200,0.55)]">
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.12]"
-        style={{
-          backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
-          backgroundSize: "0.75rem 0.75rem",
-        }}
-      />
-      <span className="relative flex size-16 shrink-0 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/25">
-        <Icon className="size-8" aria-hidden="true" />
-      </span>
-      <h4 className="relative text-xl font-bold tracking-tight">{title}</h4>
-    </div>
-  );
-}
 
 export const certificationLogos = [
   { src: tuv, alt: "TÜV Rheinland" },
@@ -93,24 +74,24 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
           </div>
         </div>
 
-        {/* Vorteile als Großkunde — nur die verbindlich bestätigten 3, keine
-            erfundenen zusätzlichen Punkte. */}
+        {/* Vorteile als Großkunde — senkrechte, gut lesbare Liste mit
+            grünen Häkchen statt horizontalem Slider (Kundenwunsch). Nur
+            die verbindlich bestätigten 4, keine erfundenen zusätzlichen
+            Punkte. */}
         <div className="mt-10">
           <h3 className="text-center text-xl font-bold tracking-tight text-brand-navy sm:text-2xl">
             Vorteile als Großkunde
           </h3>
-          <div className="mt-6">
-            <InfiniteSlider
-              direction="horizontal"
-              gap={20}
-              duration={26}
-              durationOnHover={70}
-              className="w-full [mask-image:linear-gradient(to_right,transparent_0,#000_48px,#000_calc(100%-48px),transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0,#000_48px,#000_calc(100%-48px),transparent_100%)]"
-            >
-              {benefits.map((b) => (
-                <GrosskundeCard key={b.title} {...b} />
-              ))}
-            </InfiniteSlider>
+          <div className="mx-auto mt-6 flex max-w-md flex-col gap-3">
+            {benefits.map((b) => (
+              <div
+                key={b.title}
+                className="flex items-center gap-3 rounded-xl border border-black/5 bg-white px-5 py-4 shadow-[0_10px_30px_-18px_rgba(19,31,53,0.3)]"
+              >
+                <CheckCircle2 className="size-5 shrink-0 text-green-600" aria-hidden="true" />
+                <span className="font-semibold text-brand-navy">{b.title}</span>
+              </div>
+            ))}
           </div>
         </div>
 
