@@ -166,13 +166,14 @@ export function RundumSorglosSection({
             </Button3D>
           </div>
 
-          {/* TÜV, HWK, Innung — ruhiger, nicht scrollender Logo-Streifen
-              direkt unter den Buttons (Kundenwunsch: "ernst und schlicht",
-              kein Marquee/Effekt hier). */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-8">
-            {certificationLogos.map((l) => (
-              <img key={l.alt} src={l.src} alt={l.alt} loading="lazy" className="h-10 w-auto object-contain opacity-80 sm:h-12" />
-            ))}
+          {/* TÜV, HWK, Innung — als ruhiger, automatisch laufender Slider
+              direkt unter den Buttons (seriös, nicht zu auffällig). */}
+          <div className="mx-auto mt-10 max-w-md [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
+            <InfiniteSlider gap={40} duration={18}>
+              {certificationLogos.map((l) => (
+                <img key={l.alt} src={l.src} alt={l.alt} loading="lazy" className="h-10 w-auto object-contain opacity-80 sm:h-12" />
+              ))}
+            </InfiniteSlider>
           </div>
 
           {/* Versicherungspartner — Logo-Marquee statt Zahlen-Kacheln.
