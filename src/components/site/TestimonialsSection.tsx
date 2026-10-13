@@ -94,41 +94,69 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   );
 }
 
+// Ab lg (Desktop) 3 Bewertungen nebeneinander, darunter (Tablet/Mobile) 1 —
+// Kundenwunsch: "desktopta 3-3 gitsin". Die Seitenzahl (pageCount) ergibt
+// sich aus items.length / perPage, nicht aus einer festen Zahl.
+function usePerPage() {
+  const [perPage, setPerPage] = useState(1);
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 1024px)");
+    const update = () => setPerPage(mql.matches ? 3 : 1);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
+  return perPage;
+}
+
 // Karussell statt Auto-Scroll-Marquee: der Besucher wählt selbst, welche
-// Bewertung er sieht (Pfeile + Punkte) — Kundenwunsch: "anderes Bauteil...
-// bei dem auswählbar ist, welche Bewertungen gezeigt werden". Welche
-// Bewertungen überhaupt im Pool sind, steuert weiterhin das Admin-Panel
-// (is_active je Kundenmeinung).
+// Bewertung(en) er sieht (Pfeile + Punkte) — Kundenwunsch: "anderes
+// Bauteil... bei dem auswählbar ist, welche Bewertungen gezeigt werden".
+// Welche Bewertungen überhaupt im Pool sind, steuert weiterhin das
+// Admin-Panel (is_active je Kundenmeinung).
 function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
-  const [index, setIndex] = useState(0);
+  const perPage = usePerPage();
+  const pageCount = Math.max(1, Math.ceil(items.length / perPage));
+  const [page, setPage] = useState(0);
   const [direction, setDirection] = useState(1);
 
+  // Seite einfangen, falls sie beim Wechsel perPage (Resize über die
+  // lg-Grenze) außerhalb des neuen gültigen Bereichs liegt.
+  useEffect(() => {
+    setPage((p) => Math.min(p, pageCount - 1));
+  }, [pageCount]);
+
   if (items.length === 0) return null;
-  const current = items[index % items.length]!;
+  const safePage = Math.min(page, pageCount - 1);
+  const start = safePage * perPage;
+  const pageItems = items.slice(start, start + perPage);
 
   function go(delta: 1 | -1) {
     setDirection(delta);
-    setIndex((i) => (i + delta + items.length) % items.length);
+    setPage((p) => (p + delta + pageCount) % pageCount);
   }
 
   return (
-    <div className="mx-auto w-full max-w-xl">
+    <div className="mx-auto w-full max-w-5xl">
       <div className="relative overflow-hidden">
-        {/* popLayout statt wait: die neue Karte erscheint sofort, ohne auf
+        {/* popLayout statt wait: die neue Seite erscheint sofort, ohne auf
             das Ende der Exit-Animation der alten zu warten (poppt sie
             sofort aus dem Layout-Fluss) — robuster gegenüber verzögerten/
             ausgesetzten Animationen (z.B. Tab im Hintergrund) als "wait",
             das den Inhaltswechsel sonst unbegrenzt blockieren könnte. */}
         <AnimatePresence mode="popLayout" custom={direction} initial={false}>
           <motion.div
-            key={current.id}
+            key={safePage}
             custom={direction}
             initial={{ opacity: 0, x: direction > 0 ? 40 : -40 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: direction > 0 ? -40 : 40 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
+            className="grid grid-cols-1 gap-5 lg:grid-cols-3"
           >
-            <TestimonialCard t={current} />
+            {pageItems.map((t) => (
+              <TestimonialCard key={t.id} t={t} />
+            ))}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -137,25 +165,25 @@ function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
         <button
           type="button"
           onClick={() => go(-1)}
-          aria-label="Vorherige Bewertung"
+          aria-label="Vorherige Bewertungen"
           className="grid size-10 shrink-0 place-items-center rounded-full border border-black/10 bg-white text-brand-navy shadow-sm transition-colors hover:border-brand-orange/50 hover:text-brand-orange"
         >
           <ChevronLeft className="size-5" aria-hidden="true" />
         </button>
 
         <div className="flex items-center gap-2">
-          {items.map((t, i) => (
+          {Array.from({ length: pageCount }).map((_, i) => (
             <button
-              key={t.id}
+              key={i}
               type="button"
               onClick={() => {
-                setDirection(i > index ? 1 : -1);
-                setIndex(i);
+                setDirection(i > safePage ? 1 : -1);
+                setPage(i);
               }}
-              aria-label={`Bewertung von ${t.name} anzeigen`}
-              aria-current={i === index}
+              aria-label={`Seite ${i + 1} anzeigen`}
+              aria-current={i === safePage}
               className={`size-2.5 rounded-full transition-colors ${
-                i === index ? "bg-brand-orange" : "bg-black/15 hover:bg-black/30"
+                i === safePage ? "bg-brand-orange" : "bg-black/15 hover:bg-black/30"
               }`}
             />
           ))}
@@ -164,7 +192,7 @@ function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
         <button
           type="button"
           onClick={() => go(1)}
-          aria-label="Nächste Bewertung"
+          aria-label="Nächste Bewertungen"
           className="grid size-10 shrink-0 place-items-center rounded-full border border-black/10 bg-white text-brand-navy shadow-sm transition-colors hover:border-brand-orange/50 hover:text-brand-orange"
         >
           <ChevronRight className="size-5" aria-hidden="true" />
@@ -184,7 +212,7 @@ export function TestimonialsSection() {
 
   return (
     <section aria-labelledby="reviews-title" className="relative overflow-hidden">
-      <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
