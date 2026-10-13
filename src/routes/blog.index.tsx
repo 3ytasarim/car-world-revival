@@ -95,6 +95,15 @@ function BlogIndexPage() {
                     </time>
                     <h2 className="mt-2 text-lg font-bold text-brand-navy">{post.title}</h2>
                     {post.excerpt && <p className="mt-2 text-sm text-muted-foreground">{post.excerpt}</p>}
+                    {post.tags.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-1.5">
+                        {post.tags.map((tag) => (
+                          <span key={tag} className="rounded-full bg-brand-orange/10 px-2.5 py-0.5 text-xs font-semibold text-brand-orange">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                     <span className="mt-4 flex items-center text-sm font-semibold text-brand-orange">
                       Weiterlesen
                       <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />

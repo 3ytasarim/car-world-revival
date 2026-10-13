@@ -222,8 +222,11 @@ export const updateAdminBlogPost = createServerFn({ method: "POST" })
         .optional(),
       title: z.string().max(200).optional(),
       excerpt: z.string().max(400).optional(),
-      content: z.string().max(20000).optional(),
+      content: z.string().max(100000).optional(),
       cover_image_url: z.string().max(500).nullable().optional(),
+      tags: z.array(z.string().max(40)).max(10).optional(),
+      seo_title: z.string().max(70).nullable().optional(),
+      seo_description: z.string().max(200).nullable().optional(),
       is_published: z.boolean().optional(),
     }),
   )

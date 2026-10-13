@@ -89,12 +89,24 @@ export interface BlogPostRow {
   excerpt: string;
   content: string;
   cover_image_url: string | null;
+  tags: string[];
+  seo_title: string | null;
+  seo_description: string | null;
+  created_at: string;
+}
+
+export interface BlogPostSummary {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  cover_image_url: string | null;
   created_at: string;
 }
 
 export async function fetchBlogPosts(): Promise<BlogPostRow[]> {
   const { rows } = await getPool().query<BlogPostRow>(
-    `SELECT id, slug, title, excerpt, content, cover_image_url, created_at
+    `SELECT id, slug, title, excerpt, content, cover_image_url, tags, seo_title, seo_description, created_at
      FROM public.cw_blog_posts
      WHERE is_published = true
      ORDER BY created_at DESC`,
@@ -102,9 +114,22 @@ export async function fetchBlogPosts(): Promise<BlogPostRow[]> {
   return rows;
 }
 
+/** Schlanke Liste für Seitenleisten ("Neueste Beiträge") — ohne den vollen Inhalt. */
+export async function fetchLatestBlogPosts(limit: number, excludeSlug?: string): Promise<BlogPostSummary[]> {
+  const { rows } = await getPool().query<BlogPostSummary>(
+    `SELECT id, slug, title, excerpt, cover_image_url, created_at
+     FROM public.cw_blog_posts
+     WHERE is_published = true AND slug IS DISTINCT FROM $2
+     ORDER BY created_at DESC
+     LIMIT $1`,
+    [limit, excludeSlug ?? null],
+  );
+  return rows;
+}
+
 export async function fetchBlogPostBySlug(slug: string): Promise<BlogPostRow | null> {
   const { rows } = await getPool().query<BlogPostRow>(
-    `SELECT id, slug, title, excerpt, content, cover_image_url, created_at
+    `SELECT id, slug, title, excerpt, content, cover_image_url, tags, seo_title, seo_description, created_at
      FROM public.cw_blog_posts
      WHERE slug = $1 AND is_published = true`,
     [slug],

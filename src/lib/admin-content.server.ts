@@ -248,13 +248,16 @@ export interface AdminBlogPostRow {
   excerpt: string;
   content: string;
   cover_image_url: string | null;
+  tags: string[];
+  seo_title: string | null;
+  seo_description: string | null;
   is_published: boolean;
   created_at: string;
 }
 
 export async function fetchAllBlogPosts(): Promise<AdminBlogPostRow[]> {
   const { rows } = await getPool().query<AdminBlogPostRow>(
-    `SELECT id, slug, title, excerpt, content, cover_image_url, is_published, created_at
+    `SELECT id, slug, title, excerpt, content, cover_image_url, tags, seo_title, seo_description, is_published, created_at
      FROM public.cw_blog_posts ORDER BY created_at DESC`,
   );
   return rows;
