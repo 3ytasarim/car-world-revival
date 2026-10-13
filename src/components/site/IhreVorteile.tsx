@@ -47,8 +47,8 @@ const vorteile = [
 // stärkeren werden ZUSÄTZLICH aufgenommen ("Zusätzlich stärkere Vorteile
 // aufnehmen") — kein Ersatz, eine Erweiterung auf 6.
 export const checkPoints = [
-  { title: "Unfall - Rundum-Service", text: "Wir kümmern uns um ihren Unfall von A-Z" },
-  { title: "Mobilitätsgarantie", text: "Wir verfügen über moderne Leihfahrzeuge" },
+  { title: "Unfall - Rundum-Service", text: undefined },
+  { title: "Mobilitätsgarantie", text: undefined },
   { title: "Schnelle Terminvergabe", text: undefined },
   { title: "TÜV-zertifiziert", text: undefined },
   { title: "Langjährige Erfahrung", text: undefined },
