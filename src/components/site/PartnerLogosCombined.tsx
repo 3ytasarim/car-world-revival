@@ -24,8 +24,8 @@ function MiniLogoCard({ src, alt }: { src: string; alt: string }) {
  *
  * Zwei Darstellungen:
  * - Standard (auf /leistungen, /partner): scrollende Marquee, 2-spaltig.
- * - `compact` (Startseite): alle Logos statisch, klein, in einer einzigen
- *   Reihe — kein Auto-Scroll, eigener Titel.
+ * - `compact` (Startseite): alle Logos klein, als ruhiger horizontaler
+ *   Auto-Scroll-Slider in einer Reihe, eigener Titel.
  */
 export function PartnerLogosCombined({
   compact = false,
@@ -44,13 +44,14 @@ export function PartnerLogosCombined({
             <AnimatedText text={title} minWeight={300} maxWeight={800} delayMultiplier={0.03} />
           </h2>
 
-          {/* Nur Versicherungspartner (10), fest 5-5 angeordnet auf Desktop
-              (2-spaltig gestapelt auf Mobile) — keine Zertifizierungs-Logos
-              hier, kein Auto-Scroll. */}
-          <div className="mx-auto mt-8 grid max-w-md grid-cols-2 justify-items-center gap-4 sm:max-w-xl sm:grid-cols-5">
-            {insurancePartners.map((p) => (
-              <MiniLogoCard key={p.alt} src={p.src} alt={p.alt} />
-            ))}
+          {/* Nur Versicherungspartner (10), als ruhiger horizontaler
+              Slider — keine Zertifizierungs-Logos hier. */}
+          <div className="mx-auto mt-8 max-w-xl [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
+            <InfiniteSlider gap={24} duration={30}>
+              {insurancePartners.map((p) => (
+                <MiniLogoCard key={p.alt} src={p.src} alt={p.alt} />
+              ))}
+            </InfiniteSlider>
           </div>
 
           {!hideWhatsAppButton && (

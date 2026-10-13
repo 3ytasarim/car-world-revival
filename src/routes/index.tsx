@@ -20,6 +20,7 @@ import heroPhoneSteinschlag from "@/assets/hero-steinschlag.jpg";
 import heroPhoneReifenwechsel from "@/assets/hero-reifenwechsel.jpg";
 import { Iphone15ProFrame, PhoneFanCarousel } from "@/components/ui/phone-mockups-1";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
+import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { checkPoints, CheckPointCard } from "@/components/site/IhreVorteile";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { PartnerSection, certificationLogos } from "@/components/site/PartnerSection";
@@ -231,18 +232,20 @@ function Home() {
                     ))}
                   </div>
 
-                  {/* Zertifizierungs-Logos — bewusst transparent/ohne
-                      Karten-Box, direkt nebeneinander. */}
-                  <div className="flex flex-wrap items-center justify-center gap-6 sm:justify-start lg:mb-[4rem]">
-                    {certificationLogos.map((l) => (
-                      <img
-                        key={l.alt}
-                        src={l.src}
-                        alt={l.alt}
-                        loading="lazy"
-                        className="h-12 w-auto object-contain sm:h-14"
-                      />
-                    ))}
+                  {/* Zertifizierungs-Logos — als automatisch laufender
+                      Slider statt statischer Reihe (Kundenwunsch). */}
+                  <div className="w-full max-w-md lg:mb-[4rem] [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
+                    <InfiniteSlider gap={40} duration={18}>
+                      {certificationLogos.map((l) => (
+                        <img
+                          key={l.alt}
+                          src={l.src}
+                          alt={l.alt}
+                          loading="lazy"
+                          className="h-12 w-auto object-contain sm:h-14"
+                        />
+                      ))}
+                    </InfiniteSlider>
                   </div>
 
                 </div>
