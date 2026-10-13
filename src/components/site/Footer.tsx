@@ -19,9 +19,10 @@ const legal = [
   ["Datenschutz", "/datenschutz"],
 ];
 
-// Statt der reinen Domain-Wiederholung jetzt eine Vertrauensaussage nach
-// Kundenvorlage (08.10.2026-Revisionsliste, Punkt 08B).
-const marqueeText = "CAR WORLD – MEISTERBETRIEB – TÜV ZERTIFIZIERT – 11 JAHRE ERFAHRUNG";
+// Statt der reinen Domain-Wiederholung jetzt eine Vertrauensaussage —
+// wortwörtlich wie vom Kunden vorgegeben (Original-Mail, 13.10.2026):
+// "Car World – Meisterbetrieb – TÜV zertifiziert. 11 Jahre Erfahrung".
+const marqueeText = "Car World – Meisterbetrieb – TÜV zertifiziert. 11 Jahre Erfahrung";
 
 export function Footer() {
   return (
