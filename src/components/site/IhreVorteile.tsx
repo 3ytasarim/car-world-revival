@@ -41,11 +41,15 @@ const vorteile = [
 ];
 
 // Kurze Checkmark-Kartenreihe direkt unter Titel/Untertitel, oberhalb der
-// bestehenden Foto-Karten — 3 knappe Kernversprechen statt der ausführlichen
-// Foto-Galerie darunter. Inhalte laut Revisionsliste (08.10.2026): Vertrauens-
-// signale statt Service-Versprechen, damit sie direkt unter dem Hero-CTA
-// als Trust-Badges funktionieren.
+// bestehenden Foto-Karten — Kernversprechen statt der ausführlichen
+// Foto-Galerie darunter. Laut Original-Kundenmail (13.10.2026): die
+// bestehenden 3 ("Unfall-Rundum-Service" usw.) bleiben, die 3 neuen,
+// stärkeren werden ZUSÄTZLICH aufgenommen ("Zusätzlich stärkere Vorteile
+// aufnehmen") — kein Ersatz, eine Erweiterung auf 6.
 export const checkPoints = [
+  { title: "Unfall - Rundum-Service", text: "Wir kümmern uns um ihren Unfall von A-Z" },
+  { title: "Mobilitätsgarantie", text: "Wir verfügen über moderne Leihfahrzeuge" },
+  { title: "Schnelle Terminvergabe", text: undefined },
   { title: "TÜV-zertifiziert", text: undefined },
   { title: "Langjährige Erfahrung", text: undefined },
   { title: "TÜV Rheinland im Haus", text: undefined },
@@ -55,7 +59,10 @@ export function CheckPointCard({ title, text }: (typeof checkPoints)[number]) {
   return (
     <div className="flex flex-col gap-1.5 rounded-2xl border border-black/5 bg-white p-5 shadow-[0_10px_30px_-18px_rgba(19,31,53,0.3)]">
       <div className="flex items-center gap-2.5">
-        <CheckCircle2 className="size-5 shrink-0 text-brand-orange" aria-hidden="true" />
+        {/* Grün laut Kundenwunsch ("Haken/Icons bei den Vorteilen bitte
+            grün darstellen") — nicht mehr brand-orange (das ist ohnehin
+            eigentlich Blau, kein echtes Markenorange). */}
+        <CheckCircle2 className="size-5 shrink-0 text-green-600" aria-hidden="true" />
         <h3 className="font-bold text-brand-navy">{title}</h3>
       </div>
       {text && <p className="text-sm text-muted-foreground">{text}</p>}
