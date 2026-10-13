@@ -115,21 +115,37 @@ export function RundumSorglosSection({
 
                 {i < processSteps.length - 1 && (
                   <>
+                    {/* Mobile/Tablet: vertikaler Verbinder über die ganze
+                        Lücke — Gradient-Linie + schwebender Pfeil-Kreis mit
+                        sanftem Auf-ab-Nudge statt des alten schlichten
+                        umrandeten Kreises. */}
                     <div
-                      className="absolute top-full left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 lg:hidden"
+                      className="absolute top-full left-1/2 z-10 flex h-5 w-9 -translate-x-1/2 items-center justify-center lg:hidden"
                       aria-hidden="true"
                     >
-                      <span className="flex size-8 items-center justify-center rounded-full border border-[#5088C8]/30 bg-white text-[#5088C8] shadow-sm">
-                        <ChevronDown className="size-4" />
-                      </span>
+                      <span className="absolute inset-x-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-gradient-to-b from-[#5088C8]/10 via-[#5088C8]/70 to-[#5088C8]/10" />
+                      <motion.span
+                        animate={{ y: [-2, 3, -2] }}
+                        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                        className="relative flex size-7 items-center justify-center rounded-full bg-gradient-to-br from-[#5088C8] to-[#1B3A63] text-white shadow-[0_8px_18px_-6px_rgba(27,58,99,0.6)] ring-4 ring-white"
+                      >
+                        <ChevronDown className="size-3.5" aria-hidden="true" />
+                      </motion.span>
                     </div>
+
+                    {/* Desktop: horizontaler Verbinder, gleiche Bauart. */}
                     <div
-                      className="absolute top-1/2 left-full z-10 hidden -translate-x-1/2 -translate-y-1/2 lg:flex"
+                      className="absolute top-1/2 left-full z-10 hidden w-8 -translate-y-1/2 items-center justify-center lg:flex"
                       aria-hidden="true"
                     >
-                      <span className="flex size-8 items-center justify-center rounded-full border border-[#5088C8]/30 bg-white text-[#5088C8] shadow-sm">
-                        <ChevronRight className="size-4" />
-                      </span>
+                      <span className="absolute inset-y-1/2 right-0 left-0 h-0.5 -translate-y-1/2 bg-gradient-to-r from-[#5088C8]/10 via-[#5088C8]/70 to-[#5088C8]/10" />
+                      <motion.span
+                        animate={{ x: [-2, 3, -2] }}
+                        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                        className="relative flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-[#5088C8] to-[#1B3A63] text-white shadow-[0_8px_18px_-6px_rgba(27,58,99,0.6)] ring-4 ring-white"
+                      >
+                        <ChevronRight className="size-4" aria-hidden="true" />
+                      </motion.span>
                     </div>
                   </>
                 )}
