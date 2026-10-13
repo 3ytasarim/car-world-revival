@@ -84,7 +84,7 @@ export function RundumSorglosSection({
           </motion.div>
 
           {videoSrc && (
-            <div className="mx-auto mt-10 max-w-5xl px-12">
+            <div className="mt-10">
               <VideoPlayer src={videoSrc} className="max-w-none" />
             </div>
           )}
@@ -168,10 +168,10 @@ export function RundumSorglosSection({
 
           {/* TÜV, HWK, Innung — als ruhiger, automatisch laufender Slider
               direkt unter den Buttons (seriös, nicht zu auffällig). */}
-          <div className="mx-auto mt-10 max-w-md [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
-            <InfiniteSlider gap={40} duration={18}>
+          <div className="mt-10 [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
+            <InfiniteSlider gap={64} duration={22}>
               {certificationLogos.map((l) => (
-                <img key={l.alt} src={l.src} alt={l.alt} loading="lazy" className="h-10 w-auto object-contain opacity-80 sm:h-12" />
+                <img key={l.alt} src={l.src} alt={l.alt} loading="lazy" className="h-14 w-auto object-contain opacity-80 sm:h-16" />
               ))}
             </InfiniteSlider>
           </div>

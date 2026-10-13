@@ -46,12 +46,12 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
             Für Unternehmen & Flotten
           </span>
           <h2 id="partner-title" className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
-            <AnimatedText
-              text="Partner werden – Fuhrpark- & Flottenservice für Gewerbekunden"
-              minWeight={300}
-              maxWeight={800}
-              delayMultiplier={0.05}
-            />
+            <span className="block">
+              <AnimatedText text="Partner werden – Fuhrpark- & Flottenservice" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
+            </span>
+            <span className="block">
+              <AnimatedText text="für Gewerbekunden" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
+            </span>
           </h2>
           <p className="mt-2 text-sm font-semibold tracking-wide text-brand-orange uppercase">
             Werden Sie Car-World Partner
@@ -86,7 +86,7 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
             {benefits.map((b) => (
               <div
                 key={b.title}
-                className="flex items-center gap-3 rounded-xl border border-black/5 bg-white px-5 py-4 shadow-[0_10px_30px_-18px_rgba(19,31,53,0.3)]"
+                className="flex items-center justify-center gap-3 rounded-xl border border-black/5 bg-white px-5 py-4 text-center shadow-[0_10px_30px_-18px_rgba(19,31,53,0.3)]"
               >
                 <CheckCircle2 className="size-5 shrink-0 text-green-600" aria-hidden="true" />
                 <span className="font-semibold text-brand-navy">{b.title}</span>

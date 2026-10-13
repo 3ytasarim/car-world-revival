@@ -157,9 +157,11 @@ function fileToBase64(file: File): Promise<string> {
 function ImageField({
   folder,
   initialUrl,
+  fieldName = "image_url",
 }: {
   folder: string;
   initialUrl: string | null;
+  fieldName?: string;
 }) {
   const [url, setUrl] = useState(initialUrl ?? "");
   const [uploading, setUploading] = useState(false);
@@ -199,7 +201,7 @@ function ImageField({
           className="text-xs file:mr-2 file:rounded-md file:border-0 file:bg-brand-orange file:px-2 file:py-1 file:text-xs file:text-white"
         />
       </div>
-      <input type="hidden" name="image_url" value={url} />
+      <input type="hidden" name={fieldName} value={url} />
     </div>
   );
 }
@@ -566,10 +568,7 @@ function BlogTab() {
                 </Label>
                 <Textarea name="content" defaultValue={p.content} rows={10} />
               </div>
-              <div className="space-y-1">
-                <Label className="text-xs">Titelbild-URL (optional)</Label>
-                <Input name="cover_image_url" defaultValue={p.cover_image_url ?? ""} />
-              </div>
+              <ImageField folder="blog" fieldName="cover_image_url" initialUrl={p.cover_image_url} />
               <div className="flex items-center justify-between pt-1">
                 <label className="flex items-center gap-2 text-sm">
                   <Switch name="is_published" defaultChecked={p.is_published} />
