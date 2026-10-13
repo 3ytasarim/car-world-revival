@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { RichTextEditor } from "@/components/ui/rich-text-editor";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { logoutFn } from "@/lib/auth.functions";
 import {
@@ -524,65 +525,99 @@ function BlogTab() {
 
       <div className="grid gap-4">
         {data?.map((p) => (
-          <Card key={p.id}>
-            <form
-              className="space-y-3"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const fd = new FormData(e.currentTarget);
-                save.mutate({
-                  id: p.id,
-                  title: String(fd.get("title")),
-                  slug: String(fd.get("slug")),
-                  excerpt: String(fd.get("excerpt")),
-                  content: String(fd.get("content")),
-                  cover_image_url: String(fd.get("cover_image_url")) || null,
-                  is_published: fd.get("is_published") === "on",
-                });
-              }}
-            >
-              <div className="flex items-start justify-between gap-3">
-                <Input name="title" defaultValue={p.title} className="font-semibold" placeholder="Titel" />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  aria-label="Beitrag löschen"
-                  onClick={() => remove.mutate(p.id)}
-                >
-                  <Trash2 className="size-4 text-destructive" aria-hidden="true" />
-                </Button>
-              </div>
-              <div className="space-y-1">
-                <Label className="text-xs">URL-Pfad (car-world.de/blog/…)</Label>
-                <Input name="slug" defaultValue={p.slug} />
-              </div>
-              <div className="space-y-1">
-                <Label className="text-xs">Kurzbeschreibung (für die Übersicht)</Label>
-                <Textarea name="excerpt" defaultValue={p.excerpt} rows={2} />
-              </div>
-              <div className="space-y-1">
-                <Label className="text-xs">
-                  Inhalt — Absätze durch Leerzeile trennen. Links einfach als vollständige URL (https://…)
-                  eintragen, sie werden automatisch klickbar.
-                </Label>
-                <Textarea name="content" defaultValue={p.content} rows={10} />
-              </div>
-              <ImageField folder="blog" fieldName="cover_image_url" initialUrl={p.cover_image_url} />
-              <div className="flex items-center justify-between pt-1">
-                <label className="flex items-center gap-2 text-sm">
-                  <Switch name="is_published" defaultChecked={p.is_published} />
-                  Veröffentlicht
-                </label>
-                <Button type="submit" size="sm">
-                  Speichern
-                </Button>
-              </div>
-            </form>
-          </Card>
+          <BlogPostCard key={p.id} post={p} onSave={save.mutate} onDelete={(id) => remove.mutate(id)} />
         ))}
       </div>
     </div>
+  );
+}
+
+function BlogPostCard({
+  post,
+  onSave,
+  onDelete,
+}: {
+  post: BlogPost;
+  onSave: (p: Partial<BlogPost> & { id: string }) => void;
+  onDelete: (id: string) => void;
+}) {
+  const [content, setContent] = useState(post.content);
+  const [tagsText, setTagsText] = useState(post.tags.join(", "));
+
+  return (
+    <Card>
+      <form
+        className="space-y-3"
+        onSubmit={(e) => {
+          e.preventDefault();
+          const fd = new FormData(e.currentTarget);
+          onSave({
+            id: post.id,
+            title: String(fd.get("title")),
+            slug: String(fd.get("slug")),
+            excerpt: String(fd.get("excerpt")),
+            content,
+            cover_image_url: String(fd.get("cover_image_url")) || null,
+            tags: tagsText
+              .split(",")
+              .map((t) => t.trim())
+              .filter(Boolean),
+            seo_title: String(fd.get("seo_title")) || null,
+            seo_description: String(fd.get("seo_description")) || null,
+            is_published: fd.get("is_published") === "on",
+          });
+        }}
+      >
+        <div className="flex items-start justify-between gap-3">
+          <Input name="title" defaultValue={post.title} className="font-semibold" placeholder="Titel" />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            aria-label="Beitrag löschen"
+            onClick={() => onDelete(post.id)}
+          >
+            <Trash2 className="size-4 text-destructive" aria-hidden="true" />
+          </Button>
+        </div>
+        <div className="space-y-1">
+          <Label className="text-xs">URL-Pfad (car-world.de/blog/…)</Label>
+          <Input name="slug" defaultValue={post.slug} />
+        </div>
+        <div className="space-y-1">
+          <Label className="text-xs">Kurzbeschreibung (für die Übersicht)</Label>
+          <Textarea name="excerpt" defaultValue={post.excerpt} rows={2} />
+        </div>
+        <div className="space-y-1">
+          <Label className="text-xs">Inhalt</Label>
+          <RichTextEditor value={content} onChange={setContent} />
+        </div>
+        <div className="space-y-1">
+          <Label className="text-xs">Tags (Komma-getrennt)</Label>
+          <Input value={tagsText} onChange={(e) => setTagsText(e.target.value)} placeholder="z. B. Winter, Reifen, Tipps" />
+        </div>
+        <ImageField folder="blog" fieldName="cover_image_url" initialUrl={post.cover_image_url} />
+        <div className="grid grid-cols-1 gap-3 rounded-lg border border-black/5 bg-muted/20 p-3 sm:grid-cols-2">
+          <div className="space-y-1">
+            <Label className="text-xs">SEO-Titel (optional, sonst Titel)</Label>
+            <Input name="seo_title" defaultValue={post.seo_title ?? ""} maxLength={70} />
+          </div>
+          <div className="space-y-1">
+            <Label className="text-xs">SEO-Beschreibung (optional, sonst Kurzbeschreibung)</Label>
+            <Input name="seo_description" defaultValue={post.seo_description ?? ""} maxLength={200} />
+          </div>
+        </div>
+        <div className="flex items-center justify-between pt-1">
+          <label className="flex items-center gap-2 text-sm">
+            <Switch name="is_published" defaultChecked={post.is_published} />
+            Veröffentlicht
+          </label>
+          <Button type="submit" size="sm">
+            Speichern
+          </Button>
+        </div>
+      </form>
+    </Card>
   );
 }
 

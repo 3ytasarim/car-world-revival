@@ -24,6 +24,13 @@ export const getBlogPosts = createServerFn({ method: "GET" }).handler(async () =
   return fetchBlogPosts();
 });
 
+export const getLatestBlogPosts = createServerFn({ method: "GET" })
+  .validator(z.object({ limit: z.number().max(20), excludeSlug: z.string().max(200).optional() }))
+  .handler(async ({ data }) => {
+    const { fetchLatestBlogPosts } = await import("./public-content.server");
+    return fetchLatestBlogPosts(data.limit, data.excludeSlug);
+  });
+
 export const getBlogPostBySlug = createServerFn({ method: "GET" })
   .validator(z.object({ slug: z.string().max(200) }))
   .handler(async ({ data }) => {
