@@ -40,12 +40,16 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
   return (
     <section aria-labelledby="partner-title" className="relative">
       <div ref={ref} className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <div className="mx-auto max-w-2xl text-center">
+        {/* Badge + Überschrift bekommen einen breiteren Container als der
+            Rest — sonst bricht "Partner werden – Fuhrpark- & Flottenservice"
+            innerhalb der ersten Zeile selbst nochmal um (3 statt der
+            gewünschten 2 Zeilen). */}
+        <div className="mx-auto max-w-5xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-4 py-1.5 text-xs font-semibold text-brand-navy-foreground">
             <Handshake className="size-4" aria-hidden="true" />
             Für Unternehmen & Flotten
           </span>
-          <h2 id="partner-title" className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
+          <h2 id="partner-title" className="mt-4 text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
             <span className="block">
               <AnimatedText text="Partner werden – Fuhrpark- & Flottenservice" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
             </span>
@@ -53,6 +57,8 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
               <AnimatedText text="für Gewerbekunden" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
             </span>
           </h2>
+        </div>
+        <div className="mx-auto max-w-2xl text-center">
           <p className="mt-2 text-sm font-semibold tracking-wide text-brand-orange uppercase">
             Werden Sie Car-World Partner
           </p>
