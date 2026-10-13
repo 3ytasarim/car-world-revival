@@ -114,7 +114,12 @@ function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
   return (
     <div className="mx-auto w-full max-w-xl">
       <div className="relative overflow-hidden">
-        <AnimatePresence mode="wait" custom={direction} initial={false}>
+        {/* popLayout statt wait: die neue Karte erscheint sofort, ohne auf
+            das Ende der Exit-Animation der alten zu warten (poppt sie
+            sofort aus dem Layout-Fluss) — robuster gegenüber verzögerten/
+            ausgesetzten Animationen (z.B. Tab im Hintergrund) als "wait",
+            das den Inhaltswechsel sonst unbegrenzt blockieren könnte. */}
+        <AnimatePresence mode="popLayout" custom={direction} initial={false}>
           <motion.div
             key={current.id}
             custom={direction}
