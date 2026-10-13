@@ -9,7 +9,7 @@
 // actually plays sound.
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Pause, Play, Volume1, Volume2, VolumeX } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -63,14 +63,42 @@ export const VideoPlayer = ({ src, className }: { src: string; className?: strin
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
+  // Lässt den tatsächlichen Video-Zustand (nicht die angenommene React-
+  // State) über die Browser-eigenen Events bestimmen. Vorher wurde
+  // `isPlaying` beim Klick blind umgeschaltet — wenn Autoplay beim Laden
+  // aus irgendeinem Grund (Browser-Richtlinie, Sparmodus, …) stillschweigend
+  // fehlschlug, zeigte der State trotzdem "spielt ab", der erste Klick rief
+  // dann `.pause()` auf einem bereits pausierten Video auf und man musste
+  // ein zweites Mal klicken, um wirklich zu starten.
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    el.addEventListener("play", onPlay);
+    el.addEventListener("pause", onPause);
+    // Zusätzlicher expliziter Autoplay-Versuch: das HTML-`autoplay`-Attribut
+    // greift in der Praxis zuverlässig, aber ein zusätzlicher `.play()`-
+    // Aufruf nach dem Mount kostet nichts und fängt den seltenen Fall ab,
+    // in dem es (z. B. durch Hydration-Timing) einmal nicht gegriffen hat.
+    el.play().catch(() => {
+      // Autoplay abgelehnt (z. B. Browser-Richtlinie) — State korrekt auf
+      // "pausiert" lassen, kein Fehler nötig; ein Klick startet dann normal.
+      setIsPlaying(false);
+    });
+    return () => {
+      el.removeEventListener("play", onPlay);
+      el.removeEventListener("pause", onPause);
+    };
+  }, []);
+
   const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
+    const el = videoRef.current;
+    if (!el) return;
+    if (el.paused) {
+      el.play().catch(() => {});
+    } else {
+      el.pause();
     }
   };
 

@@ -234,7 +234,7 @@ function Home() {
 
                   {/* Zertifizierungs-Logos — als automatisch laufender
                       Slider statt statischer Reihe (Kundenwunsch). */}
-                  <div className="w-full max-w-md lg:mb-[4rem] [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
+                  <div className="w-full lg:mb-[4rem] [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
                     <InfiniteSlider gap={40} duration={18}>
                       {certificationLogos.map((l) => (
                         <img
