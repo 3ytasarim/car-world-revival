@@ -20,6 +20,7 @@ import heroPhoneSteinschlag from "@/assets/hero-steinschlag.jpg";
 import heroPhoneReifenwechsel from "@/assets/hero-reifenwechsel.jpg";
 import { Iphone15ProFrame, PhoneFanCarousel } from "@/components/ui/phone-mockups-1";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
+import { HeroServiceSlider } from "@/components/site/HeroServiceSlider";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { checkPoints, CheckPointCard } from "@/components/site/IhreVorteile";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
@@ -183,31 +184,11 @@ function Home() {
 
                   </h1>
 
-                  {/* Kaza + Ön cam görseli — Kundenwunsch: Başlığın hemen
-                      altında hizmeti anlatan fotoğraf (önceden sadece
-                      Desktop'taki Phone-Carousel'de vardı, Mobile'da hiç
-                      görünmüyordu). */}
-                  <div className="grid max-w-md grid-cols-2 gap-3">
-                    <div className="relative aspect-4/3 overflow-hidden rounded-2xl shadow-[0_20px_45px_-20px_rgba(19,31,53,0.4)]">
-                      <img
-                        src={heroPhoneUnfall}
-                        alt="Unfallfahrzeug mit Frontschaden"
-                        loading="eager"
-                        className="size-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                      <span className="absolute inset-x-0 bottom-0 p-2.5 text-xs font-semibold text-white">Unfallservice</span>
-                    </div>
-                    <div className="relative aspect-4/3 overflow-hidden rounded-2xl shadow-[0_20px_45px_-20px_rgba(19,31,53,0.4)]">
-                      <img
-                        src={heroPhoneSteinschlag}
-                        alt="Steinschlag in der Frontscheibe"
-                        loading="eager"
-                        className="size-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                      <span className="absolute inset-x-0 bottom-0 p-2.5 text-xs font-semibold text-white">Windschutzscheiben</span>
-                    </div>
+                  {/* Kaza + Ön cam görseli — Başlığın hemen altında, echter
+                      Slider (Ken-Burns-Zoom + Sheen + Fortschrittspunkte),
+                      kein statisches Nebeneinander mehr. */}
+                  <div className="max-w-md">
+                    <HeroServiceSlider />
                   </div>
 
                   {/* Buttons unter dem Görsel — Shimmer sitzt auf der
