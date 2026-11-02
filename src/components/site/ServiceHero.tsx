@@ -10,22 +10,11 @@ import heroWerkstattPhoto from "@/assets/hero-werkstatt-secondary.jpg";
 /**
  * Hero für Leistungen und alle Leistungs-Unterseiten — nach shadcn space
  * "Hero 01" / 21st.dev "Agency Hero Section" (shadcnspace.com/r/hero-01, MIT):
- * große, mittige Headline mit kursivem Serif-Akzent, Untertitel, Sterne-
+ * große, mittige Headline, Untertitel, Sterne-
  * Bewertung und darunter Trennzeile + Logo-Marquee. Die Navigation der Vorlage
  * entfällt (die Seite hat ihren eigenen Header), der "Get Started"-Button
  * ebenfalls (Kundenwunsch). Das Werkstatt-Foto bleibt als Hintergrund.
- *
- * Der Akzent ist der Teil des Titels nach " in " (z. B. "in Bad Neuenahr-
- * Ahrweiler"), sonst die letzten zwei Wörter.
  */
-function splitTitle(title: string): [string, string] {
-  const i = title.indexOf(" in ");
-  if (i > 0) return [title.slice(0, i), title.slice(i + 1)];
-  const words = title.split(" ");
-  if (words.length < 3) return [title, ""];
-  return [words.slice(0, -2).join(" "), words.slice(-2).join(" ")];
-}
-
 const fade = (delay: number) => ({
   initial: { opacity: 0, y: 32 },
   animate: { opacity: 1, y: 0 },
@@ -41,7 +30,6 @@ export function ServiceHero({
   title: string;
   subtitle: ReactNode;
 }) {
-  const [lead, accent] = splitTitle(title);
   return (
     <section className="relative overflow-hidden text-brand-navy">
       <img
@@ -59,15 +47,7 @@ export function ServiceHero({
             {...fade(0)}
             className="text-balance text-4xl leading-[1.1] font-medium tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            {lead}
-            {accent && (
-              <>
-                {" "}
-                <span className="font-normal italic tracking-tight" style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}>
-                  {accent}
-                </span>
-              </>
-            )}
+            {title}
           </motion.h1>
           <motion.p {...fade(0.1)} className="max-w-2xl text-balance text-base text-brand-navy/70 sm:text-lg">
             {subtitle}
