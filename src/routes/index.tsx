@@ -20,7 +20,6 @@ import heroPhoneSteinschlag from "@/assets/hero-steinschlag.jpg";
 import heroPhoneReifenwechsel from "@/assets/hero-reifenwechsel.jpg";
 import { Iphone15ProFrame, PhoneFanCarousel } from "@/components/ui/phone-mockups-1";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
-import { HeroServiceSlider } from "@/components/site/HeroServiceSlider";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { checkPoints, CheckPointCard } from "@/components/site/IhreVorteile";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
@@ -184,14 +183,7 @@ function Home() {
 
                   </h1>
 
-                  {/* Kaza + Ön cam görseli — Başlığın hemen altında, echter
-                      Slider (Ken-Burns-Zoom + Sheen + Fortschrittspunkte),
-                      kein statisches Nebeneinander mehr. */}
-                  <div className="max-w-md">
-                    <HeroServiceSlider />
-                  </div>
-
-                  {/* Buttons unter dem Görsel — Shimmer sitzt auf der
+                  {/* Buttons direkt unter der H1 — Shimmer sitzt auf der
                       Button-Fläche (shimmer-Prop), nicht mehr auf dem Text. */}
                   <div className="flex flex-wrap items-center gap-4 lg:mt-auto">
                     <Button3D href={PHONE_HREF}>
