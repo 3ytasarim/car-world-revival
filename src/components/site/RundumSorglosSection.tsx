@@ -9,6 +9,7 @@ import { PHONE_HREF, WA_UNFALL } from "@/components/site/site-data";
 import { TowTruckIcon } from "@/components/site/TowTruckIcon";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { certificationLogos } from "@/components/site/PartnerSection";
+import { QuickContactBand } from "@/components/site/QuickContactBand";
 
 // Der Ablauf nach einem Unfall — als Karten-Grid statt Orbit, nur Icon+Titel
 // (Beschreibungstexte auf Kundenwunsch entfernt).
@@ -48,6 +49,7 @@ export function RundumSorglosSection({
   hideInsuranceMarquee = false,
   shimmerButton = false,
   videoSrc,
+  contactBand = false,
 }: {
   hideInsuranceMarquee?: boolean;
   /** Shimmer-Textanimation im "Jetzt anrufen"-Button, wie in den Seiten-Hero-Titeln
@@ -55,6 +57,9 @@ export function RundumSorglosSection({
   shimmerButton?: boolean;
   /** Werkstatt-Video direkt unter Titel/Beschreibung — nur auf der Startseite gesetzt. */
   videoSrc?: string;
+  /** Statt der beiden Anrufen/WhatsApp-Buttons das blaue "Schnell erreichbar"-Band
+   * (QuickContactBand) unter den Logos zeigen — nur auf der Startseite. */
+  contactBand?: boolean;
 }) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
@@ -162,17 +167,20 @@ export function RundumSorglosSection({
           </div>
 
           {/* Jetzt-anrufen + WhatsApp: mittig unter beiden Spalten, gleich
-              wichtig nebeneinander. */}
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Button3D href={PHONE_HREF} shimmer={shimmerButton}>
-              <PhoneCall className="size-4" aria-hidden="true" />
-              Jetzt anrufen
-            </Button3D>
-            <Button3D href={WA_UNFALL} target="_blank" rel="noopener noreferrer" variant="whatsapp">
-              <WhatsAppIcon className="size-4" />
-              WhatsApp
-            </Button3D>
-          </div>
+              wichtig nebeneinander — auf der Startseite stattdessen das blaue Band
+              (contactBand), das unterhalb des Containers steht. */}
+          {!contactBand && (
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <Button3D href={PHONE_HREF} shimmer={shimmerButton}>
+                <PhoneCall className="size-4" aria-hidden="true" />
+                Jetzt anrufen
+              </Button3D>
+              <Button3D href={WA_UNFALL} target="_blank" rel="noopener noreferrer" variant="whatsapp">
+                <WhatsAppIcon className="size-4" />
+                WhatsApp
+              </Button3D>
+            </div>
+          )}
 
           {/* Versicherungspartner — Logo-Marquee statt Zahlen-Kacheln.
               Auf der Startseite ausgeblendet: dort steht dieselbe Marquee
@@ -204,6 +212,7 @@ export function RundumSorglosSection({
           )}
         </div>
       </div>
+      {contactBand && <QuickContactBand />}
     </section>
   );
 }
