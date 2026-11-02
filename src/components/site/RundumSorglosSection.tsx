@@ -33,16 +33,16 @@ const processSteps = [
 ];
 
 export const insurancePartners = [
-  { src: "/logos/axa.png", alt: "AXA" },
-  { src: "/logos/ergo.png?v=2", alt: "ERGO" },
-  { src: "/logos/allianz.png", alt: "Allianz" },
-  { src: "/logos/debeka.png", alt: "Debeka" },
-  { src: "/logos/rv.png", alt: "R+V Versicherung" },
-  { src: "/logos/devk.png", alt: "DEVK" },
-  { src: "/logos/huk.png", alt: "HUK-COBURG" },
-  { src: "/logos/signal-iduna.png", alt: "Signal Iduna" },
-  { src: "/logos/gothaer.png", alt: "Gothaer" },
-  { src: "/logos/wuerttembergische.png", alt: "Württembergische" },
+  { src: "/logos/axa.png?v=2", alt: "AXA", aspect: 1 },
+  { src: "/logos/ergo.png?v=2", alt: "ERGO", aspect: 3.36 },
+  { src: "/logos/allianz.png?v=2", alt: "Allianz", aspect: 3.91 },
+  { src: "/logos/debeka.png?v=2", alt: "Debeka", aspect: 2.87 },
+  { src: "/logos/rv.png?v=2", alt: "R+V Versicherung", aspect: 2.31 },
+  { src: "/logos/devk.png?v=2", alt: "DEVK", aspect: 1.97 },
+  { src: "/logos/huk.png?v=2", alt: "HUK-COBURG", aspect: 0.72 },
+  { src: "/logos/signal-iduna.png?v=2", alt: "Signal Iduna", aspect: 1.22 },
+  { src: "/logos/gothaer.png?v=2", alt: "Gothaer", aspect: 3.59 },
+  { src: "/logos/wuerttembergische.png?v=2", alt: "Württembergische", aspect: 2.59 },
 ];
 
 export function RundumSorglosSection({
