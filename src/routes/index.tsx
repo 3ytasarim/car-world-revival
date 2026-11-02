@@ -9,16 +9,21 @@ import { MobileBar } from "@/components/site/MobileBar";
 
 import { LeistungenTabs } from "@/components/site/LeistungenTabs";
 import { FloatingActions } from "@/components/site/FloatingActions";
-import { PhoneScreen } from "@/components/site/PhoneScreen";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 
 
 
 import heroBg from "@/assets/hero-werkstatt.jpg";
-import heroPhoneUnfall from "@/assets/unfall-1.jpg";
-import heroPhoneSteinschlag from "@/assets/hero-steinschlag.jpg";
-import heroPhoneReifenwechsel from "@/assets/hero-reifenwechsel.jpg";
-import { Iphone15ProFrame, PhoneFanCarousel } from "@/components/ui/phone-mockups-1";
+import unfallImg from "@/assets/unfall.jpg";
+import scheibeImg from "@/assets/svc-scheibe.jpg";
+import abschleppImg from "@/assets/svc-abschlepp.jpg";
+import reparaturImg from "@/assets/svc-reparatur.jpg";
+import ersatzwagenImg from "@/assets/svc-ersatzwagen.jpg";
+import versicherungImg from "@/assets/svc-versicherung.jpg";
+import reifenImg from "@/assets/svc-reifen.jpg";
+import tuevImg from "@/assets/svc-tuev.jpg";
+import wartungImg from "@/assets/svc-wartung.jpg";
+import { ShuffleGrid, type ShuffleItem } from "@/components/ui/shuffle-grid";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { checkPoints, CheckPointCard } from "@/components/site/IhreVorteile";
@@ -26,7 +31,7 @@ import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { PartnerSection, certificationLogos } from "@/components/site/PartnerSection";
 import { PartnerLogosCombined } from "@/components/site/PartnerLogosCombined";
 
-import { PHONE_HREF, WA_FRAGE, WA_UNFALL, WA_SCHEIBE, WA_REIFEN } from "@/components/site/site-data";
+import { PHONE_HREF, WA_FRAGE } from "@/components/site/site-data";
 import { Button3D } from "@/components/ui/button-3d";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
@@ -85,32 +90,18 @@ const stats = [
   ["12", "Versicherungspartner"],
 ];
 
-// Hero-Phones: 3 verschiedene Themen statt 3x derselbe "Unfall gehabt?"-Karte.
-const heroPhones = [
-  {
-    image: heroPhoneUnfall,
-    imageAlt: "Unfallfahrzeug mit Frontschaden",
-    badge: "Notfall",
-    title: "Unfall gehabt?",
-    subtitle: "Wir kümmern uns um alles — sofort.",
-    wa: WA_UNFALL,
-  },
-  {
-    image: heroPhoneSteinschlag,
-    imageAlt: "Steinschlag in der Frontscheibe",
-    badge: "Sofort-Termin",
-    title: "Steinschlag?",
-    subtitle: "In wenigen Minuten repariert.",
-    wa: WA_SCHEIBE,
-  },
-  {
-    image: heroPhoneReifenwechsel,
-    imageAlt: "Reifenwechsel in der Werkstatt",
-    badge: "Schnell & fair",
-    title: "Reifenwechsel?",
-    subtitle: "Wechsel und Einlagerung ohne Wartezeit.",
-    wa: WA_REIFEN,
-  },
+// Hero-Raster: die 9 Leistungs-Titelbilder (gleiche Bilder wie in
+// "Unsere Leistungen"), Unfallservice und Windschutzscheiben zuerst.
+const heroShuffleItems: ShuffleItem[] = [
+  { id: 1, src: unfallImg, alt: "Unfallservice", label: "Unfallservice" },
+  { id: 2, src: scheibeImg, alt: "Windschutzscheiben", label: "Windschutzscheiben" },
+  { id: 3, src: abschleppImg, alt: "Abschleppdienst", label: "Abschleppdienst" },
+  { id: 4, src: reparaturImg, alt: "Fahrzeugreparatur", label: "Fahrzeugreparatur" },
+  { id: 5, src: ersatzwagenImg, alt: "Ersatzwagen", label: "Ersatzwagen" },
+  { id: 6, src: versicherungImg, alt: "Versicherungsabwicklung", label: "Versicherung" },
+  { id: 7, src: reifenImg, alt: "Reifenwechsel", label: "Reifenwechsel" },
+  { id: 8, src: tuevImg, alt: "TÜV & AU", label: "TÜV & AU" },
+  { id: 9, src: wartungImg, alt: "Inspektion & Wartung", label: "Inspektion & Wartung" },
 ];
 
 function Home() {
@@ -223,25 +214,11 @@ function Home() {
 
                 </div>
 
-                {/* Mockup-Spalte: 3 Smartphones im Fan-Carousel, automatisch
-                    wechselnd — nur auf Desktop (ab lg), auf Mobile komplett
-                    ausgeblendet statt verkleinert dargestellt. */}
-                <div className="mx-auto hidden h-full w-full max-w-2xl items-center justify-center lg:flex lg:translate-x-10 xl:translate-x-10">
-                  <PhoneFanCarousel
-                    className="drop-shadow-2xl"
-                    items={heroPhones.map((p, i) => (
-                      <Iphone15ProFrame key={i}>
-                        <PhoneScreen
-                          image={p.image}
-                          imageAlt={p.imageAlt}
-                          badge={p.badge}
-                          title={p.title}
-                          subtitle={p.subtitle}
-                          wa={p.wa}
-                        />
-                      </Iphone15ProFrame>
-                    ))}
-                  />
+                {/* Bild-Spalte: karışan 3x3-Raster mit den Leistungs-
+                    Titelbildern (statt der früheren Smartphone-Mockups) —
+                    nur auf Desktop (ab lg), auf Mobile ausgeblendet. */}
+                <div className="mx-auto hidden h-full w-full max-w-xl items-center justify-center lg:flex">
+                  <ShuffleGrid items={heroShuffleItems} />
                 </div>
               </div>
             </div>
