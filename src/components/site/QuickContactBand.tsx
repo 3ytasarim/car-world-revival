@@ -10,7 +10,9 @@ import { PHONE_HREF, WA_FRAGE } from "@/components/site/site-data";
  * Stellen verwendet: unter dem Rundum-sorglos-Paket und vor den
  * Versicherungspartnern.
  */
-export function QuickContactBand({ className = "" }: { className?: string }) {
+/** `wa`: WhatsApp-Link — Standard ist die allgemeine Frage, Leistungsseiten
+ * übergeben ihre themenspezifische Nachricht. */
+export function QuickContactBand({ className = "", wa = WA_FRAGE }: { className?: string; wa?: string }) {
   return (
     <section
       className={`relative flex min-h-[420px] items-center bg-brand-orange py-20 sm:min-h-[500px] sm:py-28 ${className}`}
@@ -23,7 +25,7 @@ export function QuickContactBand({ className = "" }: { className?: string }) {
             <Phone className="size-4" aria-hidden="true" />
             Jetzt anrufen
           </BeamButton>
-          <BeamButton href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="whatsapp">
+          <BeamButton href={wa} target="_blank" rel="noopener noreferrer" variant="whatsapp">
             <WhatsAppIcon className="size-4" />
             WhatsApp
           </BeamButton>
