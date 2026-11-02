@@ -6,7 +6,6 @@ import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { getTestimonials } from "@/lib/public-content.functions";
 import { WA_FRAGE } from "./site-data";
 import { Button3D } from "@/components/ui/button-3d";
-import { AnimatedText } from "@/components/ui/animated-text";
 
 type Testimonial = {
   id: string;
@@ -227,7 +226,7 @@ export function TestimonialsSection() {
             <span className="ml-2">5,0 / 5 bei Google</span>
           </span>
           <h2 id="reviews-title" className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
-            <AnimatedText text="Das sagen unsere Kunden" minWeight={300} maxWeight={800} delayMultiplier={0.03} />
+            Das sagen unsere Kunden
           </h2>
           <p className="mt-3 text-muted-foreground">
             Echte Bewertungen von Kundinnen und Kunden aus der Region — Unfallservice, Reparatur und mehr.

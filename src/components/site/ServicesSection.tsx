@@ -1,6 +1,5 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 
-import { AnimatedText } from "@/components/ui/animated-text";
 import {
   WA_UNFALL,
   WA_ABSCHLEPP,
@@ -155,7 +154,7 @@ export function ServicesSection() {
             Alles aus einer Hand
           </span>
           <h2 id="leistungen-title" className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
-            <AnimatedText text="Unsere Leistungen" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
+            Unsere Leistungen
           </h2>
           <p className="mt-3 text-lg text-muted-foreground">Ein Ansprechpartner für alles rund um Ihr Fahrzeug.</p>
         </div>

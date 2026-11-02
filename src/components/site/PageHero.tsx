@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 
 import { FloatingIcons } from "@/components/site/FloatingIcons";
 import { GLSLHills } from "@/components/glsl-hills";
-import { GradientShimmer } from "@/components/ui/gradient-shimmer";
 import heroWerkstattPhoto from "@/assets/hero-werkstatt-secondary.jpg";
 
 export function PageHero({
@@ -46,9 +45,7 @@ export function PageHero({
       <div className="relative mx-auto w-full max-w-4xl px-4 py-16 text-center sm:px-6">
         {badge}
         <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
-          <GradientShimmer gradient="bay" duration={2}>
-            {title}
-          </GradientShimmer>
+          {title}
         </h1>
         <p className="mt-3 text-brand-navy/70">{subtitle}</p>
       </div>
