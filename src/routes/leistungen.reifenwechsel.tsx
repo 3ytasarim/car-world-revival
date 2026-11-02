@@ -5,7 +5,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { MobileBar } from "@/components/site/MobileBar";
 import { FloatingActions } from "@/components/site/FloatingActions";
-import { PageHero } from "@/components/site/PageHero";
+import { ServiceHero } from "@/components/site/ServiceHero";
 import { ServiceDetailContent } from "@/components/site/ServiceDetailContent";
 import { WA_REIFEN } from "@/components/site/site-data";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
@@ -76,7 +76,7 @@ function ReifenwechselPage() {
       />
       <Header />
       <main className="flex-1 pb-16 md:pb-0">
-        <PageHero
+        <ServiceHero
           badge={
             <span className="inline-flex items-center gap-2 rounded-full bg-brand-orange/15 px-4 py-1.5 text-xs font-semibold text-brand-orange">
               <Disc className="size-4" aria-hidden="true" />
@@ -85,7 +85,7 @@ function ReifenwechselPage() {
           }
           title="Reifenwechsel in Bad Neuenahr-Ahrweiler"
           subtitle="Räderwechsel, Auswuchten und Einlagerung für Sommer- und Winterräder."
-          photoBackground
+          wa={WA_REIFEN}
         />
         <ServiceDetailContent sections={sections} faqs={faqs} wa={WA_REIFEN} />
       </main>
