@@ -1,6 +1,5 @@
 import { CheckCircle2 } from "lucide-react";
 
-import { AnimatedText } from "@/components/ui/animated-text";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { certificationLogos, CertificationLogoCard } from "@/components/site/PartnerSection";
 import { insurancePartners, PartnerLogoCard } from "@/components/site/RundumSorglosSection";
@@ -87,8 +86,8 @@ export function IhreVorteile() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 id="vorteile-title" className="text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
-            <AnimatedText text="Ihre " minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-[#131F35]" />
-            <AnimatedText text="Vorteile" minWeight={300} maxWeight={800} delayMultiplier={0.06} className="text-brand-orange" />
+            <span className="text-[#131F35]">Ihre </span>
+            <span className="text-brand-orange">Vorteile</span>
           </h2>
           <p className="mt-3 text-muted-foreground">Das bekommen Sie, wenn Sie sich für Car-World entscheiden.</p>
         </div>

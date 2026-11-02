@@ -1,4 +1,3 @@
-import { AnimatedText } from "@/components/ui/animated-text";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { Button3D } from "@/components/ui/button-3d";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
@@ -41,7 +40,7 @@ export function PartnerLogosCombined({
       <section aria-labelledby="partner-logos-title" className="relative bg-white py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <h2 id="partner-logos-title" className="text-center text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
-            <AnimatedText text={title} minWeight={300} maxWeight={800} delayMultiplier={0.03} />
+            {title}
           </h2>
 
           {/* Nur Versicherungspartner (10), als ruhiger horizontaler
@@ -71,7 +70,7 @@ export function PartnerLogosCombined({
     <section aria-labelledby="partner-logos-title" className="relative bg-white py-16 sm:py-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <h2 id="partner-logos-title" className="text-center text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
-          <AnimatedText text={title} minWeight={300} maxWeight={800} delayMultiplier={0.03} />
+          {title}
         </h2>
 
         <div className="mt-10 grid grid-cols-1 items-start justify-items-center gap-10 lg:grid-cols-2 lg:gap-8">

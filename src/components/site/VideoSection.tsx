@@ -4,7 +4,6 @@ import { Car, Droplets, Play, ShieldAlert, Wrench } from "lucide-react";
 import { useInView } from "@/hooks/use-in-view";
 import { WA_FOTO, WA_UNFALL, WA_LACK, WA_SCHEIBE, WA_REPARATUR } from "./site-data";
 import { Button3D } from "@/components/ui/button-3d";
-import { AnimatedText } from "@/components/ui/animated-text";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 type Clip = {
@@ -33,7 +32,7 @@ export function VideoSection() {
       <div ref={ref} className="mx-auto max-w-6xl px-4 pt-28 pb-16 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 id="video-title" className="text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
-            <AnimatedText text="Sehen statt lesen" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
+            Sehen statt lesen
           </h2>
           <p className="mt-3 text-muted-foreground">Kurze Videos zeigen, wie wir Ihnen helfen.</p>
         </div>

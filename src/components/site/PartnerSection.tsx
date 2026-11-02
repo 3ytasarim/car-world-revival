@@ -3,7 +3,6 @@ import { CheckCircle2, Handshake } from "lucide-react";
 
 import { useInView } from "@/hooks/use-in-view";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
-import { AnimatedText } from "@/components/ui/animated-text";
 import { Button3D } from "@/components/ui/button-3d";
 import { WA_PARTNER } from "./site-data";
 import tuv from "@/assets/partner-tuv.png";
@@ -51,10 +50,10 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
           </span>
           <h2 id="partner-title" className="mt-4 text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
             <span className="block">
-              <AnimatedText text="Partner werden – Fuhrpark- & Flottenservice" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
+              Partner werden – Fuhrpark- & Flottenservice
             </span>
             <span className="block">
-              <AnimatedText text="für Gewerbekunden" minWeight={300} maxWeight={800} delayMultiplier={0.05} />
+              für Gewerbekunden
             </span>
           </h2>
         </div>
@@ -110,7 +109,7 @@ export function PartnerSection({ hideCertificationBlock = false }: { hideCertifi
         {!hideCertificationBlock && (
           <div className="mt-14">
             <h2 className="text-center text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
-              <AnimatedText text="Unsere Partner & Zertifizierungen" minWeight={300} maxWeight={800} delayMultiplier={0.03} />
+              Unsere Partner & Zertifizierungen
             </h2>
             <div className="mx-auto mt-8 grid max-w-xs grid-cols-2 gap-3 sm:max-w-md sm:gap-5">
               <div className="[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]">
