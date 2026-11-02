@@ -85,7 +85,6 @@ function InspektionWartungPage() {
           }
           title="Inspektion und Wartung in Bad Neuenahr-Ahrweiler"
           subtitle="Kfz-Service nach Herstellervorgaben – passend zu Fahrzeug, Kilometerstand und Wartungsintervall."
-          wa={WA_INSPEKTION}
         />
         <ServiceDetailContent sections={sections} faqs={faqs} wa={WA_INSPEKTION} />
       </main>
