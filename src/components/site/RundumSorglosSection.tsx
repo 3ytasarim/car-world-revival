@@ -10,28 +10,24 @@ import { TowTruckIcon } from "@/components/site/TowTruckIcon";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { certificationLogos } from "@/components/site/PartnerSection";
 
-// Der Ablauf nach einem Unfall — als Karten-Grid statt Orbit, mit
-// ausführlichem Text statt nur Icon+Titel.
+// Der Ablauf nach einem Unfall — als Karten-Grid statt Orbit, nur Icon+Titel
+// (Beschreibungstexte auf Kundenwunsch entfernt).
 const processSteps = [
   {
     icon: PhoneCall,
     title: "Kontakt",
-    text: "Sie rufen uns direkt an und nehmen Kontakt zu uns auf, sei es telefonisch, per WhatsApp oder über unser Kontaktformular, um Ihre Anfrage zu stellen. Wir sind jederzeit für Sie da!",
   },
   {
     icon: TowTruckIcon,
     title: "Abholung",
-    text: "Wir schleppen Ihr Fahrzeug ab und kümmern uns um den sicheren Transport zu unserer Werkstatt.",
   },
   {
     icon: Wrench,
     title: "Reparatur",
-    text: "Wir kalkulieren den Schaden fachgerecht und reparieren Ihr Fahrzeug professionell.",
   },
   {
     icon: FileCheck2,
     title: "Unfallabwicklung",
-    text: "Wir übernehmen die komplette Kommunikation und Abwicklung mit der Versicherung.",
   },
 ];
 
@@ -72,14 +68,17 @@ export function RundumSorglosSection({
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="mx-auto max-w-2xl text-center"
+            className="mx-auto max-w-5xl text-center"
           >
-            <h2 id="rundum-title" className="text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
-              Rundum sorglos Paket
+            <h2
+              id="rundum-title"
+              className="text-3xl font-bold tracking-tight text-balance text-brand-navy sm:text-4xl lg:whitespace-nowrap"
+            >
+              UNFALL GEHABT? WIR KÜMMERN UNS UM DEN REST.
             </h2>
 
-            <p className="mt-4 text-sm text-muted-foreground sm:text-base">
-              Wir kümmern uns um deinen Unfall von A-Z
+            <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-foreground sm:text-base">
+              Von der Schadenaufnahme bis zur Reparatur – wir begleiten dich durch die gesamte Abwicklung.
             </p>
           </motion.div>
 
@@ -100,9 +99,9 @@ export function RundumSorglosSection({
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
-                className="relative flex flex-col gap-3 rounded-2xl border border-black/5 bg-white p-6 shadow-[0_10px_30px_-18px_rgba(19,31,53,0.3)]"
+                className="relative flex flex-col items-center justify-center gap-4 rounded-2xl border border-black/5 bg-white px-6 py-8 text-center shadow-[0_10px_30px_-18px_rgba(19,31,53,0.3)]"
               >
-                <div className="flex items-center gap-3">
+                <div className="flex flex-col items-center gap-4">
                   <span className="relative flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#5088C8]/10 text-[#1B3A63]">
                     <step.icon className="size-6" aria-hidden="true" />
                     <span className="absolute -top-2 -right-2 flex size-6 items-center justify-center rounded-full border-2 border-white bg-brand-orange text-[11px] font-bold text-brand-orange-foreground shadow-sm">
@@ -111,7 +110,6 @@ export function RundumSorglosSection({
                   </span>
                   <h3 className="font-bold text-brand-navy">{step.title}</h3>
                 </div>
-                <p className="text-sm text-muted-foreground">{step.text}</p>
 
                 {i < processSteps.length - 1 && (
                   <>
@@ -153,6 +151,16 @@ export function RundumSorglosSection({
             ))}
           </div>
 
+          {/* TÜV, HWK, Innung — als ruhiger, automatisch laufender Slider
+              direkt unter den Ablauf-Schritten, vor den Buttons (seriös, nicht zu auffällig). */}
+          <div className="mt-10 [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
+            <InfiniteSlider gap={64} duration={22}>
+              {certificationLogos.map((l) => (
+                <img key={l.alt} src={l.src} alt={l.alt} loading="lazy" className="h-14 w-auto object-contain opacity-80 sm:h-16" />
+              ))}
+            </InfiniteSlider>
+          </div>
+
           {/* Jetzt-anrufen + WhatsApp: mittig unter beiden Spalten, gleich
               wichtig nebeneinander. */}
           <div className="mt-10 flex flex-wrap justify-center gap-4">
@@ -164,16 +172,6 @@ export function RundumSorglosSection({
               <WhatsAppIcon className="size-4" />
               WhatsApp
             </Button3D>
-          </div>
-
-          {/* TÜV, HWK, Innung — als ruhiger, automatisch laufender Slider
-              direkt unter den Buttons (seriös, nicht zu auffällig). */}
-          <div className="mt-10 [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
-            <InfiniteSlider gap={64} duration={22}>
-              {certificationLogos.map((l) => (
-                <img key={l.alt} src={l.src} alt={l.alt} loading="lazy" className="h-14 w-auto object-contain opacity-80 sm:h-16" />
-              ))}
-            </InfiniteSlider>
           </div>
 
           {/* Versicherungspartner — Logo-Marquee statt Zahlen-Kacheln.
