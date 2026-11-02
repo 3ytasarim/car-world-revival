@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Phone, Star } from "lucide-react";
+import { Car, Phone, ShieldAlert, Star } from "lucide-react";
 
 
 import { Header } from "@/components/site/Header";
@@ -31,7 +31,7 @@ import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { PartnerSection, certificationLogos } from "@/components/site/PartnerSection";
 import { PartnerLogosCombined } from "@/components/site/PartnerLogosCombined";
 
-import { PHONE_HREF, WA_FRAGE } from "@/components/site/site-data";
+import { PHONE_HREF, WA_FRAGE, WA_UNFALL, WA_SCHEIBE } from "@/components/site/site-data";
 import { Button3D } from "@/components/ui/button-3d";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
@@ -174,16 +174,17 @@ function Home() {
 
                   </h1>
 
-                  {/* Buttons direkt unter der H1 — Shimmer sitzt auf der
-                      Button-Fläche (shimmer-Prop), nicht mehr auf dem Text. */}
+                  {/* Zwei direkt sichtbare Themen-CTAs statt Anrufen/WhatsApp —
+                      jeder öffnet WhatsApp mit passend vorbefüllter Nachricht.
+                      Shimmer sitzt auf der Button-Fläche (shimmer-Prop). */}
                   <div className="flex flex-wrap items-center gap-4 lg:mt-auto">
-                    <Button3D href={PHONE_HREF}>
-                      <Phone className="size-4" aria-hidden="true" />
-                      Jetzt anrufen
+                    <Button3D href={WA_UNFALL} target="_blank" rel="noopener noreferrer" shimmer>
+                      <ShieldAlert className="size-4" aria-hidden="true" />
+                      Unfallschaden melden
                     </Button3D>
-                    <Button3D href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="whatsapp" shimmer>
-                      <WhatsAppIcon className="size-4" />
-                      WhatsApp
+                    <Button3D href={WA_SCHEIBE} target="_blank" rel="noopener noreferrer">
+                      <Car className="size-4" aria-hidden="true" />
+                      Steinschlag oder Glasschaden?
                     </Button3D>
                   </div>
 
