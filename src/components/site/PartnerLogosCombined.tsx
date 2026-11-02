@@ -1,5 +1,6 @@
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { Button3D } from "@/components/ui/button-3d";
+import { LogoCloud } from "@/components/ui/logo-cloud";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { insurancePartners, PartnerLogoCard } from "@/components/site/RundumSorglosSection";
 import { certificationLogos, CertificationLogoCard } from "@/components/site/PartnerSection";
@@ -8,14 +9,6 @@ import { WA_PARTNER } from "@/components/site/site-data";
 const FADE_MASK =
   "[mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,#000_12%,#000_88%,transparent_100%)]";
 
-function MiniLogoCard({ src, alt }: { src: string; alt: string }) {
-  return (
-    <div className="flex size-20 items-center justify-center rounded-xl border border-black/10 bg-white p-3 shadow-sm sm:size-24">
-      <img src={src} alt={alt} loading="lazy" className="max-h-full max-w-full object-contain" />
-    </div>
-  );
-}
-
 /**
  * Fasst die Versicherungspartner-Marquee (aus RundumSorglosSection) und die
  * Partner-&-Zertifizierungen-Marquee (aus PartnerSection) unter einer
@@ -23,8 +16,8 @@ function MiniLogoCard({ src, alt }: { src: string; alt: string }) {
  *
  * Zwei Darstellungen:
  * - Standard (auf /leistungen, /partner): scrollende Marquee, 2-spaltig.
- * - `compact` (Startseite): alle Logos klein, als ruhiger horizontaler
- *   Auto-Scroll-Slider in einer Reihe, eigener Titel.
+ * - `compact` (Startseite): Versicherungslogos als zentrierte Logo-Wolke
+ *   (blass, beim Hover farbig), eigener Titel.
  */
 export function PartnerLogosCombined({
   compact = false,
@@ -38,19 +31,15 @@ export function PartnerLogosCombined({
   if (compact) {
     return (
       <section aria-labelledby="partner-logos-title" className="relative bg-white py-16 sm:py-20">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <h2 id="partner-logos-title" className="text-center text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
             {title}
           </h2>
 
-          {/* Nur Versicherungspartner (10), als ruhiger horizontaler
-              Slider — keine Zertifizierungs-Logos hier. */}
-          <div className="mx-auto mt-8 max-w-xl [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
-            <InfiniteSlider gap={24} duration={30}>
-              {insurancePartners.map((p) => (
-                <MiniLogoCard key={p.alt} src={p.src} alt={p.alt} />
-              ))}
-            </InfiniteSlider>
+          {/* Nur Versicherungspartner (10), zentriertes Logo-Raster: zunächst blass
+              schwarzweiß, beim Hover farbig — keine Zertifizierungs-Logos hier. */}
+          <div className="mt-8">
+            <LogoCloud logos={insurancePartners} />
           </div>
 
           {!hideWhatsAppButton && (

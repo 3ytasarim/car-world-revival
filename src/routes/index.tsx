@@ -33,6 +33,7 @@ import { PartnerLogosCombined } from "@/components/site/PartnerLogosCombined";
 
 import { PHONE_HREF, WA_FRAGE, WA_UNFALL, WA_SCHEIBE } from "@/components/site/site-data";
 import { Button3D } from "@/components/ui/button-3d";
+import { BeamButton } from "@/components/ui/beam-button";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 
@@ -239,21 +240,21 @@ function Home() {
         {/* Kundenmeinungen (Google-Bewertungen) */}
         <TestimonialsSection />
 
-        {/* Schnell erreichbar: Jetzt-anrufen + WhatsApp, direkt vor den
-            Versicherungspartner-Logos. */}
-        <section className="relative bg-brand-navy py-14">
-          <div className="mx-auto max-w-2xl px-4 text-center sm:px-6">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">Schnell erreichbar</h2>
-            <p className="mt-2 text-white/70">Rufen Sie uns direkt an oder schreiben Sie uns per WhatsApp.</p>
-            <div className="mt-6 flex flex-wrap justify-center gap-4">
-              <Button3D href={PHONE_HREF}>
+        {/* Schnell erreichbar: blaues Band (Header-Farbe) mit Anrufen + WhatsApp
+            als Beam-Buttons, direkt vor den Versicherungspartner-Logos. */}
+        <section className="relative flex min-h-[420px] items-center bg-brand-orange py-20 sm:min-h-[500px] sm:py-28">
+          <div className="mx-auto w-full max-w-3xl px-4 text-center sm:px-6">
+            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">Schnell erreichbar</h2>
+            <p className="mt-3 text-white/85">Rufen Sie uns direkt an oder schreiben Sie uns per WhatsApp.</p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <BeamButton href={PHONE_HREF}>
                 <Phone className="size-4" aria-hidden="true" />
                 Jetzt anrufen
-              </Button3D>
-              <Button3D href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="whatsapp">
+              </BeamButton>
+              <BeamButton href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="whatsapp">
                 <WhatsAppIcon className="size-4" />
                 WhatsApp
-              </Button3D>
+              </BeamButton>
             </div>
           </div>
         </section>

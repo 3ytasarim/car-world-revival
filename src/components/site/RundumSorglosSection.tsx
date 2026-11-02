@@ -33,7 +33,7 @@ const processSteps = [
 
 export const insurancePartners = [
   { src: "/logos/axa.png", alt: "AXA" },
-  { src: "/logos/ergo.png", alt: "ERGO" },
+  { src: "/logos/ergo.png?v=2", alt: "ERGO" },
   { src: "/logos/allianz.png", alt: "Allianz" },
   { src: "/logos/debeka.png", alt: "Debeka" },
   { src: "/logos/rv.png", alt: "R+V Versicherung" },
