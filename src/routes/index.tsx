@@ -33,7 +33,7 @@ import { PartnerLogosCombined } from "@/components/site/PartnerLogosCombined";
 
 import { PHONE_HREF, WA_FRAGE, WA_UNFALL, WA_SCHEIBE } from "@/components/site/site-data";
 import { Button3D } from "@/components/ui/button-3d";
-import { BeamButton } from "@/components/ui/beam-button";
+import { QuickContactBand } from "@/components/site/QuickContactBand";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 
@@ -230,7 +230,7 @@ function Home() {
 
         {/* Rundum-sorglos-Paket — direkt nach dem Hero, inkl. Werkstatt-Video
             und Vorher/Nachher. */}
-        <RundumSorglosSection hideInsuranceMarquee shimmerButton videoSrc="/videos/werkstatt-video.mp4" />
+        <RundumSorglosSection hideInsuranceMarquee shimmerButton contactBand videoSrc="/videos/werkstatt-video.mp4" />
 
         {/* Ihre Vorteile ist aktuell deaktiviert (Kundenwunsch) — Checkmark-
             Karten + Zertifizierungs-Logos werden stattdessen im Hero
@@ -242,22 +242,7 @@ function Home() {
 
         {/* Schnell erreichbar: blaues Band (Header-Farbe) mit Anrufen + WhatsApp
             als Beam-Buttons, direkt vor den Versicherungspartner-Logos. */}
-        <section className="relative flex min-h-[420px] items-center bg-brand-orange py-20 sm:min-h-[500px] sm:py-28">
-          <div className="mx-auto w-full max-w-3xl px-4 text-center sm:px-6">
-            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">Schnell erreichbar</h2>
-            <p className="mt-3 text-white/85">Rufen Sie uns direkt an oder schreiben Sie uns per WhatsApp.</p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <BeamButton href={PHONE_HREF}>
-                <Phone className="size-4" aria-hidden="true" />
-                Jetzt anrufen
-              </BeamButton>
-              <BeamButton href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="whatsapp">
-                <WhatsAppIcon className="size-4" />
-                WhatsApp
-              </BeamButton>
-            </div>
-          </div>
-        </section>
+        <QuickContactBand />
 
         {/* Versicherungspartner + Zertifizierungen — kompakt, statisch, klein */}
         <PartnerLogosCombined compact title="Partner mit allen Versicherungen" hideWhatsAppButton />
