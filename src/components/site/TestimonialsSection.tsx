@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { Quote, Star } from "lucide-react";
 
 import { getTestimonials } from "@/lib/public-content.functions";
 import { WA_FRAGE } from "./site-data";
 import { Button3D } from "@/components/ui/button-3d";
+import { InfiniteSlider } from "@/components/ui/infinite-slider";
 
 type Testimonial = {
   id: string;
@@ -93,110 +93,38 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   );
 }
 
-// Ab lg (Desktop) 3 Bewertungen nebeneinander, darunter (Tablet/Mobile) 1 —
-// Kundenwunsch: "desktopta 3-3 gitsin". Die Seitenzahl (pageCount) ergibt
-// sich aus items.length / perPage, nicht aus einer festen Zahl.
-function usePerPage() {
-  const [perPage, setPerPage] = useState(1);
-  useEffect(() => {
-    const mql = window.matchMedia("(min-width: 1024px)");
-    const update = () => setPerPage(mql.matches ? 3 : 1);
-    update();
-    mql.addEventListener("change", update);
-    return () => mql.removeEventListener("change", update);
-  }, []);
-  return perPage;
+// Zwei Reihen Bewertungskarten, die in entgegengesetzte Richtungen laufen,
+// mit ausblendenden Rändern — nach dem 21st.dev-Muster "Testimonials Marquee"
+// (shadcnspace/marquee-01; Registry-Quelle verlangt Login, daher mit dem
+// vorhandenen InfiniteSlider nachgebaut). Es werden nur die kurzen Bewertungen
+// gezeigt; lange sind im Admin-Panel (Kundenmeinungen) auf "inaktiv" gesetzt
+// und lassen sich dort jederzeit wieder aktivieren.
+const EDGE_FADE =
+  "[mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)]";
+
+function MarqueeRow({ items, reverse = false, duration }: { items: Testimonial[]; reverse?: boolean; duration: number }) {
+  // Satz wird wiederholt, damit eine Reihe auch mit wenigen Bewertungen
+  // breiter als jeder Bildschirm ist (sonst entsteht eine sichtbare Lücke).
+  const row = [...items, ...items];
+  return (
+    <div className={EDGE_FADE}>
+      <InfiniteSlider gap={20} duration={duration} durationOnHover={duration * 3} reverse={reverse}>
+        {row.map((t, i) => (
+          <div key={`${t.id}-${i}`} className="flex w-[300px] shrink-0 sm:w-[360px]">
+            <TestimonialCard t={t} />
+          </div>
+        ))}
+      </InfiniteSlider>
+    </div>
+  );
 }
 
-// Karussell statt Auto-Scroll-Marquee: der Besucher wählt selbst, welche
-// Bewertung(en) er sieht (Pfeile + Punkte) — Kundenwunsch: "anderes
-// Bauteil... bei dem auswählbar ist, welche Bewertungen gezeigt werden".
-// Welche Bewertungen überhaupt im Pool sind, steuert weiterhin das
-// Admin-Panel (is_active je Kundenmeinung).
-function TestimonialsCarousel({ items }: { items: Testimonial[] }) {
-  const perPage = usePerPage();
-  const pageCount = Math.max(1, Math.ceil(items.length / perPage));
-  const [page, setPage] = useState(0);
-  const [direction, setDirection] = useState(1);
-
-  // Seite einfangen, falls sie beim Wechsel perPage (Resize über die
-  // lg-Grenze) außerhalb des neuen gültigen Bereichs liegt.
-  useEffect(() => {
-    setPage((p) => Math.min(p, pageCount - 1));
-  }, [pageCount]);
-
+function TestimonialsMarquee({ items }: { items: Testimonial[] }) {
   if (items.length === 0) return null;
-  const safePage = Math.min(page, pageCount - 1);
-  const start = safePage * perPage;
-  const pageItems = items.slice(start, start + perPage);
-
-  function go(delta: 1 | -1) {
-    setDirection(delta);
-    setPage((p) => (p + delta + pageCount) % pageCount);
-  }
-
   return (
-    <div className="mx-auto w-full max-w-5xl">
-      <div className="relative overflow-hidden">
-        {/* popLayout statt wait: die neue Seite erscheint sofort, ohne auf
-            das Ende der Exit-Animation der alten zu warten (poppt sie
-            sofort aus dem Layout-Fluss) — robuster gegenüber verzögerten/
-            ausgesetzten Animationen (z.B. Tab im Hintergrund) als "wait",
-            das den Inhaltswechsel sonst unbegrenzt blockieren könnte. */}
-        <AnimatePresence mode="popLayout" custom={direction} initial={false}>
-          <motion.div
-            key={safePage}
-            custom={direction}
-            initial={{ opacity: 0, x: direction > 0 ? 40 : -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: direction > 0 ? -40 : 40 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="grid grid-cols-1 gap-5 lg:grid-cols-3"
-          >
-            {pageItems.map((t) => (
-              <TestimonialCard key={t.id} t={t} />
-            ))}
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      <div className="mt-6 flex items-center justify-center gap-5">
-        <button
-          type="button"
-          onClick={() => go(-1)}
-          aria-label="Vorherige Bewertungen"
-          className="grid size-10 shrink-0 place-items-center rounded-full border border-black/10 bg-white text-brand-navy shadow-sm transition-colors hover:border-brand-orange/50 hover:text-brand-orange"
-        >
-          <ChevronLeft className="size-5" aria-hidden="true" />
-        </button>
-
-        <div className="flex items-center gap-2">
-          {Array.from({ length: pageCount }).map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => {
-                setDirection(i > safePage ? 1 : -1);
-                setPage(i);
-              }}
-              aria-label={`Seite ${i + 1} anzeigen`}
-              aria-current={i === safePage}
-              className={`size-2.5 rounded-full transition-colors ${
-                i === safePage ? "bg-brand-orange" : "bg-black/15 hover:bg-black/30"
-              }`}
-            />
-          ))}
-        </div>
-
-        <button
-          type="button"
-          onClick={() => go(1)}
-          aria-label="Nächste Bewertungen"
-          className="grid size-10 shrink-0 place-items-center rounded-full border border-black/10 bg-white text-brand-navy shadow-sm transition-colors hover:border-brand-orange/50 hover:text-brand-orange"
-        >
-          <ChevronRight className="size-5" aria-hidden="true" />
-        </button>
-      </div>
+    <div className="space-y-5 py-2">
+      <MarqueeRow items={items} duration={45} />
+      <MarqueeRow items={[...items].reverse()} reverse duration={55} />
     </div>
   );
 }
@@ -211,7 +139,7 @@ export function TestimonialsSection() {
 
   return (
     <section aria-labelledby="reviews-title" className="relative overflow-hidden">
-      <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6">
+      <div className="mx-auto max-w-5xl px-4 pt-20 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -233,10 +161,15 @@ export function TestimonialsSection() {
           </p>
         </motion.div>
 
-        <div className="relative mt-12 flex justify-center">
-          <TestimonialsCarousel items={items} />
-        </div>
+      </div>
 
+      {/* Gleiche Breite/Ausrichtung wie die Abschnitte darüber und darunter
+          (max-w-7xl-Container) statt randlos über die ganze Seite. */}
+      <div className="mx-auto mt-12 max-w-7xl px-4 sm:px-6">
+        <TestimonialsMarquee items={items} />
+      </div>
+
+      <div className="mx-auto max-w-5xl px-4 pb-20 sm:px-6">
         <div className="mt-10 text-center">
           <Button3D href={WA_FRAGE} target="_blank" rel="noopener noreferrer" variant="whatsapp">
             Jetzt Frage per WhatsApp stellen

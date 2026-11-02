@@ -12,7 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { Toaster } from "@/components/ui/sonner";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { SideRailIcons } from "@/components/site/SideRailIcons";
+// import { SideRailIcons } from "@/components/site/SideRailIcons";
 import { AnalyticsTracker } from "@/components/site/AnalyticsTracker";
 
 function NotFoundComponent() {
@@ -134,7 +134,10 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <AnalyticsTracker />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <SideRailIcons />
+      {/* Kenar-Ikonlari (links/rechts herabfallende Auto-Symbole) vom Kunden nicht
+          gewünscht — ausgeblendet. Zum Reaktivieren die Zeile unten einkommentieren
+          und den Import oben wieder aktivieren.
+      <SideRailIcons /> */}
       <Outlet />
       <Toaster position="top-center" richColors />
     </QueryClientProvider>
