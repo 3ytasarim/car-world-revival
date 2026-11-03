@@ -86,7 +86,7 @@ function WindschutzscheibenPage() {
           title="Windschutzscheibe reparieren in Bad Neuenahr-Ahrweiler"
           subtitle="Steinschlag prüfen lassen, geeignete Schäden reparieren oder die Frontscheibe fachgerecht austauschen."
         />
-        <ServiceDetailContent sections={sections} faqs={faqs} wa={WA_SCHEIBE} />
+        <ServiceDetailContent sections={sections} faqs={faqs} />
       </main>
       <Footer />
       <FloatingActions />

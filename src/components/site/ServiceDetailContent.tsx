@@ -14,18 +14,16 @@ export interface ServiceDetailFaq {
 
 /**
  * Wiederverwendbarer Inhaltsblock für die einzelnen Leistungs-Detailseiten
- * (/leistungen/<slug>) — Textabschnitte, null/eine/mehrere FAQs, dann Anruf- +
- * "Schnell erreichbar"-Band (Anrufen + WhatsApp). Jede Seite bringt nur ihre eigenen Daten (sections/faqs/wa)
- * mit, das Layout bleibt für alle gleich.
+ * (/leistungen/<slug>) — Textabschnitte, null/eine/mehrere FAQs, dann das
+ * "Schnell erreichbar"-Band. Jede Seite bringt nur ihre eigenen Daten
+ * (sections/faqs) mit, das Layout bleibt für alle gleich.
  */
 export function ServiceDetailContent({
   sections,
   faqs,
-  wa,
 }: {
   sections: ServiceDetailSection[];
   faqs?: ServiceDetailFaq[];
-  wa: string;
 }) {
   return (
     <>
@@ -76,7 +74,7 @@ export function ServiceDetailContent({
           </div>
         </div>
       </section>
-      <QuickContactBand wa={wa} />
+      <QuickContactBand />
     </>
   );
 }

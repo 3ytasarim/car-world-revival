@@ -79,7 +79,7 @@ function AbschleppdienstPage() {
           title="Abschleppdienst in Bad Neuenahr-Ahrweiler"
           subtitle="Schnelle Bergung und sicherer Fahrzeugtransport nach Unfall oder Panne."
         />
-        <ServiceDetailContent sections={sections} faqs={[faq]} wa={WA_ABSCHLEPP} />
+        <ServiceDetailContent sections={sections} faqs={[faq]} />
       </main>
       <Footer />
       <FloatingActions />

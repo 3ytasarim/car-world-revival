@@ -79,7 +79,7 @@ function UnfallservicePage() {
           title="Unfallservice in Bad Neuenahr-Ahrweiler"
           subtitle="Soforthilfe rund um die Uhr – wir koordinieren die nächsten Schritte nach Ihrem Autounfall."
         />
-        <ServiceDetailContent sections={sections} faqs={[faq]} wa={WA_UNFALL} />
+        <ServiceDetailContent sections={sections} faqs={[faq]} />
       </main>
       <Footer />
       <FloatingActions />

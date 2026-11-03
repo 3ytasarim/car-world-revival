@@ -86,7 +86,7 @@ function ReifenwechselPage() {
           title="Reifenwechsel in Bad Neuenahr-Ahrweiler"
           subtitle="Räderwechsel, Auswuchten und Einlagerung für Sommer- und Winterräder."
         />
-        <ServiceDetailContent sections={sections} faqs={faqs} wa={WA_REIFEN} />
+        <ServiceDetailContent sections={sections} faqs={faqs} />
       </main>
       <Footer />
       <FloatingActions />

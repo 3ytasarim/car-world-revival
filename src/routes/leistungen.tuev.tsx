@@ -86,7 +86,7 @@ function TuevPage() {
           title="TÜV, HU und AU in Bad Neuenahr-Ahrweiler"
           subtitle="Hauptuntersuchung bequem über Car-World koordinieren und notwendige Werkstattarbeiten direkt abstimmen."
         />
-        <ServiceDetailContent sections={sections} faqs={faqs} wa={WA_TUEV} />
+        <ServiceDetailContent sections={sections} faqs={faqs} />
       </main>
       <Footer />
       <FloatingActions />

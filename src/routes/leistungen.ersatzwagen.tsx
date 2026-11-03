@@ -86,7 +86,7 @@ function ErsatzwagenPage() {
           title="Ersatzwagen in Bad Neuenahr-Ahrweiler"
           subtitle="Während der Reparatur mobil bleiben – Ersatzfahrzeug direkt bei Car-World anfragen."
         />
-        <ServiceDetailContent sections={sections} faqs={faqs} wa={WA_ERSATZWAGEN} />
+        <ServiceDetailContent sections={sections} faqs={faqs} />
       </main>
       <Footer />
       <FloatingActions />
