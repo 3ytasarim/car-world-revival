@@ -145,7 +145,7 @@ function Home() {
             <div className="relative z-10 mx-auto flex w-full max-w-[1600px] items-center px-4 pt-6 pb-10 md:px-10 md:pt-10 md:pb-12 lg:min-h-[620px] lg:px-14 lg:pt-10 lg:pb-12">
 
 
-              <div className="grid w-full items-center gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-stretch lg:gap-8">
+              <div className="grid w-full items-center gap-12 lg:grid-cols-2 lg:items-stretch lg:gap-8">
                 {/* Text-Spalte */}
                 <div className="max-w-4xl space-y-7 pt-6 text-left lg:flex lg:flex-col lg:pt-4">
                   {/* Google + 5 Sterne Trust-Badge — Vertrauenssignal noch
@@ -161,7 +161,7 @@ function Home() {
                     <span className="text-sm font-semibold text-[#131F35]">5,0 / 5 bei Google</span>
                   </div>
 
-                  <h1 className="text-left text-[2rem] leading-[1.05] tracking-tight sm:text-[2.5rem] md:text-[3rem] lg:text-[3rem] xl:text-[3.25rem]">
+                  <h1 className="text-left text-[2rem] leading-[1.05] tracking-tight sm:text-[2.5rem] md:text-[3rem] lg:text-[2.5rem] xl:text-[2.5rem]">
                     <span
                       className="block bg-[linear-gradient(180deg,_#0B1626_0%,_rgba(11,_22,_38,_0.8)_100%)] bg-clip-text text-transparent"
                     >
@@ -219,7 +219,7 @@ function Home() {
                 {/* Bild-Spalte: karışan 3x3-Raster mit den Leistungs-
                     Titelbildern (statt der früheren Smartphone-Mockups) —
                     nur auf Desktop (ab lg), auf Mobile ausgeblendet. */}
-                <div className="mx-auto hidden h-full w-full max-w-xl items-center justify-center lg:flex">
+                <div className="mx-auto hidden h-full w-full items-center justify-center lg:flex">
                   <ShuffleGrid items={heroShuffleItems} />
                 </div>
               </div>
