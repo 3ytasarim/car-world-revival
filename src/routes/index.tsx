@@ -200,7 +200,7 @@ function Home() {
 
                   {/* Zertifizierungs-Logos — als automatisch laufender
                       Slider statt statischer Reihe (Kundenwunsch). */}
-                  <div className="w-full lg:mb-[4rem] [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
+                  <div className="w-full [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
                     <InfiniteSlider gap={40} duration={18}>
                       {certificationLogos.map((l) => (
                         <img
@@ -220,7 +220,7 @@ function Home() {
                     Titelbildern (statt der früheren Smartphone-Mockups) —
                     nur auf Desktop (ab lg), auf Mobile ausgeblendet. */}
                 <div className="mx-auto hidden h-full w-full max-w-xl items-center justify-center lg:flex">
-                  <ShuffleGrid items={heroShuffleItems} />
+                  <ShuffleGrid items={heroShuffleItems} fill />
                 </div>
               </div>
             </div>
