@@ -23,10 +23,13 @@ export function ShuffleGrid({
   items,
   intervalMs = 3000,
   columns = 3,
+  fill = false,
 }: {
   items: ShuffleItem[];
   intervalMs?: number;
   columns?: 3 | 4;
+  /** true: füllt die Höhe des Elternelements statt quadratisch zu sein. */
+  fill?: boolean;
 }) {
   const [squares, setSquares] = useState(items);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -44,7 +47,7 @@ export function ShuffleGrid({
 
   return (
     <div
-      className={`grid aspect-square w-full gap-2 ${columns === 4 ? "grid-cols-4 grid-rows-4" : "grid-cols-3 grid-rows-3"}`}
+      className={`grid w-full gap-2 ${fill ? "h-full" : "aspect-square"} ${columns === 4 ? "grid-cols-4 grid-rows-4" : "grid-cols-3 grid-rows-3"}`}
     >
       {squares.map((s) => (
         <motion.div
