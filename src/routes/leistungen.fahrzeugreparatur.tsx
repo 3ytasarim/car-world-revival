@@ -86,7 +86,7 @@ function FahrzeugreparaturPage() {
           title="Fahrzeugreparatur in Bad Neuenahr-Ahrweiler"
           subtitle="Fachgerechte Instandsetzung von Karosserie, Lack und Fahrzeugtechnik in der Kfz-Meisterwerkstatt."
         />
-        <ServiceDetailContent sections={sections} faqs={faqs} wa={WA_REPARATUR} />
+        <ServiceDetailContent sections={sections} faqs={faqs} />
       </main>
       <Footer />
       <FloatingActions />

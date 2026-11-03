@@ -86,7 +86,7 @@ function VersicherungsabwicklungPage() {
           title="Versicherungsabwicklung nach einem Kfz-Schaden"
           subtitle="Wir übernehmen auf Ihren Auftrag die reparaturbezogene Abstimmung mit Ihrer Versicherung."
         />
-        <ServiceDetailContent sections={sections} faqs={faqs} wa={WA_VERSICHERUNG} />
+        <ServiceDetailContent sections={sections} faqs={faqs} />
       </main>
       <Footer />
       <FloatingActions />
