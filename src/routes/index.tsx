@@ -178,7 +178,7 @@ function Home() {
                   {/* Zwei direkt sichtbare Themen-CTAs statt Anrufen/WhatsApp —
                       jeder öffnet WhatsApp mit passend vorbefüllter Nachricht.
                       Shimmer sitzt auf der Button-Fläche (shimmer-Prop). */}
-                  <div className="flex flex-wrap items-center gap-4 lg:mt-auto">
+                  <div className="flex flex-wrap items-center justify-center gap-4 lg:mt-auto">
                     <Button3D href={WA_UNFALL} target="_blank" rel="noopener noreferrer" shimmer>
                       <ShieldAlert className="size-4" aria-hidden="true" />
                       Unfallschaden melden
@@ -200,7 +200,7 @@ function Home() {
 
                   {/* Zertifizierungs-Logos — als automatisch laufender
                       Slider statt statischer Reihe (Kundenwunsch). */}
-                  <div className="w-full lg:mb-[4rem] [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
+                  <div className="w-full [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
                     <InfiniteSlider gap={40} duration={18}>
                       {certificationLogos.map((l) => (
                         <img
