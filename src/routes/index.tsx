@@ -14,15 +14,15 @@ import AnimatedGradientBackground from "@/components/ui/animated-gradient-backgr
 
 
 import heroBg from "@/assets/hero-werkstatt.jpg";
-import unfallImg from "@/assets/unfall.jpg";
-import scheibeImg from "@/assets/svc-scheibe.jpg";
-import abschleppImg from "@/assets/svc-abschlepp.jpg";
-import reparaturImg from "@/assets/svc-reparatur.jpg";
-import ersatzwagenImg from "@/assets/svc-ersatzwagen.jpg";
-import versicherungImg from "@/assets/svc-versicherung.jpg";
-import reifenImg from "@/assets/svc-reifen.jpg";
-import tuevImg from "@/assets/svc-tuev.jpg";
-import wartungImg from "@/assets/svc-wartung.jpg";
+import betrieb1Img from "@/assets/betrieb-1.webp";
+import betrieb2Img from "@/assets/betrieb-2.webp";
+import betrieb3Img from "@/assets/betrieb-3.webp";
+import betrieb4Img from "@/assets/betrieb-4.webp";
+import betrieb5Img from "@/assets/betrieb-5.webp";
+import betrieb6Img from "@/assets/betrieb-6.webp";
+import betrieb7Img from "@/assets/betrieb-7.webp";
+import betrieb8Img from "@/assets/betrieb-8.webp";
+import betrieb9Img from "@/assets/betrieb-9.webp";
 import { ShuffleGrid, type ShuffleItem } from "@/components/ui/shuffle-grid";
 import { RundumSorglosSection } from "@/components/site/RundumSorglosSection";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
@@ -91,18 +91,18 @@ const stats = [
   ["12", "Versicherungspartner"],
 ];
 
-// Hero-Raster: die 9 Leistungs-Titelbilder (gleiche Bilder wie in
-// "Unsere Leistungen"), Unfallservice und Windschutzscheiben zuerst.
+// Hero-Raster: echte Betriebsfotos von Car-World (Außenansicht, Werkstatt,
+// Arbeitsalltag) — ohne Beschriftung, da die Bilder keine einzelne Leistung zeigen.
 const heroShuffleItems: ShuffleItem[] = [
-  { id: 1, src: unfallImg, alt: "Unfallservice", label: "Unfallservice" },
-  { id: 2, src: scheibeImg, alt: "Windschutzscheiben", label: "Windschutzscheiben" },
-  { id: 3, src: abschleppImg, alt: "Abschleppdienst", label: "Abschleppdienst" },
-  { id: 4, src: reparaturImg, alt: "Fahrzeugreparatur", label: "Fahrzeugreparatur" },
-  { id: 5, src: ersatzwagenImg, alt: "Ersatzwagen", label: "Ersatzwagen" },
-  { id: 6, src: versicherungImg, alt: "Versicherungsabwicklung", label: "Versicherung" },
-  { id: 7, src: reifenImg, alt: "Reifenwechsel", label: "Reifenwechsel" },
-  { id: 8, src: tuevImg, alt: "TÜV & AU", label: "TÜV & AU" },
-  { id: 9, src: wartungImg, alt: "Inspektion & Wartung", label: "Inspektion & Wartung" },
+  { id: 1, src: betrieb1Img, alt: "Car-World Werkstatt von außen mit Steinschlag-Aufsteller" },
+  { id: 2, src: betrieb2Img, alt: "Werkstatteinfahrt der Car-World Kfz-Meisterwerkstatt" },
+  { id: 3, src: betrieb3Img, alt: "Kfz-Mechaniker prüft ein Fahrzeug auf der Hebebühne" },
+  { id: 4, src: betrieb4Img, alt: "Car-World Werkstatttor mit Unfallinstandsetzung" },
+  { id: 5, src: betrieb5Img, alt: "Scheibenarbeiten im Fahrzeug mit orangen Handschuhen" },
+  { id: 6, src: betrieb6Img, alt: "Car-World Gebäude mit Autoglas-Glasservice-Schild" },
+  { id: 7, src: betrieb7Img, alt: "Werkzeugwagen in der Werkstatt" },
+  { id: 8, src: betrieb8Img, alt: "Mechaniker setzt eine Windschutzscheibe ein" },
+  { id: 9, src: betrieb9Img, alt: "Motorreparatur in der Werkstatt" },
 ];
 
 function Home() {
