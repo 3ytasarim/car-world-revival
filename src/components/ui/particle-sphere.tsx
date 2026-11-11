@@ -4,16 +4,9 @@ import { useEffect, useMemo, useRef } from "react";
 
 import { cn } from "@/lib/utils";
 
-// Literal port of 21st.dev (shadcnspace/orbiting-circles-02)'s
-// ParticleSphereAnimation — same 9000-point sphere + rotation + depth/rim
-// shading math, unchanged. Only the palette is swapped: the original mixes
-// orange/lime/blue "brand tour" colors; here it's the site's own navy/blue
-// tones so the globe reads as part of Car-World's identity instead of a
-// generic tech-demo gradient.
-// 9000 in the original — cut down hard: mapping+sorting+individually
-// filling that many arcs every animation frame is expensive main-thread
-// work, and this globe sits on the same page as several other running CSS
-// animations (the orbit rings around it) that compete for the same thread.
+// Rotating particle sphere with depth/rim shading in the site's navy/blue palette.
+// Based on ParticleSphereAnimation from 21st.dev (shadcnspace/orbiting-circles-02).
+// The particle count is kept low to limit per-frame canvas work.
 const PARTICLE_COUNT = 1800;
 const RADIUS = 275;
 

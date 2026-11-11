@@ -2,10 +2,9 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
-// Marquee aus shadcn space "Hero 01" (shadcnspace.com/r/hero-01, MIT) — der
-// Inhalt wird `repeat`-mal wiederholt und läuft per CSS-Keyframe. Klassen und
-// Keyframe heißen bewusst "hero-marquee*", weil styles.css bereits eine
-// eigene `animate-marquee`-Utility (translateX -50 %) besitzt.
+// Marquee from shadcn space Hero 01 (MIT): the children repeat `repeat` times and
+// scroll via a CSS keyframe. Class and keyframe names are prefixed "hero-marquee"
+// because styles.css already defines an `animate-marquee` utility.
 interface HeroMarqueeProps extends ComponentPropsWithoutRef<"div"> {
   pauseOnHover?: boolean;
   repeat?: number;

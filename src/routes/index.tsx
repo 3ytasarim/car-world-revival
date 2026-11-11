@@ -216,9 +216,7 @@ function Home() {
 
                 </div>
 
-                {/* Bild-Spalte: karışan 3x3-Raster mit den Leistungs-
-                    Titelbildern (statt der früheren Smartphone-Mockups) —
-                    nur auf Desktop (ab lg), auf Mobile ausgeblendet. */}
+                {/* Bild-Spalte: 3x3-Raster mit Betriebsfotos, nur ab lg sichtbar. */}
                 <div className="mx-auto hidden h-full w-full max-w-xl items-center justify-center lg:flex lg:pt-4">
                   <ShuffleGrid items={heroShuffleItems} fill />
                 </div>

@@ -1,11 +1,7 @@
-// Server-side admin auth against the shared Neon Postgres database — same
-// database public-content.server.ts already reads offers/jobs from, now
-// also home to car-world-revival's own login (replacing Supabase Auth).
+// Server-side admin auth against the shared Neon Postgres database.
 //
-// Session mechanism mirrors german-auto-platform's proven pattern (a random
-// token, only its SHA-256 hash ever stored in the DB, the raw token lives
-// only in an httpOnly cookie) — framework-agnostic, just ported from
-// Next's `cookies()` to TanStack Start's getCookie/setCookie.
+// Sessions use a random token: only its SHA-256 hash is stored in the DB, the raw
+// token lives in an httpOnly cookie (set via TanStack Start's getCookie/setCookie).
 import { randomBytes, createHash } from "node:crypto";
 import { Pool } from "pg";
 import { hash as argon2Hash, verify as argon2Verify } from "@node-rs/argon2";

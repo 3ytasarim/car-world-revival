@@ -5,11 +5,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
-// From 21st.dev (ziegfiroyt/reveal2) — the original was a horizontal
-// left/right slider. Per the client's revision brief the whole site now
-// flows top-to-bottom (no left/right interactions anywhere), so this was
-// rebuilt as a vertical top/bottom reveal: "Vorher" on top, "Nachher"
-// revealed by dragging the divider down.
+// Vertical before/after reveal: "Vorher" on top, "Nachher" revealed by dragging
+// the divider down. Based on 21st.dev (ziegfiroyt/reveal2).
 export function RevealSlider({
   beforeImage,
   afterImage,

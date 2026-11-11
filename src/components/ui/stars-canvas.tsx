@@ -1,9 +1,7 @@
 import { useEffect, useRef } from "react";
 
-// Scattered twinkling stars, drawn on a <canvas> sized to its parent.
-// Built from scratch — 21st.dev's designali-in/stars-canvas needed an API
-// key this session doesn't have. Lightweight (no react-three-fiber): plain
-// 2D canvas dots that fade in and out at random offsets/speeds.
+// Scattered twinkling stars on a <canvas> sized to its parent (plain 2D dots with
+// random fade offsets and speeds).
 export function StarsCanvas({ count = 90, className = "" }: { count?: number; className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 

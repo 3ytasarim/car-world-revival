@@ -1,8 +1,5 @@
-// Karışan görsel ızgarası — 21st.dev "Suffle Hero" (uniquesonu) davranışına
-// göre: kareler her 3 sn'de rastgele yeniden dizilir, Framer Motion `layout`
-// ile yaylı geçiş. (Registry kaynağı kimlik doğrulaması istediği için CLI ile
-// kurulamadı; açıklamadaki davranıştan yeniden yazıldı. Başlık/CTA kısmı
-// burada yok — Hero'nun kendi metin sütunu var.)
+// 3x3 image grid that reshuffles every few seconds, animated with a spring
+// `layout` transition (framer-motion). Based on 21st.dev (uniquesonu/suffle-hero).
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 

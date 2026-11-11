@@ -1,12 +1,8 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-// Adapted from 21st.dev (pulseawan/modern-login-signup) — same WebGL dot-grid
-// shader, but loading `three` as a real import (the registry snippet loaded
-// it from a CDN <script> tag at runtime as a workaround for bundlers that
-// can't resolve the package — unnecessary here since `three` is an actual
-// project dependency) and with the dot color made configurable so it can
-// sit on the site's own navy instead of pure black.
+// WebGL dot-grid shader with a configurable dot color.
+// Based on 21st.dev (pulseawan/modern-login-signup).
 export function DotGridBackground({ color = "#8FB8E8" }: { color?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 

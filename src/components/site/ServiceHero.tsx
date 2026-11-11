@@ -7,20 +7,18 @@ import { certificationLogos } from "@/components/site/PartnerSection";
 import { HeroMarquee } from "@/components/ui/hero-marquee";
 import heroWerkstattPhoto from "@/assets/hero-werkstatt-secondary.jpg";
 
-/**
- * Hero für Leistungen und alle Leistungs-Unterseiten — nach shadcn space
- * "Hero 01" / 21st.dev "Agency Hero Section" (shadcnspace.com/r/hero-01, MIT):
- * große, mittige Headline, Untertitel, Sterne-
- * Bewertung und darunter Trennzeile + Logo-Marquee. Die Navigation der Vorlage
- * entfällt (die Seite hat ihren eigenen Header), der "Get Started"-Button
- * ebenfalls (Kundenwunsch). Das Werkstatt-Foto bleibt als Hintergrund.
- */
 const fade = (delay: number) => ({
   initial: { opacity: 0, y: 32 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 1, delay, ease: "easeInOut" as const },
 });
 
+/**
+ * Hero für /leistungen und alle Leistungs-Unterseiten. Zentriertes Layout nach
+ * shadcn space Hero 01 (MIT): Bewertung, Badge, Headline, Untertitel und ein
+ * Logo-Marquee. Navigation und CTA-Button der Vorlage entfallen; das
+ * Werkstatt-Foto bleibt als Hintergrund.
+ */
 export function ServiceHero({
   badge,
   title,

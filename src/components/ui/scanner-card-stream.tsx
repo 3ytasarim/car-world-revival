@@ -1,23 +1,7 @@
-// Ported from 21st.dev (rahil1202/scanner-card-stream) — kept the real
-// mechanic (Three.js particle field + 2D-canvas scanner particles + an
-// ASCII-scramble "scan" reveal on each card as it crosses the center line),
-// not a simplified stand-in. Three things had to change to embed it inside a
-// bounded page section instead of the original full-viewport demo:
-//   1. All sizing/camera math now reads the wrapper's own extent via a ref
-//      + ResizeObserver instead of `window.innerWidth` — otherwise the
-//      canvases and scan line would be framed against the full browser
-//      viewport and only partially visible inside a contained section.
-//   2. The registry snippet elided the actual drag handlers and the effect
-//      cleanup (shown as "no changes here" placeholders, gated in the paid
-//      tier) even though the drag state fields (isDragging, lastMouseX,
-//      velocity, friction) were fully declared — so those two pieces are a
-//      completed implementation of what the component's own state machine
-//      already called for, not a design deviation.
-//   3. Added an `orientation` prop ("horizontal" | "vertical") — the whole
-//      site moved to a strictly top-to-bottom motion language, so every
-//      axis-dependent piece (stream transform, camera bounds, particle
-//      drift, scan-line placement, clip-path direction, drag/wheel input)
-//      branches on it instead of assuming X is always the stream axis.
+// Three.js particle field with a 2D-canvas scanner and an ASCII-scramble reveal on
+// each card crossing the scan line. Sizing is read from the wrapper via
+// ResizeObserver; `orientation` switches the stream axis between horizontal and
+// vertical. Based on 21st.dev (rahil1202/scanner-card-stream).
 import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import * as THREE from "three";
 

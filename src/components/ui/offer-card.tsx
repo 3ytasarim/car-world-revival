@@ -1,16 +1,7 @@
-// Adapted from 21st.dev (n38693842/3d-card) — kept the actual mechanic: a
-// mousemove-driven perspective tilt (rotateX/rotateY tracking the cursor
-// relative to the card, reset on mouse-leave), with per-element translateZ
-// depth so content "floats" at different heights while tilting. Applied via
-// direct ref/style mutation (not React state) exactly like the original —
-// re-rendering on every mousemove would be wasteful, this is imperative for
-// a reason. Dropped: the demo's full-viewport wrapper and Unsplash
-// placeholder (not part of the card itself). The image slot is taller/wider
-// than the original demo's, and object-contain instead of object-cover:
-// these are promotional flyer photos with text near the edges, and
-// cropping them hides real content — a lesson learned earlier building this
-// same page's previous card design. "Get Started" is replaced with the
-// site's 3D WhatsApp CTA.
+// Offer card with a cursor-driven 3D tilt (rotateX/rotateY set via direct style
+// updates, no React state) and per-element translateZ depth. The image slot uses
+// object-contain so flyer text near the edges is not cropped.
+// Based on 21st.dev (n38693842/3d-card).
 import { useRef } from "react";
 
 import { cn } from "@/lib/utils";

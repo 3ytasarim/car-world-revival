@@ -1,12 +1,8 @@
 import type { ReactNode } from "react";
 
-// Adapted from 21st.dev (ruixen.ui/gradient-bold-card) — the original ships
-// a fixed-size empty demo card with no content slot. This takes real
-// children instead, in the site's two-blue brand gradient.
-//
-// The outer wrapper provides a permanent dark-blue frame. A much larger
-// conic-gradient layer rotates behind the content, so the highlight travels
-// continuously without the border ever disappearing.
+// Card framed by a two-blue brand gradient; a large conic gradient rotates
+// behind the content so the highlight travels without the border disappearing.
+// Based on 21st.dev (ruixen.ui/gradient-bold-card).
 export function GradientBoldCard({
   children,
   className = "",

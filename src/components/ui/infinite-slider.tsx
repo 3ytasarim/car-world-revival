@@ -1,6 +1,6 @@
 "use client";
 
-// Literal port of 21st.dev (ibelick/infinite-slider) — unchanged.
+// Based on 21st.dev (ibelick/infinite-slider).
 import { useEffect, useState } from "react";
 import { animate, motion, useMotionValue } from "framer-motion";
 import useMeasure from "react-use-measure";

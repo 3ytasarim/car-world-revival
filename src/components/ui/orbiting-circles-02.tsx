@@ -1,17 +1,9 @@
 import type { CSSProperties, ReactNode } from "react";
 
-// Literal port of 21st.dev (shadcnspace/orbiting-circles-02), structure and
-// classes unchanged: rings are anchored `bottom-0` + `translate-y-1/2` (their
-// own center sits exactly on the container's bottom edge, so only the top
-// half is visible inside `overflow-hidden` — that's what makes the "rising
-// dome" composition), each ring's icons are doubled with a mirrored copy at
-// `angle + 180` for the left/right symmetry, and the spoke/badge
-// counter-rotation trick is untouched. Only two swaps: the 9000-particle
-// canvas "globe" center is replaced with the real Car-World logo (a
-// generative WebGL sphere has nothing to do with an auto workshop's
-// partner-logo rings), and `orbit.icons` takes real `content` nodes instead
-// of `{src, alt}` pairs so any of the site's existing logo assets can be
-// dropped straight in.
+// Orbit rings anchored to the bottom edge so only the upper half is visible, with
+// mirrored icons at angle + 180 and counter-rotated badges. Orbit icons take
+// arbitrary content nodes.
+// Based on 21st.dev (shadcnspace/orbiting-circles-02).
 export interface OrbitIcon {
   key: string;
   content: ReactNode;

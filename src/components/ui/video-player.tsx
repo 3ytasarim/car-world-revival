@@ -1,12 +1,7 @@
-// Faithful port of 21st.dev (chetanverma16/video-player) — a real, working
-// custom player (play/pause, seek, volume, playback speed, hover-reveal
-// control bar), not decorative bloat, so all of it is kept. Reuses this
-// project's own @/components/ui/button (already has the "ghost" variant and
-// "icon" size the original relies on — no need to duplicate shadcn's
-// button.tsx). Adapted for autoplaying background-style use: autoPlay/loop/
-// playsInline/muted on the <video> (browsers block autoplay-with-sound
-// otherwise) — the clip has a real audio track, so unmuting via the UI
-// actually plays sound.
+// Custom video player: play/pause, seek, volume, playback speed and a hover-reveal
+// control bar. autoPlay/loop/playsInline/muted are set on the <video> for
+// background-style use; the clip has an audio track that can be unmuted.
+// Based on 21st.dev (chetanverma16/video-player).
 "use client";
 
 import { useEffect, useRef, useState } from "react";

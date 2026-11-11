@@ -93,12 +93,10 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   );
 }
 
-// Zwei Reihen Bewertungskarten, die in entgegengesetzte Richtungen laufen,
-// mit ausblendenden Rändern — nach dem 21st.dev-Muster "Testimonials Marquee"
-// (shadcnspace/marquee-01; Registry-Quelle verlangt Login, daher mit dem
-// vorhandenen InfiniteSlider nachgebaut). Es werden nur die kurzen Bewertungen
-// gezeigt; lange sind im Admin-Panel (Kundenmeinungen) auf "inaktiv" gesetzt
-// und lassen sich dort jederzeit wieder aktivieren.
+// Zwei Reihen Bewertungskarten, die in entgegengesetzte Richtungen laufen, mit
+// ausblendenden Rändern (Muster: Testimonials Marquee, shadcnspace/marquee-01).
+// Gezeigt werden nur die kurzen Bewertungen; lange sind im Admin-Panel
+// (Kundenmeinungen) auf "inaktiv" gesetzt und dort wieder aktivierbar.
 const EDGE_FADE =
   "[mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)]";
 

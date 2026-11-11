@@ -1,13 +1,8 @@
 import { useMemo } from "react";
 
-// Adapted from 21st.dev (larsen66/admit-one-ticket) — kept only the actual
-// ticket silhouette (the SVG clip-path with rounded corners + a perforated
-// notch dividing a stub on the right, `ticketClipPath`/`TICKET_GEOMETRY`
-// below are a near-direct port of that math). Dropped entirely: the ~2000
-// lines of custom WebGL "paper shaders" dithering engine that generated the
-// ticket's decorative texture, the audio "tear" effect, and the random
-// palette remixer — none of that is needed here since the ticket's face is
-// a real offer photo, not a generated texture.
+// Ticket silhouette: SVG clip-path with rounded corners and a perforated notch
+// before the stub on the right (ticketClipPath / TICKET_GEOMETRY).
+// Based on 21st.dev (larsen66/admit-one-ticket).
 export const TICKET_GEOMETRY = {
   aspect: 741 / 425,
   cornerRadius: 25 / 741,

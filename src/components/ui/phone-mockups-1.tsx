@@ -2,12 +2,8 @@ import { useEffect, useState, type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
-// Adapted from 21st.dev (solaceui/phone-mockups-1) — the original SVG
-// frame + carousel logic used next/image and rendered one phone at a
-// time. Ported off Next.js to a plain frame that takes real children
-// (instead of a single background image) via foreignObject, so the site's
-// existing PhoneScreen content can sit inside each phone. No wrapping
-// background — it's meant to sit directly on the page's own gradient.
+// SVG phone frame that renders its children through a foreignObject.
+// Based on 21st.dev (solaceui/phone-mockups-1).
 export function Iphone15ProFrame({
   children,
   className = "",

@@ -1,11 +1,8 @@
 import { cn } from "@/lib/utils";
 import { Button3D } from "@/components/ui/button-3d";
 
-// Adapted from 21st.dev (arunachalam/profile-card) — the original is a
-// "team member" bio card (name/title/description + social icon row,
-// next/image + next/link). Ported off Next.js to plain <img>/<a>, and the
-// social icon row is swapped for a single "Termin anfragen" CTA to match
-// the site's service-card use case.
+// Profile card with a single "Termin anfragen" CTA.
+// Based on 21st.dev (arunachalam/profile-card).
 export interface ProfileCardProps {
   title?: string;
   description?: string;

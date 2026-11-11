@@ -11,11 +11,8 @@ import imgVersicherungsabwicklung from "@/assets/vorteil-versicherungsabwicklung
 import imgVersicherung from "@/assets/vorteil-versicherung.jpg";
 
 // Echte Fotos statt generischer Icons — jede Karte zeigt ein Bild mit
-// Bildunterschrift, angelehnt an 21st.dev (ravikatiyar162/marquee-logo-scroller):
-// horizontal scrollend wie das Original, aber ohne dessen eigenen
-// Titel/Description-Header (die Sektion hat bereits ihre eigene Überschrift
-// oben) und mit deutlich größeren Bildern + Bildunterschrift statt kleiner
-// Logo-Kacheln.
+// Bildunterschrift, horizontal scrollend (angelehnt an 21st.dev
+// ravikatiyar162/marquee-logo-scroller), mit größeren Bildern statt kleiner Logo-Kacheln.
 //
 // Die Fade-Maske hier ist bewusst in FESTEN Pixeln (nicht %) gesetzt: das
 // macht die Stelle, an der die Karten voll sichtbar werden, zu einer festen

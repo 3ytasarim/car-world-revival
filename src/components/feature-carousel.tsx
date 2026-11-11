@@ -1,9 +1,5 @@
-// Adapted from 21st.dev (0xUrvish/feature-carousel). The original ships
-// hardcoded demo content (Unsplash stock photos, Hugeicons) — this takes the
-// real Leistungen data as props instead, uses the project's own
-// framer-motion (not the separate `motion` package) and lucide-react icons
-// (not @hugeicons) to match the rest of the codebase, and recolors the
-// accent panel to the site's blue.
+// Feature carousel driven by the Leistungen data passed in as props.
+// Based on 21st.dev (0xUrvish/feature-carousel).
 import { useState, useEffect, useCallback, type ComponentType } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";

@@ -1,12 +1,7 @@
 import type { ReactNode } from "react";
 
-// A center logo with a ring of partner/certification logos orbiting around
-// it — the classic "orbiting circles" pattern (as seen in 21st.dev's
-// orbiting-skills / Magic UI's OrbitingCircles). Built from scratch: the
-// exact 21st.dev registry file was rejected by their own security scanner
-// ("script content detected"), so this is a from-scratch equivalent using
-// plain CSS keyframe rotation — the orbiting items counter-rotate so their
-// logos stay upright instead of spinning with the ring.
+// Center logo with partner/certification logos orbiting around it (CSS keyframe
+// rotation; the items counter-rotate so the logos stay upright).
 export interface OrbitingItem {
   key: string;
   content: ReactNode;

@@ -1,9 +1,7 @@
-// Logo-Wolke nach dem 21st.dev-Muster "Logo Cloud" (efferd/logo-cloud-5) —
-// responsives, zentriertes Raster; die Trennlinien entstehen durch gap-px auf
-// getöntem Grund, dadurch hat auch die äußere Kontur (inkl. Rundung) eine Linie.
-// Registry-Quelle verlangt Login (CLI nicht nutzbar), daher nach der
-// Beschreibung nachgebaut. Logos sind zunächst blass/schwarzweiß und werden
-// beim Hover farbig.
+// Logo-Wolke: responsives, zentriertes Raster; die Trennlinien entstehen durch
+// gap-px auf getöntem Grund, dadurch hat auch die äußere Kontur eine Linie.
+// Logos sind zunächst blass/schwarzweiß und werden beim Hover farbig.
+// Basiert auf 21st.dev (efferd/logo-cloud-5).
 //
 // Größen: Breite/Höhe werden aus dem Seitenverhältnis so berechnet, dass jedes
 // Logo dieselbe Fläche einnimmt (sonst wirken breite Logos wie ERGO/Allianz

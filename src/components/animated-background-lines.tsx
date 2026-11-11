@@ -1,15 +1,7 @@
-// Adapted from 21st.dev (minhxthanh/animated-background-lines) — the original
-// registry component ships a full dark CTA section (grid bg, corner SVGs,
-// headline, button) built with Next.js `style jsx global`. This keeps only
-// the sweeping-gradient line effect as a standalone, reusable background
-// piece — reoriented to vertical lines (fits a tall narrow gutter better
-// than full-width horizontal ones), recolored to the site's blue, and
-// ported off styled-jsx (not available outside Next.js) onto a plain
-// <style> tag.
+// Vertical sweeping-gradient lines as a standalone background layer.
+// Based on 21st.dev (minhxthanh/animated-background-lines).
 
-// Evenly spaced across the container's width — denser than the original
-// 5-line registry component so it reads as a fuller field once the gutter
-// itself is widened toward the middle.
+// Lines are spaced evenly across the container width.
 const LINE_COUNT = 11;
 const LINE_POSITIONS = Array.from(
   { length: LINE_COUNT },
